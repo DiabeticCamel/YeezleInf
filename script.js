@@ -661,7 +661,7 @@ function addRow(choiceData, result) {
 
 
     const albumLogo = new Image()
-    albumLogo.src = "/128_" + choiceData.album + ".jpg"
+    albumLogo.src = "images/128_" + choiceData.album + ".jpg"
     albumLogo.className = 'album-logo'
 
     albumCellInner.appendChild(albumLogo)
