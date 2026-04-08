@@ -108,40 +108,23 @@
   <!-- End Google Tag Manager (noscript) -->
 
     <header id="mega-header">
-      <div id="left-but-cont">
-        <div class="circle-button" id="other-button">
-          <span class="material-symbols-outlined red600">favorite</span>
-        </div>
-      </div>
+  <div id="left-but-cont">
+    <div class="circle-button" id="other-button">
+      <span class="material-symbols-outlined red600">favorite</span>
+    </div>
+  </div>
 
-      <svg
-        id="YEEZLE_Image"
-        data-name="YEEZLEImage"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1020.03 499.58"
-      > 
-        <defs>
-          <style>
-            .cls-1 {
-              fill: rgb(255, 255, 255);
-            }
-          </style>
-        </defs>
-      </svg>
+  <img src="InfYeezle.png" alt="Infinite Yeezle Logo" id="main-logo" />
 
-      <div id="rs-cont">
-        <div class="right-but-cont">
-          <span class="material-icons md-cus" id="help-button"
-            >help_outline</span
-          >
-        </div>
-        <div class="right-but-cont" id="dono-icon">
-          <span class="material-icons md-cus" id="dono-button"
-            >favorite_outline</span
-          >
-        </div>
-      </div>
-    </header>
+  <div id="rs-cont">
+    <div class="right-but-cont">
+      <span class="material-icons md-cus" id="help-button">help_outline</span>
+    </div>
+    <div class="right-but-cont" id="dono-icon">
+      <span class="material-icons md-cus" id="dono-button">favorite_outline</span>
+    </div>
+  </div>
+</header>
 
     <div class="main-container">
       <br />
@@ -187,8 +170,24 @@
           </div>
           <style>
             #new-song-button {
-              white-space: nowrap; /* Prevents the text from wrapping */
+              white-space: nowrap; 
             }
+
+            #mega-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            }
+
+            #main-logo {
+              height: 60px;   
+              width: auto;
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              pointer-events: none; 
+            }
+            
           </style>
           <div>
             <button id="new-song-button" style="margin-bottom: 20px;">New Song</button>
