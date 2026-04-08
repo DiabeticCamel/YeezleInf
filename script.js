@@ -831,7 +831,7 @@ function formatScoreText(resultsArray) {
     for (e of resultsArray) {
         formattedScoreText += "\n" + e.join("")
     }
-    formattedScoreText += "\n\n🌐 https://infiniteyeezle.netlify.app 🌐"
+    formattedScoreText += "\n\n🌐 infiniteyeezle.netlify.app 🌐"
 
     return formattedScoreText
 }
