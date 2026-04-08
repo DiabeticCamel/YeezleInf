@@ -17,7 +17,7 @@
   <!-- End Google Tag Manager -->
     <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
 
-    <meta charset="“UTF-8”" />
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Yeezle" />
@@ -38,7 +38,7 @@
     <script src="compressed.js" type="text/javascript" charset="utf-8"></script>
 
     <title>InfYeezle</title>
-    <link rel="icon" type="images/x-icon" href="https://storage.ko-fi.com/cdn/useruploads/ed7e1c75-ffd5-4c77-a183-134674a27e0b.jpg" />
+    <link rel="icon" type="images/x-icon" href="https://pbs.twimg.com/profile_images/2041749667118247940/2i3j7i9e_400x400.jpg" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FB2F8KP4B5"></script>
 <script>
@@ -53,45 +53,18 @@
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,100,1,200"
     rel="stylesheet"
   />
-    <style>
-      body {
-        margin-top: -280px;
-      }
-    </style>
+   
+   <style>
+  #intro-card {
+    max-width: 1200px;
+    width: 90vw;
+  }
+</style>
     <head>
       <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <style>
-          /* Original desktop positioning */
-          .responsive-image {
-            position: relative;
-            right: -480px;
-            top: 310px;
-            height: 300px;        /* Original height */
-            width: auto;          /* Maintain aspect ratio */
-          }
-
-          /* Mobile style */
-          @media (max-width: 768px) {
-            .responsive-image {
-              position: relative;
-              right: -90px;           /* Reset right offset */
-              top: 150px;             /* Reset top offset */
-              margin-top: 150px;
-              height: 150px
-            }
-          }
-        </style>
       </head>
       </body>
-
-        <body>
-
-          <div class="image-container">
-            <img src="InfYeezle.png" alt="Responsive Image" class="responsive-image">
-          </div>
-
-        </body>
         </html>
 
 
@@ -102,40 +75,23 @@
   <!-- End Google Tag Manager (noscript) -->
 
     <header id="mega-header">
-      <div id="left-but-cont">
-        <div class="circle-button" id="other-button">
-          <span class="material-symbols-outlined red600">favorite</span>
-        </div>
-      </div>
+  <div id="left-but-cont">
+    <div class="circle-button" id="other-button">
+      <span class="material-symbols-outlined red600">favorite</span>
+    </div>
+  </div>
 
-      <svg
-        id="YEEZLE_Image"
-        data-name="YEEZLEImage"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1020.03 499.58"
-      > 
-        <defs>
-          <style>
-            .cls-1 {
-              fill: rgb(255, 255, 255);
-            }
-          </style>
-        </defs>
-      </svg>
+  <img src="InfYeezle.png" alt="Infinite Yeezle Logo" id="main-logo" />
 
-      <div id="rs-cont">
-        <div class="right-but-cont">
-          <span class="material-icons md-cus" id="help-button"
-            >help_outline</span
-          >
-        </div>
-        <div class="right-but-cont" id="dono-icon">
-          <span class="material-icons md-cus" id="dono-button"
-            >favorite_outline</span
-          >
-        </div>
-      </div>
-    </header>
+  <div id="rs-cont">
+    <div class="right-but-cont">
+      <span class="material-icons md-cus" id="help-button">help_outline</span>
+    </div>
+    <div class="right-but-cont" id="dono-icon">
+      <span class="material-icons md-cus" id="dono-button">favorite_outline</span>
+    </div>
+  </div>
+</header>
 
     <div class="main-container">
       <br />
@@ -180,9 +136,70 @@
             <button id="share-score-button">Share Score</button>
           </div>
           <style>
+
+
+#mega-header {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+#rs-cont {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-top: -150px !important;
+}
+
+#left-but-cont {
+  margin-top: -150px !important;
+}
+
+#main-logo {
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+
+            
             #new-song-button {
-              white-space: nowrap; /* Prevents the text from wrapping */
+              white-space: nowrap; 
             }
+
+          #mega-header { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            height: 400px; padding: 10px 0; 
+            overflow: visible; 
+          } 
+            
+            #main-logo { 
+              height: clamp(150px, 22vw, 300px); 
+              width: auto; position: absolute; 
+              left: 50%; 
+              transform: translateX(-50%); 
+              pointer-events: none; 
+            } 
+            
+            .main-container { 
+              display: flex; 
+              flex-direction: column; 
+              align-items: center; 
+              margin-top: -100px; 
+              min-height: 0; 
+            }
+            
+            #result-container { 
+              margin-top: 10px; 
+              overflow-y: auto; /* scroll if it gets too tall instead of pushing up */ }
+            
           </style>
           <div>
             <button id="new-song-button" style="margin-bottom: 20px;">New Song</button>
@@ -218,10 +235,10 @@
 
         <div class="stat-container" id="stat-collumn">
           <div id="donate-banner">
-            Consider donating to help keep money in my bank acount!❤️
+            Consider following our official X account!❤️
           </div>
           <a
-            href="https://autismsociety.org/donate/"
+            href="https://x.com/InfiniteYeezle"
             target="_blank"
             rel="noopener noreferrer"
             class="buttonA"
@@ -236,30 +253,29 @@
       <div id="donate-container">
         <div id="donate-title">SUPPORT</div>
         <div id="donate-text">
-          InfiniteYeezle was made by the people and
-          being enjoyed the people.
+          I started InfiniteYeezle as a fun side project because I always seemed to want more after the daily Yeezle. I never thought so many people would see it and keep coming back.
           <br />
           <br />
 
-          In order to keep Infinite Yeezle updated, we need your help. If you've enjoyed
-          playing Ininite Yeezle, please consider donating - every dollar helps somone maybe?
+          I can't thank you guys enough for your continued support throughout the development of this website. Thank you! I don't need your money, but you might as well follow the official X account for Infinite Yeezle :)
     
         </div>
         <a
-          href="https://autismsociety.org/donate/"
+          href="https://x.com/InfiniteYeezle"
           target="_blank"
           rel="noopener noreferrer"
           class="buttonA"
-          >Support us!❤️</a
+          >Follow!❤️</a
         >
 
         <div id="small-donate-text">( Huge thanks to: )</div>
         <div id="donors-container">
           <div id="donor-text">
-            <b>Official Yeezle Devs</b>, <br />
+            <b>The Original Yeezle Devs</b>, <br />
 
-            Me, <br />
-            & all other anonymous donations!
+            
+            And all of you guys! <br />
+    
           </div>  
 
         </div>
@@ -280,7 +296,7 @@
             <ul style="line-height: 1.7">
               <li>
                 You get eight guesses to guess a mystery song from any of
-                Kanye's 14 studio albums!
+                Kanye's 16 studio albums!
               </li>
 
               <li>
@@ -316,13 +332,15 @@
             <img class="smallbums" src="128_5.jpg" />
             <img class="smallbums" src="Ye6.jpeg" />
             <img class="smallbums" src="Ye7.jpeg" />
-            <img class="smallbums" src="https://yeezle.xyz/albums/128_8.jpg" />
-            <img class="smallbums" src="https://yeezle.xyz/albums/128_9.jpg" />
+            <img class="smallbums" src="128_8.jpg" />
+            <img class="smallbums" src="128_9.jpg" />
             <img class="smallbums" src="Ye10.jpeg" />
             <img class="smallbums" src="Ye11.jpeg" />
             <img class="smallbums" src="Ye12.jpeg" />
-            <img class="smallbums" src="https://yeezle.xyz//albums/128_13.jpg" />
+            <img class="smallbums" src="128_13.jpg" />
             <img class="smallbums" src="Ye14.png" />
+            <img class="smallbums" src="128_15.jpg" />
+            <img class="smallbums" src="128_16.jpg" />
           </div>
 
           <div id="start-div">
@@ -355,3 +373,4 @@
   </footer>
     
 </html>
+
