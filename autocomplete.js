@@ -215,7 +215,7 @@ const songTitles = [
     "BEG FORGIVENESS",
     "GOOD (DON'T DIE)",
     "PROBLEMATIC",
-    "KING",
+    "KING (VULTURES 1)",
 
 // VULTURES 2
     "SLIDE",
@@ -259,7 +259,7 @@ const songTitles = [
     "FIRST TIME IN A LONG TIME",
 
 // BULLY
-    "KING",
+    "KING (BULLY)",
     "THIS A MUST",
     "FATHER",
     "ALL THE LOVE",
