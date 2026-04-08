@@ -149,13 +149,13 @@
               overflow: visible;
             }
 
-            #main-logo {
-              height: 260px;   
+           #main-logo {
+              height: clamp(40px, 8vw, 300px);  /* scales between 40px and 80px based on screen width */
               width: auto;
               position: absolute;
               left: 50%;
               transform: translateX(-50%);
-              pointer-events: none; 
+              pointer-events: none;
             }
            
             .main-container {
