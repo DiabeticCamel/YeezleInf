@@ -871,6 +871,161 @@
           "cover":"https://en.wikipedia.org/wiki/File:%C2%A5$_-_Vultures_2.png",
           "track":16, "length":251,"features":["Ty Dolla Sign"]}
 
+    "TRUE LOVE":{"title":"TRUE LOVE","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":1,"length":137,"features":[]},
+
+    "BROKEN ROAD":{"title":"BROKEN ROAD","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":2,"length":100,"features":[]},
+
+    "GET LOST":{"title":"GET LOST","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":3,"length":154,"features":[]},
+
+    "KEEP THE FLOWERS":{"title":"KEEP THE FLOWERS","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":4,"length":171,"features":[]},
+
+    "JESSE":{"title":"JESSE","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":5,"length":127,"features":[]},
+
+    "TOO EASY":{"title":"TOO EASY","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":6,"length":177,"features":[]},
+
+    "PABLO":{"title":"PABLO","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":7,"length":185,"features":["Travis Scott", "Future", "Marilyn Manson"]},
+
+    "MR MIYAGI":{"title":"MR MIYAGI","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":8,"length":180,"features":["Future", "Playboi Carti"]},
+
+    "HAPPY":{"title":"HAPPY","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":9,"length":285,"features":["Future"]},
+
+    "SECURITY":{"title":"SECURITY","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":10,"length":138,"features":[]},
+
+    "CITY OF GOD":{"title":"CITY OF GOD","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":11,"length":256,"features":[]},
+
+    "530":{"title":"530","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":12,"length":122,"features":[]},
+
+    "CITY OF CHI":{"title":"CITY OF CHI","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":13,"length":162,"features":[]},
+
+    "SCIFI":{"title":"SCIFI","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":14,"length":240,"features":[]},
+
+    "SUZY":{"title":"SUZY","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":15,"length":84,"features":[]},
+
+    "BURN EVERYTHING":{"title":"BURN EVERYTHING","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":16,"length":120,"features":[]},
+
+    "LOUIE BAGS":{"title":"LOUIE BAGS","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":17,"length":305,"features":[]},
+
+    "WE DID IT":{"title":"WE DID IT","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":18,"length":235,"features":["Baby Keem", "Migos"]},
+
+    "MAINTENANCE":{"title":"MAINTENANCE","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":19,"length":73,"features":[]},
+
+    "LORD LIFT ME UP":{"title":"LORD LIFT ME UP","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":20,"length":129,"features":[]},
+
+    "FIRST TIME IN A LONG TIME":{"title":"FIRST TIME IN A LONG TIME","album":15,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/a/a6/Donda_2_streaming_album_cover.jpg",
+          "track":21,"length":185,"features":[]},
+
+    "KING":{"title":"KING","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":1,"length":126,"features":[]},
+
+    "THIS A MUST":{"title":"THIS A MUST","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":2,"length":86,"features":[]},
+
+    "FATHER":{"title":"FATHER","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":3,"length":169,"features":["Travis Scott"]},
+
+    "ALL THE LOVE":{"title":"ALL THE LOVE","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":4,"length":229,"features":["Andre Troutman"]},
+
+    "PUNCH DRUNK":{"title":"PUNCH DRUNK","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":5,"length":108,"features":[]},
+
+    "WHATEVER WORKS":{"title":"WHATEVER WORKS","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":6,"length":119,"features":[]},
+
+    "MAMA'S FAVORITE":{"title":"MAMA'S FAVORITE","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":7,"length":154,"features":[]},
+
+    "SISTERS AND BROTHERS":{"title":"SISTERS AND BROTHERS","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":8,"length":166,"features":[]},
+
+    "BULLY":{"title":"BULLY","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":9,"length":147,"features":["CeeLo Green"]},
+
+    "HIGHS AND LOWS":{"title":"HIGHS AND LOWS","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":10,"length":111,"features":[]},
+
+    "I CAN'T WAIT":{"title":"I CAN'T WAIT","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":11,"length":127,"features":[]},
+
+    "WHITE LINES":{"title":"WHITE LINES","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":12,"length":130,"features":["Andre Troutman"]},
+
+    "CIRCLES":{"title":"CIRCLES","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":13,"length":91,"features":[]},
+
+    "PREACHER MAN":{"title":"PREACHER MAN","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":14,"length":181,"features":[]},
+
+    "BEAUTY AND THE BEAST":{"title":"BEAUTY AND THE BEAST","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":15,"length":105,"features":[]},
+
+    "DAMN":{"title":"DAMN","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":16,"length":122,"features":[]},
+
+    "LAST BREATH":{"title":"LAST BREATH","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":17,"length":186,"features":["Peso Pluma"]},
+
+    "THIS ONE HERE":{"title":"THIS ONE HERE","album":16,
+          "cover":"https://upload.wikimedia.org/wikipedia/en/f/f1/Ye_%28Kanye_West%29_-_Bully_-_Album_Cover.png",
+          "track":18,"length":181,"features":[]},
 },
 
 "numbers": 
@@ -1097,7 +1252,46 @@
     "206":{"title":"SKY CITY"},
     "207":{"title":"MY SOUL"}
 
-
+    "208":{"title":"TRUE LOVE"},
+    "209":{"title":"BROKEN ROAD"},
+    "210":{"title":"GET LOST"},
+    "211":{"title":"KEEP THE FLOWERS"},
+    "212":{"title":"JESSE"},
+    "213":{"title":"TOO EASY"},
+    "214":{"title":"PABLO"},
+    "215":{"title":"MR MIYAGI"},
+    "216":{"title":"HAPPY"},
+    "217":{"title":"SECURITY"},
+    "218":{"title":"CITY OF GOD"},
+    "219":{"title":"530"},
+    "220":{"title":"CITY OF CHI"},
+    "221":{"title":"SCIFI"},
+    "222":{"title":"SUZY"},
+    "223":{"title":"BURN EVERYTHING"},
+    "224":{"title":"LOUIE BAGS"},
+    "225":{"title":"WE DID IT"},
+    "226":{"title":"MAINTENANCE"},
+    "227":{"title":"LORD LIFT ME UP"},
+    "228":{"title":"FIRST TIME IN A LONG TIME"},
+      
+    "229":{"title":"KING"},
+    "230":{"title":"THIS A MUST"},
+    "231":{"title":"FATHER"},
+    "232":{"title":"ALL THE LOVE"},
+    "233":{"title":"PUNCH DRUNK"},
+    "234":{"title":"WHATEVER WORKS"},
+    "235":{"title":"MAMA'S FAVORITE"},
+    "236":{"title":"SISTERS AND BROTHERS"},
+    "237":{"title":"BULLY"},
+    "238":{"title":"HIGHS AND LOWS"},
+    "239":{"title":"I CAN'T WAIT"},
+    "240":{"title":"WHITE LINES"},
+    "241":{"title":"CIRCLES"},
+    "242":{"title":"PREACHER MAN"},
+    "243":{"title":"BEAUTY AND THE BEAST"},
+    "244":{"title":"DAMN"},
+    "245":{"title":"LAST BREATH"},
+    "246":{"title":"THIS ONE HERE"},
 
     },
 
