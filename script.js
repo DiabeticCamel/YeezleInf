@@ -321,7 +321,7 @@ async function getRandomMysterySong() {
 
     // console.log(result.album)
 
-}
+
 async function doubleTrouble() {
     await fetch('/datasheetNoSkit.json')
         .then(response => response.json())
