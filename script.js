@@ -304,6 +304,65 @@ function newMysterySong() {
     console.log(today)
 }
 
+async function getSpotifyToken() {
+    const response = await fetch('/.netlify/functions/spotify-token')
+    const data = await response.json()
+    return data.access_token
+}
+
+async function getSpotifyPreview(songTitle) {
+    const token = await getSpotifyToken()
+    
+    const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${encodeURIComponent(songTitle + ' Kanye West')}&type=track&limit=1`,
+        { headers: { 'Authorization': 'Bearer ' + token } }
+    )
+    
+    const data = await response.json()
+    const track = data.tracks.items[0]
+    
+    if (track && track.preview_url) {
+        return track.preview_url
+    } else {
+        return null
+    }
+}
+
+let previewAudio = null
+
+async function playPreviewHint() {
+    const hintBtn = document.getElementById('hint-button')
+    
+    if (previewAudio && !previewAudio.paused) {
+        previewAudio.pause()
+        previewAudio.currentTime = 0
+        hintBtn.innerText = 'Play Hint'
+        return
+    }
+
+    hintBtn.innerText = 'Loading...'
+    hintBtn.disabled = true
+
+    const previewUrl = await getSpotifyPreview(mysterySong.title)
+
+    if (previewUrl) {
+        previewAudio = new Audio(previewUrl)
+        previewAudio.play()
+        hintBtn.innerText = 'Stop Hint'
+        hintBtn.disabled = false
+
+        previewAudio.onended = function() {
+            hintBtn.innerText = 'Play Hint'
+        }
+    } else {
+        hintBtn.innerText = 'No preview available'
+        setTimeout(() => {
+            hintBtn.innerText = 'Play Hint'
+            hintBtn.disabled = false
+        }, 2000)
+    }
+}
+
 async function compareSong(choice) {
     if (guessCount <= maxGuesses) {
         let choiceData;
