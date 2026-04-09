@@ -61,6 +61,11 @@ searchInput.setAttribute('placeholder', 'Start by typing any Ye song!')
 showIntro()
 sideStatistics()
 updateModeIcon()
+
+if (gameMode === 'infinite') {
+    resetGameState()
+}
+
 getRandomMysterySong()
 loadLocalStorage()
 
