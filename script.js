@@ -322,9 +322,12 @@ async function compareSong(choice) {
         searchInput.setAttribute('placeholder', 'Guess ' + ++guessCount + '/' + maxGuesses)
         searchInput.value = ""
 
-        if (guessCount >= 6 && gameMode === 'infinite') {
-            document.getElementById('hint-button').style.display = 'inline-block'
-        }
+       if (guessCount >= 6 && gameMode === 'infinite') {
+    const hintAlreadyShown = document.getElementById('hint-display').innerText !== ''
+    if (!hintAlreadyShown) {
+        document.getElementById('hint-button').style.display = 'inline-block'
+    }
+}
 
         if (Object.values(result).every(r => r.includes("green"))) {
             irishSpring = true
