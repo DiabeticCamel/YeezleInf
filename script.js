@@ -322,12 +322,15 @@ async function compareSong(choice) {
         searchInput.setAttribute('placeholder', 'Guess ' + ++guessCount + '/' + maxGuesses)
         searchInput.value = ""
 
+        if (guessCount >= 6) {
+            document.getElementById('hint-button').style.display = 'inline-block'
+        }
+
         if (Object.values(result).every(r => r.includes("green"))) {
             irishSpring = true
         } else {
             irishSpring = false
         }
-
         if (Object.values(result).every(r => r.includes("green"))) {
             mainStatisticsW()
             showMysterySong(true)
@@ -336,7 +339,7 @@ async function compareSong(choice) {
             searchInput.setAttribute('placeholder', 'You solved it in ' + accGuessCount + '!')
         }
     }
-
+    
     if (guessCount > maxGuesses && irishSpring != true) {
         mainStatisticsL()
         showMysterySong(false)
