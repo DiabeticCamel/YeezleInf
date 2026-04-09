@@ -54,7 +54,7 @@ const a = new Date("2022-04-15"),
 const tzAdj = a.getTimezoneOffset();
 const aAdjusted = new Date(a.getTime() + tzAdj * 60000);
 
-yeezleDay = dateDiffInDays(aAdjusted, b) + 1 - 938;
+yeezleDay = dateDiffInDays(aAdjusted, b) + 1 - 1454;
 console.log(yeezleDay)
 
 searchInput.setAttribute('placeholder', 'Start by typing any Ye song!')
@@ -549,7 +549,11 @@ function scoreText() {
 }
 
 function formatScoreText(resultsArray) {
-    let formattedScoreText = "INFYEEZLE #" + yeezleDay + ": " + (Number(guessCount) - 1) + "/" + maxGuesses + "\n"
+    const prefix = gameMode === 'daily' ? 'daily_' : 'inf_';
+    const gamesPlayed = Number(window.localStorage.getItem(prefix + 'gamesPlayed')) || 0
+    const modeLabel = gameMode === 'daily' ? 'DAILYYEEZLE' : 'INFYEEZLE'
+
+    let formattedScoreText = modeLabel + " #" + gamesPlayed + ": " + (Number(guessCount) - 1) + "/" + maxGuesses + "\n"
     for (e of resultsArray) {
         formattedScoreText += "\n" + e.join("")
     }
