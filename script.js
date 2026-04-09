@@ -183,7 +183,7 @@ function updateModeIcon() {
 }
 
 function toggleGameMode() {
-    // save current mode's game state under a mode-specific key before switching
+    // save current mode's game state under a mode-specific key before switching 
     const currentState = {
         guessCount: localStorage.getItem('guessCount'),
         gameTable: localStorage.getItem('gameTable'),
