@@ -183,9 +183,36 @@ function updateModeIcon() {
 }
 
 function toggleGameMode() {
+    // save current mode's game state under a mode-specific key before switching
+    const currentState = {
+        guessCount: localStorage.getItem('guessCount'),
+        gameTable: localStorage.getItem('gameTable'),
+        sessionDate: localStorage.getItem('sessionDate'),
+        guessedSongs: localStorage.getItem('guessedSongs'),
+        winStatus: localStorage.getItem('winStatus'),
+        mysterySong: localStorage.getItem('mysterySong')
+    }
+    localStorage.setItem('savedState_' + gameMode, JSON.stringify(currentState))
+
+    // switch mode
     gameMode = gameMode === 'daily' ? 'infinite' : 'daily';
     localStorage.setItem('gameMode', gameMode);
-    resetGameState();
+
+    // clear current keys
+    resetGameState()
+
+    // restore the new mode's saved state if it exists
+    const savedState = localStorage.getItem('savedState_' + gameMode)
+    if (savedState) {
+        const state = JSON.parse(savedState)
+        if (state.guessCount) localStorage.setItem('guessCount', state.guessCount)
+        if (state.gameTable) localStorage.setItem('gameTable', state.gameTable)
+        if (state.sessionDate) localStorage.setItem('sessionDate', state.sessionDate)
+        if (state.guessedSongs) localStorage.setItem('guessedSongs', state.guessedSongs)
+        if (state.winStatus) localStorage.setItem('winStatus', state.winStatus)
+        if (state.mysterySong) localStorage.setItem('mysterySong', state.mysterySong)
+    }
+
     window.location.reload();
 }
 
