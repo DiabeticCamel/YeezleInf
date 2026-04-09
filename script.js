@@ -379,6 +379,14 @@ function mainStatisticsL() {
     dataGames.innerText = gamesPlayed + 1
 }
 
+function showLetterHint() {
+    const hintBtn = document.getElementById('hint-button')
+    const words = mysterySong.title.split(' ')
+    const hint = words.map(word => word[0] + '_'.repeat(word.length - 1)).join(' ')
+    document.getElementById('hint-display').innerText = 'Hint: ' + hint
+    hintBtn.style.display = 'none'
+}
+
 function compareFunction(choiceData, mysterySong) {
     if (choiceData.album === mysterySong.album) { result.album = "green"; }
     else if (choiceData.album - mysterySong.album >= -2 && choiceData.album - mysterySong.album <= 2 && choiceData.album - mysterySong.album < 0) { result.album = "yellow up"; }
