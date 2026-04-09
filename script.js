@@ -383,10 +383,9 @@ function mainStatisticsL() {
 }
 
 function showLetterHint() {
-    const hintBtn = document.getElementById('hint-button')
     const firstLetter = mysterySong.title[0]
-    document.getElementById('hint-display').innerText = 'Hint: ' + firstLetter
-    hintBtn.style.display = 'none'
+    document.getElementById('hint-display').innerText = 'First Letter: ' + firstLetter
+    document.getElementById('hint-button').style.display = 'none'
 }
 
 function compareFunction(choiceData, mysterySong) {
