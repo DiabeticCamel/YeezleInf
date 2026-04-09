@@ -192,26 +192,29 @@
           </div>
         </div>
 
-        <div class="stat-container">
-          <div id="vertical-stat">
-            <div id="stat-text">WIN STREAK</div>
-            <div class="stat-bubbles" id="streak-bubble">
-              <div id="data-streak" class="endcardStatistics"></div>
-            </div>
-          </div>
-          <div id="vertical-stat">
-            <div id="stat-text">CORRECT GUESSES</div>
-            <div class="stat-bubbles">
-              <div id="data-div" class="endcardStatistics"></div>
-            </div>
-          </div>
-          <div id="vertical-stat">
-            <div id="stat-text">GAMES PLAYED</div>
-            <div class="stat-bubbles">
-              <div id="data-games" class="endcardStatistics"></div>
-            </div>
-          </div>
-        </div>
+       <div class="stat-container" id="stat-collumn" style="flex-direction: column; padding: 15px;">
+  <div style="color: white; font-size: 14px; font-family: SYNE; margin-bottom: 10px; opacity: 0.6;" id="stat-mode-label">INFINITE STATS</div>
+  <div style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; gap: 10px;">
+    <div id="vertical-stat">
+      <div id="stat-text">WIN STREAK</div>
+      <div class="stat-bubbles" id="streak-bubble">
+        <div id="data-streak" class="endcardStatistics"></div>
+      </div>
+    </div>
+    <div id="vertical-stat">
+      <div id="stat-text">CORRECT GUESSES</div>
+      <div class="stat-bubbles">
+        <div id="data-div" class="endcardStatistics"></div>
+      </div>
+    </div>
+    <div id="vertical-stat">
+      <div id="stat-text" id="games-stat-label">GAMES PLAYED</div>
+      <div class="stat-bubbles">
+        <div id="data-games" class="endcardStatistics"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
         <div class="stat-container" id="stat-collumn">
           <div id="donate-banner">
