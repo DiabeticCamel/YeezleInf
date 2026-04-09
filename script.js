@@ -298,7 +298,7 @@ await fetch('/datasheetNoSkit.json')
 
   function newMysterySong() {
       Math.seedrandom(new Date().toString());
-      mysteryNumber = Math.floor(Math.random() * 207) + 1;
+      mysteryNumber = Math.floor(Math.random() * 246) + 1;
   }
 
 
