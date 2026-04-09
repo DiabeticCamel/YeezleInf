@@ -206,7 +206,18 @@ function preserveGameState() {
     }
 
 
-
+function toggleGameMode() {
+    gameMode = gameMode === 'daily' ? 'infinite' : 'daily';
+    localStorage.setItem('gameMode', gameMode);
+    
+    // Update button tooltip/appearance
+    const btn = document.getElementById('mode-toggle-btn');
+    if (btn) btn.title = gameMode === 'daily' ? 'Switch to Infinite' : 'Switch to Daily';
+    
+    // Reset and reload with new mode
+    resetGameState();
+    window.location.reload();
+}
 
 }
 
