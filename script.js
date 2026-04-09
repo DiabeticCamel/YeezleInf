@@ -304,44 +304,6 @@ function newMysterySong() {
     console.log(today)
 }
 
-async function getSpotifyToken() {
-    const response = await fetch('/.netlify/functions/spotify-token')
-    const data = await response.json()
-    return data.access_token
-}
-
-async function showSpotifyHint() {
-    const hintBtn = document.getElementById('hint-button')
-    hintBtn.innerText = 'Loading...'
-    hintBtn.disabled = true
-
-    const token = await getSpotifyToken()
-    const response = await fetch(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(mysterySong.title + ' Kanye West')}&type=track&limit=1`,
-        { headers: { 'Authorization': 'Bearer ' + token } }
-    )
-    const data = await response.json()
-    const track = data.tracks.items[0]
-
-    if (track) {
-        const proxyUrl = `/.netlify/functions/spotify-embed?trackId=${track.id}`
-        document.getElementById('spotify-embed').innerHTML =
-            `<iframe src="${proxyUrl}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
-        hintBtn.innerText = 'Hide Hint'
-        hintBtn.disabled = false
-        hintBtn.onclick = function() {
-            document.getElementById('spotify-embed').innerHTML = ''
-            hintBtn.innerText = 'Show Hint'
-            hintBtn.onclick = showSpotifyHint
-        }
-    } else {
-        hintBtn.innerText = 'Song not found'
-        setTimeout(() => {
-            hintBtn.innerText = 'Show Hint'
-            hintBtn.disabled = false
-        }, 2000)
-    }
-}
 
 async function compareSong(choice) {
     if (guessCount <= maxGuesses) {
