@@ -310,54 +310,34 @@ async function getSpotifyToken() {
     return data.access_token
 }
 
-async function getSpotifyPreview(songTitle) {
-    const token = await getSpotifyToken()
-    
-    const response = await fetch(
-        `https://api.spotify.com/v1/search?q=${encodeURIComponent(songTitle + ' Kanye West')}&type=track&limit=1`,
-        { headers: { 'Authorization': 'Bearer ' + token } }
-    )
-    
-    const data = await response.json()
-    const track = data.tracks.items[0]
-    
-    if (track && track.preview_url) {
-        return track.preview_url
-    } else {
-        return null
-    }
-}
-
-let previewAudio = null
-
-async function playPreviewHint() {
+async function showSpotifyHint() {
     const hintBtn = document.getElementById('hint-button')
-    
-    if (previewAudio && !previewAudio.paused) {
-        previewAudio.pause()
-        previewAudio.currentTime = 0
-        hintBtn.innerText = 'Play Hint'
-        return
-    }
-
     hintBtn.innerText = 'Loading...'
     hintBtn.disabled = true
 
-    const previewUrl = await getSpotifyPreview(mysterySong.title)
+    const token = await getSpotifyToken()
+    const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${encodeURIComponent(mysterySong.title + ' Kanye West')}&type=track&limit=1`,
+        { headers: { 'Authorization': 'Bearer ' + token } }
+    )
+    const data = await response.json()
+    const track = data.tracks.items[0]
 
-    if (previewUrl) {
-        previewAudio = new Audio(previewUrl)
-        previewAudio.play()
-        hintBtn.innerText = 'Stop Hint'
+    if (track) {
+        const embedUrl = `https://open.spotify.com/embed/track/${track.id}`
+        document.getElementById('spotify-embed').innerHTML =
+            `<iframe src="${embedUrl}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
+        hintBtn.innerText = 'Hide Hint'
         hintBtn.disabled = false
-
-        previewAudio.onended = function() {
-            hintBtn.innerText = 'Play Hint'
+        hintBtn.onclick = function() {
+            document.getElementById('spotify-embed').innerHTML = ''
+            hintBtn.innerText = 'Show Hint'
+            hintBtn.onclick = showSpotifyHint
         }
     } else {
-        hintBtn.innerText = 'No preview available'
+        hintBtn.innerText = 'Song not found'
         setTimeout(() => {
-            hintBtn.innerText = 'Play Hint'
+            hintBtn.innerText = 'Show Hint'
             hintBtn.disabled = false
         }, 2000)
     }
