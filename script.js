@@ -227,6 +227,11 @@ function updateModeIcon() {
     btn.innerHTML = gameMode === 'infinite' ? infiniteSvg : dailySvg;
      document.getElementById('main-logo').src = 
         gameMode === 'daily' ? 'DailyYeezle.png' : 'InfYeezle.png';
+    document.getElementById('stat-mode-label').innerText = 
+    gameMode === 'daily' ? 'DAILY STATS' : 'INFINITE STATS';
+
+document.getElementById('games-stat-label').innerText = 
+    gameMode === 'daily' ? 'DAYS PLAYED' : 'GAMES PLAYED';
 }
 
 function toggleGameMode() {
@@ -846,7 +851,7 @@ function sideStatistics() {
 
 
 
-}
+
 
 
 function randomElement(array) {
