@@ -384,9 +384,8 @@ function mainStatisticsL() {
 
 function showLetterHint() {
     const hintBtn = document.getElementById('hint-button')
-    const words = mysterySong.title.split(' ')
-    const hint = words.map(word => word[0] + '_'.repeat(word.length - 1)).join(' ')
-    document.getElementById('hint-display').innerText = 'Hint: ' + hint
+    const firstLetter = mysterySong.title[0]
+    document.getElementById('hint-display').innerText = 'Hint: ' + firstLetter
     hintBtn.style.display = 'none'
 }
 
