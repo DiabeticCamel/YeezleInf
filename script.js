@@ -1,5 +1,3 @@
-resetGameState()
-
 // 47a4f79b-9bda-4259-8170-a0f390ee7443
 
 var result = { "title": "DJ Khaled" }
@@ -205,6 +203,7 @@ function preserveGameState() {
         window.localStorage.setItem('sessionDate', new Date())
     }
 
+}
 
 function toggleGameMode() {
     gameMode = gameMode === 'daily' ? 'infinite' : 'daily';
@@ -217,8 +216,6 @@ function toggleGameMode() {
     // Reset and reload with new mode
     resetGameState();
     window.location.reload();
-}
-
 }
 
 // tror guess count felet ligger under här vid ++guessCount
@@ -238,6 +235,38 @@ function loadLocalStorage() {
     if (storedGameTableContainer) {
         document.getElementById('result-table').innerHTML = storedGameTableContainer;
     }
+
+    const winStorage = window.localStorage.getItem('winStatus')
+
+    if (winStorage) {
+        if (winStorage === "true") {
+            showMysterySong(true);
+        } else if (winStorage === "false") {
+            showMysterySong(false);
+        }
+    } else { console.log("No Win Yet!") }
+
+    const sessionDate = window.localStorage.getItem('sessionDate')
+    if (sessionDate) {
+        const deezNuts = new Date(sessionDate)
+        const sesDateComp = deezNuts.getDate()
+        const neezDuts = new Date(today)
+        const curDateComp = neezDuts.getDate()
+        console.log("Session key is: " + sesDateComp + ", while game key is: " + curDateComp)
+
+        if (sesDateComp !== curDateComp) {
+            console.log('We need to update')
+            if (gameMode === 'daily') {
+                resetGameState()
+                window.location.reload();
+            }
+        } else {
+            console.log("Game is still valid.")
+        }
+    } else {
+        console.log("No session active")
+    }
+}
 
 
     const winStorage = window.localStorage.getItem('winStatus')
@@ -420,13 +449,7 @@ async function compareSong(choice) {
 
         searchInput.value = ""
 
-if (sesDateComp !== curDateComp) {
-    if (gameMode === 'daily') {   // ← add this check
-        resetGameState();
-        window.location.reload();
-    }
-    // in infinite mode, just let it keep playing
-}
+
 
 
         if (Object.values(result).every(r => r.includes("green"))) {
