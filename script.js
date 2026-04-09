@@ -342,7 +342,7 @@ async function doubleTrouble() {
 // MUST BE SAME NUMBER AS OBJECTS IN JSON FILE. MATH SECTION. math section. Math Section.
 function newMysterySong() {
     Math.seedrandom(today);
-    mysteryNumber = Math.floor(Math.random() * 207) + 1;
+    mysteryNumber = Math.floor(Math.random() * 246) + 1;
 
     console.log(today)
     //console.log(mysteryNumber + " is created.");
@@ -661,7 +661,7 @@ function addRow(choiceData, result) {
 
 
     const albumLogo = new Image()
-    albumLogo.src = "/128_" + choiceData.album + ".jpg"
+    albumLogo.src = "images/128_" + choiceData.album + ".jpg"
     albumLogo.className = 'album-logo'
 
     albumCellInner.appendChild(albumLogo)
