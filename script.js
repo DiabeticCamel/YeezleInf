@@ -82,8 +82,6 @@ guessButton.onclick = async function () {
 
 playAgainButton.onclick = playAgain
 
-window.onload = resetGameState;
-
 cardBackground.onclick = function (e) {
     if (e.target.id === cardBackground.id) {
         playAgain()
