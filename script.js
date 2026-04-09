@@ -324,9 +324,9 @@ async function showSpotifyHint() {
     const track = data.tracks.items[0]
 
     if (track) {
-        const embedUrl = `https://open.spotify.com/embed/track/${track.id}`
+        const proxyUrl = `/.netlify/functions/spotify-embed?trackId=${track.id}`
         document.getElementById('spotify-embed').innerHTML =
-            `<iframe src="${embedUrl}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
+            `<iframe src="${proxyUrl}" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>`
         hintBtn.innerText = 'Hide Hint'
         hintBtn.disabled = false
         hintBtn.onclick = function() {
