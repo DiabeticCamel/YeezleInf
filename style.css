@@ -122,6 +122,11 @@ body {
 
 }
 
+#mode-toggle-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 #rs-cont {
   display: flex;
