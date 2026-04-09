@@ -6,7 +6,7 @@ var result = { "title": "DJ Khaled" }
 let mysteryNumber = {}
 let mysterySong = {}
 let choiceSong = {}
-
+let gameMode = localStorage.getItem('gameMode') || 'infinite';
 let irishSpring = false
 let guessedSongs = {}
 //let currentSongIndex = 0;
@@ -285,17 +285,22 @@ function resetGameState() {
 */
 
 async function getRandomMysterySong() {
-    newMysterySong()
-//console.log(mysteryNumber)
-await fetch('/datasheetNoSkit.json')
-    .then(response => response.json())
-    .then(data => {
+    if (gameMode === 'daily') {
+        newMysterySong(); 
+    } else {
+        Math.seedrandom(new Date().toString() + Math.random());
+        mysteryNumber = Math.floor(Math.random() * 246) + 1;
+    }
 
-        mysteryDouble = data.numbers[mysteryNumber].title
-       // console.log(mysteryDouble)
-    })
-    doubleTrouble()
+    await fetch('/datasheetNoSkit.json')
+        .then(response => response.json())
+        .then(data => {
+            mysteryDouble = data.numbers[mysteryNumber].title;
+        });
+    doubleTrouble();
+}
 
+    
   function newMysterySong() {
       Math.seedrandom(new Date().toString());
       mysteryNumber = Math.floor(Math.random() * 246) + 1;
@@ -404,7 +409,13 @@ async function compareSong(choice) {
 
         searchInput.value = ""
 
-
+if (sesDateComp !== curDateComp) {
+    if (gameMode === 'daily') {   // ← add this check
+        resetGameState();
+        window.location.reload();
+    }
+    // in infinite mode, just let it keep playing
+}
 
 
         if (Object.values(result).every(r => r.includes("green"))) {
