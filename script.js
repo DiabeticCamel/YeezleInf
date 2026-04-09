@@ -1,15 +1,12 @@
-resetGameState()
-
 // 47a4f79b-9bda-4259-8170-a0f390ee7443
 
 var result = { "title": "DJ Khaled" }
 let mysteryNumber = {}
 let mysterySong = {}
 let choiceSong = {}
-
+let gameMode = localStorage.getItem('gameMode') || 'infinite';
 let irishSpring = false
 let guessedSongs = {}
-//let currentSongIndex = 0;
 accGuessCount = {}
 
 const maxGuesses = 8
@@ -38,41 +35,37 @@ const dataDiv = document.getElementById('data-div')
 const dataStreak = document.getElementById('data-streak')
 const dataGames = document.getElementById('data-games')
 
-
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
-var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var mm = String(today.getMonth() + 1).padStart(2, '0');
 var yyyy = today.getFullYear();
-
 today = mm + '/' + dd + '/' + yyyy;
-
 
 const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-// a and b are javascript Date objects
 function dateDiffInDays(a, b) {
-    // Discard the time and time-zone information.
     const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
     const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
     return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
 
-// test it
 const a = new Date("2022-04-15"),
     b = new Date();
 const tzAdj = a.getTimezoneOffset();
 const aAdjusted = new Date(a.getTime() + tzAdj * 60000);
-
-
 
 yeezleDay = dateDiffInDays(aAdjusted, b) + 1 - 938;
 console.log(yeezleDay)
 
 searchInput.setAttribute('placeholder', 'Start by typing any Ye song!')
 showIntro()
-//initLocalStorage()
 sideStatistics()
+updateModeIcon()
+
+if (gameMode === 'infinite') {
+    resetGameState()
+}
+
 getRandomMysterySong()
 loadLocalStorage()
 
@@ -81,7 +74,6 @@ showShowButton.onclick = showShowResult
 guessButton.onclick = async function () {
     if (songTitles.includes(searchInput.value)) {
         const total = Number(window.localStorage.getItem('totalGuesses')) || 0
-
         await compareSong(searchInput.value)
         window.localStorage.setItem('totalGuesses', total + 1)
         sideStatistics()
@@ -89,8 +81,6 @@ guessButton.onclick = async function () {
 }
 
 playAgainButton.onclick = playAgain
-
-window.onload = resetGameState;
 
 cardBackground.onclick = function (e) {
     if (e.target.id === cardBackground.id) {
@@ -101,15 +91,11 @@ cardBackground.onclick = function (e) {
 shareScoreButton.onclick = function () {
     copyToClipboard(scoreText())
     clipboardPopup()
-
-
-    //window.alert("Score copied to clipboard!")
 }
 
 newSongButton.onclick = function () {
-  //window.alert("New song chosen!")
-  resetGameState()
-  location.reload()
+    resetGameState()
+    location.reload()
 }
 
 helpButton.onclick = function () {
@@ -126,8 +112,6 @@ donateCardBack.onclick = function (e) {
     }
 }
 
-
-
 introCardBack.onclick = function (e) {
     if (e.target.id === introCardBack.id) {
         introCardBack.classList.add('hide')
@@ -137,80 +121,101 @@ introCardBack.onclick = function (e) {
 startButton.onclick = () => {
     introCardBack.classList.add("hide")
     window.localStorage.setItem('introShown', "false")
+}
 
+document.getElementById('mode-card-back').onclick = function(e) {
+    if (e.target.id === 'mode-card-back') {
+        document.getElementById('mode-card-back').classList.add('hide')
+    }
 }
 
 function clipboardPopup() {
-
     clipboardPopupScreen.classList.remove('hide')
-
     setTimeout(function () {
         clipboardPopupScreen.classList.add('fade-out');
-
-
     }, 2000);
     setTimeout(function () {
         clipboardPopupScreen.classList.remove('fade-out')
         clipboardPopupScreen.classList.add('hide')
     }, 4000);
-
-
 }
-
-/* Local Storage Test
-//Updates after winning or losing
-function updateSongIndex() {
-    window.localStorage.setItem('currentSongIndex', currentSongIndex + 1)
-}
-
-function initLocalStorage() {
-    const storedCurrentSongIndex = window.localStorage.getItem('currentSongIndex');
-    if (!storedCurrentSongIndex) {
-        window.localStorage.setItem('currentSongIndex', currentSongIndex);
-    } else {
-        currentSongIndex = Number(storedCurrentSongs);
-        currentSong = mysterySong
-    }
-
-}
-
-*/
 
 function preserveGameState() {
     window.localStorage.setItem('guessedSongs', JSON.stringify(guessedSongs))
-
     const gameTable = document.getElementById('result-table')
     window.localStorage.setItem('gameTable', gameTable.innerHTML)
 
-
-    if (typeof winStatus === 'undefined') {
-        //console.log('No win yet.')
-    } else {
-        const ifWin = winStatus
-        if (ifWin) {
+    if (typeof winStatus !== 'undefined') {
+        if (winStatus) {
             window.localStorage.setItem('winStatus', winStatus)
         }
     }
 
-
-
     window.localStorage.setItem('guessCount', guessCount)
-
     window.localStorage.setItem('mysterySong', JSON.stringify(mysterySong))
 
     const sessionDate = window.localStorage.getItem('sessionDate')
-    if (sessionDate) {
-        //console.log("Session date is already set.")
-    } else {
+    if (!sessionDate) {
         window.localStorage.setItem('sessionDate', new Date())
     }
-
-
-
-
 }
 
-// tror guess count felet ligger under här vid ++guessCount
+function showModeCard() {
+    document.getElementById('current-mode-label').innerText =
+        gameMode === 'infinite' ? 'Infinite' : 'Daily';
+    document.getElementById('mode-card-back').classList.remove('hide')
+}
+
+function updateModeIcon() {
+    const infiniteSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="75px" viewBox="0 -960 960 960" width="75px" fill="#e3e3e3"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>`;
+    const dailySvg = `<svg xmlns="http://www.w3.org/2000/svg" height="75px" viewBox="0 -960 960 960" width="75px" fill="#e3e3e3"><path d="M220-260q-92 0-156-64T0-480q0-92 64-156t156-64q37 0 71 13t61 37l68 62-60 54-62-56q-16-14-36-22t-42-8q-58 0-99 41t-41 99q0 58 41 99t99 41q22 0 42-8t36-22l310-280q27-24 61-37t71-13q92 0 156 64t64 156q0 92-64 156t-156 64q-37 0-71-13t-61-37l-68-62 60-54 62 56q16 14 36 22t42 8q58 0 99-41t41-99q0-58-41-99t-99-41q-22 0-42 8t-36 22L352-310q-27 24-61 37t-71 13Z"/></svg>`;
+
+    const btn = document.getElementById('mode-toggle-btn');
+    btn.innerHTML = gameMode === 'infinite' ? infiniteSvg : dailySvg;
+
+    document.getElementById('main-logo').src =
+        gameMode === 'daily' ? 'DailyYeezle.png' : 'InfYeezle.png';
+
+    const statLabel = document.getElementById('stat-mode-label');
+    const gamesLabel = document.getElementById('games-stat-label');
+    if (statLabel) statLabel.innerText = gameMode === 'daily' ? 'DAILY STATS' : 'INFINITE STATS';
+    if (gamesLabel) gamesLabel.innerText = gameMode === 'daily' ? 'DAYS PLAYED' : 'GAMES PLAYED';
+}
+
+function toggleGameMode() {
+    // save current mode's game state under a mode-specific key before switching
+    const currentState = {
+        guessCount: localStorage.getItem('guessCount'),
+        gameTable: localStorage.getItem('gameTable'),
+        sessionDate: localStorage.getItem('sessionDate'),
+        guessedSongs: localStorage.getItem('guessedSongs'),
+        winStatus: localStorage.getItem('winStatus'),
+        mysterySong: localStorage.getItem('mysterySong')
+    }
+    localStorage.setItem('savedState_' + gameMode, JSON.stringify(currentState))
+
+    // switch mode
+    gameMode = gameMode === 'daily' ? 'infinite' : 'daily';
+    localStorage.setItem('gameMode', gameMode);
+
+    // clear current keys
+    resetGameState()
+
+    // restore the new mode's saved state if it exists
+    const savedState = localStorage.getItem('savedState_' + gameMode)
+    if (savedState) {
+        const state = JSON.parse(savedState)
+        if (state.guessCount) localStorage.setItem('guessCount', state.guessCount)
+        if (state.gameTable) localStorage.setItem('gameTable', state.gameTable)
+        if (state.sessionDate) localStorage.setItem('sessionDate', state.sessionDate)
+        if (state.guessedSongs) localStorage.setItem('guessedSongs', state.guessedSongs)
+        if (state.winStatus) localStorage.setItem('winStatus', state.winStatus)
+        if (state.mysterySong) localStorage.setItem('mysterySong', state.mysterySong)
+    }
+
+    window.location.reload();
+}
+
 function loadLocalStorage() {
     const anyGuesses = window.localStorage.getItem('guessCount')
     if (anyGuesses) {
@@ -228,19 +233,14 @@ function loadLocalStorage() {
         document.getElementById('result-table').innerHTML = storedGameTableContainer;
     }
 
-
     const winStorage = window.localStorage.getItem('winStatus')
-
     if (winStorage) {
         if (winStorage === "true") {
             showMysterySong(true);
-
         } else if (winStorage === "false") {
             showMysterySong(false);
         }
-
     } else { console.log("No Win Yet!") }
-
 
     const sessionDate = window.localStorage.getItem('sessionDate')
     if (sessionDate) {
@@ -252,18 +252,16 @@ function loadLocalStorage() {
 
         if (sesDateComp !== curDateComp) {
             console.log('We need to update')
-            resetGameState()
-            window.location.reload();
+            if (gameMode === 'daily') {
+                resetGameState()
+                window.location.reload();
+            }
         } else {
             console.log("Game is still valid.")
         }
-
-
     } else {
         console.log("No session active")
     }
-
-
 }
 
 function resetGameState() {
@@ -273,528 +271,257 @@ function resetGameState() {
     localStorage.removeItem('guessedSongs');
     localStorage.removeItem('endyCard')
     localStorage.removeItem('winStatus')
-    localStorage.removeItem('endyCard')
     localStorage.removeItem('mysterySong')
 }
 
-// set local storage på en var.
-/* if (var) {
-    } else {
-        let var = date
-    }
-*/
-
 async function getRandomMysterySong() {
-    newMysterySong()
-//console.log(mysteryNumber)
-await fetch('/datasheetNoSkit.json')
-    .then(response => response.json())
-    .then(data => {
+    if (gameMode === 'daily') {
+        newMysterySong();
+    } else {
+        Math.seedrandom(new Date().toString() + Math.random());
+        mysteryNumber = Math.floor(Math.random() * 246) + 1;
+    }
 
-        mysteryDouble = data.numbers[mysteryNumber].title
-       // console.log(mysteryDouble)
-    })
-    doubleTrouble()
-
-  function newMysterySong() {
-      Math.seedrandom(new Date().toString());
-      mysteryNumber = Math.floor(Math.random() * 246) + 1;
-  }
-
-
-/*
-    await fetch(spreadFunctionCalls() + "/numbers/" + mysteryNumber)
+    await fetch('/datasheetNoSkit.json')
         .then(response => response.json())
         .then(data => {
-            mysteryDouble = data.title
-        })
-    doubleTrouble()
-*/
-    //console.log(mysteryDouble + " is not doubled!");
-
-    //console.log(mysteryNumber + " is remembered.")
-
-    // console.log(result.album)
-
+            mysteryDouble = data.numbers[mysteryNumber].title;
+        });
+    doubleTrouble();
 }
+
 async function doubleTrouble() {
     await fetch('/datasheetNoSkit.json')
         .then(response => response.json())
         .then(data => {
-        mysterySong = data.songs[mysteryDouble]
-
-        //console.log(mysterySong)
-    })
-
-}
-
-/*
-async function doubleTrouble() {
-    await fetch(spreadFunctionCalls() + "/songs/" + mysteryDouble)
-        .then(response => response.json())
-        .then(data => {
-            mysterySong = data
+            mysterySong = data.songs[mysteryDouble]
         })
-    //console.log(mysterySong.title + " is todays song!");
 }
-*/
 
-// MUST BE SAME NUMBER AS OBJECTS IN JSON FILE. MATH SECTION. math section. Math Section.
 function newMysterySong() {
     Math.seedrandom(today);
     mysteryNumber = Math.floor(Math.random() * 246) + 1;
-
     console.log(today)
-    //console.log(mysteryNumber + " is created.");
 }
 
-
-
-
 async function compareSong(choice) {
-
     if (guessCount <= maxGuesses) {
-
-        //console.log(choice + " is Kanye's best song!!!");
         let choiceData;
-
-        /* förra
-        await fetch(spreadFunctionCalls() + "/songs/" + choice)
-            .then(response => response.json())
-            .then(data => {
-                choiceData = data
-                //console.log(choiceData.title + ", I got broads in Atlanta") 
-                compareFunction(choiceData, mysterySong)
-                //console.log(choiceData)
-                //console.log(mysterySong)
-                //console.log(result)
-            })
-           */
-
         const controller = new AbortController()
-
-        // 5 second timeout:
         const timeoutId = setTimeout(() => controller.abort(), 400)
 
         await fetch('/datasheetNoSkit.json', { signal: controller.signal })
-        .then(response => response.json())
-        .then(data => {
-
-            choiceData = data.songs[choice]
-            compareFunction(choiceData, mysterySong)
-
-        })
-        // MAYBE ADD BACK SIGNAL CONTROLELR SIGNAL
-/*
-        await fetch(spreadFunctionCalls() + "/songs/" + choice,
-            { signal: controller.signal })
             .then(response => response.json())
             .then(data => {
-                choiceData = data
-                //console.log(choiceData.title + ", I got broads in Atlanta") 
+                choiceData = data.songs[choice]
                 compareFunction(choiceData, mysterySong)
-                //console.log(choiceData)
-                //console.log(mysterySong)
-                //console.log(result)
-
             })
-*/
+
         addRow(choiceData, result)
         searchInput.setAttribute('placeholder', 'Guess ' + ++guessCount + '/' + maxGuesses)
-
         searchInput.value = ""
-
-
-
 
         if (Object.values(result).every(r => r.includes("green"))) {
             irishSpring = true
-        }
-        else {
+        } else {
             irishSpring = false
         }
 
-
         if (Object.values(result).every(r => r.includes("green"))) {
-            const correct = Number(window.localStorage.getItem('correctGuesses')) || 0
-            window.localStorage.setItem('correctGuesses', correct + 1)
-
-
-
             mainStatisticsW()
             showMysterySong(true)
             winStatus = "true";
-
             accGuessCount = guessCount - 1
             searchInput.setAttribute('placeholder', 'You solved it in ' + accGuessCount + '!')
-        } else { }
-
+        }
     }
 
-
-    if (guessCount > maxGuesses
-        && irishSpring != true) {
-
+    if (guessCount > maxGuesses && irishSpring != true) {
         mainStatisticsL()
         showMysterySong(false)
         winStatus = "false";
         searchInput.setAttribute('placeholder', 'Better luck next time!')
         preserveGameState()
-    } else { }
+    }
     sideStatistics()
     preserveGameState()
-    //console.log(result.title + " seggy")
 }
 
 function mainStatisticsW() {
-    const gamesPlayed = Number(window.localStorage.getItem('gamesPlayed')) || Number(window.localStorage.getItem('winStreak')) - 1
-    window.localStorage.setItem('gamesPlayed', gamesPlayed + 1)
+    const prefix = gameMode === 'daily' ? 'daily_' : 'inf_';
 
-    const statCorrect = Number(window.localStorage.getItem('correctGuesses')) || 0
+    const gamesPlayed = Number(window.localStorage.getItem(prefix + 'gamesPlayed')) || 0
+    window.localStorage.setItem(prefix + 'gamesPlayed', gamesPlayed + 1)
 
-    const winStreak = Number(window.localStorage.getItem('winStreak')) || 0
-    window.localStorage.setItem('winStreak', winStreak + 1)
+    const correctGuess = Number(window.localStorage.getItem(prefix + 'correctGuesses')) || 0
+    window.localStorage.setItem(prefix + 'correctGuesses', correctGuess + 1)
 
+    const winStreak = Number(window.localStorage.getItem(prefix + 'winStreak')) || 0
+    window.localStorage.setItem(prefix + 'winStreak', winStreak + 1)
 
-
-
-    dataDiv.innerText = `${statCorrect}`
-    dataStreak.innerText = `${winStreak}`
-    dataGames.innerText = `${gamesPlayed}`
+    dataDiv.innerText = correctGuess + 1
+    dataStreak.innerText = winStreak + 1
+    dataGames.innerText = gamesPlayed + 1
 }
+
 function mainStatisticsL() {
-    const gamesPlayed = Number(window.localStorage.getItem('gamesPlayed')) || Number(window.localStorage.getItem('winStreak'))
-    window.localStorage.setItem('gamesPlayed', gamesPlayed + 1)
+    const prefix = gameMode === 'daily' ? 'daily_' : 'inf_';
 
-    const statCorrect = Number(window.localStorage.getItem('correctGuesses')) || 0
+    const gamesPlayed = Number(window.localStorage.getItem(prefix + 'gamesPlayed')) || 0
+    window.localStorage.setItem(prefix + 'gamesPlayed', gamesPlayed + 1)
 
-    window.localStorage.setItem('winStreak', 0)
-    const winStreak = window.localStorage.getItem('winStreak') || 0
+    const correctGuess = Number(window.localStorage.getItem(prefix + 'correctGuesses')) || 0
+    window.localStorage.setItem(prefix + 'winStreak', 0)
 
-
-
-    dataDiv.innerText = `${statCorrect}`
-    dataStreak.innerText = `${winStreak}`
-    dataGames.innerText = `${gamesPlayed}`
+    dataDiv.innerText = correctGuess
+    dataStreak.innerText = 0
+    dataGames.innerText = gamesPlayed + 1
 }
-
-
 
 function compareFunction(choiceData, mysterySong) {
+    if (choiceData.album === mysterySong.album) { result.album = "green"; }
+    else if (choiceData.album - mysterySong.album >= -2 && choiceData.album - mysterySong.album <= 2 && choiceData.album - mysterySong.album < 0) { result.album = "yellow up"; }
+    else if (choiceData.album - mysterySong.album >= -2 && choiceData.album - mysterySong.album <= 2 && choiceData.album - mysterySong.album > 0) { result.album = "yellow down"; }
+    else if (choiceData.album - mysterySong.album < 0) { result.album = "grey up"; }
+    else if (choiceData.album - mysterySong.album > 0) { result.album = "grey down"; }
 
+    if (choiceData.title === mysterySong.title) { result.title = "green" }
+    else { result.title = "grey" }
 
-    // Album Comparison
-    if (choiceData.album === mysterySong.album) {
-        result.album = "green";
-    }
+    if (choiceData.track === mysterySong.track) { result.track = "green"; }
+    else if (choiceData.track - mysterySong.track >= -2 && choiceData.track - mysterySong.track <= 2 && choiceData.track - mysterySong.track < 0) { result.track = "yellow up"; }
+    else if (choiceData.track - mysterySong.track >= -2 && choiceData.track - mysterySong.track <= 2 && choiceData.track - mysterySong.track > 0) { result.track = "yellow down"; }
+    else if (choiceData.track - mysterySong.track < 0) { result.track = "grey up"; }
+    else if (choiceData.track - mysterySong.track > 0) { result.track = "grey down"; }
 
-    else if (choiceData.album - mysterySong.album >= -2
-        && choiceData.album - mysterySong.album <= 2
-        && choiceData.album - mysterySong.album != 0
-        && choiceData.album - mysterySong.album < 0) {
-        result.album = "yellow up";
-    }
+    if (choiceData.length === mysterySong.length) { result.length = "green"; }
+    else if (choiceData.length - mysterySong.length >= -30 && choiceData.length - mysterySong.length <= 30 && choiceData.length - mysterySong.length < 0) { result.length = "yellow up"; }
+    else if (choiceData.length - mysterySong.length >= -30 && choiceData.length - mysterySong.length <= 30 && choiceData.length - mysterySong.length > 0) { result.length = "yellow down"; }
+    else if (choiceData.length - mysterySong.length < 0) { result.length = "grey up"; }
+    else if (choiceData.length - mysterySong.length > 0) { result.length = "grey down"; }
 
-    else if (choiceData.album - mysterySong.album >= -2
-        && choiceData.album - mysterySong.album <= 2
-        && choiceData.album - mysterySong.album != 0
-        && choiceData.album - mysterySong.album > 0) {
-        result.album = "yellow down";
-    }
-
-    else if (choiceData.album - mysterySong.album < 0) {
-        result.album = "grey up";
-    }
-
-    else if (choiceData.album - mysterySong.album > 0) {
-        result.album = "grey down";
-    }
-
-    // Title Comparison
-    if (choiceData.title === mysterySong.title) {
-        result.title = "green"
-        //console.log("West Guesser Ever!")
-    }
-    else {
-        result.title = "grey"
-        //console.log("u really a bum on fonem")
-    }
-
-    // Track Comparison
-    if (choiceData.track === mysterySong.track) {
-        result.track = "green";
-    }
-
-    else if (choiceData.track - mysterySong.track >= -2
-        && choiceData.track - mysterySong.track <= 2
-        && choiceData.track - mysterySong.track != 0
-        && choiceData.track - mysterySong.track < 0) {
-        result.track = "yellow up";
-    }
-
-    else if (choiceData.track - mysterySong.track >= -2
-        && choiceData.track - mysterySong.track <= 2
-        && choiceData.track - mysterySong.track != 0
-        && choiceData.track - mysterySong.track > 0) {
-        result.track = "yellow down";
-    }
-
-    else if (choiceData.track - mysterySong.track < 0) {
-        result.track = "grey up";
-    }
-
-    else if (choiceData.track - mysterySong.track > 0) {
-        result.track = "grey down";
-    }
-
-    // Lenght Comparison
-
-    if (choiceData.length === mysterySong.length) {
-        result.length = "green";
-    }
-
-    else if (choiceData.length - mysterySong.length >= -30
-        && choiceData.length - mysterySong.length <= 30
-        && choiceData.length - mysterySong.length != 0
-        && choiceData.length - mysterySong.length < 0) {
-        result.length = "yellow up";
-    }
-
-    else if (choiceData.length - mysterySong.length >= -30
-        && choiceData.length - mysterySong.length <= 30
-        && choiceData.length - mysterySong.length != 0
-        && choiceData.length - mysterySong.length > 0) {
-        result.length = "yellow down";
-    }
-
-    else if (choiceData.length - mysterySong.length < 0) {
-        result.length = "grey up";
-    }
-
-    else if (choiceData.length - mysterySong.length > 0) {
-        result.length = "grey down";
-    }
-
-    // Features
     const filteredArray = choiceData.features.filter(value => mysterySong.features.includes(value));
-
     if (areArraysEqualSets(choiceData, mysterySong) === "true") { result.features = "green" }
-
-    //if (choiceData.features[0] === mysterySong.features[0]){result.features = "green"}
-
-
-
-    else if (filteredArray != "") {
-        result.features = "yellow"
-    }
-
-
-
+    else if (filteredArray != "") { result.features = "yellow" }
     else { result.features = "grey" }
-
-
-
-
-
 
     return result;
 }
 
-/** assumes array elements are primitive types
-* check whether 2 arrays are equal sets.
-* @param  {} choiceData.features is an array
-* @param  {} mysterySong.features is an array
-*/
 function areArraysEqualSets(choiceData, mysterySong) {
     const superSet = {};
     for (const i of choiceData.features) {
         const e = i + typeof i;
         superSet[e] = 1;
     }
-
     for (const i of mysterySong.features) {
         const e = i + typeof i;
-        if (!superSet[e]) {
-            return "false";
-        }
+        if (!superSet[e]) { return "false"; }
         superSet[e] = 2;
     }
-
     for (let e in superSet) {
-        if (superSet[e] === 1) {
-            return "false";
-        }
+        if (superSet[e] === 1) { return "false"; }
     }
-
     return "true";
 }
 
 function addRow(choiceData, result) {
     const newRow = resultTable.insertRow(-1)
 
-    // Song
     const songCell = document.createElement('td')
     songCell.classList.add('song-cell')
     songCell.className += " " + result["title"]
-
-
-    /*
-    const songHeadshot = new Image()
-    songHeadshot.src = choiceData.cover
-    songHeadshot.className = 'song-headshot'
-    */
-
     const songTitle = document.createElement('p')
     songTitle.className = 'song-title'
     songTitle.innerText = choiceData.title
-
-    //songCell.appendChild(songHeadshot)
     songCell.appendChild(songTitle)
 
-    // Album
     const albumCell = document.createElement('td')
     albumCell.classList.add('album-cell')
     albumCell.className += " " + result["album"]
-
     const albumCellInner = document.createElement('div')
     albumCellInner.className = 'album-cell-inner'
-
-
     const albumLogo = new Image()
     albumLogo.src = "images/128_" + choiceData.album + ".jpg"
     albumLogo.className = 'album-logo'
-
     albumCellInner.appendChild(albumLogo)
-
-    //albumCellInner.innerHTML += choiceData["album"]
-
     albumCell.appendChild(albumCellInner)
 
-
-    // Track Number (Tagen från Age)
     const trackCell = document.createElement('td')
     trackCell.classList.add('track-cell')
     trackCell.innerText = choiceData.track
     trackCell.className += " " + result["track"]
 
-    // Track Length
     const lengthCell = document.createElement('td')
     lengthCell.classList.add('length-cell')
     lengthCell.innerText = secondsToMin(choiceData.length)
     lengthCell.className += " " + result["length"]
 
-    // Features
     const featuresCell = document.createElement('td')
     featuresCell.classList.add('features-cell')
     featuresCell.innerText = haveFeatures(choiceData)
     featuresCell.className += " " + result["features"]
-
 
     newRow.appendChild(songCell)
     newRow.appendChild(albumCell)
     newRow.appendChild(trackCell)
     newRow.appendChild(lengthCell)
     newRow.appendChild(featuresCell)
-
 }
 
 function secondsToMin(seconds) {
     let min = Math.floor(seconds / 60)
     let secondsRemaining = seconds % 60
-
-    if (secondsRemaining > 9) {
-        return min + ":" + secondsRemaining
-    }
-
-    else {
-        return min + ":0" + secondsRemaining
-    }
+    if (secondsRemaining > 9) { return min + ":" + secondsRemaining }
+    else { return min + ":0" + secondsRemaining }
 }
 
 function haveFeatures(choiceData) {
-    if (choiceData.features[0] === "") {
-        //console.log("No features")
-        return "No features"
-    }
-    else {
-        //console.log("Has features")
-        return choiceData.features
-    }
+    if (choiceData.features[0] === "") { return "No features" }
+    else { return choiceData.features }
 }
 
 function showMysterySong(correct) {
-    cardBackground.querySelector("#end-card-title").innerText = correct ? "Correct!" + " " : "Game" + " Over!"
+    cardBackground.querySelector("#end-card-title").innerText = correct ? "Correct! " : "Game Over!"
     cardBackground.querySelector('#mystery-song-title').innerText = mysterySong.title + " "
-
-    if (mysterySong.features[0] === "") {
-    }
-    else {
+    if (mysterySong.features[0] !== "") {
         cardBackground.querySelector('#mystery-song-feature').innerText = "ft. [" + mysterySong.features + "]"
     }
-
-
     cardBackground.querySelector('#mystery-song-img').src = mysterySong.cover
     cardBackground.classList.remove('hide')
     searchInput.classList.add('greyed')
     playAgainButton.focus()
-
-
 }
 
 function showShowResult() {
     cardBackground.classList.remove('hide')
-
-
-
-
 }
 
 function playAgain() {
-
     guessButton.classList.add('disable')
     cardBackground.classList.add('hide')
     showShowButton.classList.remove('disable')
-
 }
 
 function sideStatistics() {
-
-    const totalGuesses = window.localStorage.getItem('totalGuesses') || 0
-    const gamesPlayed = Number(window.localStorage.getItem('gamesPlayed')) || Number(window.localStorage.getItem('correctGuesses'))
-
-    const correctGuess = Number(window.localStorage.getItem('correctGuesses')) || 0
-    const statCorrect = Number(window.localStorage.getItem('correctGuesses')) || 0
-
-    //console.log(gamesPlayed + ", " + statCorrect)
-
-
-    const winStreak = window.localStorage.getItem('winStreak') || 0
+    const prefix = gameMode === 'daily' ? 'daily_' : 'inf_';
+    const correctGuess = Number(window.localStorage.getItem(prefix + 'correctGuesses')) || 0
+    const winStreak = window.localStorage.getItem(prefix + 'winStreak') || 0
+    const gamesPlayed = Number(window.localStorage.getItem(prefix + 'gamesPlayed')) || 0
 
     if (gamesPlayed < correctGuess) {
-        window.localStorage.setItem('gamesPlayed', correctGuess)
-
+        window.localStorage.setItem(prefix + 'gamesPlayed', correctGuess)
     }
 
-
-
-    dataDiv.innerText = `${statCorrect}`
-    dataStreak.innerText = `${winStreak}`
-    dataGames.innerText = `${gamesPlayed}`
-
-
-
-
-
+    dataDiv.innerText = correctGuess
+    dataStreak.innerText = winStreak
+    dataGames.innerText = gamesPlayed
 }
-
 
 function randomElement(array) {
     return array[Math.floor(Math.random() * array.length)]
 }
 
-
-
-//copy to clipboard
 function copyToClipboard(text) {
     const textArea = document.createElement('textarea')
     textArea.value = text
@@ -810,15 +537,10 @@ function scoreText() {
         let subArray = []
         if (e != document.querySelector("tbody").children[0]) {
             for (d of e.children) {
-                if (d.classList.contains('green')) {
-                    subArray.push("🟢 ")
-                } else if (d.classList.contains('yellow')) {
-                    subArray.push("🟡 ")
-                } else if (d.classList.contains('red')) {
-                    subArray.push("🟥 ")  
-                } else {
-                    subArray.push("⚪️ ")
-                }
+                if (d.classList.contains('green')) { subArray.push("🟢 ") }
+                else if (d.classList.contains('yellow')) { subArray.push("🟡 ") }
+                else if (d.classList.contains('red')) { subArray.push("🟥 ") }
+                else { subArray.push("⚪️ ") }
             }
             resultsArray.push(subArray)
         }
@@ -827,50 +549,20 @@ function scoreText() {
 }
 
 function formatScoreText(resultsArray) {
-    let formattedScoreText = "INFYEEZLE #" + yeezleDay + ": " + (Number(guessCount) - 1) + "/" + maxGuesses + "\n"  //+ "\n"
+    let formattedScoreText = "INFYEEZLE #" + yeezleDay + ": " + (Number(guessCount) - 1) + "/" + maxGuesses + "\n"
     for (e of resultsArray) {
         formattedScoreText += "\n" + e.join("")
     }
     formattedScoreText += "\n\n🌐 infiniteyeezle.netlify.app 🌐"
-
     return formattedScoreText
 }
 
-function spreadFunctionCalls() {
-
-    return randomSpread();
-    //return "https://api.npoint.io/21c105480c786fadc987"
-    //return "https://api.npoint.io/d73423cbdb26e5d39167"
-    //return "https://api.npoint.io/57f7590196c37d8320f4"
-
-}
-
-function randomSpread() {
-    var values = [
-        "https://api.npoint.io/57f7590196c37d8320f4",
-        "https://api.npoint.io/59b7afd3113c38cff99f",
-        "https://api.npoint.io/c9b6436291f2c9bcffb0",
-        "https://api.npoint.io/4eb342f5565886620b10"
-
-    ],
-        valueToUse = values[Math.floor(Math.random() * values.length)];
-    // do something with the selected value
-    return valueToUse;
-}
-
-
 function showIntro() {
     const introShown = window.localStorage.getItem('introShown')
-
-    if (introShown === "false") {
-
-        //window.localStorage.setItem('introShown', "false")
-    } else {
+    if (introShown !== "false") {
         introCardBack.classList.remove('hide')
     }
 }
-
-
 
 function jerseyElement(primary, secondary, number, color) {
     return `<svg viewBox="0,0,42,52" class="jersey">
@@ -881,27 +573,6 @@ function jerseyElement(primary, secondary, number, color) {
     <text x="22" y="30" fill="#ffffff">${number}</text>
     </svg>`
 }
-
-function hexFromResult(result) {
-    const r = 1
-    let c;
-    switch (r) {
-        case "green":
-            c = "#3C8725"
-            break;
-        case "yellow":
-            c = "#d0ae0e"
-            break;
-        case "grey":
-            c = "#a6a6a6"
-            break;
-        default:
-            c = "#ffffff"
-            break;
-    }
-    return c
-}
-
 
 function openInNewTab(url) {
     window.open(url, '_blank').focus();

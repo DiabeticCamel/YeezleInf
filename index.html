@@ -33,7 +33,6 @@
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" />
     <script src="compressed.js" type="text/javascript" charset="utf-8"></script>
-
     <title>InfYeezle</title>
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-FB2F8KP4B5"></script>
@@ -41,53 +40,51 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-FB2F8KP4B5');
-</script></head>
+</script>
+  </head>
 
   <link
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,100,1,200"
     rel="stylesheet"
   />
-   
-   <style>
-  #intro-card {
-    max-width: 1200px;
-    width: 90vw;
-  }
-</style>
-    <head>
-      <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      </head>
-      </body>
-        </html>
 
+  <style>
+    #intro-card {
+      max-width: 1200px;
+      width: 90vw;
+    }
+  </style>
 
   <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKLT8HB"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+<!-- End Google Tag Manager (noscript) -->
 
     <header id="mega-header">
-  <div id="left-but-cont">
-    <div class="circle-button" id="other-button">
-      <span class="material-symbols-outlined red600">favorite</span>
-    </div>
-  </div>
+      <div id="left-but-cont">
+        <div class="circle-button" id="other-button">
+          <span class="material-symbols-outlined red600">favorite</span>
+        </div>
+      </div>
 
-  <img src="InfYeezle.png" alt="Infinite Yeezle Logo" id="main-logo" />
+      <img src="InfYeezle.png" alt="Infinite Yeezle Logo" id="main-logo" />
 
-  <div id="rs-cont">
-    <div class="right-but-cont">
-      <span class="material-icons md-cus" id="help-button">help_outline</span>
-    </div>
-    <div class="right-but-cont" id="dono-icon">
-      <span class="material-icons md-cus" id="dono-button">favorite_outline</span>
-    </div>
-  </div>
-</header>
+      <div id="rs-cont">
+        <div class="right-but-cont">
+          <span class="material-icons md-cus" id="help-button">help_outline</span>
+        </div>
+        <div class="right-but-cont" id="dono-icon">
+          <span class="material-icons md-cus" id="dono-button">favorite_outline</span>
+        </div>
+        <div class="right-but-cont">
+          <span id="mode-toggle-btn" onclick="showModeCard()" style="cursor: pointer;">
+            <svg xmlns="http://www.w3.org/2000/svg" height="75px" viewBox="0 -960 960 960" width="75px" fill="#e3e3e3"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>
+          </span>
+        </div>
+      </div>
+    </header>
 
     <div class="main-container">
       <br />
@@ -132,102 +129,92 @@
             <button id="share-score-button">Share Score</button>
           </div>
           <style>
-
-
-#mega-header {
-  position: relative !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-
-  max-width: 1200px !important;
-  margin: 0 auto !important;
-  width: 100% !important;
-}
-
-#rs-cont {
-  display: flex !important;
-  align-items: center !important;
-  gap: 8px !important;
-  margin-top: -150px !important;
-}
-
-#left-but-cont {
-  margin-top: -150px !important;
-}
-
-#main-logo {
-  position: absolute !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-}
-
-
-            
+            #mega-header {
+              position: relative !important;
+              display: flex !important;
+              align-items: center !important;
+              justify-content: space-between !important;
+              max-width: 1200px !important;
+              margin: 0 auto !important;
+              width: 100% !important;
+            }
+            #rs-cont {
+              display: flex !important;
+              align-items: center !important;
+              gap: 8px !important;
+              margin-top: -150px !important;
+            }
+            #left-but-cont {
+              margin-top: -150px !important;
+            }
+            #main-logo {
+              position: absolute !important;
+              left: 50% !important;
+              transform: translateX(-50%) !important;
+            }
             #new-song-button {
-              white-space: nowrap; 
+              white-space: nowrap;
             }
-
-          #mega-header { 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            height: 400px; padding: 10px 0; 
-            overflow: visible; 
-          } 
-            
-            #main-logo { 
-              height: clamp(150px, 22vw, 300px); 
-              width: auto; position: absolute; 
-              left: 50%; 
-              transform: translateX(-50%); 
-              pointer-events: none; 
-            } 
-            
-            .main-container { 
-              display: flex; 
-              flex-direction: column; 
-              align-items: center; 
-              margin-top: -100px; 
-              min-height: 0; 
+            #mega-header {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              height: 400px;
+              padding: 10px 0;
+              overflow: visible;
             }
-            
-            #result-container { 
-              margin-top: 10px; 
-              overflow-y: auto; /* scroll if it gets too tall instead of pushing up */ }
-            
+            #main-logo {
+              height: clamp(150px, 22vw, 300px);
+              width: auto;
+              position: absolute;
+              left: 50%;
+              transform: translateX(-50%);
+              pointer-events: none;
+            }
+            .main-container {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              margin-top: -100px;
+              min-height: 0;
+            }
+            #result-container {
+              margin-top: 10px;
+              overflow-y: auto;
+            }
           </style>
           <div>
             <button id="new-song-button" style="margin-bottom: 20px;">New Song</button>
           </div>
 
-          <div id="clipboard-popup" class="hide" ;>
+          <div id="clipboard-popup" class="hide">
             <div id="clipboard-popup-text">Result copied to clipboard!</div>
           </div>
-
-
         </div>
 
-        <div class="stat-container">
-          <div id="vertical-stat">
-            <div id="stat-text">WIN STREAK</div>
-            <div class="stat-bubbles" id="streak-bubble">
-              <div id="data-streak" class="endcardStatistics"></div>
-            </div>
-          </div>
-          <div id="vertical-stat">
-            <div id="stat-text">CORRECT GUESSES</div>
-            <div class="stat-bubbles">
-              <div id="data-div" class="endcardStatistics"></div>
-            </div>
-          </div>
-          <div id="vertical-stat">
-            <div id="stat-text">GAMES PLAYED</div>
-            <div class="stat-bubbles">
-              <div id="data-games" class="endcardStatistics"></div>
-            </div>
-          </div>
-        </div>
+       <div class="stat-container" id="stat-collumn" style="flex-direction: column; padding-block: 15px;">
+  <div style="color: white; font-size: 14px; font-family: SYNE; margin-bottom: 10px; opacity: 0.6;" id="stat-mode-label">INFINITE STATS</div>
+  <div style="display: flex; flex-direction: row; justify-content: space-around; width: 100%; gap: 10px;">
+    <div id="vertical-stat">
+      <div id="stat-text">WIN STREAK</div>
+      <div class="stat-bubbles" id="streak-bubble">
+        <div id="data-streak" class="endcardStatistics"></div>
+      </div>
+    </div>
+    <div id="vertical-stat">
+      <div id="stat-text">CORRECT GUESSES</div>
+      <div class="stat-bubbles">
+        <div id="data-div" class="endcardStatistics"></div>
+      </div>
+    </div>
+    <div id="vertical-stat">
+      <div id="stat-text" id="games-stat-label">GAMES PLAYED</div>
+      <div class="stat-bubbles">
+        <div id="data-games" class="endcardStatistics"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
         <div class="stat-container" id="stat-collumn">
           <div id="donate-banner">
@@ -241,7 +228,19 @@
             id="twelve-marg"
             >Support us!</a
           >
+          
         </div>
+      </div>
+    </div>
+
+    <div id="mode-card-back" class="hide" style="backdrop-filter: brightness(0.3); -webkit-backdrop-filter: brightness(0.3); background-color: rgba(0,0,0,0.6); position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; transition: opacity 0.4s ease-out;">
+      <div id="mode-card" style="background-color: rgb(44,44,44); color: white; width: min(500px, 60vw); display: flex; flex-direction: column; justify-content: space-between; align-items: center; border-radius: 10px; box-shadow: 0 0 90px rgb(141,141,141); padding: 20px;">
+        <div id="mode-card-title" style="font-size: 28px; color: white; margin-bottom: 10px;">SWITCH MODE</div>
+        <div id="mode-card-text" style="font-family: SYNE; font-size: 16px; text-align: center; margin-bottom: 10px;">
+          You're currently in <b id="current-mode-label">Infinite</b> mode.<br><br>
+          Would you like to switch?
+        </div>
+        <button id="mode-confirm-btn" onclick="toggleGameMode()">Switch</button>
       </div>
     </div>
 
@@ -252,30 +251,23 @@
           I started InfiniteYeezle as a fun side project because I always seemed to want more after the daily Yeezle. I never thought so many people would see it and keep coming back.
           <br />
           <br />
-
           I can't thank you guys enough for your continued support throughout the development of this website. Thank you! I don't need your money, but you might as well follow the official X account for Infinite Yeezle :)
-    
         </div>
         <a
-          href="https://x.com/InfiniteYeezle"
+           href="https://x.com/InfiniteYeezle"
           target="_blank"
           rel="noopener noreferrer"
           class="buttonA"
-          >Follow! ❤️</a
+          >Follow!❤️</a
         >
-
+        
         <div id="small-donate-text">( Huge thanks to: )</div>
         <div id="donors-container">
           <div id="donor-text">
             <b>The Original Yeezle Devs</b>, <br />
-
-            
             And all of you guys! <br />
-    
-          </div>  
-
+          </div>
         </div>
-
       </div>
     </div>
 
@@ -285,35 +277,27 @@
           <h1 id="intro-message">Welcome to Infinite Yeezle!</h1>
           <br />
           <p>Guess the mystery Ye song as much as you want!</p>
-
           <br />
-
           <div id="intro-text">
             <ul style="line-height: 1.7">
               <li>
                 You get eight guesses to guess a mystery song from any of
                 Kanye's 16 studio albums!
               </li>
-
               <li>
                 <span id="green-fill">Green in any column</span> &nbsp;indicates a
                 complete match!
               </li>
-
               <li>
-                <span id="yellow-fill"
-                  >Yellow in the album or track number column</span
-                >
+                <span id="yellow-fill">Yellow in the album or track number column</span>
                 &nbsp;indicates that this attribute is within 2 (albums or tracks),
                 with an arrow hinting if it is higher (↑) or lower (↓).
               </li>
-
               <li>
                 <span id="yellow-fill">Yellow in the track length column</span>
                 &nbsp;indicates that the song length is within 30 seconds, with an
                 arrow hinting if it is higher (↑) or lower (↓).
               </li>
-
               <li>
                 <span id="yellow-fill">Yellow in the features column</span>
                 &nbsp;indicates that at least one of the featured artists is correct.
@@ -338,7 +322,6 @@
             <img class="smallbums" src="images/128_15.jpg" />
             <img class="smallbums" src="images/128_16.jpg" />
           </div>
-
           <div id="start-div">
             <button id="start-button">Play</button>
           </div>
@@ -351,22 +334,4 @@
     <script src="script.js"></script>
   </body>
 
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="260"
-        height="220"
-        viewBox="0 0 26 22"
-        fill="blanchedalmond"
-        style="height: 20px; width: 60px; margin-right: 8px; cursor: pointer"
-
-     
-      </svg>
-    </div>
-    <br /><br />
-
-    <br />
-    <br />
-  </footer>
-    
 </html>
-
