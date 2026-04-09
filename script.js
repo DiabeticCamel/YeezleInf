@@ -304,7 +304,7 @@ function loadLocalStorage() {
     }
 
 
-}
+
 
 function resetGameState() {
     localStorage.removeItem('guessCount');
