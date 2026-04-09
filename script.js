@@ -511,37 +511,36 @@ async function compareSong(choice) {
 }
 
 function mainStatisticsW() {
-    const gamesPlayed = Number(window.localStorage.getItem('gamesPlayed')) || Number(window.localStorage.getItem('winStreak')) - 1
-    window.localStorage.setItem('gamesPlayed', gamesPlayed + 1)
+    const prefix = gameMode === 'daily' ? 'daily_' : 'inf_';
 
-    const statCorrect = Number(window.localStorage.getItem('correctGuesses')) || 0
+    const gamesPlayed = Number(window.localStorage.getItem(prefix + 'gamesPlayed')) || 0
+    window.localStorage.setItem(prefix + 'gamesPlayed', gamesPlayed + 1)
 
-    const winStreak = Number(window.localStorage.getItem('winStreak')) || 0
-    window.localStorage.setItem('winStreak', winStreak + 1)
+    const correctGuess = Number(window.localStorage.getItem(prefix + 'correctGuesses')) || 0
+    window.localStorage.setItem(prefix + 'correctGuesses', correctGuess + 1)
 
+    const winStreak = Number(window.localStorage.getItem(prefix + 'winStreak')) || 0
+    window.localStorage.setItem(prefix + 'winStreak', winStreak + 1)
 
-
-
-    dataDiv.innerText = `${statCorrect}`
-    dataStreak.innerText = `${winStreak}`
-    dataGames.innerText = `${gamesPlayed}`
+    dataDiv.innerText = correctGuess + 1
+    dataStreak.innerText = winStreak + 1
+    dataGames.innerText = gamesPlayed + 1
 }
+
 function mainStatisticsL() {
-    const gamesPlayed = Number(window.localStorage.getItem('gamesPlayed')) || Number(window.localStorage.getItem('winStreak'))
-    window.localStorage.setItem('gamesPlayed', gamesPlayed + 1)
+    const prefix = gameMode === 'daily' ? 'daily_' : 'inf_';
 
-    const statCorrect = Number(window.localStorage.getItem('correctGuesses')) || 0
+    const gamesPlayed = Number(window.localStorage.getItem(prefix + 'gamesPlayed')) || 0
+    window.localStorage.setItem(prefix + 'gamesPlayed', gamesPlayed + 1)
 
-    window.localStorage.setItem('winStreak', 0)
-    const winStreak = window.localStorage.getItem('winStreak') || 0
+    const correctGuess = Number(window.localStorage.getItem(prefix + 'correctGuesses')) || 0
 
+    window.localStorage.setItem(prefix + 'winStreak', 0)
 
-
-    dataDiv.innerText = `${statCorrect}`
-    dataStreak.innerText = `${winStreak}`
-    dataGames.innerText = `${gamesPlayed}`
+    dataDiv.innerText = correctGuess
+    dataStreak.innerText = 0
+    dataGames.innerText = gamesPlayed + 1
 }
-
 
 
 function compareFunction(choiceData, mysterySong) {
@@ -822,22 +821,20 @@ function playAgain() {
 }
 
 function sideStatistics() {
+    const prefix = gameMode === 'daily' ? 'daily_' : 'inf_';
 
-    const totalGuesses = window.localStorage.getItem('totalGuesses') || 0
-    const gamesPlayed = Number(window.localStorage.getItem('gamesPlayed')) || Number(window.localStorage.getItem('correctGuesses'))
-
-    const correctGuess = Number(window.localStorage.getItem('correctGuesses')) || 0
-    const statCorrect = Number(window.localStorage.getItem('correctGuesses')) || 0
-
-    //console.log(gamesPlayed + ", " + statCorrect)
-
-
-    const winStreak = window.localStorage.getItem('winStreak') || 0
+    const correctGuess = Number(window.localStorage.getItem(prefix + 'correctGuesses')) || 0
+    const winStreak = window.localStorage.getItem(prefix + 'winStreak') || 0
+    const gamesPlayed = Number(window.localStorage.getItem(prefix + 'gamesPlayed')) || 0
 
     if (gamesPlayed < correctGuess) {
-        window.localStorage.setItem('gamesPlayed', correctGuess)
-
+        window.localStorage.setItem(prefix + 'gamesPlayed', correctGuess)
     }
+
+    dataDiv.innerText = correctGuess
+    dataStreak.innerText = winStreak
+    dataGames.innerText = gamesPlayed
+}
 
 
 
