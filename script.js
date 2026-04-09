@@ -225,6 +225,8 @@ function updateModeIcon() {
     const btn = document.getElementById('mode-toggle-btn');
     // show calendar when infinite (click to go daily), show infinity when daily (click to go infinite)
     btn.innerHTML = gameMode === 'infinite' ? infiniteSvg : dailySvg;
+     document.getElementById('main-logo').src = 
+        gameMode === 'daily' ? 'DailyYeezle.png' : 'InfYeezle.png';
 }
 
 function toggleGameMode() {
