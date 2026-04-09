@@ -218,6 +218,21 @@ body {
   transition: opacity 0.4s ease-out;
 }
 
+#mode-card-back {
+  backdrop-filter: brightness(0.3);
+  -webkit-backdrop-filter: brightness(0.3);
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.4s ease-out;
+}
+
 #mode-card {
   background-color: rgb(44, 44, 44);
   color: white;
@@ -229,7 +244,6 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 90px rgb(141, 141, 141);
   padding: 20px;
-  margin-top: 40px;
 }
 
 #mode-card-title {
