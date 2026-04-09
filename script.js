@@ -322,7 +322,7 @@ async function compareSong(choice) {
         searchInput.setAttribute('placeholder', 'Guess ' + ++guessCount + '/' + maxGuesses)
         searchInput.value = ""
 
-        if (guessCount >= 6) {
+        if (guessCount >= 6 && gameMode === 'infinite') {
             document.getElementById('hint-button').style.display = 'inline-block'
         }
 
