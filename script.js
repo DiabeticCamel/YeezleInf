@@ -8,6 +8,34 @@ let gameMode = localStorage.getItem('gameMode') || 'infinite';
 let irishSpring = false
 let guessedSongs = {}
 accGuessCount = {}
+let albumMode = localStorage.getItem('albumMode') || 'standard';
+
+const albumRanges = {
+    standard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    classic:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    early:    [1, 2, 3, 4, 5, 6, 7, 8],
+    recent:   [9, 10, 11, 12, 13, 14, 15, 16],
+    custom:   JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]')
+}
+
+const albumNumberRanges = {
+    1:  {min: 1,   max: 21},
+    2:  {min: 22,  max: 42},
+    3:  {min: 43,  max: 56},
+    4:  {min: 57,  max: 68},
+    5:  {min: 69,  max: 81},
+    6:  {min: 112, max: 123},
+    7:  {min: 82,  max: 91},
+    8:  {min: 92,  max: 111},
+    9:  {min: 124, max: 130},
+    10: {min: 131, max: 137},
+    11: {min: 138, max: 148},
+    12: {min: 149, max: 175},
+    13: {min: 176, max: 191},
+    14: {min: 192, max: 207},
+    15: {min: 208, max: 228},
+    16: {min: 229, max: 246}
+}
 
 const maxGuesses = 8
 const showShowButton = document.getElementById('results-button')
@@ -180,7 +208,64 @@ function updateModeIcon() {
     const gamesLabel = document.getElementById('games-stat-label');
     if (statLabel) statLabel.innerText = gameMode === 'daily' ? 'DAILY STATS' : 'INFINITE STATS';
     if (gamesLabel) gamesLabel.innerText = gameMode === 'daily' ? 'DAYS PLAYED' : 'GAMES PLAYED';
+    const albumBtn = document.getElementById('album-mode-btn')
+    if (albumBtn) albumBtn.style.display = gameMode === 'infinite' ? 'flex' : 'none'
 }
+
+function showAlbumCard() {
+    updateAlbumCard()
+    document.getElementById('album-card-back').classList.remove('hide')
+}
+
+document.getElementById('album-card-back').onclick = function(e) {
+    if (e.target.id === 'album-card-back') {
+        document.getElementById('album-card-back').classList.add('hide')
+    }
+}
+
+function setAlbumMode(mode) {
+    albumMode = mode
+    localStorage.setItem('albumMode', mode)
+    updateAlbumCard()
+    resetGameState()
+    location.reload()
+}
+
+function toggleCustomAlbum(albumNum) {
+    let custom = JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]')
+    if (custom.includes(albumNum)) {
+        if (custom.length === 1) return // always keep at least one
+        custom = custom.filter(a => a !== albumNum)
+    } else {
+        custom.push(albumNum)
+    }
+    localStorage.setItem('customAlbums', JSON.stringify(custom))
+    albumRanges.custom = custom
+    updateAlbumCard()
+}
+
+function applyCustomMode() {
+    albumMode = 'custom'
+    localStorage.setItem('albumMode', 'custom')
+    resetGameState()
+    location.reload()
+}
+
+function updateAlbumCard() {
+    const btns = document.querySelectorAll('.album-mode-btn')
+    btns.forEach(btn => {
+        btn.style.backgroundColor = btn.dataset.mode === albumMode ? '#4daa31' : 'rgb(255,252,238)'
+        btn.style.color = btn.dataset.mode === albumMode ? 'white' : 'black'
+    })
+
+    const custom = JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]')
+    document.querySelectorAll('.custom-album-img').forEach(img => {
+        const albumNum = Number(img.dataset.album)
+        img.style.opacity = custom.includes(albumNum) ? '1' : '0.3'
+        img.style.transform = custom.includes(albumNum) ? 'scale(1.1)' : 'scale(1)'
+    })
+}
+
 
 function toggleGameMode() {
     // save current mode's game state under a mode-specific key before switching 
@@ -279,7 +364,8 @@ async function getRandomMysterySong() {
         newMysterySong();
     } else {
         Math.seedrandom(new Date().toString() + Math.random());
-        mysteryNumber = Math.floor(Math.random() * 246) + 1;
+        const pool = getNumberPoolForAlbumMode()
+        mysteryNumber = pool[Math.floor(Math.random() * pool.length)]
     }
 
     await fetch('/datasheetNoSkit.json')
