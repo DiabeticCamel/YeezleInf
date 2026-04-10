@@ -45,9 +45,15 @@
   background-size: contain;
 }
 
+html {
+  min-height: 100%;
+}
+
 body {
   color: var(--text-color);
+  min-height: 100%;
   background-image: radial-gradient(circle, #2a2a2a, #2a292a, #2a292a, #2b2829, #2c2727, #302a2a, #342e2c, #38312f, #423a37, #4c433f, #564c48, #605650);
+  background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
