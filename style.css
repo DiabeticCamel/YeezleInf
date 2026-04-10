@@ -169,18 +169,6 @@ body {
   }
 } 
 
-.right-but-cont svg {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-}
-
-@media only screen and (max-width: 600px) {
-  .right-but-cont svg {
-    width: 32px;
-    height: 32px;
-  }
-}
  
 #left-but-cont {
   display: flex;
@@ -313,12 +301,18 @@ body {
   color: red;
 }
 
+.right-but-cont svg,
+#mode-toggle-btn svg,
 #album-mode-btn svg {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: block;
 }
 
 @media only screen and (max-width: 600px) {
+  .right-but-cont svg,
+  #mode-toggle-btn svg,
   #album-mode-btn svg {
     width: 32px;
     height: 32px;
@@ -332,8 +326,6 @@ body {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-
-
 }
 
 #data-div {
