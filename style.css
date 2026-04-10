@@ -169,11 +169,14 @@ body {
   }
 } 
 
-.right-but-cont {
-  display: flex;
-  margin-right: 8px;
-
+.right-but-cont svg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: block;
+   margin-right: 8px;
 }
+ 
 #left-but-cont {
   display: flex;
   width: 30vw;
