@@ -415,3 +415,7 @@ async function getFilteredSongTitles() {
     
     return songTitles.filter(title => allowedTitles.has(title))
 }
+
+getFilteredSongTitles().then(filteredTitles => {
+    autocomplete(document.getElementById("search-input"), filteredTitles)
+})
