@@ -173,8 +173,13 @@ body {
   width: 40px;
   height: 40px;
   flex-shrink: 0;
-  display: block;
-   margin-right: 8px;
+}
+
+@media only screen and (max-width: 600px) {
+  .right-but-cont svg {
+    width: 32px;
+    height: 32px;
+  }
 }
  
 #left-but-cont {
