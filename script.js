@@ -671,8 +671,7 @@ if (gameMode === 'daily') {
         location.reload()
     }
 }
-    
-  
+}  
 
 function showShowResult() {
     cardBackground.classList.remove('hide')
