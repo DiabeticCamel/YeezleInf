@@ -110,29 +110,47 @@ body {
 
 @media only screen and (max-width: 600px) {
   #rs-cont {
-    flex-direction: column;
-    align-items: flex-end;
-    margin-right: 12px;
-    margin-top: 20px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin: 0;
+    padding: 10px 0 34px 0;
+    background-color: rgba(30, 28, 28, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 100;
   }
-  .material-icons.md-cus { font-size: 32px; }
-  .right-but-cont { margin-top: 2px; }
-  #left-but-cont  { margin-left: 12px; }
-  #dono-icon      { margin-top: 6px; }
-}
 
-/* ── Left-side nav ──────────────────────────────────────────── */
-#left-but-cont {
-  display: flex;
-  width: 30vw;
-  justify-content: flex-start;
-  align-items: flex-start;
-  max-width: 290px;
-  position: relative;
-  top: -20px;
-  margin-top: 1vw;
-}
+  #left-but-cont {
+    display: none;
+  }
 
+ 
+
+  #version-label {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 6px 0 0 0;
+    font-size: 10px;
+    z-index: 101;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.85);
+  }
+}
 /* ── Material icons base ────────────────────────────────────── */
 .material-icons {
   font-family: 'Material Icons';
@@ -231,6 +249,7 @@ body {
   flex-direction: column;
   justify-content: start;
   align-items: center;
+   padding-bottom: 90px;
 }
 
 header {
@@ -868,18 +887,6 @@ li {
 
 /* ── Intro buttons ──────────────────────────────────────────── */
 #start-div { margin-top: 2vw; }
-
-/* ── Version label ──────────────────────────────────────────── */
-#version-label {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  color: rgba(255,255,255,0.3);
-  font-family: SYNE;
-  font-size: 11px;
-  pointer-events: none;
-  z-index: 1;
-}
 
 /* ── Misc structural ────────────────────────────────────────── */
 hr   { width: 100%; margin-block: 5px; }
