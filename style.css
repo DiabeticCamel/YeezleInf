@@ -118,7 +118,7 @@ body {
   display: block;
 }
 
-/* ── Mobile nav bar ─────────────────────────────────────────── */
+/* ── Mobile — single block for all max-width: 600px rules ───── */
 @media only screen and (max-width: 600px) {
   #rs-cont {
     position: fixed;
@@ -170,6 +170,31 @@ body {
     z-index: 102;
     pointer-events: none;
     color: rgba(255, 255, 255, 0.85);
+  }
+
+  #end-card-title   { font-size: 36px; }
+  #super-div        { width: 80vw; }
+  #end-card         { width: 100%; }
+  .stat-container   { width: 100%; }
+  #mystery-song-img { width: 50vw; }
+  #result-table     { zoom: 0.5; }
+  #divisions-img    { zoom: 0.6; }
+
+  li { font-size: 12px; margin-bottom: 3vw; }
+
+  #intro-card-back  { align-items: flex-start; }
+
+  #intro-card {
+    margin-top: 16px;
+    overflow-y: scroll;
+  }
+
+  #intro-card-inner {
+    margin-bottom: 164px;
+    background-color: #202020e7;
+    border-radius: 10px;
+    padding-top: 16px;
+    box-shadow: 0 0 8px rgb(109 109 109 / 25%);
   }
 }
 
@@ -724,11 +749,6 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
 .center { text-align: center; }
 footer > center { margin-bottom: 0; }
 
-@media screen and (max-width: 600px) {
-  #result-table  { zoom: 0.5; }
-  #divisions-img { zoom: 0.6; }
-}
-
 /* ── Donate card ────────────────────────────────────────────── */
 #donate-container {
   background-color: rgb(204,99,99);
@@ -829,23 +849,6 @@ li {
   height: 100%;
 }
 
-
-  #intro-card-back { align-items: flex-start; }
-
-  #intro-card {
-    margin-top: 16px;
-    overflow-y: scroll;
-  }
-
-  #intro-card-inner {
-    margin-bottom: 164px;
-    background-color: #202020e7;
-    border-radius: 10px;
-    padding-top: 16px;
-    box-shadow: 0 0 8px rgb(109 109 109 / 25%);
-  }
-}
-
 @media only screen and (min-width: 700px) {
   #intro-card {
     width: clamp(200px, 1000px, 1000px);
@@ -889,7 +892,7 @@ li {
 /* ── Intro buttons ──────────────────────────────────────────── */
 #start-div { margin-top: 2vw; }
 
-/* ── Version label ──────────────────────────────────────────── */
+/* ── Version label (desktop) ────────────────────────────────── */
 #version-label {
   position: fixed;
   bottom: 10px;
