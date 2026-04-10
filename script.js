@@ -83,11 +83,11 @@ function daysBetween(dateA, dateB) {
   return Math.floor((ub - ua) / MS_PER_DAY);
 }
 
-const epoch     = new Date('2022-04-15');
+const epoch     = new Date('2026-01-01');
 const tzOffset  = epoch.getTimezoneOffset();
 const epochAdj  = new Date(epoch.getTime() + tzOffset * 60000);
-yeezleDay = daysBetween(epochAdj, new Date()) + 1 - 1454;
-console.log(yeezleDay);
+InfyeezleDay = daysBetween(epochAdj, new Date()) + 1 - 98;
+console.log(InfyeezleDay);
 
 /* ── boot ── */
 textInput.setAttribute('placeholder', 'Start by typing any Ye song!');
