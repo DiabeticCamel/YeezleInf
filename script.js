@@ -648,6 +648,8 @@ if (gameMode === 'daily') {
     const existing = document.getElementById('daily-count-label')
     if (!existing) {
         const panel = document.createElement('div')
+        newSongButton.innerHTML =
+            <div style="text-align:center</div>
         panel.id = 'daily-count-label'
         panel.innerHTML = `
             <div style="color:rgba(255,255,255,0.4);font-family:SYNE;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;margin-top:18px;text-align:center;">Today's community stats</div>
