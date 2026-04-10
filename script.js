@@ -650,7 +650,7 @@ if (gameMode === 'daily') {
         const panel = document.createElement('div')
         panel.id = 'daily-count-label'
         panel.innerHTML = `
-            <div style="color:rgba(255,255,255,0.4);font-family:SYNE;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;margin-top:18px;">Today's community stats</div>
+            <div style="color:rgba(255,255,255,0.4);font-family:SYNE;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;margin-top:18px;text-align:center;">Today's community stats</div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:280px;margin:0 auto;">
                 <div style="background:rgba(255,255,255,0.07);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:12px 14px;">
                     <div style="font-size:24px;font-weight:500;color:#4daa31;font-family:YZY;">${count}</div>
