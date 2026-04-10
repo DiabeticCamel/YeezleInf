@@ -20,6 +20,7 @@ const albumRanges = {
 
 const SUPABASE_URL = 'https://ebqqfuiomqyrnvklnrkl.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVicXFmdWlvbXF5cm52a2xucmtsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3OTg3OTYsImV4cCI6MjA5MTM3NDc5Nn0.pHAh7y2yk5kd8ytDBQtL6OIuJUhSfNomYYpy9ZsaKJg'
+
 const albumNumberRanges = {
     1:  {min: 1,   max: 21},
     2:  {min: 22,  max: 42},
@@ -196,31 +197,6 @@ function showModeCard() {
     document.getElementById('mode-card-back').classList.remove('hide')
 }
 
-async function showMysterySong(correct) {
-    cardBackground.querySelector("#end-card-title").innerText = correct ? "Correct! " : "Game Over!"
-    cardBackground.querySelector('#mystery-song-title').innerText = mysterySong.title + " "
-    if (mysterySong.features[0] !== "") {
-        cardBackground.querySelector('#mystery-song-feature').innerText = "ft. [" + mysterySong.features + "]"
-    }
-    cardBackground.querySelector('#mystery-song-img').src = mysterySong.cover
-    cardBackground.classList.remove('hide')
-    searchInput.classList.add('greyed')
-    playAgainButton.focus()
-
-    // Add completion count for daily mode
-    if (gameMode === 'daily') {
-        const count = await getDailyCompletions()
-        const existingLabel = document.getElementById('daily-count-label')
-        if (!existingLabel) {
-            const label = document.createElement('p')
-            label.id = 'daily-count-label'
-            label.style.cssText = 'color: rgba(255,255,255,0.7); font-family: SYNE; font-size: 14px; margin-top: 8px;'
-            label.innerText = `${count} players completed today's puzzle`
-            cardBackground.querySelector('#end-card-inner').appendChild(label)
-        }
-    }
-}
-
 function updateModeIcon() {
     const infiniteSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>`;
     const dailySvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M220-260q-92 0-156-64T0-480q0-92 64-156t156-64q37 0 71 13t61 37l68 62-60 54-62-56q-16-14-36-22t-42-8q-58 0-99 41t-41 99q0 58 41 99t99 41q22 0 42-8t36-22l310-280q27-24 61-37t71-13q92 0 156 64t64 156q0 92-64 156t-156 64q-37 0-71-13t-61-37l-68-62 60-54 62 56q16 14 36 22t42 8q58 0 99-41t41-99q0-58-41-99t-99-41q-22 0-42 8t-36 22L352-310q-27 24-61 37t-71 13Z"/></svg>`;
@@ -261,7 +237,7 @@ function setAlbumMode(mode) {
 function toggleCustomAlbum(albumNum) {
     let custom = JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]')
     if (custom.includes(albumNum)) {
-        if (custom.length === 1) return // always keep at least one
+        if (custom.length === 1) return
         custom = custom.filter(a => a !== albumNum)
     } else {
         custom.push(albumNum)
@@ -305,9 +281,7 @@ function updateAlbumCard() {
     })
 }
 
-
 function toggleGameMode() {
-    // save current mode's game state under a mode-specific key before switching 
     const currentState = {
         guessCount: localStorage.getItem('guessCount'),
         gameTable: localStorage.getItem('gameTable'),
@@ -318,14 +292,11 @@ function toggleGameMode() {
     }
     localStorage.setItem('savedState_' + gameMode, JSON.stringify(currentState))
 
-    // switch mode
     gameMode = gameMode === 'daily' ? 'infinite' : 'daily';
     localStorage.setItem('gameMode', gameMode);
 
-    // clear current keys
     resetGameState()
 
-    // restore the new mode's saved state if it exists
     const savedState = localStorage.getItem('savedState_' + gameMode)
     if (savedState) {
         const state = JSON.parse(savedState)
@@ -340,7 +311,7 @@ function toggleGameMode() {
     window.location.reload();
 }
 
-function loadLocalStorage() {
+async function loadLocalStorage() {
     const anyGuesses = window.localStorage.getItem('guessCount')
     if (anyGuesses) {
         guessCount = Number(window.localStorage.getItem('guessCount'))
@@ -360,9 +331,9 @@ function loadLocalStorage() {
     const winStorage = window.localStorage.getItem('winStatus')
     if (winStorage) {
         if (winStorage === "true") {
-            showMysterySong(true);
+            await showMysterySong(true);
         } else if (winStorage === "false") {
-            showMysterySong(false);
+            await showMysterySong(false);
         }
     } else { console.log("No Win Yet!") }
 
@@ -430,9 +401,8 @@ function newMysterySong() {
 }
 
 async function submitDailyCompletion(won) {
-    // Don't submit twice
     if (localStorage.getItem('submitted_' + today)) return
-    
+
     await fetch(`${SUPABASE_URL}/rest/v1/daily_completions`, {
         method: 'POST',
         headers: {
@@ -442,7 +412,7 @@ async function submitDailyCompletion(won) {
         },
         body: JSON.stringify({ date: today, won: won })
     })
-    
+
     localStorage.setItem('submitted_' + today, 'true')
 }
 
@@ -461,7 +431,6 @@ async function getDailyCompletions() {
     return count || '0'
 }
 
-
 async function compareSong(choice) {
     if (guessCount <= maxGuesses) {
         let choiceData;
@@ -479,49 +448,33 @@ async function compareSong(choice) {
         searchInput.setAttribute('placeholder', 'Guess ' + ++guessCount + '/' + maxGuesses)
         searchInput.value = ""
 
-if (Object.values(result).every(r => r.includes("green"))) {
-    mainStatisticsW()
-    showMysterySong(true)
-    winStatus = "true"
-    if (gameMode === 'daily') submitDailyCompletion(true)  // add this
-}
-
-// and in the loss block:
-if (guessCount > maxGuesses && irishSpring != true) {
-    mainStatisticsL()
-    showMysterySong(false)
-    winStatus = "false"
-    if (gameMode === 'daily') submitDailyCompletion(false)  // add this
-}
-        
-       if (guessCount >= 6 && gameMode === 'infinite') {
-    const hintAlreadyShown = document.getElementById('hint-display').innerText !== ''
-    if (!hintAlreadyShown) {
-        document.getElementById('hint-button').style.display = 'inline-block'
-    }
-}
+        if (guessCount >= 6 && gameMode === 'infinite') {
+            const hintAlreadyShown = document.getElementById('hint-display').innerText !== ''
+            if (!hintAlreadyShown) {
+                document.getElementById('hint-button').style.display = 'inline-block'
+            }
+        }
 
         if (Object.values(result).every(r => r.includes("green"))) {
             irishSpring = true
-        } else {
-            irishSpring = false
-        }
-        if (Object.values(result).every(r => r.includes("green"))) {
             mainStatisticsW()
-            showMysterySong(true)
-            winStatus = "true";
+            await showMysterySong(true)
+            winStatus = "true"
             accGuessCount = guessCount - 1
             searchInput.setAttribute('placeholder', 'You solved it in ' + accGuessCount + '!')
+            if (gameMode === 'daily') submitDailyCompletion(true)
         }
     }
-    
+
     if (guessCount > maxGuesses && irishSpring != true) {
         mainStatisticsL()
-        showMysterySong(false)
-        winStatus = "false";
+        await showMysterySong(false)
+        winStatus = "false"
         searchInput.setAttribute('placeholder', 'Better luck next time!')
+        if (gameMode === 'daily') submitDailyCompletion(false)
         preserveGameState()
     }
+
     sideStatistics()
     preserveGameState()
 }
@@ -666,7 +619,7 @@ function haveFeatures(choiceData) {
     else { return choiceData.features }
 }
 
-function showMysterySong(correct) {
+async function showMysterySong(correct) {
     cardBackground.querySelector("#end-card-title").innerText = correct ? "Correct! " : "Game Over!"
     cardBackground.querySelector('#mystery-song-title').innerText = mysterySong.title + " "
     if (mysterySong.features[0] !== "") {
@@ -676,6 +629,18 @@ function showMysterySong(correct) {
     cardBackground.classList.remove('hide')
     searchInput.classList.add('greyed')
     playAgainButton.focus()
+
+    if (gameMode === 'daily') {
+        const count = await getDailyCompletions()
+        const existingLabel = document.getElementById('daily-count-label')
+        if (!existingLabel) {
+            const label = document.createElement('p')
+            label.id = 'daily-count-label'
+            label.style.cssText = 'color: rgba(255,255,255,0.7); font-family: SYNE; font-size: 14px; margin-top: 8px;'
+            label.innerText = `${count} players completed today's puzzle`
+            cardBackground.querySelector('#end-card-inner').appendChild(label)
+        }
+    }
 }
 
 function showShowResult() {
