@@ -665,7 +665,7 @@ function formatScoreText(resultsArray) {
 
     let modeLabel
     if (gameMode === 'daily') {
-        modeLabel = 'DAILYYEEZLE'
+        modeLabel = 'DAILY YEEZLE'
     } else {
         const albumModeLabels = {
             standard: 'INFYEEZLE',
