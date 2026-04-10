@@ -169,7 +169,15 @@ body {
   }
 } 
 
- 
+#newSongButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+
 #left-but-cont {
   display: flex;
   width: 30vw;
@@ -701,6 +709,7 @@ margin-bottom: 100px;
 #mystery-song-title {
   font-size: min(5vw, 30px);
   margin-top: 10px;
+  text-align: center;
 }
 
 #clipboard-popup {

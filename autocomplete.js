@@ -397,6 +397,11 @@ function autocomplete(inp, arr) {
 }
 
 async function getFilteredSongTitles() {
+    // Daily mode always uses all songs
+    if (gameMode === 'daily') {
+        return songTitles
+    }
+
     const pool = getNumberPoolForAlbumMode()
     
     const response = await fetch('/datasheetNoSkit.json')
