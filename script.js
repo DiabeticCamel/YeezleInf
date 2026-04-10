@@ -668,11 +668,11 @@ function formatScoreText(resultsArray) {
         modeLabel = 'DAILY YEEZLE'
     } else {
         const albumModeLabels = {
-            standard: 'INFYEEZLE',
-            classic: 'INFYEEZLE [CLASSIC]',
-            early: 'INFYEEZLE [EARLY]',
-            recent: 'INFYEEZLE [RECENT]',
-            custom: 'INFYEEZLE [CUSTOM]'
+            standard: 'INFINITE YEEZLE',
+            classic: 'INFINITE YEEZLE [CLASSIC]',
+            early: 'INFINITE YEEZLE [EARLY]',
+            recent: 'INFINITE YEEZLE [RECENT]',
+            custom: 'INFINITE YEEZLE [CUSTOM]'
         }
         modeLabel = albumModeLabels[albumMode] || 'INFYEEZLE'
     }
