@@ -27,14 +27,14 @@
 
 /* ── Design tokens ──────────────────────────────────────────── */
 :root {
-  --yellow:    #ccab17;
-  --green:     #4daa31;
-  --grey:      rgb(165,165,165);
-  --primary:   #4daa31;
+  --yellow:     #ccab17;
+  --green:      #4daa31;
+  --grey:       rgb(165,165,165);
+  --primary:    #4daa31;
   --text-color: black;
-  --maincolS:  rgb(70,67,65);
-  --maincol:   rgb(51,51,51);
-  --seccol:    rgb(254,250,239);
+  --maincolS:   rgb(70,67,65);
+  --maincol:    rgb(51,51,51);
+  --seccol:     rgb(254,250,239);
 }
 
 /* ── Base ───────────────────────────────────────────────────── */
@@ -108,6 +108,17 @@ body {
 
 .material-icons.md-cus { font-size: 40px; }
 
+/* ── Icon sizing in nav ─────────────────────────────────────── */
+.right-but-cont svg,
+#mode-toggle-btn svg,
+#album-mode-btn svg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* ── Mobile nav bar ─────────────────────────────────────────── */
 @media only screen and (max-width: 600px) {
   #rs-cont {
     position: fixed;
@@ -122,7 +133,7 @@ body {
     align-items: center;
     gap: 24px;
     margin: 0;
-    padding: 10px 0 34px 0;
+    padding: 10px 0 29px 0;
     background-color: rgba(30, 28, 28, 0.55);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -133,7 +144,16 @@ body {
     display: none;
   }
 
- 
+  .right-but-cont svg,
+  #mode-toggle-btn svg,
+  #album-mode-btn svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .main-container {
+    padding-bottom: 90px;
+  }
 
   #version-label {
     position: fixed;
@@ -146,11 +166,25 @@ body {
     -webkit-backdrop-filter: none;
     padding: 6px 0 0 0;
     font-size: 10px;
+    font-family: SYNE;
     z-index: 101;
     pointer-events: none;
     color: rgba(255, 255, 255, 0.85);
   }
 }
+
+/* ── Left-side nav ──────────────────────────────────────────── */
+#left-but-cont {
+  display: flex;
+  width: 30vw;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 290px;
+  position: relative;
+  top: -20px;
+  margin-top: 1vw;
+}
+
 /* ── Material icons base ────────────────────────────────────── */
 .material-icons {
   font-family: 'Material Icons';
@@ -210,25 +244,6 @@ body {
 #help-button:hover { cursor: pointer; }
 #dono-button:hover { cursor: pointer; color: red; }
 
-/* ── Icon sizing in nav ─────────────────────────────────────── */
-.right-but-cont svg,
-#mode-toggle-btn svg,
-#album-mode-btn svg {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-  display: block;
-}
-
-@media only screen and (max-width: 600px) {
-  .right-but-cont svg,
-  #mode-toggle-btn svg,
-  #album-mode-btn svg {
-    width: 32px;
-    height: 32px;
-  }
-}
-
 /* ── Other button ───────────────────────────────────────────── */
 #other-button {
   color: var(--seccol);
@@ -249,7 +264,6 @@ body {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-   padding-bottom: 90px;
 }
 
 header {
@@ -479,7 +493,7 @@ img.album-logo {
 }
 
 /* ── Color states ───────────────────────────────────────────── */
-td.green  { background-color: var(--green);  color: white; box-shadow: 0 5px 30px var(--green);  }
+td.green  { background-color: var(--green);  color: white; box-shadow: 0 5px 30px var(--green); }
 td.grey   { opacity: 1; }
 td.yellow { background-color: var(--yellow); box-shadow: 0 5px 30px var(--yellow); }
 td.down::after { content: " \2193"; width: 40px; }
@@ -556,7 +570,11 @@ svg.jersey   { width: 40px; }
 }
 
 @media only screen and (max-width: 600px) {
-  #end-card-title { font-size: 36px; }
+  #end-card-title  { font-size: 36px; }
+  #super-div       { width: 80vw; }
+  #end-card        { width: 100%; }
+  .stat-container  { width: 100%; }
+  #mystery-song-img{ width: 50vw; }
 }
 
 #mystery-song-img {
@@ -616,13 +634,6 @@ svg.jersey   { width: 40px; }
 #stat-box     { padding-block: 15px; }
 #ad           { justify-content: center; }
 #inner-ad     { padding-block: 15px; }
-
-@media only screen and (max-width: 600px) {
-  #super-div       { width: 80vw; }
-  #end-card        { width: 100%; }
-  .stat-container  { width: 100%; }
-  #mystery-song-img{ width: 50vw; }
-}
 
 .stat-bubbles {
   align-items: center;
@@ -722,8 +733,8 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
 footer > center { margin-bottom: 0; }
 
 @media screen and (max-width: 600px) {
-  #result-table   { zoom: 0.5; }
-  #divisions-img  { zoom: 0.6; }
+  #result-table  { zoom: 0.5; }
+  #divisions-img { zoom: 0.6; }
 }
 
 /* ── Donate card ────────────────────────────────────────────── */
@@ -754,8 +765,8 @@ footer > center { margin-bottom: 0; }
   transition: opacity 0.4s ease-out;
 }
 
-#donate-text  { font-weight: 100; font-family: SYNE; font-size: 16px; }
-#donate-title { font-size: 28px; color: white; margin-bottom: 10px; }
+#donate-text   { font-weight: 100; font-family: SYNE; font-size: 16px; }
+#donate-title  { font-size: 28px; color: white; margin-bottom: 10px; }
 #donate-button { margin-top: 24px; }
 
 #small-donate-text {
@@ -887,6 +898,18 @@ li {
 
 /* ── Intro buttons ──────────────────────────────────────────── */
 #start-div { margin-top: 2vw; }
+
+/* ── Version label ──────────────────────────────────────────── */
+#version-label {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  color: rgba(255,255,255,0.3);
+  font-family: SYNE;
+  font-size: 11px;
+  pointer-events: none;
+  z-index: 1;
+}
 
 /* ── Misc structural ────────────────────────────────────────── */
 hr   { width: 100%; margin-block: 5px; }
