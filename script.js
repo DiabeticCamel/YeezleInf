@@ -662,7 +662,20 @@ function scoreText() {
 function formatScoreText(resultsArray) {
     const prefix = gameMode === 'daily' ? 'daily_' : 'inf_';
     const gamesPlayed = Number(window.localStorage.getItem(prefix + 'gamesPlayed')) || 0
-    const modeLabel = gameMode === 'daily' ? 'DAILYYEEZLE' : 'INFYEEZLE'
+
+    let modeLabel
+    if (gameMode === 'daily') {
+        modeLabel = 'DAILYYEEZLE'
+    } else {
+        const albumModeLabels = {
+            standard: 'INFYEEZLE',
+            classic: 'INFYEEZLE [CLASSIC]',
+            early: 'INFYEEZLE [EARLY]',
+            recent: 'INFYEEZLE [RECENT]',
+            custom: 'INFYEEZLE [CUSTOM]'
+        }
+        modeLabel = albumModeLabels[albumMode] || 'INFYEEZLE'
+    }
 
     let formattedScoreText = modeLabel + " #" + gamesPlayed + ": " + (Number(guessCount) - 1) + "/" + maxGuesses + "\n"
     for (e of resultsArray) {
