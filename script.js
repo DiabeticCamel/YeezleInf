@@ -251,6 +251,18 @@ function applyCustomMode() {
     location.reload()
 }
 
+function getNumberPoolForAlbumMode() {
+    const allowedAlbums = albumRanges[albumMode]
+    let pool = []
+    allowedAlbums.forEach(albumNum => {
+        const range = albumNumberRanges[albumNum]
+        for (let i = range.min; i <= range.max; i++) {
+            pool.push(i)
+        }
+    })
+    return pool
+}
+
 function updateAlbumCard() {
     const btns = document.querySelectorAll('.album-mode-btn')
     btns.forEach(btn => {
