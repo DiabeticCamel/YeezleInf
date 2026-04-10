@@ -169,7 +169,13 @@ body {
   }
 } 
 
- 
+#newSongButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
 #left-but-cont {
   display: flex;
   width: 30vw;
