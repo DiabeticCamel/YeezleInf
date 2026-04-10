@@ -1,421 +1,185 @@
+/* ── Song catalogue ─────────────────────────────────────────── */
 const songTitles = [
+  // The College Dropout
+  "Intro","We Don't Care","Graduation Day","All Falls Down","I'll Fly Away",
+  "Spaceship","Jesus Walks","Never Let Me Down","Get Em High","Workout Plan",
+  "The New Workout Plan","Slow Jamz","Breathe In Breathe Out","School Spirit Skit 1",
+  "School Spirit","School Spirit Skit 2","Lil Jimmy Skit","Two Words",
+  "Through The Wire","Family Business","Last Call",
 
-// The College Dropout
-    "Intro",
-    "We Don't Care",
-    "Graduation Day",
-    "All Falls Down",
-    "I'll Fly Away",
-    "Spaceship",
-    "Jesus Walks",
-    "Never Let Me Down",
-    "Get Em High",
-    "Workout Plan",
-    "The New Workout Plan",
-    "Slow Jamz",
-    "Breathe In Breathe Out",
-    "School Spirit Skit 1",
-    "School Spirit",
-    "School Spirit Skit 2",
-    "Lil Jimmy Skit",
-    "Two Words",
-    "Through The Wire",
-    "Family Business",
-    "Last Call",
+  // Late Registration
+  "Wake Up Mr West","Heard Em' Say","Touch The Sky","Gold Digger","Skit 1",
+  "Drive Slow","My Way Home","Crack Music","Roses","Bring Me Down","Addiction",
+  "Skit 2","Diamonds From Sierra Leone - Remix","We Major","Skit 3","Hey Mama",
+  "Celebration","Skit 4","Gone","Diamonds From Sierra Leone - Bonus Track","Late",
 
-// Late Registration
-    "Wake Up Mr West",
-    "Heard Em' Say",
-    "Touch The Sky",
-    "Gold Digger",
-    "Skit 1",
-    "Drive Slow",
-    "My Way Home",
-    "Crack Music",
-    "Roses",
-    "Bring Me Down",
-    "Addiction",
-    "Skit 2",
-    "Diamonds From Sierra Leone - Remix",
-    "We Major",
-    "Skit 3",
-    "Hey Mama",
-    "Celebration",
-    "Skit 4",
-    "Gone",
-    "Diamonds From Sierra Leone - Bonus Track",
-    "Late",
+  // Graduation
+  "Good Morning","Champion","Stronger","I Wonder","Good Life",
+  "Can't Tell Me Nothing","Barry Bonds","Drunk and Hot Girls","Flashing Lights",
+  "Everything I Am","The Glory","Homecoming","Big Brother","Good Night",
 
-// Graduation
-    "Good Morning",
-    "Champion",
-    "Stronger",
-    "I Wonder",
-    "Good Life",
-    "Can't Tell Me Nothing",
-    "Barry Bonds",
-    "Drunk and Hot Girls",
-    "Flashing Lights",
-    "Everything I Am",
-    "The Glory",
-    "Homecoming",
-    "Big Brother",
-    "Good Night",
+  // 808s & Heartbreak
+  "Say You Will","Welcome To Heartbreak","Heartless","Amazing","Love Lockdown",
+  "Paranoid","RoboCop","Street Lights","Bad News","See You In My Nightmares",
+  "Coldest Winter","Pinocchio Story",
 
-// 808's and Heartbreaks
-    "Say You Will",
-    "Welcome To Heartbreak",
-    "Heartless",
-    "Amazing",
-    "Love Lockdown",
-    "Paranoid",
-    "RoboCop",
-    "Street Lights",
-    "Bad News",
-    "See You In My Nightmares",
-    "Coldest Winter",
-    "Pinocchio Story",
+  // My Beautiful Dark Twisted Fantasy
+  "Dark Fantasy","Gorgeous","POWER","All Of The Lights (Interlude)",
+  "All Of The Lights","Monster","So Appalled","Devil In A New Dress","Runaway",
+  "Hell Of A Life","Blame Game","Lost In The World","Who Will Survive In America",
 
-// My Beautiful Dark Twisted Fantasies
-    "Dark Fantasy",
-    "Gorgeous",
-    "POWER",
-    "All Of The Lights (Interlude)",
-    "All Of The Lights",
-    "Monster",
-    "So Appalled",
-    "Devil In A New Dress",
-    "Runaway",
-    "Hell Of A Life",
-    "Blame Game",
-    "Lost In The World",
-    "Who Will Survive In America",
+  // Yeezus
+  "On Sight","Black Skinhead","I Am A God","New Slaves","Hold My Liquor",
+  "I'm In It","Blood On The Leaves","Guilt Trip","Send It Up","Bound 2",
 
-// Yeezus
-    "On Sight",
-    "Black Skinhead",
-    "I Am A God",
-    "New Slaves",
-    "Hold My Liquor",
-    "I'm In It",
-    "Blood On The Leaves",
-    "Guilt Trip",
-    "Send It Up",
-    "Bound 2",
+  // The Life of Pablo
+  "Ultralight Beam","Father Stretch My Hands Pt 1","Pt 2","Famous","Feedback",
+  "Low Lights","Highlights","Freestyle 4","I Love Kanye","Waves","FML",
+  "Real Friends","Wolves","Frank's Track","Siiiiiiiiilver Surffffeeeeer Intermission",
+  "30 Hours","No More Parties In LA","Facts (Charlie Heat Version)","Fade","Saint Pablo",
 
-// The Life Of Pablo
-    "Ultralight Beam",
-    "Father Stretch My Hands Pt 1",
-    "Pt 2",
-    "Famous",
-    "Feedback",
-    "Low Lights",
-    "Highlights",
-    "Freestyle 4",
-    "I Love Kanye",
-    "Waves",
-    "FML",
-    "Real Friends",
-    "Wolves",
-    "Frank's Track",
-    "Siiiiiiiiilver Surffffeeeeer Intermission",
-    "30 Hours",
-    "No More Parties In LA",
-    "Facts (Charlie Heat Version)",
-    "Fade",
-    "Saint Pablo",
+  // Watch the Throne
+  "No Church In The Wild","Lift Off","Ni**as In Paris","Otis","Gotta Have It",
+  "New Day","That's My Bitch","Welcome To The Jungle","Who Gon Stop Me",
+  "Murder To Excellence","Made In America","Why I Love You",
 
-// Watch The Throne
-    "No Church In The Wild",
-    "Lift Off",
-    "Ni**as In Paris",
-    "Otis",
-    "Gotta Have It",
-    "New Day",
-    "That's My Bitch",
-    "Welcome To The Jungle",
-    "Who Gon Stop Me",
-    "Murder To Excellence",
-    "Made In America",
-    "Why I Love You",
+  // ye
+  "I Thought About Killing You","Yikes","All Mine","Wouldn't Leave",
+  "No Mistakes","Ghost Town","Violent Crimes",
 
-// ye
-    "I Thought About Killing You",
-    "Yikes",
-    "All Mine",
-    "Wouldn't Leave",
-    "No Mistakes",
-    "Ghost Town",
-    "Violent Crimes",
+  // KIDS SEE GHOSTS
+  "Feel The Love","Fire","4th Dimension","Freee (Ghost Town Pt 2)","Reborn",
+  "Kids See Ghosts","Cudi Montage",
 
-// KIDS SEE GHOSTS
-    "Feel The Love",
-    "Fire",
-    "4th Dimension",
-    "Freee (Ghost Town Pt 2)",
-    "Reborn",
-    "Kids See Ghosts",
-    "Cudi Montage",
+  // Jesus Is King
+  "Every Hour","Selah","Follow God","Closed On Sunday","On God",
+  "Everything We Need","Water","God Is","Hands On","Use This Gospel","Jesus Is Lord",
 
-// Jesus Is King
-    "Every Hour",
-    "Selah",
-    "Follow God",
-    "Closed On Sunday",
-    "On God",
-    "Everything We Need",
-    "Water",
-    "God Is",
-    "Hands On",
-    "Use This Gospel",
-    "Jesus Is Lord",
+  // Donda
+  "Donda Chant","Jail","God Breathed","Off The Grid","Hurricane","Praise God",
+  "Jonah","Ok Ok","Junya","Believe What I Say","24","Remote Control","Moon",
+  "Heaven and Hell","Donda","Keep My Spirit Alive","Jesus Lord","New Again",
+  "Tell The Vision","Lord I Need You","Pure Souls","Come To Life",
+  "No Child Left Behind","Jail pt 2","Ok Ok pt 2","Junya pt 2","Jesus Lord pt 2",
 
-// Donda
-    "Donda Chant",
-    "Jail",
-    "God Breathed",
-    "Off The Grid",
-    "Hurricane",
-    "Praise God",
-    "Jonah",
-    "Ok Ok",
-    "Junya",
-    "Believe What I Say",
-    "24",
-    "Remote Control",
-    "Moon",
-    "Heaven and Hell",
-    "Donda",
-    "Keep My Spirit Alive",
-    "Jesus Lord",
-    "New Again",
-    "Tell The Vision",
-    "Lord I Need You",
-    "Pure Souls",
-    "Come To Life",
-    "No Child Left Behind",
-    "Jail pt 2",
-    "Ok Ok pt 2",
-    "Junya pt 2",
-    "Jesus Lord pt 2",
+  // Vultures 1
+  "STARS","KEYS TO MY LIFE","PAID","TALKING","BACK TO ME","HOODRAT","DO IT",
+  "PAPERWORK","BURN","FUK SUMN","VULTURES","CARNIVAL","BEG FORGIVENESS",
+  "GOOD (DON'T DIE)","PROBLEMATIC","KING (VULTURES 1)",
 
-// VULTURES 1
-    "STARS",
-    "KEYS TO MY LIFE",
-    "PAID",
-    "TALKING",
-    "BACK TO ME",
-    "HOODRAT",
-    "DO IT",
-    "PAPERWORK",
-    "BURN",
-    "FUK SUMN",
-    "VULTURES",
-    "CARNIVAL",
-    "BEG FORGIVENESS",
-    "GOOD (DON'T DIE)",
-    "PROBLEMATIC",
-    "KING (VULTURES 1)",
+  // Vultures 2
+  "SLIDE","TIME MOVING SLOW","FIELD TRIP","FRIED","ISABELLA","PROMOTION",
+  "530 (VULTURES 2)","DEAD","FOREVER ROLLING","BOMB","RIVER","FOREVER",
+  "HUSBAND","LIFESTYLE","SKY CITY","MY SOUL",
 
-// VULTURES 2
-    "SLIDE",
-    "TIME MOVING SLOW",
-    "FIELD TRIP",
-    "FRIED",
-    "ISABELLA",
-    "PROMOTION",
-    "530 (VULTURES 2)",
-    "DEAD",
-    "FOREVER ROLLING",
-    "BOMB",
-    "RIVER",
-    "FOREVER",
-    "HUSBAND",
-    "LIFESTYLE",
-    "SKY CITY",
-    "MY SOUL",
+  // Donda 2
+  "TRUE LOVE","BROKEN ROAD","GET LOST","KEEP THE FLOWERS","JESSE","TOO EASY",
+  "PABLO","MR MIYAGI","HAPPY","SECURITY","CITY OF GOD","530 (DONDA 2)",
+  "CITY OF CHI","SCIFI","SUZY","BURN EVERYTHING","LOUIE BAGS","WE DID IT",
+  "MAINTENANCE","LORD LIFT ME UP","FIRST TIME IN A LONG TIME",
 
-// DONDA 2
-    "TRUE LOVE",
-    "BROKEN ROAD",
-    "GET LOST",
-    "KEEP THE FLOWERS",
-    "JESSE",
-    "TOO EASY",
-    "PABLO",
-    "MR MIYAGI",
-    "HAPPY",
-    "SECURITY",
-    "CITY OF GOD",
-    "530 (DONDA 2)",
-    "CITY OF CHI",
-    "SCIFI",
-    "SUZY",
-    "BURN EVERYTHING",
-    "LOUIE BAGS",
-    "WE DID IT",
-    "MAINTENANCE",
-    "LORD LIFT ME UP",
-    "FIRST TIME IN A LONG TIME",
+  // Bully
+  "KING (BULLY)","THIS A MUST","FATHER","ALL THE LOVE","PUNCH DRUNK",
+  "WHATEVER WORKS","MAMA'S FAVORITE","SISTERS AND BROTHERS","BULLY",
+  "HIGHS AND LOWS","I CAN'T WAIT","WHITE LINES","CIRCLES","PREACHER MAN",
+  "BEAUTY AND THE BEAST","DAMN","LAST BREATH","THIS ONE HERE"
+];
 
-// BULLY
-    "KING (BULLY)",
-    "THIS A MUST",
-    "FATHER",
-    "ALL THE LOVE",
-    "PUNCH DRUNK",
-    "WHATEVER WORKS",
-    "MAMA'S FAVORITE",
-    "SISTERS AND BROTHERS",
-    "BULLY",
-    "HIGHS AND LOWS",
-    "I CAN'T WAIT",
-    "WHITE LINES",
-    "CIRCLES",
-    "PREACHER MAN",
-    "BEAUTY AND THE BEAST",
-    "DAMN",
-    "LAST BREATH",
-    "THIS ONE HERE",
+/* ── Autocomplete widget ─────────────────────────────────────── */
+function autocomplete(inputEl, catalogue) {
+  let highlightIndex = -1;
 
-]
+  /* rebuild dropdown on every keystroke */
+  inputEl.addEventListener('input', function () {
+    const query = this.value;
+    dismissDropdowns();
+    if (!query) return;
 
+    highlightIndex = -1;
 
-function autocomplete(inp, arr) {
-    /*the autocomplete function takes two arguments,
-    the text field element and an array of possible autocompleted values:*/
-    var currentFocus;
-    /*execute a function when someone writes in the text field:*/
-    inp.addEventListener("input", function (e) {
-        var a, b, i, val = this.value;
-        /*close any already open lists of autocompleted values*/
-        closeAllLists();
-        if (!val) {
-            return false;
-        }
-        currentFocus = -1;
-        /*create a DIV element that will contain the items (values):*/
-        a = document.createElement("DIV");
-        a.setAttribute("id", this.id + "autocomplete-list");
-        a.setAttribute("class", "autocomplete-items");
-        /*append the DIV element as a child of the autocomplete container:*/
-        this.parentNode.appendChild(a);
-        /*for each item in the array...*/
-        for (i = 0; i < arr.length; i++) {
-            /*check if the item starts with the same letters as the text field value:*/
-            // if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-            // check if the song title contains the query
-            if (arr[i].toUpperCase().includes(val.toUpperCase())) {
-                /*create a DIV element for each matching element:*/
-                b = document.createElement("DIV");
-                /*make the matching letters bold:*/
-                b.innerHTML = arr[i]
-                /*insert a input field that will hold the current array item's value:*/
-                b.innerHTML += '<input type="hidden" value="' + arr[i] + '">';
-                /*execute a function when someone clicks on the item value (DIV element):*/
-                b.addEventListener("click", function (e) {
-                    /*insert the value for the autocomplete text field:*/
-                    inp.value = this.getElementsByTagName("input")[0].value;
-                    /*close the list of autocompleted values,
-                    (or any other open lists of autocompleted values:*/
-                    closeAllLists();
-                });
-                if (a.childElementCount < 5) // only show top 5 results
-                    a.appendChild(b);
-            }
-        }
-    });
-    /*execute a function presses a key on the keyboard:*/
-    inp.addEventListener("keydown", function (e) {
-        var x = document.getElementById(this.id + "autocomplete-list");
-        if (x) x = x.getElementsByTagName("div");
-        if (e.keyCode == 40) {
-            /*If the arrow DOWN key is pressed,
-            increase the currentFocus variable:*/
-            currentFocus++;
-            /*and and make the current item more visible:*/
-            addActive(x);
-        } else if (e.keyCode == 38) { //up
-            /*If the arrow UP key is pressed,
-            decrease the currentFocus variable:*/
-            currentFocus--;
-            /*and and make the current item more visible:*/
-            addActive(x);
-        } else if (e.keyCode == 13) {
-            /*If the ENTER key is pressed, prevent the form from being submitted,*/
-            e.preventDefault();
-            if (currentFocus > -1) {
-                /*and simulate a click on the "active" item:*/
-                if (x) x[currentFocus].click();
-                document.getElementById("guess-button").click()
-            }
-        }
-        if (arr.includes(inp.value)) {
-            document.getElementById("guess-button").disabled = false;
-        } else {
-            document.getElementById("guess-button").disabled = true;
-        }
-    });
+    const dropdown = document.createElement('DIV');
+    dropdown.id        = this.id + 'autocomplete-list';
+    dropdown.className = 'autocomplete-items';
+    this.parentNode.appendChild(dropdown);
 
-    function addActive(x) {
-        /*a function to classify an item as "active":*/
-        if (!x) return false;
-        /*start by removing the "active" class on all items:*/
-        removeActive(x);
-        if (currentFocus >= x.length) currentFocus = 0;
-        if (currentFocus < 0) currentFocus = (x.length - 1);
-        /*add class "autocomplete-active":*/
-        x[currentFocus].classList.add("autocomplete-active");
+    let shown = 0;
+    for (let i = 0; i < catalogue.length; i++) {
+      if (shown >= 5) break;                                    // cap at 5 results
+      if (!catalogue[i].toUpperCase().includes(query.toUpperCase())) continue;
+
+      const item = document.createElement('DIV');
+      item.innerHTML  = catalogue[i];
+      item.innerHTML += `<input type="hidden" value="${catalogue[i]}">`;
+
+      item.addEventListener('click', function () {
+        inputEl.value = this.querySelector('input').value;
+        dismissDropdowns();
+      });
+
+      dropdown.appendChild(item);
+      shown++;
+    }
+  });
+
+  /* keyboard navigation */
+  inputEl.addEventListener('keydown', function (e) {
+    const list = document.getElementById(this.id + 'autocomplete-list');
+    const items = list ? list.querySelectorAll('div') : null;
+
+    if (e.keyCode === 40) {                       // ↓ arrow
+      highlightIndex++;
+      applyHighlight(items);
+    } else if (e.keyCode === 38) {                // ↑ arrow
+      highlightIndex--;
+      applyHighlight(items);
+    } else if (e.keyCode === 13) {                // Enter
+      e.preventDefault();
+      if (highlightIndex > -1 && items) {
+        items[highlightIndex].click();
+        document.getElementById('guess-button').click();
+      }
     }
 
-    function removeActive(x) {
-        /*a function to remove the "active" class from all autocomplete items:*/
-        for (var i = 0; i < x.length; i++) {
-            x[i].classList.remove("autocomplete-active");
-        }
-    }
+    document.getElementById('guess-button').disabled = !catalogue.includes(inputEl.value);
+  });
 
-    function closeAllLists(elmnt) {
-        /*close all autocomplete lists in the document,
-        except the one passed as an argument:*/
-        var x = document.getElementsByClassName("autocomplete-items");
-        for (var i = 0; i < x.length; i++) {
-            if (elmnt != x[i] && elmnt != inp) {
-                x[i].parentNode.removeChild(x[i]);
-            }
-        }
+  function applyHighlight(items) {
+    if (!items) return;
+    clearHighlight(items);
+    if (highlightIndex >= items.length) highlightIndex = 0;
+    if (highlightIndex < 0)             highlightIndex = items.length - 1;
+    items[highlightIndex].classList.add('autocomplete-active');
+  }
+
+  function clearHighlight(items) {
+    for (const item of items) item.classList.remove('autocomplete-active');
+  }
+
+  function dismissDropdowns(except) {
+    const open = document.getElementsByClassName('autocomplete-items');
+    for (const el of open) {
+      if (el !== except && el !== inputEl) el.parentNode.removeChild(el);
     }
-    /*execute a function when someone clicks in the document:*/
-    document.addEventListener("click", function (e) {
-        closeAllLists(e.target);
-        if (arr.includes(inp.value)) {
-            document.getElementById("guess-button").disabled = false;
-        } else {
-            document.getElementById("guess-button").disabled = true;
-        }
-    });
+  }
+
+  /* close on outside click */
+  document.addEventListener('click', function (e) {
+    dismissDropdowns(e.target);
+    document.getElementById('guess-button').disabled = !catalogue.includes(inputEl.value);
+  });
 }
 
-async function getFilteredSongTitles() {
-    // Daily mode always uses all songs
-    if (gameMode === 'daily') {
-        return songTitles
-    }
+/* ── Build filtered title list for current album mode ────────── */
+async function buildActiveTitleList() {
+  if (activeMode === 'daily') return songTitles;
 
-    const pool = getNumberPoolForAlbumMode()
-    
-    const response = await fetch('/datasheetNoSkit.json')
-    const data = await response.json()
-    
-    const allowedTitles = new Set()
-    pool.forEach(num => {
-        const title = data.numbers[num].title
-        allowedTitles.add(title)
-    })
-    
-    return songTitles.filter(title => allowedTitles.has(title))
+  const pool     = buildNumberPool();
+  const data     = await fetch('/datasheetNoSkit.json').then(r => r.json());
+  const allowed  = new Set(pool.map(n => data.numbers[n].title));
+  return songTitles.filter(t => allowed.has(t));
 }
 
-getFilteredSongTitles().then(filteredTitles => {
-    autocomplete(document.getElementById("search-input"), filteredTitles)
-})
+/* ── Boot autocomplete ──────────────────────────────────────── */
+buildActiveTitleList().then(list => {
+  autocomplete(document.getElementById('search-input'), list);
+});
