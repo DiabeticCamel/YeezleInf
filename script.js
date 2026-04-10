@@ -410,7 +410,11 @@ async function submitDailyCompletion(won) {
             'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ date: today, won: won })
+        body: JSON.stringify({
+            date: today,
+            won: won,
+            guesses: won ? String(guessCount - 1) : String(maxGuesses)
+        })
     })
 
     localStorage.setItem('submitted_' + today, 'true')
@@ -418,7 +422,7 @@ async function submitDailyCompletion(won) {
 
 async function getDailyCompletions() {
     const res = await fetch(
-        `${SUPABASE_URL}/rest/v1/daily_completions?date=eq.${encodeURIComponent(today)}&won=eq.true&select=id`,
+        `${SUPABASE_URL}/rest/v1/daily_completions?date=eq.${encodeURIComponent(today)}&won=eq.true&select=id,guesses`,
         {
             headers: {
                 'apikey': SUPABASE_ANON_KEY,
@@ -427,8 +431,11 @@ async function getDailyCompletions() {
             }
         }
     )
-    const count = res.headers.get('content-range')?.split('/')[1]
-    return count || '0'
+    const count = res.headers.get('content-range')?.split('/')[1] || '0'
+    const rows = await res.json()
+    const valid = rows.map(r => Number(r.guesses)).filter(n => !isNaN(n) && n > 0)
+    const avg = valid.length ? (valid.reduce((a, b) => a + b, 0) / valid.length).toFixed(1) : null
+    return { count, avg }
 }
 
 async function compareSong(choice) {
@@ -631,14 +638,25 @@ async function showMysterySong(correct) {
     playAgainButton.focus()
 
     if (gameMode === 'daily') {
-        const count = await getDailyCompletions()
-        const existingLabel = document.getElementById('daily-count-label')
-        if (!existingLabel) {
-            const label = document.createElement('p')
-            label.id = 'daily-count-label'
-            label.style.cssText = 'color: rgba(255,255,255,0.7); font-family: SYNE; font-size: 14px; margin-top: 8px;'
-            label.innerText = `${count} players completed today's puzzle`
-            cardBackground.querySelector('#end-card-inner').appendChild(label)
+        const { count, avg } = await getDailyCompletions()
+        const existing = document.getElementById('daily-count-label')
+        if (!existing) {
+            const panel = document.createElement('div')
+            panel.id = 'daily-count-label'
+            panel.innerHTML = `
+                <div style="color:rgba(255,255,255,0.4);font-family:SYNE;font-size:11px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px;margin-top:18px;">Today's community stats</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:280px;margin:0 auto;">
+                    <div style="background:rgba(255,255,255,0.07);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:12px 14px;">
+                        <div style="font-size:24px;font-weight:500;color:#4daa31;font-family:YZY;">${count}</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.4);font-family:SYNE;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">players done</div>
+                    </div>
+                    <div style="background:rgba(255,255,255,0.07);border:0.5px solid rgba(255,255,255,0.12);border-radius:10px;padding:12px 14px;">
+                        <div style="font-size:24px;font-weight:500;color:#ccab17;font-family:YZY;">${avg ?? '—'}</div>
+                        <div style="font-size:11px;color:rgba(255,255,255,0.4);font-family:SYNE;text-transform:uppercase;letter-spacing:0.05em;margin-top:4px;">avg guesses</div>
+                    </div>
+                </div>
+            `
+            cardBackground.querySelector('#end-card-inner').appendChild(panel)
         }
     }
 }
