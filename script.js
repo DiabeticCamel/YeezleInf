@@ -640,9 +640,12 @@ async function showMysterySong(correct) {
     searchInput.classList.add('greyed')
     playAgainButton.focus()
 
-    if (gameMode === 'daily') {
-        const { count, avg } = await getDailyCompletions()
-        const existing = document.getElementById('daily-count-label')
+
+if (gameMode === 'daily') {
+    newSongButton.innerText = 'Switch to Infinite'
+    newSongButton.onclick = toggleGameMode
+    const { count, avg } = await getDailyCompletions()
+    const existing = document.getElementById('daily-count-label')
         if (!existing) {
             const panel = document.createElement('div')
             panel.id = 'daily-count-label'
@@ -663,6 +666,15 @@ async function showMysterySong(correct) {
         }
     }
 }
+} else {
+    newSongButton.innerText = 'New Song'
+    newSongButton.onclick = function () {
+        resetGameState()
+        location.reload()
+    }
+}
+    
+  
 
 function showShowResult() {
     cardBackground.classList.remove('hide')
