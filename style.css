@@ -120,25 +120,23 @@ body {
 
 /* ── Mobile nav bar ─────────────────────────────────────────── */
 @media only screen and (max-width: 600px) {
-  #rs-cont {
+  #version-label {
     position: fixed;
-    bottom: 0;
-    right: 0;
+    bottom: 5px;
     left: 0;
-    top: auto;
-    width: 100%;
-    max-width: 100%;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    margin: 0;
-    padding: 10px 0 29px 0;
-    background-color: rgba(30, 28, 28, 0.55);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 100;
+    right: 0;
+    text-align: center;
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    padding: 6px 0 0 0;
+    font-size: 10px;
+    font-family: SYNE;
+    z-index: 102;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.85);
   }
+}
 
   #left-but-cont {
     display: none;
