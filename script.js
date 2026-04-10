@@ -8,6 +8,34 @@ let gameMode = localStorage.getItem('gameMode') || 'infinite';
 let irishSpring = false
 let guessedSongs = {}
 accGuessCount = {}
+let albumMode = localStorage.getItem('albumMode') || 'standard';
+
+const albumRanges = {
+    standard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    classic:  [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+    early:    [1, 2, 3, 4, 5, 6, 7, 8],
+    recent:   [9, 10, 11, 12, 13, 14, 15, 16],
+    custom:   JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]')
+}
+
+const albumNumberRanges = {
+    1:  {min: 1,   max: 21},
+    2:  {min: 22,  max: 42},
+    3:  {min: 43,  max: 56},
+    4:  {min: 57,  max: 68},
+    5:  {min: 69,  max: 81},
+    6:  {min: 112, max: 123},
+    7:  {min: 82,  max: 91},
+    8:  {min: 92,  max: 111},
+    9:  {min: 124, max: 130},
+    10: {min: 131, max: 137},
+    11: {min: 138, max: 148},
+    12: {min: 149, max: 175},
+    13: {min: 176, max: 191},
+    14: {min: 192, max: 207},
+    15: {min: 208, max: 228},
+    16: {min: 229, max: 246}
+}
 
 const maxGuesses = 8
 const showShowButton = document.getElementById('results-button')
@@ -54,7 +82,7 @@ const a = new Date("2022-04-15"),
 const tzAdj = a.getTimezoneOffset();
 const aAdjusted = new Date(a.getTime() + tzAdj * 60000);
 
-yeezleDay = dateDiffInDays(aAdjusted, b) + 1 - 938;
+yeezleDay = dateDiffInDays(aAdjusted, b) + 1 - 1454;
 console.log(yeezleDay)
 
 searchInput.setAttribute('placeholder', 'Start by typing any Ye song!')
@@ -167,8 +195,8 @@ function showModeCard() {
 }
 
 function updateModeIcon() {
-    const infiniteSvg = `<svg xmlns="http://www.w3.org/2000/svg" height="60px" viewBox="0 -960 960 960" width="60px" fill="#e3e3e3"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>`;
-    const dailySvg = `<svg xmlns="http://www.w3.org/2000/svg" height="60px" viewBox="0 -960 960 960" width="60px" fill="#e3e3e3"><path d="M220-260q-92 0-156-64T0-480q0-92 64-156t156-64q37 0 71 13t61 37l68 62-60 54-62-56q-16-14-36-22t-42-8q-58 0-99 41t-41 99q0 58 41 99t99 41q22 0 42-8t36-22l310-280q27-24 61-37t71-13q92 0 156 64t64 156q0 92-64 156t-156 64q-37 0-71-13t-61-37l-68-62 60-54 62 56q16 14 36 22t42 8q58 0 99-41t41-99q0-58-41-99t-99-41q-22 0-42 8t-36 22L352-310q-27 24-61 37t-71 13Z"/></svg>`;
+    const infiniteSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>`;
+    const dailySvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M220-260q-92 0-156-64T0-480q0-92 64-156t156-64q37 0 71 13t61 37l68 62-60 54-62-56q-16-14-36-22t-42-8q-58 0-99 41t-41 99q0 58 41 99t99 41q22 0 42-8t36-22l310-280q27-24 61-37t71-13q92 0 156 64t64 156q0 92-64 156t-156 64q-37 0-71-13t-61-37l-68-62 60-54 62 56q16 14 36 22t42 8q58 0 99-41t41-99q0-58-41-99t-99-41q-22 0-42 8t-36 22L352-310q-27 24-61 37t-71 13Z"/></svg>`;
 
     const btn = document.getElementById('mode-toggle-btn');
     btn.innerHTML = gameMode === 'infinite' ? infiniteSvg : dailySvg;
@@ -180,10 +208,79 @@ function updateModeIcon() {
     const gamesLabel = document.getElementById('games-stat-label');
     if (statLabel) statLabel.innerText = gameMode === 'daily' ? 'DAILY STATS' : 'INFINITE STATS';
     if (gamesLabel) gamesLabel.innerText = gameMode === 'daily' ? 'DAYS PLAYED' : 'GAMES PLAYED';
+    const albumBtn = document.getElementById('album-mode-btn')
+    if (albumBtn) albumBtn.style.display = gameMode === 'infinite' ? 'flex' : 'none'
 }
 
+function showAlbumCard() {
+    updateAlbumCard()
+    document.getElementById('album-card-back').classList.remove('hide')
+}
+
+document.getElementById('album-card-back').onclick = function(e) {
+    if (e.target.id === 'album-card-back') {
+        document.getElementById('album-card-back').classList.add('hide')
+    }
+}
+
+function setAlbumMode(mode) {
+    albumMode = mode
+    localStorage.setItem('albumMode', mode)
+    updateAlbumCard()
+    resetGameState()
+    location.reload()
+}
+
+function toggleCustomAlbum(albumNum) {
+    let custom = JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]')
+    if (custom.includes(albumNum)) {
+        if (custom.length === 1) return // always keep at least one
+        custom = custom.filter(a => a !== albumNum)
+    } else {
+        custom.push(albumNum)
+    }
+    localStorage.setItem('customAlbums', JSON.stringify(custom))
+    albumRanges.custom = custom
+    updateAlbumCard()
+}
+
+function applyCustomMode() {
+    albumMode = 'custom'
+    localStorage.setItem('albumMode', 'custom')
+    resetGameState()
+    location.reload()
+}
+
+function getNumberPoolForAlbumMode() {
+    const allowedAlbums = albumRanges[albumMode]
+    let pool = []
+    allowedAlbums.forEach(albumNum => {
+        const range = albumNumberRanges[albumNum]
+        for (let i = range.min; i <= range.max; i++) {
+            pool.push(i)
+        }
+    })
+    return pool
+}
+
+function updateAlbumCard() {
+    const btns = document.querySelectorAll('.album-mode-btn')
+    btns.forEach(btn => {
+        btn.style.backgroundColor = btn.dataset.mode === albumMode ? '#4daa31' : 'rgb(255,252,238)'
+        btn.style.color = btn.dataset.mode === albumMode ? 'white' : 'black'
+    })
+
+    const custom = JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]')
+    document.querySelectorAll('.custom-album-img').forEach(img => {
+        const albumNum = Number(img.dataset.album)
+        img.style.opacity = custom.includes(albumNum) ? '1' : '0.3'
+        img.style.transform = custom.includes(albumNum) ? 'scale(1.1)' : 'scale(1)'
+    })
+}
+
+
 function toggleGameMode() {
-    // save current mode's game state under a mode-specific key before switching
+    // save current mode's game state under a mode-specific key before switching 
     const currentState = {
         guessCount: localStorage.getItem('guessCount'),
         gameTable: localStorage.getItem('gameTable'),
@@ -279,7 +376,8 @@ async function getRandomMysterySong() {
         newMysterySong();
     } else {
         Math.seedrandom(new Date().toString() + Math.random());
-        mysteryNumber = Math.floor(Math.random() * 246) + 1;
+        const pool = getNumberPoolForAlbumMode()
+        mysteryNumber = pool[Math.floor(Math.random() * pool.length)]
     }
 
     await fetch('/datasheetNoSkit.json')
@@ -304,6 +402,7 @@ function newMysterySong() {
     console.log(today)
 }
 
+
 async function compareSong(choice) {
     if (guessCount <= maxGuesses) {
         let choiceData;
@@ -321,12 +420,18 @@ async function compareSong(choice) {
         searchInput.setAttribute('placeholder', 'Guess ' + ++guessCount + '/' + maxGuesses)
         searchInput.value = ""
 
+       if (guessCount >= 6 && gameMode === 'infinite') {
+    const hintAlreadyShown = document.getElementById('hint-display').innerText !== ''
+    if (!hintAlreadyShown) {
+        document.getElementById('hint-button').style.display = 'inline-block'
+    }
+}
+
         if (Object.values(result).every(r => r.includes("green"))) {
             irishSpring = true
         } else {
             irishSpring = false
         }
-
         if (Object.values(result).every(r => r.includes("green"))) {
             mainStatisticsW()
             showMysterySong(true)
@@ -335,7 +440,7 @@ async function compareSong(choice) {
             searchInput.setAttribute('placeholder', 'You solved it in ' + accGuessCount + '!')
         }
     }
-
+    
     if (guessCount > maxGuesses && irishSpring != true) {
         mainStatisticsL()
         showMysterySong(false)
@@ -376,6 +481,12 @@ function mainStatisticsL() {
     dataDiv.innerText = correctGuess
     dataStreak.innerText = 0
     dataGames.innerText = gamesPlayed + 1
+}
+
+function showLetterHint() {
+    const firstLetter = mysterySong.title[0]
+    document.getElementById('hint-display').innerText = 'First Letter: ' + firstLetter
+    document.getElementById('hint-button').style.display = 'none'
 }
 
 function compareFunction(choiceData, mysterySong) {
@@ -549,7 +660,24 @@ function scoreText() {
 }
 
 function formatScoreText(resultsArray) {
-    let formattedScoreText = "INFYEEZLE #" + yeezleDay + ": " + (Number(guessCount) - 1) + "/" + maxGuesses + "\n"
+    const prefix = gameMode === 'daily' ? 'daily_' : 'inf_';
+    const gamesPlayed = Number(window.localStorage.getItem(prefix + 'gamesPlayed')) || 0
+
+    let modeLabel
+    if (gameMode === 'daily') {
+        modeLabel = 'DAILY YEEZLE'
+    } else {
+        const albumModeLabels = {
+            standard: 'INFINITE YEEZLE',
+            classic: 'INFINITE YEEZLE [CLASSIC]',
+            early: 'INFINITE YEEZLE [EARLY]',
+            recent: 'INFINITE YEEZLE [RECENT]',
+            custom: 'INFINITE YEEZLE [CUSTOM]'
+        }
+        modeLabel = albumModeLabels[albumMode] || 'INFYEEZLE'
+    }
+
+    let formattedScoreText = modeLabel + " #" + gamesPlayed + ": " + (Number(guessCount) - 1) + "/" + maxGuesses + "\n"
     for (e of resultsArray) {
         formattedScoreText += "\n" + e.join("")
     }

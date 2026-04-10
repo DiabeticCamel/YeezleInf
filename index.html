@@ -80,7 +80,12 @@
         </div>
         <div class="right-but-cont">
           <span id="mode-toggle-btn" onclick="showModeCard()" style="cursor: pointer;">
-            <svg xmlns="http://www.w3.org/2000/svg" height="60px" viewBox="0 -960 960 960" width="60px" fill="#e3e3e3"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/></svg>
+          </span>
+        </div>
+        <div class="right-but-cont">
+          <span id="album-mode-btn" onclick="showAlbumCard()" style="cursor: pointer; display: flex; align-items: center;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3"><path d="M500-360q42 0 71-29t29-71v-220h120v-80H560v220q-13-10-28-15t-32-5q-42 0-71 29t-29 71q0 42 29 71t71 29ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/></svg>
           </span>
         </div>
       </div>
@@ -99,7 +104,9 @@
 
       <button id="results-button" class="disable">Show Results</button>
       <button id="guess-button" disabled>Guess</button>
-
+     <button id="hint-button" onclick="showLetterHint()" style="display: none;">Show Hint</button>
+    <div id="hint-display" style="color: white; font-family: SYNE; margin-top: 10px;"></div>
+      
       <div id="result-container">
         <table id="result-table">
           <tr id="result-rows">
@@ -329,9 +336,48 @@
       </div>
     </div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
-    <script src="autocomplete.js"></script>
-    <script src="script.js"></script>
+<div id="album-card-back" class="hide" style="backdrop-filter: brightness(0.3); -webkit-backdrop-filter: brightness(0.3); background-color: rgba(0,0,0,0.6); position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; transition: opacity 0.4s ease-out; z-index: 999; overflow-y: auto;">
+  <div id="album-card" style="background-color: rgb(44,44,44); color: white; width: min(500px, 90vw); display: flex; flex-direction: column; align-items: center; border-radius: 10px; box-shadow: 0 0 90px rgb(141,141,141); padding: 20px; margin: 40px 0;">
+    <div style="font-size: 28px; color: white; margin-bottom: 6px;">ALBUM MODE</div>
+    <div style="font-family: SYNE; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 20px;">Infinite mode only</div>
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 20px;">
+      <button class="album-mode-btn" data-mode="standard" onclick="setAlbumMode('standard')" style="font-family: YZY;">All Albums</button>
+      <button class="album-mode-btn" data-mode="classic" onclick="setAlbumMode('classic')" style="font-family: YZY;">Classic (up to Donda)</button>
+      <button class="album-mode-btn" data-mode="early" onclick="setAlbumMode('early')" style="font-family: YZY;">Early (up to TLOP)</button>
+      <button class="album-mode-btn" data-mode="recent" onclick="setAlbumMode('recent')" style="font-family: YZY;">Recent (after TLOP)</button>
+      <button class="album-mode-btn" data-mode="custom" onclick="updateAlbumCard()" style="font-family: YZY;">Custom</button>
+    </div>
+    <div style="font-family: SYNE; font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 10px;">Custom — click albums to toggle</div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 16px;">
+      <img class="custom-album-img smallbums" data-album="1"  src="images/Ye2.jpeg"   onclick="toggleCustomAlbum(1)"  style="cursor:pointer; transition: all 90ms ease-in-out;" title="College Dropout"/>
+      <img class="custom-album-img smallbums" data-album="2"  src="images/Ye3.jpeg"   onclick="toggleCustomAlbum(2)"  style="cursor:pointer; transition: all 90ms ease-in-out;" title="Late Registration"/>
+      <img class="custom-album-img smallbums" data-album="3"  src="images/Ye4.jpeg"   onclick="toggleCustomAlbum(3)"  style="cursor:pointer; transition: all 90ms ease-in-out;" title="Graduation"/>
+      <img class="custom-album-img smallbums" data-album="4"  src="images/Ye5.jpeg"   onclick="toggleCustomAlbum(4)"  style="cursor:pointer; transition: all 90ms ease-in-out;" title="808s"/>
+      <img class="custom-album-img smallbums" data-album="5"  src="images/128_5.jpg"  onclick="toggleCustomAlbum(5)"  style="cursor:pointer; transition: all 90ms ease-in-out;" title="MBDTF"/>
+      <img class="custom-album-img smallbums" data-album="6"  src="images/Ye6.jpeg"   onclick="toggleCustomAlbum(6)"  style="cursor:pointer; transition: all 90ms ease-in-out;" title="Watch The Throne"/>
+      <img class="custom-album-img smallbums" data-album="7"  src="images/Ye7.jpeg"   onclick="toggleCustomAlbum(7)"  style="cursor:pointer; transition: all 90ms ease-in-out;" title="Yeezus"/>
+      <img class="custom-album-img smallbums" data-album="8"  src="images/128_8.jpg"  onclick="toggleCustomAlbum(8)"  style="cursor:pointer; transition: all 90ms ease-in-out;" title="TLOP"/>
+      <img class="custom-album-img smallbums" data-album="9"  src="images/128_9.jpg"  onclick="toggleCustomAlbum(9)"  style="cursor:pointer; transition: all 90ms ease-in-out;" title="ye"/>
+      <img class="custom-album-img smallbums" data-album="10" src="images/Ye10.jpeg"  onclick="toggleCustomAlbum(10)" style="cursor:pointer; transition: all 90ms ease-in-out;" title="Kids See Ghosts"/>
+      <img class="custom-album-img smallbums" data-album="11" src="images/Ye11.jpeg"  onclick="toggleCustomAlbum(11)" style="cursor:pointer; transition: all 90ms ease-in-out;" title="Jesus Is King"/>
+      <img class="custom-album-img smallbums" data-album="12" src="images/Ye12.jpeg"  onclick="toggleCustomAlbum(12)" style="cursor:pointer; transition: all 90ms ease-in-out;" title="Donda"/>
+      <img class="custom-album-img smallbums" data-album="13" src="images/128_13.jpg" onclick="toggleCustomAlbum(13)" style="cursor:pointer; transition: all 90ms ease-in-out;" title="Vultures 1"/>
+      <img class="custom-album-img smallbums" data-album="14" src="images/Ye14.png"   onclick="toggleCustomAlbum(14)" style="cursor:pointer; transition: all 90ms ease-in-out;" title="Vultures 2"/>
+      <img class="custom-album-img smallbums" data-album="15" src="images/128_15.jpg" onclick="toggleCustomAlbum(15)" style="cursor:pointer; transition: all 90ms ease-in-out;" title="Donda 2"/>
+      <img class="custom-album-img smallbums" data-album="16" src="images/128_16.jpg" onclick="toggleCustomAlbum(16)" style="cursor:pointer; transition: all 90ms ease-in-out;" title="Bully"/>
+    </div>
+    <button onclick="applyCustomMode()" style="font-family: YZY; background-color: #4daa31; color: white; margin-top: 4px;">Apply Custom</button>
+    <button onclick="document.getElementById('album-card-back').classList.add('hide')" style="font-family: YZY; margin-top: 8px; background-color: transparent; color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.2);">Close</button>
+  </div>
+</div>
+
+<div id="version-label">
+  v1.2.0<br>infiniteyeezle.netlify.app
+</div>
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+<script src="script.js"></script>
+<script src="autocomplete.js"></script>
   </body>
 
 </html>

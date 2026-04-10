@@ -396,4 +396,21 @@ function autocomplete(inp, arr) {
     });
 }
 
-autocomplete(document.getElementById("search-input"), songTitles);
+async function getFilteredSongTitles() {
+    const pool = getNumberPoolForAlbumMode()
+    
+    const response = await fetch('/datasheetNoSkit.json')
+    const data = await response.json()
+    
+    const allowedTitles = new Set()
+    pool.forEach(num => {
+        const title = data.numbers[num].title
+        allowedTitles.add(title)
+    })
+    
+    return songTitles.filter(title => allowedTitles.has(title))
+}
+
+getFilteredSongTitles().then(filteredTitles => {
+    autocomplete(document.getElementById("search-input"), filteredTitles)
+})

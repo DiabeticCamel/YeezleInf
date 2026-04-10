@@ -169,11 +169,7 @@ body {
   }
 } 
 
-.right-but-cont {
-  display: flex;
-  margin-right: 8px;
-
-}
+ 
 #left-but-cont {
   display: flex;
   width: 30vw;
@@ -305,6 +301,24 @@ body {
   color: red;
 }
 
+.right-but-cont svg,
+#mode-toggle-btn svg,
+#album-mode-btn svg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: block;
+}
+
+@media only screen and (max-width: 600px) {
+  .right-but-cont svg,
+  #mode-toggle-btn svg,
+  #album-mode-btn svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 .main-container {
   width: 100%;
   height: 100%;
@@ -312,8 +326,6 @@ body {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-
-
 }
 
 #data-div {
@@ -634,7 +646,16 @@ margin-bottom: 100px;
 }
 
 
-
+#version-label {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: SYNE;
+  font-size: 11px;
+  pointer-events: none;
+  z-index: 1;
+}
 
 
 #end-card-inner {
