@@ -701,6 +701,7 @@ margin-bottom: 100px;
 #mystery-song-title {
   font-size: min(5vw, 30px);
   margin-top: 10px;
+  text-align: center;
 }
 
 #clipboard-popup {
