@@ -18,6 +18,8 @@ const albumRanges = {
     custom:   JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]')
 }
 
+const SUPABASE_URL = 'https://ebqqfuiomqyrnvklnrkl.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVicXFmdWlvbXF5cm52a2xucmtsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3OTg3OTYsImV4cCI6MjA5MTM3NDc5Nn0.pHAh7y2yk5kd8ytDBQtL6OIuJUhSfNomYYpy9ZsaKJg'
 const albumNumberRanges = {
     1:  {min: 1,   max: 21},
     2:  {min: 22,  max: 42},
@@ -192,6 +194,31 @@ function showModeCard() {
     document.getElementById('current-mode-label').innerText =
         gameMode === 'infinite' ? 'Infinite' : 'Daily';
     document.getElementById('mode-card-back').classList.remove('hide')
+}
+
+async function showMysterySong(correct) {
+    cardBackground.querySelector("#end-card-title").innerText = correct ? "Correct! " : "Game Over!"
+    cardBackground.querySelector('#mystery-song-title').innerText = mysterySong.title + " "
+    if (mysterySong.features[0] !== "") {
+        cardBackground.querySelector('#mystery-song-feature').innerText = "ft. [" + mysterySong.features + "]"
+    }
+    cardBackground.querySelector('#mystery-song-img').src = mysterySong.cover
+    cardBackground.classList.remove('hide')
+    searchInput.classList.add('greyed')
+    playAgainButton.focus()
+
+    // Add completion count for daily mode
+    if (gameMode === 'daily') {
+        const count = await getDailyCompletions()
+        const existingLabel = document.getElementById('daily-count-label')
+        if (!existingLabel) {
+            const label = document.createElement('p')
+            label.id = 'daily-count-label'
+            label.style.cssText = 'color: rgba(255,255,255,0.7); font-family: SYNE; font-size: 14px; margin-top: 8px;'
+            label.innerText = `${count} players completed today's puzzle`
+            cardBackground.querySelector('#end-card-inner').appendChild(label)
+        }
+    }
 }
 
 function updateModeIcon() {
@@ -402,6 +429,38 @@ function newMysterySong() {
     console.log(today)
 }
 
+async function submitDailyCompletion(won) {
+    // Don't submit twice
+    if (localStorage.getItem('submitted_' + today)) return
+    
+    await fetch(`${SUPABASE_URL}/rest/v1/daily_completions`, {
+        method: 'POST',
+        headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ date: today, won: won })
+    })
+    
+    localStorage.setItem('submitted_' + today, 'true')
+}
+
+async function getDailyCompletions() {
+    const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/daily_completions?date=eq.${encodeURIComponent(today)}&won=eq.true&select=id`,
+        {
+            headers: {
+                'apikey': SUPABASE_ANON_KEY,
+                'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                'Prefer': 'count=exact'
+            }
+        }
+    )
+    const count = res.headers.get('content-range')?.split('/')[1]
+    return count || '0'
+}
+
 
 async function compareSong(choice) {
     if (guessCount <= maxGuesses) {
@@ -420,6 +479,21 @@ async function compareSong(choice) {
         searchInput.setAttribute('placeholder', 'Guess ' + ++guessCount + '/' + maxGuesses)
         searchInput.value = ""
 
+if (Object.values(result).every(r => r.includes("green"))) {
+    mainStatisticsW()
+    showMysterySong(true)
+    winStatus = "true"
+    if (gameMode === 'daily') submitDailyCompletion(true)  // add this
+}
+
+// and in the loss block:
+if (guessCount > maxGuesses && irishSpring != true) {
+    mainStatisticsL()
+    showMysterySong(false)
+    winStatus = "false"
+    if (gameMode === 'daily') submitDailyCompletion(false)  // add this
+}
+        
        if (guessCount >= 6 && gameMode === 'infinite') {
     const hintAlreadyShown = document.getElementById('hint-display').innerText !== ''
     if (!hintAlreadyShown) {
