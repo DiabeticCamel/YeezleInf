@@ -646,7 +646,16 @@ margin-bottom: 100px;
 }
 
 
-
+#version-label {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: SYNE;
+  font-size: 11px;
+  pointer-events: none;
+  z-index: 1;
+}
 
 
 #end-card-inner {
