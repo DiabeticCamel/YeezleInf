@@ -14,6 +14,18 @@ var filterMode    = localStorage.getItem('albumMode')  || 'standard';
 /* ── profile ── */
 const gameStartTime = Date.now();
 
+function refreshLiveStats() {
+  const profile = loadProfile();
+  const lvlEl   = document.getElementById('live-level-display');
+  const barEl   = document.getElementById('live-xp-bar');
+  const coinEl  = document.getElementById('live-coins-display');
+  if (!lvlEl) return;
+  lvlEl.innerText  = profile.level;
+  coinEl.innerText = profile.coins + ' 🪙';
+  const pct = Math.min((profile.xp / xpForLevel(profile.level)) * 100, 100);
+  setTimeout(() => { if (barEl) barEl.style.width = pct + '%'; }, 100);
+}
+
 function loadProfile() {
   const saved = localStorage.getItem('yeezleProfile');
   return saved ? JSON.parse(saved) : {
@@ -269,6 +281,7 @@ textInput.setAttribute('placeholder', 'Start by typing any Ye song!');
 showIntro();
 refreshSideStats();
 updateModeIcon();
+refreshLiveStats();
 
 if (activeMode === 'infinite') clearSavedRound();
 
@@ -621,6 +634,7 @@ async function evaluateGuess(title) {
     isDaily: activeMode === 'daily',
     usedHint: document.getElementById('hint-display').innerText !== '',
     targetAlbum: targetSong.album
+    refreshLiveStats();
   });
 
   refreshSideStats();
