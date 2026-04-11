@@ -613,15 +613,13 @@ svg.jersey   { width: 40px; }
   opacity: 1;
   margin-top: 50px;
   margin-bottom: 100px;
+  width: min(500px, 90vw);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-@media only screen and (min-width: 1400px) {
-  #super-div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
+
 
 #end-card {
   background-color: rgb(44,44,44);
@@ -705,12 +703,12 @@ svg.jersey   { width: 40px; }
 .stat-container {
   background-color: rgb(44,44,44);
   color: white;
-  width: min(500px, 60vw);
+  width: 100%;
   height: fit-content;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   border-radius: 10px;
   padding-block: 15px;
   box-shadow: 0 20px 50px rgba(255,248,220,0.473);
