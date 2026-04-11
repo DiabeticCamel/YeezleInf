@@ -879,6 +879,13 @@ li {
   margin-bottom: 20px;
 }
 
+@media only screen and (max-width: 600px) {
+  .smallbums {
+    width: 14vw;
+    max-width: 56px;
+  }
+}
+
 .smallbums {
   width: 5vw;
   max-width: 60px;
