@@ -175,9 +175,12 @@ function showAlbumCard() {
   document.getElementById('album-card-back').classList.remove('hide');
 }
 
-document.getElementById('album-card-back').onclick = e => {
-  if (e.target.id === 'album-card-back') document.getElementById('album-card-back').classList.add('hide');
-};
+const albumCardBack = document.getElementById('album-card-back');
+if (albumCardBack) {
+  albumCardBack.onclick = e => {
+    if (e.target.id === 'album-card-back') albumCardBack.classList.add('hide');
+  };
+}
 
 function setAlbumMode(m) {
   filterMode = m;
