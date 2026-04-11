@@ -30,6 +30,57 @@ function saveProfile(p) {
   localStorage.setItem('yeezleProfile', JSON.stringify(p));
 }
 
+/* ── coins ── */
+function awardCoins(profile, { won, guessCount, secondsTaken, streak, isDaily }) {
+  let coins = won ? 10 : 2;
+  if (won) {
+    coins += Math.floor((9 - guessCount) * 3);
+    coins += Math.min(streak * 2, 20);
+    if (secondsTaken < 30)      coins += 10;
+    else if (secondsTaken < 60) coins += 5;
+    if (isDaily) coins += 5;
+  }
+  profile.coins += coins;
+  return coins;
+}
+
+/* ── xp + leveling ── */
+function xpForLevel(level) {
+  return Math.floor(100 * level * Math.pow(1.15, level - 1));
+}
+
+function awardXP(profile, { won, guessCount, isDaily }) {
+  let xp = won ? 20 + (9 - guessCount) * 5 : 5;
+  if (isDaily) xp += 10;
+  profile.xp += xp;
+  let leveled = false;
+  while (profile.xp >= xpForLevel(profile.level)) {
+    profile.xp -= xpForLevel(profile.level);
+    profile.level += 1;
+    leveled = true;
+    showAchievementToast(`⭐ Level ${profile.level} reached!`);
+  }
+  return { xp, leveled };
+}
+
+/* ── achievement toast ── */
+function showAchievementToast(message) {
+  const toast = document.createElement('div');
+  toast.innerText = message;
+  toast.style.cssText = `
+    position:fixed; bottom:90px; left:50%; transform:translateX(-50%);
+    background:#4daa31; color:white; padding:10px 20px; border-radius:8px;
+    font-family:SYNE; font-size:14px; z-index:9999; white-space:nowrap;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  `;
+  document.body.appendChild(toast);
+  setTimeout(() => {
+    toast.style.transition = 'opacity 0.5s';
+    toast.style.opacity = '0';
+  }, 2500);
+  setTimeout(() => toast.remove(), 3000);
+}
+
 /* ── album pools ── */
 const POOL_MAP = {
   standard: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
