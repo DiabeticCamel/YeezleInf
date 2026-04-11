@@ -293,15 +293,40 @@ body {
   align-items: center;
 }
 
-#custom-album-grid .smallbums {
-  width: 100%;
+.smallbums {
+  width: 40px;
+  height: 40px;
   max-width: none;
-  min-width: 0;
-  height: 0;
-  padding-bottom: 100%;
   object-fit: cover;
-  display: block;
-  box-sizing: border-box;
+  box-shadow: 0 0 50px rgba(255,248,220,0.247);
+  transition: all 90ms ease-in-out;
+}
+
+.smallbums:hover {
+  transform: scale(1.5) translateY(-1rem);
+  box-shadow: 3px 2px 50px 9px #161616;
+}
+
+#custom-album-grid {
+  grid-template-columns: repeat(8, 40px);
+}
+
+@media only screen and (min-width: 600px) {
+  #custom-album-grid .smallbums {
+    width: 50px;
+    height: 50px;
+  }
+  #custom-album-grid {
+    grid-template-columns: repeat(8, 50px) !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .smallbums {
+    width: 14vw;
+    max-width: 40px;
+    height: 40px;
+  }
 }
 
 header {
@@ -890,25 +915,10 @@ li {
   margin-bottom: 20px;
 }
 
-@media only screen and (max-width: 600px) {
-  .smallbums {
-    width: 14vw;
-    max-width: 56px;
-  }
-}
 
-.smallbums {
-  width: 5vw;
-  max-width: 60px;
-  box-shadow: 0 0 50px rgba(255,248,220,0.247);
-  transition: all 90ms ease-in-out;
-}
 
-.smallbums:hover {
-  transform: scale(1.5) translateY(-1rem);
-  box-shadow: 3px 2px 50px 9px #161616;
-}
 
+.
 /* ── Intro buttons ──────────────────────────────────────────── */
 #start-div { margin-top: 2vw; }
 
