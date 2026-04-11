@@ -775,6 +775,11 @@ center { margin-top: 50px; margin-bottom: 20px; }
   gap: 20px;
 }
 
+@keyframes confettiFall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(105vh) rotate(720deg); opacity: 0; }
+}
+
 /* ── Autocomplete ───────────────────────────────────────────── */
 .autocomplete {
   position: relative;
