@@ -230,8 +230,14 @@ function updateAlbumCard() {
   
   const customGrid = document.getElementById('custom-album-grid');
   const customLabel = document.getElementById('custom-album-label');
-  if (customGrid) customGrid.style.display = filterMode === 'custom' ? 'flex' : 'none';
-  if (customLabel) customLabel.style.display = filterMode === 'custom' ? 'block' : 'none';
+ if (customGrid) {
+  filterMode === 'custom'
+    ? customGrid.classList.add('visible')
+    : customGrid.classList.remove('visible');
+}
+if (customLabel) {
+  customLabel.style.display = filterMode === 'custom' ? 'block' : 'none';
+}
 
   const saved = JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]');
   document.querySelectorAll('.custom-album-img').forEach(img => {
