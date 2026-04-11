@@ -282,6 +282,7 @@ showIntro();
 refreshSideStats();
 updateModeIcon();
 refreshLiveStats();
+applyCosmetics();
 
 if (activeMode === 'infinite') clearSavedRound();
 
@@ -329,6 +330,143 @@ function saveSession() {
   localStorage.setItem('guessCount', guessCount);
   localStorage.setItem('mysterySong', JSON.stringify(targetSong));
   if (!localStorage.getItem('sessionDate')) localStorage.setItem('sessionDate', new Date());
+}
+
+/* ── shop data ── */
+const SHOP_ITEMS = {
+  backgrounds: [
+    { id: 'bg_default',    label: 'Default',          price: 0,   rarity: 'common',    value: null },
+    { id: 'bg_graduation', label: 'Graduation Blue',  price: 80,  rarity: 'common',    value: 'radial-gradient(circle, #1a2a4a, #0d1b2a)' },
+    { id: 'bg_donda',      label: 'Donda White',      price: 200, rarity: 'rare',      value: 'radial-gradient(circle, #2a2a2a, #111)' },
+    { id: 'bg_neon',       label: 'Neon Nights',      price: 400, rarity: 'rare',      value: 'radial-gradient(circle, #0a0a1a, #1a0a2a, #0a1a0a)' },
+    { id: 'bg_gold',       label: 'Gold Rush',        price: 600, rarity: 'legendary', value: 'radial-gradient(circle, #2a1a00, #1a1000, #2a2000)' },
+  ],
+  tiles: [
+    { id: 'tile_default',  label: 'Default Green',    price: 0,   rarity: 'common',    value: null },
+    { id: 'tile_blue',     label: 'Ocean Blue',       price: 60,  rarity: 'common',    value: '#1a6aaa' },
+    { id: 'tile_purple',   label: 'Purple Haze',      price: 60,  rarity: 'common',    value: '#6a2aaa' },
+    { id: 'tile_gold',     label: 'Gold Tile',        price: 180, rarity: 'rare',      value: '#aa8a00' },
+    { id: 'tile_neon',     label: 'Neon Green',       price: 500, rarity: 'legendary', value: '#00ff88' },
+  ],
+  effects: [
+    { id: 'fx_default',    label: 'Default',          price: 0,   rarity: 'common',    value: null },
+    { id: 'fx_confetti',   label: 'Confetti',         price: 220, rarity: 'rare',      value: 'confetti' },
+    { id: 'fx_gold',       label: 'Gold Shower',      price: 600, rarity: 'legendary', value: 'gold' },
+  ]
+};
+
+const RARITY_COLORS = {
+  common:    'rgba(255,255,255,0.15)',
+  rare:      'rgba(77,170,49,0.3)',
+  legendary: 'rgba(204,171,23,0.35)'
+};
+
+const RARITY_LABELS = {
+  common:    { color: 'rgba(255,255,255,0.4)', text: 'COMMON' },
+  rare:      { color: '#4daa31',               text: 'RARE' },
+  legendary: { color: '#ccab17',               text: 'LEGENDARY' }
+};
+
+let activeShopTab = 'backgrounds';
+
+function showShop() {
+  const profile = loadProfile();
+  document.getElementById('shop-coin-display').innerText = profile.coins + ' 🪙';
+  renderShopItems(activeShopTab);
+  document.getElementById('shop-back').classList.remove('hide');
+}
+
+function setShopTab(tab) {
+  activeShopTab = tab;
+  document.querySelectorAll('.shop-tab-btn').forEach(btn => {
+    btn.classList.toggle('active-tab', btn.dataset.tab === tab);
+  });
+  renderShopItems(tab);
+}
+
+function renderShopItems(tab) {
+  const profile = loadProfile();
+  const items   = SHOP_ITEMS[tab];
+  const grid    = document.getElementById('shop-items-grid');
+  const equippedKey = tab === 'backgrounds' ? 'background' : tab === 'tiles' ? 'tileStyle' : 'winEffect';
+
+  grid.innerHTML = '';
+  grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;';
+
+  items.forEach(item => {
+    const owned    = profile.inventory.includes(item.id) || item.price === 0;
+    const equipped = profile.equipped[equippedKey] === item.id;
+    const canAfford = profile.coins >= item.price;
+
+    const card = document.createElement('div');
+    card.style.cssText = `
+      background:${RARITY_COLORS[item.rarity]};
+      border:1px solid ${equipped ? '#4daa31' : 'rgba(255,255,255,0.1)'};
+      border-radius:8px; padding:12px; display:flex; flex-direction:column;
+      align-items:center; gap:6px; cursor:pointer;
+      box-shadow:${equipped ? '0 0 12px #4daa31' : 'none'};
+    `;
+
+    card.innerHTML = `
+      <div style="font-family:YZY;font-size:13px;color:white;text-align:center;">${item.label}</div>
+      <div style="font-size:10px;font-family:SYNE;color:${RARITY_LABELS[item.rarity].color};">${RARITY_LABELS[item.rarity].text}</div>
+      <div style="font-family:YZY;font-size:12px;color:#ccab17;">${item.price === 0 ? 'FREE' : item.price + ' 🪙'}</div>
+      <button onclick="handleShopAction('${item.id}','${tab}')" style="
+        font-family:SYNE; font-size:11px; padding:4px 10px; margin-top:4px;
+        background:${equipped ? '#4daa31' : owned ? 'rgba(255,255,255,0.15)' : canAfford ? 'rgb(255,252,238)' : 'rgba(255,255,255,0.05)'};
+        color:${equipped ? 'white' : owned ? 'white' : canAfford ? 'black' : 'rgba(255,255,255,0.3)'};
+        cursor:${!owned && !canAfford ? 'not-allowed' : 'pointer'};
+        border-radius:4px; border:none;
+      ">${equipped ? 'Equipped' : owned ? 'Equip' : 'Buy'}</button>
+    `;
+
+    grid.appendChild(card);
+  });
+}
+
+function handleShopAction(itemId, tab) {
+  const profile = loadProfile();
+  const items   = SHOP_ITEMS[tab];
+  const item    = items.find(i => i.id === itemId);
+  if (!item) return;
+
+  const equippedKey = tab === 'backgrounds' ? 'background' : tab === 'tiles' ? 'tileStyle' : 'winEffect';
+  const owned = profile.inventory.includes(item.id) || item.price === 0;
+
+  if (!owned) {
+    if (profile.coins < item.price) {
+      showAchievementToast('Not enough coins 🪙');
+      return;
+    }
+    profile.coins -= item.price;
+    profile.inventory.push(item.id);
+    saveProfile(profile);
+    showAchievementToast(`${item.label} purchased!`);
+  }
+
+  profile.equipped[equippedKey] = item.id;
+  saveProfile(profile);
+  applyCosmetics();
+  document.getElementById('shop-coin-display').innerText = profile.coins + ' 🪙';
+  refreshLiveStats();
+  renderShopItems(tab);
+}
+
+function applyCosmetics() {
+  const profile = loadProfile();
+
+  // background
+  const bgItem = SHOP_ITEMS.backgrounds.find(i => i.id === profile.equipped.background);
+  if (bgItem && bgItem.value) {
+    document.body.style.backgroundImage = bgItem.value;
+  } else {
+    document.body.style.backgroundImage = '';
+  }
+
+  // tile color
+  const tileItem = SHOP_ITEMS.tiles.find(i => i.id === profile.equipped.tileStyle);
+  const tileColor = tileItem && tileItem.value ? tileItem.value : '#4daa31';
+  document.documentElement.style.setProperty('--green', tileColor);
 }
 
 function showModeCard() {
