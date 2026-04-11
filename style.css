@@ -321,11 +321,30 @@ body {
   }
 }
 
+#custom-album-grid .smallbums {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  max-width: none;
+}
+
 @media only screen and (max-width: 600px) {
   .smallbums {
     width: 14vw;
     max-width: 40px;
     height: 40px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #custom-album-grid {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+  #custom-album-grid .smallbums {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
   }
 }
 
