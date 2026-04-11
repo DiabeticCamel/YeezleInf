@@ -634,12 +634,11 @@ async function evaluateGuess(title) {
     isDaily: activeMode === 'daily',
     usedHint: document.getElementById('hint-display').innerText !== '',
     targetAlbum: targetSong.album
-    refreshLiveStats();
   });
 
   refreshSideStats();
   saveSession();
-}
+
 
 function recordWin() {
   const pre = activeMode === 'daily' ? 'daily_' : 'inf_';
