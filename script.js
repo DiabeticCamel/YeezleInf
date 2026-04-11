@@ -267,7 +267,12 @@ function applyCustomMode() {
   location.reload();
 }
 
+var isSwitchingMode = false;
+
 function toggleGameMode() {
+  if (isSwitchingMode) return;   // prevent re-entrant / rapid calls
+  isSwitchingMode = true;
+
   const snapshot = {
     guessCount:   localStorage.getItem('guessCount'),
     gameTable:    localStorage.getItem('gameTable'),
@@ -292,6 +297,8 @@ function toggleGameMode() {
     if (s.winStatus)    localStorage.setItem('winStatus',    s.winStatus);
     if (s.mysterySong)  localStorage.setItem('mysterySong',  s.mysterySong);
   }
+
+  isSwitchingMode = false;
   window.location.reload();
 }
 
@@ -596,7 +603,10 @@ async function renderEndCard(won) {
 
   if (activeMode === 'daily') {
     nextSongBtn.innerText = 'Switch to Infinite';
-    nextSongBtn.onclick   = toggleGameMode;
+    nextSongBtn.onclick = () => {
+    if (isSwitchingMode) return;
+      toggleGameMode();
+    };
     const { count, avg } = await fetchDailyStats();
     if (!document.getElementById('daily-count-label')) {
       const panel = document.createElement('div');
