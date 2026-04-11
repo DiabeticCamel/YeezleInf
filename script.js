@@ -310,6 +310,9 @@ supportBtn.onclick  = () => supportPanel.classList.remove('hide');
 supportPanel.onclick = e => { if (e.target.id === supportPanel.id) supportPanel.classList.add('hide'); };
 rulesPanel.onclick   = e => { if (e.target.id === rulesPanel.id)   rulesPanel.classList.add('hide');  };
 beginBtn.onclick     = () => { rulesPanel.classList.add('hide'); localStorage.setItem('introShown','false'); };
+document.getElementById('shop-back').onclick = e => {
+  if (e.target.id === 'shop-back') document.getElementById('shop-back').classList.add('hide');
+};
 
 document.getElementById('mode-card-back').onclick = e => {
   if (e.target.id === 'mode-card-back') document.getElementById('mode-card-back').classList.add('hide');
