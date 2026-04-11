@@ -185,6 +185,63 @@ function onGameComplete({ won, guessCount, secondsTaken, isDaily, usedHint, targ
   }, 800);
 }
 
+/* ── win effects ── */
+function triggerWinEffect() {
+  const profile = loadProfile();
+  const fx = profile.equipped.winEffect;
+  if (!fx || fx === 'fx_default') return;
+
+  if (fx === 'fx_confetti') launchConfetti();
+  if (fx === 'fx_gold')     launchGoldShower();
+}
+
+function launchConfetti() {
+  const colors = ['#4daa31','#ccab17','#ffffff','#ff6b6b','#6b9fff'];
+  for (let i = 0; i < 120; i++) {
+    const piece = document.createElement('div');
+    piece.style.cssText = `
+      position:fixed;
+      left:${Math.random() * 100}vw;
+      top:-10px;
+      width:${6 + Math.random() * 6}px;
+      height:${6 + Math.random() * 6}px;
+      background:${colors[Math.floor(Math.random() * colors.length)]};
+      border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
+      opacity:1;
+      z-index:99999;
+      pointer-events:none;
+      animation: confettiFall ${1.5 + Math.random() * 2}s ease-in forwards;
+      animation-delay:${Math.random() * 1.2}s;
+    `;
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 4000);
+  }
+}
+
+function launchGoldShower() {
+  const colors = ['#ccab17','#ffdd44','#ffaa00','#fff0a0'];
+  for (let i = 0; i < 150; i++) {
+    const piece = document.createElement('div');
+    piece.style.cssText = `
+      position:fixed;
+      left:${Math.random() * 100}vw;
+      top:-10px;
+      width:${4 + Math.random() * 8}px;
+      height:${4 + Math.random() * 8}px;
+      background:${colors[Math.floor(Math.random() * colors.length)]};
+      border-radius:50%;
+      opacity:1;
+      z-index:99999;
+      pointer-events:none;
+      box-shadow: 0 0 6px ${colors[0]};
+      animation: confettiFall ${1 + Math.random() * 2}s ease-in forwards;
+      animation-delay:${Math.random() * 0.8}s;
+    `;
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 4000);
+  }
+}
+
 /* ── shop data ── */
 const SHOP_ITEMS = {
   backgrounds: [
