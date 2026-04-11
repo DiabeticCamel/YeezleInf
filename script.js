@@ -636,8 +636,10 @@ async function evaluateGuess(title) {
     targetAlbum: targetSong.album
   });
 
+  refreshLiveStats();
   refreshSideStats();
   saveSession();
+}
 
 
 function recordWin() {
