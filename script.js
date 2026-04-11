@@ -11,6 +11,25 @@ var pastGuesses   = {};
 var runningTotal  = {};
 var filterMode    = localStorage.getItem('albumMode')  || 'standard';
 
+/* ── profile ── */
+const gameStartTime = Date.now();
+
+function loadProfile() {
+  const saved = localStorage.getItem('yeezleProfile');
+  return saved ? JSON.parse(saved) : {
+    coins: 0, xp: 0, level: 1,
+    totalGames: 0, totalWins: 0,
+    infiniteStreak: 0, dailyStreak: 0,
+    lastDailyDate: null,
+    achievements: [], inventory: [],
+    equipped: { background: 'default', tileStyle: 'default', font: 'YZY', winEffect: 'default' }
+  };
+}
+
+function saveProfile(p) {
+  localStorage.setItem('yeezleProfile', JSON.stringify(p));
+}
+
 /* ── album pools ── */
 const POOL_MAP = {
   standard: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
