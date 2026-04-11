@@ -294,40 +294,38 @@ body {
 }
 
 .smallbums {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+  max-width: 100%;
   box-shadow: 0 0 50px rgba(255,248,220,0.247);
-  transition: all 90ms ease-in-out;
+  transition: opacity 90ms ease-in-out, transform 90ms ease-in-out;
 }
 
 .smallbums:hover {
-  transform: scale(1.5) translateY(-1rem);
+  transform: scale(1.15);
   box-shadow: 3px 2px 50px 9px #161616;
 }
 
 #custom-album-grid {
-  grid-template-columns: repeat(8, 1fr);
-  width: 100%;
-  box-sizing: border-box;
+  display: none;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   gap: 6px;
   margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
   justify-content: center;
 }
 
-#custom-album-grid .smallbums {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  max-width: none;
+#custom-album-grid.visible {
+  display: grid;
 }
 
 @media only screen and (max-width: 600px) {
   #custom-album-grid {
     grid-template-columns: repeat(4, 1fr);
-  }
-  .smallbums {
-    width: 14vw;
-    max-width: 56px;
-    height: auto;
   }
 }
 
