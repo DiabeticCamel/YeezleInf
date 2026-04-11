@@ -916,6 +916,19 @@ li {
   height: 100%;
 }
 
+#albums-included {
+  width: fit-content;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+#albums-included .smallbums {
+  width: 5vw;
+  max-width: 60px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
 @media only screen and (min-width: 700px) {
   #intro-card {
     width: clamp(200px, 1000px, 1000px);
@@ -930,20 +943,6 @@ li {
     max-height: 60px;
   }
 
-   #albums-included .smallbums {
-  width: 5vw;
-  max-width: 60px;
-  height: auto;
-  aspect-ratio: 1 / 1;
-}
-
-@media only screen and (max-width: 600px) {
-  #albums-included .smallbums {
-    width: 14vw;
-    max-width: 56px;
-  }
-}
-
   #intro-card-inner {
     background-color: #202020e7;
     border-radius: 10px;
@@ -952,10 +951,12 @@ li {
   }
 }
 
-#albums-included {
-  width: fit-content;
-  margin-top: 0;
-  margin-bottom: 20px;
+@media only screen and (max-width: 600px) {
+  #albums-included .smallbums {
+    width: 14vw;
+    max-width: 40px;
+    height: auto;
+  }
 }
 
 
