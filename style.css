@@ -296,10 +296,12 @@ body {
 #custom-album-grid .smallbums {
   width: 100%;
   max-width: none;
-  height: auto;
-  aspect-ratio: 1 / 1;
+  min-width: 0;
+  height: 0;
+  padding-bottom: 100%;
   object-fit: cover;
   display: block;
+  box-sizing: border-box;
 }
 
 header {
