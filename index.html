@@ -264,28 +264,28 @@
       <button class="album-mode-btn" data-mode="custom"   onclick="setAlbumMode('custom')"   style="font-family:YZY;">Custom</button>
     </div>
 
-    <div id="custom-album-label" style="display:none;font-family:SYNE;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Click albums to toggle</div>
-    <div id="custom-album-grid">
-      <img class="custom-album-img smallbums" data-album="1"  src="images/Ye2.jpeg"   onclick="toggleCustomAlbum(1)"  style="cursor:pointer;" title="College Dropout"/>
-      <img class="custom-album-img smallbums" data-album="2"  src="images/Ye3.jpeg"   onclick="toggleCustomAlbum(2)"  style="cursor:pointer;" title="Late Registration"/>
-      <img class="custom-album-img smallbums" data-album="3"  src="images/Ye4.jpeg"   onclick="toggleCustomAlbum(3)"  style="cursor:pointer;" title="Graduation"/>
-      <img class="custom-album-img smallbums" data-album="4"  src="images/Ye5.jpeg"   onclick="toggleCustomAlbum(4)"  style="cursor:pointer;" title="808s"/>
-      <img class="custom-album-img smallbums" data-album="5"  src="images/128_5.jpg"  onclick="toggleCustomAlbum(5)"  style="cursor:pointer;" title="MBDTF"/>
-      <img class="custom-album-img smallbums" data-album="6"  src="images/Ye6.jpeg"   onclick="toggleCustomAlbum(6)"  style="cursor:pointer;" title="Watch The Throne"/>
-      <img class="custom-album-img smallbums" data-album="7"  src="images/Ye7.jpeg"   onclick="toggleCustomAlbum(7)"  style="cursor:pointer;" title="Yeezus"/>
-      <img class="custom-album-img smallbums" data-album="8"  src="images/128_8.jpg"  onclick="toggleCustomAlbum(8)"  style="cursor:pointer;" title="TLOP"/>
-      <img class="custom-album-img smallbums" data-album="9"  src="images/128_9.jpg"  onclick="toggleCustomAlbum(9)"  style="cursor:pointer;" title="ye"/>
-      <img class="custom-album-img smallbums" data-album="10" src="images/Ye10.jpeg"  onclick="toggleCustomAlbum(10)" style="cursor:pointer;" title="Kids See Ghosts"/>
-      <img class="custom-album-img smallbums" data-album="11" src="images/Ye11.jpeg"  onclick="toggleCustomAlbum(11)" style="cursor:pointer;" title="Jesus Is King"/>
-      <img class="custom-album-img smallbums" data-album="12" src="images/Ye12.jpeg"  onclick="toggleCustomAlbum(12)" style="cursor:pointer;" title="Donda"/>
-      <img class="custom-album-img smallbums" data-album="13" src="images/128_13.jpg" onclick="toggleCustomAlbum(13)" style="cursor:pointer;" title="Vultures 1"/>
-      <img class="custom-album-img smallbums" data-album="14" src="images/Ye14.png"   onclick="toggleCustomAlbum(14)" style="cursor:pointer;" title="Vultures 2"/>
-      <img class="custom-album-img smallbums" data-album="15" src="images/128_15.jpg" onclick="toggleCustomAlbum(15)" style="cursor:pointer;" title="Donda 2"/>
-      <img class="custom-album-img smallbums" data-album="16" src="images/128_16.jpg" onclick="toggleCustomAlbum(16)" style="cursor:pointer;" title="Bully"/>
-    </div>
+    <div id="preview-album-label" style="display:none;font-family:SYNE;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Albums included in this mode</div>
+<div id="preview-album-grid">
+  <img class="preview-album-img smallbums" data-album="1"  src="images/Ye2.jpeg"   title="College Dropout"/>
+  <img class="preview-album-img smallbums" data-album="2"  src="images/Ye3.jpeg"   title="Late Registration"/>
+  <img class="preview-album-img smallbums" data-album="3"  src="images/Ye4.jpeg"   title="Graduation"/>
+  <img class="preview-album-img smallbums" data-album="4"  src="images/Ye5.jpeg"   title="808s"/>
+  <img class="preview-album-img smallbums" data-album="5"  src="images/128_5.jpg"  title="MBDTF"/>
+  <img class="preview-album-img smallbums" data-album="6"  src="images/Ye6.jpeg"   title="Watch The Throne"/>
+  <img class="preview-album-img smallbums" data-album="7"  src="images/Ye7.jpeg"   title="Yeezus"/>
+  <img class="preview-album-img smallbums" data-album="8"  src="images/128_8.jpg"  title="TLOP"/>
+  <img class="preview-album-img smallbums" data-album="9"  src="images/128_9.jpg"  title="ye"/>
+  <img class="preview-album-img smallbums" data-album="10" src="images/Ye10.jpeg"  title="Kids See Ghosts"/>
+  <img class="preview-album-img smallbums" data-album="11" src="images/Ye11.jpeg"  title="Jesus Is King"/>
+  <img class="preview-album-img smallbums" data-album="12" src="images/Ye12.jpeg"  title="Donda"/>
+  <img class="preview-album-img smallbums" data-album="13" src="images/128_13.jpg" title="Vultures 1"/>
+  <img class="preview-album-img smallbums" data-album="14" src="images/Ye14.png"   title="Vultures 2"/>
+  <img class="preview-album-img smallbums" data-album="15" src="images/128_15.jpg" title="Donda 2"/>
+  <img class="preview-album-img smallbums" data-album="16" src="images/128_16.jpg" title="Bully"/>
+</div>
 
     <div id="custom-apply-btn" style="display:none;">
-      <button onclick="applyCustomMode()" style="font-family:YZY;background-color:#4daa31;color:white;margin-top:4px;">Apply & Reload</button>
+      <button onclick="applyCustomMode()" style="font-family:YZY;background-color:#4daa31;color:white;margin-top:4px;">Save & Play</button>
     </div>
 
     <button onclick="document.getElementById('album-card-back').classList.add('hide')" style="font-family:YZY;margin-top:8px;background-color:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2);">Close</button>
