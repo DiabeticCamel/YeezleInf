@@ -151,14 +151,14 @@ function showAchievements() {
     `;
 
     card.innerHTML = `
-      <div class="ach-tooltip-wrap" style="position:absolute;top:7px;right:7px;">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"
-          style="width:16px;height:16px;opacity:0.45;cursor:pointer;flex-shrink:0;"
-          fill="#e3e3e3">
-          <path d="m387-412 35-114-92-74h114l36-112 36 112h114l-93 74 35 114-92-71-93 71ZM240-40v-309q-38-42-59-96t-21-115q0-134 93-227t227-93q134 0 227 93t93 227q0 61-21 115t-59 96v309l-240-80-240 80Zm410-350q70-70 70-170t-70-170q-70-70-170-70t-170 70q-70 70-70 170t70 170q70 70 170 70t170-70ZM320-159l160-41 160 41v-124q-35 20-75.5 31.5T480-240q-44 0-84.5-11.5T320-283v124Zm160-62Z"/>
-        </svg>
-        <div class="ach-tooltip">${ach.hint}</div>
-      </div>
+     <div class="ach-tooltip-wrap" style="position:absolute;top:7px;right:7px;">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"
+    style="width:16px;height:16px;opacity:0.45;cursor:pointer;flex-shrink:0;"
+    fill="#e3e3e3">
+    <path d="M440-280h80v-240h-80v240Zm68.5-331.5Q520-623 520-640t-11.5-28.5Q497-680 480-680t-28.5 11.5Q440-657 440-640t11.5 28.5Q463-600 480-600t28.5-11.5ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"/>
+  </svg>
+  <div class="ach-tooltip">${ach.hint}</div>
+</div>
       <div style="font-size:22px;">${unlocked ? ach.label.match(/\S+$/)[0] : '🔒'}</div>
       <div style="font-family:YZY;font-size:12px;color:white;">${ach.label.replace(/\S+$/, '').trim()}</div>
       <div style="font-family:SYNE;font-size:10px;color:${unlocked ? '#4daa31' : 'rgba(255,255,255,0.3)'};">
