@@ -75,6 +75,13 @@
           </svg>
         </span>
       </div>
+      <div class="right-but-cont">
+        <span id="shop-btn" onclick="showShop()" style="cursor:pointer;display:flex;align-items:center;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
+            <path d="M280-80q-33 0-56.5-23.5T200-160q0-33 23.5-56.5T280-240q33 0 56.5 23.5T360-160q0 33-23.5 56.5T280-80Zm400 0q-33 0-56.5-23.5T600-160q0-33 23.5-56.5T680-240q33 0 56.5 23.5T760-160q0 33-23.5 56.5T680-80ZM246-720l96 200h280l110-200H246Zm-38-80h590q23 0 35 20.5t1 41.5L692-482q-11 20-29.5 31T622-440H324l-44 80h480v80H280q-45 0-68-39.5t-2-78.5l54-98-144-304H40v-80h130l38 80Zm134 280h280-280Z"/>
+          </svg>
+        </span>
+      </div>
     </div>
   </header>
 
@@ -353,5 +360,29 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
   <script src="script.js"></script>
   <script src="autocomplete.js"></script>
+
+  <!-- ===== SHOP ===== -->
+<div id="shop-back" class="hide" style="backdrop-filter:brightness(0.3);-webkit-backdrop-filter:brightness(0.3);background-color:rgba(0,0,0,0.6);position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:flex-start;z-index:200;overflow-y:auto;">
+  <div id="shop-card" style="background-color:rgb(44,44,44);color:white;width:min(560px,92vw);border-radius:10px;box-shadow:0 0 90px rgb(141,141,141);padding:24px;margin:40px 0;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <div style="font-size:28px;font-family:YZY;">SHOP</div>
+      <div style="font-family:YZY;font-size:16px;color:#ccab17;" id="shop-coin-display">0 🪙</div>
+    </div>
+    <div style="font-family:SYNE;font-size:13px;color:rgba(255,255,255,0.4);margin-bottom:20px;">Spend coins on cosmetics</div>
+
+    <!-- tabs -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;">
+      <button class="shop-tab-btn active-tab" onclick="setShopTab('backgrounds')" data-tab="backgrounds" style="font-family:SYNE;font-size:12px;padding:6px 14px;">Backgrounds</button>
+      <button class="shop-tab-btn" onclick="setShopTab('tiles')"       data-tab="tiles"       style="font-family:SYNE;font-size:12px;padding:6px 14px;">Tiles</button>
+      <button class="shop-tab-btn" onclick="setShopTab('effects')"     data-tab="effects"     style="font-family:SYNE;font-size:12px;padding:6px 14px;">Win Effects</button>
+    </div>
+
+    <div id="shop-items-grid"></div>
+
+    <button onclick="document.getElementById('shop-back').classList.add('hide')" style="font-family:YZY;margin-top:16px;background-color:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2);width:100%;">Close</button>
+  </div>
+</div>
+  
 </body>
 </html>
