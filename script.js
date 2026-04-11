@@ -182,13 +182,51 @@ if (albumCardBack) {
   };
 }
 
-function setAlbumMode(m) {
-  filterMode = m;
-  localStorage.setItem('albumMode', m);
-  updateAlbumCard();
-  if (m !== 'custom') {
-    clearSavedRound();
-    location.reload();
+function updateAlbumCard() {
+  document.querySelectorAll('.album-mode-btn').forEach(btn => {
+    btn.style.backgroundColor = btn.dataset.mode === filterMode ? '#4daa31' : 'rgb(255,252,238)';
+    btn.style.color            = btn.dataset.mode === filterMode ? 'white'   : 'black';
+  });
+
+  const customGrid  = document.getElementById('custom-album-grid');
+  const customLabel = document.getElementById('custom-album-label');
+  const applyBtn    = document.getElementById('custom-apply-btn');
+  const previewGrid = document.getElementById('preview-album-grid');
+  const previewLabel = document.getElementById('preview-album-label');
+
+  // hide everything first
+  if (customGrid)   customGrid.classList.remove('visible');
+  if (previewGrid)  previewGrid.classList.remove('visible');
+  if (customLabel)  customLabel.style.display  = 'none';
+  if (previewLabel) previewLabel.style.display = 'none';
+  if (applyBtn)     applyBtn.style.display     = 'none';
+
+  if (filterMode === 'custom') {
+    if (customLabel) customLabel.style.display = 'block';
+    if (customGrid)  customGrid.classList.add('visible');
+    if (applyBtn)    applyBtn.style.display    = 'block';
+
+    const saved = JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]');
+    document.querySelectorAll('.custom-album-img').forEach(img => {
+      const id = Number(img.dataset.album);
+      img.style.opacity   = saved.includes(id) ? '1'      : '0.3';
+      img.style.transform = saved.includes(id) ? 'scale(1.1)' : 'scale(1)';
+    });
+  } else if (filterMode !== 'standard') {
+    // show read-only preview for classic / early / recent
+    if (previewLabel) previewLabel.style.display = 'block';
+    if (previewGrid)  previewGrid.classList.add('visible');
+    if (applyBtn)     applyBtn.style.display     = 'block';
+
+    const included = POOL_MAP[filterMode];
+    document.querySelectorAll('.preview-album-img').forEach(img => {
+      const id = Number(img.dataset.album);
+      img.style.opacity   = included.includes(id) ? '1'   : '0.3';
+      img.style.transform = included.includes(id) ? 'scale(1.1)' : 'scale(1)';
+    });
+  } else {
+    // standard — just show apply
+    if (applyBtn) applyBtn.style.display = 'block';
   }
 }
 
@@ -206,8 +244,10 @@ function toggleCustomAlbum(n) {
 }
 
 function applyCustomMode() {
-  filterMode = 'custom';
-  localStorage.setItem('albumMode', 'custom');
+  localStorage.setItem('albumMode', filterMode);
+  if (filterMode === 'custom') {
+    POOL_MAP.custom = JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]');
+  }
   clearSavedRound();
   location.reload();
 }
