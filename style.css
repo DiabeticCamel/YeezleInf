@@ -626,7 +626,7 @@ svg.jersey   { width: 40px; }
 #end-card {
   background-color: rgb(44,44,44);
   color: white;
-  width: min(500px, 60vw);
+  width: min(500px, 90vw);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -640,15 +640,16 @@ svg.jersey   { width: 40px; }
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70%;
+  width: 90%;
   padding-block: 30px;
 }
 
 #end-card-title-container {
-  width: 35vw;
+  width: 100%;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  text-align: center;
   margin-bottom: 25px;
 }
 
@@ -656,9 +657,11 @@ svg.jersey   { width: 40px; }
   color: white;
   font-size: min(8vw, 50px);
   justify-content: center;
+  text-align: center;
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
 }
 
 #mystery-song-img {
