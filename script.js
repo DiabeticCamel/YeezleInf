@@ -109,28 +109,27 @@ function _runToastQueue() {
   }, 3000);
 }
 
-/* ── achievements ── */
 const ACHIEVEMENTS = [
-  { id: 'first_win',      label: 'First Blood 🎵',    check: p       => p.totalWins >= 1 },
-  { id: 'one_shot',       label: 'One Shot ⚡',        check: (p, g)  => g.won && g.guessCount === 1 },
-  { id: 'efficient',      label: 'Efficient 🎯',       check: (p, g)  => g.won && g.guessCount <= 2 },
-  { id: 'streak_5',       label: 'On a Roll 🔥',       check: p       => p.infiniteStreak >= 5 },
-  { id: 'streak_10',      label: 'Unstoppable 👑',     check: p       => p.infiniteStreak >= 10 },
-  { id: 'games_50',       label: 'Ye Scholar 📚',      check: p       => p.totalGames >= 50 },
-  { id: 'games_100',      label: 'Completionist 🏆',   check: p       => p.totalGames >= 100 },
-  { id: 'daily_7',        label: 'Daily Devotion 📅',  check: p       => p.dailyStreak >= 7 },
-  { id: 'speed_demon',    label: 'Speed Demon ⏱️',     check: (p, g)  => g.won && g.secondsTaken < 30 },
-  { id: 'comeback',       label: 'Comeback Kid 😤',    check: (p, g)  => g.won && g.guessCount === 8 },
-  { id: 'coin_500',       label: 'Coin Collector 💰',  check: p       => p.coins >= 500 },
-  { id: 'max_level',      label: 'Max Level 🌟',       check: p       => p.level >= 20 },
-  { id: 'ghost',          label: 'Ghost 👻',           check: (p, g)  => g.won && !g.usedHint },
-  { id: 'mbdtf_fan',      label: 'MBDTF Fan 🎭',       check: (p, g)  => g.won && g.targetAlbum === 5 },
-  { id: 'custom_curator', label: 'Custom Curator 🎨',  check: (p, g)  => g.usedCustomMode },
+  { id: 'first_win',      label: 'First Blood 🎵',    hint: 'Win your first game.',                         check: p       => p.totalWins >= 1 },
+  { id: 'one_shot',       label: 'One Shot ⚡',        hint: 'Guess the song correctly on your first try.',  check: (p, g)  => g.won && g.guessCount === 1 },
+  { id: 'efficient',      label: 'Efficient 🎯',       hint: 'Win a game in 2 guesses or fewer.',            check: (p, g)  => g.won && g.guessCount <= 2 },
+  { id: 'streak_5',       label: 'On a Roll 🔥',       hint: 'Reach a 5-game win streak in Infinite mode.',  check: p       => p.infiniteStreak >= 5 },
+  { id: 'streak_10',      label: 'Unstoppable 👑',     hint: 'Reach a 10-game win streak in Infinite mode.', check: p       => p.infiniteStreak >= 10 },
+  { id: 'games_50',       label: 'Ye Scholar 📚',      hint: 'Play 50 total games.',                         check: p       => p.totalGames >= 50 },
+  { id: 'games_100',      label: 'Completionist 🏆',   hint: 'Play 100 total games.',                        check: p       => p.totalGames >= 100 },
+  { id: 'daily_7',        label: 'Daily Devotion 📅',  hint: 'Complete the Daily Yeezle 7 days in a row.',   check: p       => p.dailyStreak >= 7 },
+  { id: 'speed_demon',    label: 'Speed Demon ⏱️',     hint: 'Win a game in under 30 seconds.',              check: (p, g)  => g.won && g.secondsTaken < 30 },
+  { id: 'comeback',       label: 'Comeback Kid 😤',    hint: 'Win on your very last (8th) guess.',           check: (p, g)  => g.won && g.guessCount === 8 },
+  { id: 'coin_500',       label: 'Coin Collector 💰',  hint: 'Accumulate 500 coins total.',                  check: p       => p.coins >= 500 },
+  { id: 'max_level',      label: 'Max Level 🌟',       hint: 'Reach level 20.',                              check: p       => p.level >= 20 },
+  { id: 'ghost',          label: 'Ghost 👻',           hint: 'Win without using the hint.',                  check: (p, g)  => g.won && !g.usedHint },
+  { id: 'mbdtf_fan',      label: 'MBDTF Fan 🎭',       hint: 'Win a game where the song is from MBDTF.',     check: (p, g)  => g.won && g.targetAlbum === 5 },
+  { id: 'custom_curator', label: 'Custom Curator 🎨',  hint: 'Win a game in Custom album mode.',             check: (p, g)  => g.usedCustomMode },
 ];
 
 function showAchievements() {
   const profile = loadProfile();
-  const earned = profile.achievements || [];
+  const earned  = profile.achievements || [];
 
   document.getElementById('achievements-count-label').innerText =
     `${earned.length} / ${ACHIEVEMENTS.length} unlocked`;
@@ -142,6 +141,7 @@ function showAchievements() {
     const unlocked = earned.includes(ach.id);
     const card = document.createElement('div');
     card.style.cssText = `
+      position:relative;
       background:${unlocked ? 'rgba(77,170,49,0.2)' : 'rgba(255,255,255,0.05)'};
       border:1px solid ${unlocked ? '#4daa31' : 'rgba(255,255,255,0.1)'};
       border-radius:8px; padding:12px; display:flex; flex-direction:column;
@@ -149,18 +149,40 @@ function showAchievements() {
       opacity:${unlocked ? '1' : '0.4'};
       box-shadow:${unlocked ? '0 0 10px rgba(77,170,49,0.3)' : 'none'};
     `;
+
     card.innerHTML = `
+      <div class="ach-tooltip-wrap" style="position:absolute;top:7px;right:7px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"
+          style="width:16px;height:16px;opacity:0.45;cursor:pointer;flex-shrink:0;"
+          fill="#e3e3e3">
+          <path d="m387-412 35-114-92-74h114l36-112 36 112h114l-93 74 35 114-92-71-93 71ZM240-40v-309q-38-42-59-96t-21-115q0-134 93-227t227-93q134 0 227 93t93 227q0 61-21 115t-59 96v309l-240-80-240 80Zm410-350q70-70 70-170t-70-170q-70-70-170-70t-170 70q-70 70-70 170t70 170q70 70 170 70t170-70ZM320-159l160-41 160 41v-124q-35 20-75.5 31.5T480-240q-44 0-84.5-11.5T320-283v124Zm160-62Z"/>
+        </svg>
+        <div class="ach-tooltip">${ach.hint}</div>
+      </div>
       <div style="font-size:22px;">${unlocked ? ach.label.match(/\S+$/)[0] : '🔒'}</div>
       <div style="font-family:YZY;font-size:12px;color:white;">${ach.label.replace(/\S+$/, '').trim()}</div>
       <div style="font-family:SYNE;font-size:10px;color:${unlocked ? '#4daa31' : 'rgba(255,255,255,0.3)'};">
         ${unlocked ? 'UNLOCKED' : 'LOCKED'}
       </div>
     `;
+
+    // mobile tap toggle
+    const wrap = card.querySelector('.ach-tooltip-wrap');
+    wrap.addEventListener('click', e => {
+      e.stopPropagation();
+      const isOpen = wrap.classList.contains('tooltip-open');
+      document.querySelectorAll('.ach-tooltip-wrap.tooltip-open')
+        .forEach(el => el.classList.remove('tooltip-open'));
+      if (!isOpen) wrap.classList.add('tooltip-open');
+    });
+
     grid.appendChild(card);
   }
 
-  // close on backdrop click
+  // close any open tooltips when clicking outside
   document.getElementById('achievements-back').onclick = e => {
+    document.querySelectorAll('.ach-tooltip-wrap.tooltip-open')
+      .forEach(el => el.classList.remove('tooltip-open'));
     if (e.target.id === 'achievements-back') e.target.classList.add('hide');
   };
 
