@@ -185,6 +185,41 @@ function onGameComplete({ won, guessCount, secondsTaken, isDaily, usedHint, targ
   }, 800);
 }
 
+/* ── shop data ── */
+const SHOP_ITEMS = {
+  backgrounds: [
+    { id: 'bg_default',    label: 'Default',          price: 0,   rarity: 'common',    value: null },
+    { id: 'bg_graduation', label: 'Graduation Blue',  price: 80,  rarity: 'common',    value: 'radial-gradient(circle, #1a2a4a, #0d1b2a)' },
+    { id: 'bg_donda',      label: 'Donda White',      price: 200, rarity: 'rare',      value: 'radial-gradient(circle, #2a2a2a, #111)' },
+    { id: 'bg_neon',       label: 'Neon Nights',      price: 400, rarity: 'rare',      value: 'radial-gradient(circle, #0a0a1a, #1a0a2a, #0a1a0a)' },
+    { id: 'bg_gold',       label: 'Gold Rush',        price: 600, rarity: 'legendary', value: 'radial-gradient(circle, #2a1a00, #1a1000, #2a2000)' },
+  ],
+  tiles: [
+    { id: 'tile_default',  label: 'Default Green',    price: 0,   rarity: 'common',    value: null },
+    { id: 'tile_blue',     label: 'Ocean Blue',       price: 60,  rarity: 'common',    value: '#1a6aaa' },
+    { id: 'tile_purple',   label: 'Purple Haze',      price: 60,  rarity: 'common',    value: '#6a2aaa' },
+    { id: 'tile_gold',     label: 'Gold Tile',        price: 180, rarity: 'rare',      value: '#aa8a00' },
+    { id: 'tile_neon',     label: 'Neon Green',       price: 500, rarity: 'legendary', value: '#00ff88' },
+  ],
+  effects: [
+    { id: 'fx_default',    label: 'Default',          price: 0,   rarity: 'common',    value: null },
+    { id: 'fx_confetti',   label: 'Confetti',         price: 220, rarity: 'rare',      value: 'confetti' },
+    { id: 'fx_gold',       label: 'Gold Shower',      price: 600, rarity: 'legendary', value: 'gold' },
+  ]
+};
+
+const RARITY_COLORS = {
+  common:    'rgba(255,255,255,0.15)',
+  rare:      'rgba(77,170,49,0.3)',
+  legendary: 'rgba(204,171,23,0.35)'
+};
+
+const RARITY_LABELS = {
+  common:    { color: 'rgba(255,255,255,0.4)', text: 'COMMON' },
+  rare:      { color: '#4daa31',               text: 'RARE' },
+  legendary: { color: '#ccab17',               text: 'LEGENDARY' }
+};
+
 /* ── album pools ── */
 const POOL_MAP = {
   standard: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
@@ -334,41 +369,6 @@ function saveSession() {
   localStorage.setItem('mysterySong', JSON.stringify(targetSong));
   if (!localStorage.getItem('sessionDate')) localStorage.setItem('sessionDate', new Date());
 }
-
-/* ── shop data ── */
-const SHOP_ITEMS = {
-  backgrounds: [
-    { id: 'bg_default',    label: 'Default',          price: 0,   rarity: 'common',    value: null },
-    { id: 'bg_graduation', label: 'Graduation Blue',  price: 80,  rarity: 'common',    value: 'radial-gradient(circle, #1a2a4a, #0d1b2a)' },
-    { id: 'bg_donda',      label: 'Donda White',      price: 200, rarity: 'rare',      value: 'radial-gradient(circle, #2a2a2a, #111)' },
-    { id: 'bg_neon',       label: 'Neon Nights',      price: 400, rarity: 'rare',      value: 'radial-gradient(circle, #0a0a1a, #1a0a2a, #0a1a0a)' },
-    { id: 'bg_gold',       label: 'Gold Rush',        price: 600, rarity: 'legendary', value: 'radial-gradient(circle, #2a1a00, #1a1000, #2a2000)' },
-  ],
-  tiles: [
-    { id: 'tile_default',  label: 'Default Green',    price: 0,   rarity: 'common',    value: null },
-    { id: 'tile_blue',     label: 'Ocean Blue',       price: 60,  rarity: 'common',    value: '#1a6aaa' },
-    { id: 'tile_purple',   label: 'Purple Haze',      price: 60,  rarity: 'common',    value: '#6a2aaa' },
-    { id: 'tile_gold',     label: 'Gold Tile',        price: 180, rarity: 'rare',      value: '#aa8a00' },
-    { id: 'tile_neon',     label: 'Neon Green',       price: 500, rarity: 'legendary', value: '#00ff88' },
-  ],
-  effects: [
-    { id: 'fx_default',    label: 'Default',          price: 0,   rarity: 'common',    value: null },
-    { id: 'fx_confetti',   label: 'Confetti',         price: 220, rarity: 'rare',      value: 'confetti' },
-    { id: 'fx_gold',       label: 'Gold Shower',      price: 600, rarity: 'legendary', value: 'gold' },
-  ]
-};
-
-const RARITY_COLORS = {
-  common:    'rgba(255,255,255,0.15)',
-  rare:      'rgba(77,170,49,0.3)',
-  legendary: 'rgba(204,171,23,0.35)'
-};
-
-const RARITY_LABELS = {
-  common:    { color: 'rgba(255,255,255,0.4)', text: 'COMMON' },
-  rare:      { color: '#4daa31',               text: 'RARE' },
-  legendary: { color: '#ccab17',               text: 'LEGENDARY' }
-};
 
 let activeShopTab = 'backgrounds';
 
