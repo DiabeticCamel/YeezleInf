@@ -81,6 +81,83 @@ function showAchievementToast(message) {
   setTimeout(() => toast.remove(), 3000);
 }
 
+/* ── achievements ── */
+const ACHIEVEMENTS = [
+  { id: 'first_win',      label: 'First Blood 🎵',    check: p       => p.totalWins >= 1 },
+  { id: 'one_shot',       label: 'One Shot ⚡',        check: (p, g)  => g.won && g.guessCount === 1 },
+  { id: 'efficient',      label: 'Efficient 🎯',       check: (p, g)  => g.won && g.guessCount <= 2 },
+  { id: 'streak_5',       label: 'On a Roll 🔥',       check: p       => p.infiniteStreak >= 5 },
+  { id: 'streak_10',      label: 'Unstoppable 👑',     check: p       => p.infiniteStreak >= 10 },
+  { id: 'games_50',       label: 'Ye Scholar 📚',      check: p       => p.totalGames >= 50 },
+  { id: 'games_100',      label: 'Completionist 🏆',   check: p       => p.totalGames >= 100 },
+  { id: 'daily_7',        label: 'Daily Devotion 📅',  check: p       => p.dailyStreak >= 7 },
+  { id: 'speed_demon',    label: 'Speed Demon ⏱️',     check: (p, g)  => g.won && g.secondsTaken < 30 },
+  { id: 'comeback',       label: 'Comeback Kid 😤',    check: (p, g)  => g.won && g.guessCount === 8 },
+  { id: 'coin_500',       label: 'Coin Collector 💰',  check: p       => p.coins >= 500 },
+  { id: 'max_level',      label: 'Max Level 🌟',       check: p       => p.level >= 20 },
+  { id: 'ghost',          label: 'Ghost 👻',           check: (p, g)  => g.won && !g.usedHint },
+  { id: 'mbdtf_fan',      label: 'MBDTF Fan 🎭',       check: (p, g)  => g.won && g.targetAlbum === 5 },
+  { id: 'custom_curator', label: 'Custom Curator 🎨',  check: (p, g)  => g.usedCustomMode },
+];
+
+function checkAchievements(profile, gameContext) {
+  for (const ach of ACHIEVEMENTS) {
+    if (profile.achievements.includes(ach.id)) continue;
+    if (ach.check(profile, gameContext)) {
+      profile.achievements.push(ach.id);
+      showAchievementToast(`🏅 ${ach.label} unlocked!`);
+    }
+  }
+}
+
+/* ── daily streak ── */
+function updateDailyStreak(profile) {
+  const today = new Date().toISOString().split('T')[0];
+  if (profile.lastDailyDate === today) return;
+  const last = profile.lastDailyDate ? new Date(profile.lastDailyDate) : null;
+  const diffDays = last ? (new Date(today) - last) / 86400000 : null;
+  profile.dailyStreak = diffDays === 1 ? profile.dailyStreak + 1 : 1;
+  profile.lastDailyDate = today;
+  const milestones = { 3: 15, 7: 50, 14: 100, 30: 300 };
+  if (milestones[profile.dailyStreak]) {
+    profile.coins += milestones[profile.dailyStreak];
+    showAchievementToast(`🔥 ${profile.dailyStreak}-day streak! +${milestones[profile.dailyStreak]} coins`);
+  }
+}
+
+/* ── on game complete ── */
+function onGameComplete({ won, guessCount, secondsTaken, isDaily, usedHint, targetAlbum }) {
+  const profile = loadProfile();
+
+  profile.totalGames += 1;
+  if (won) profile.totalWins += 1;
+
+  const streak = isDaily ? profile.dailyStreak : profile.infiniteStreak;
+
+  if (won) {
+    if (isDaily) updateDailyStreak(profile);
+    else profile.infiniteStreak += 1;
+  } else {
+    if (isDaily) profile.dailyStreak = 0;
+    else profile.infiniteStreak = 0;
+  }
+
+  const coinsEarned = awardCoins(profile, { won, guessCount, secondsTaken, streak, isDaily });
+  const { xp: xpEarned } = awardXP(profile, { won, guessCount, isDaily });
+
+  const gameContext = {
+    won, guessCount, secondsTaken, isDaily, usedHint, targetAlbum,
+    usedCustomMode: localStorage.getItem('albumMode') === 'custom'
+  };
+  checkAchievements(profile, gameContext);
+
+  saveProfile(profile);
+
+  if (won) {
+    setTimeout(() => showAchievementToast(`+${coinsEarned} coins 🪙  +${xpEarned} XP ⭐`), 1200);
+  }
+}
+
 /* ── album pools ── */
 const POOL_MAP = {
   standard: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16],
@@ -521,6 +598,15 @@ async function evaluateGuess(title) {
     if (activeMode === 'daily') pushDailyResult(false);
     saveSession();
   }
+
+  onGameComplete({
+    won: playerWon,
+    guessCount: guessCount - 1,
+    secondsTaken: Math.floor((Date.now() - gameStartTime) / 1000),
+    isDaily: activeMode === 'daily',
+    usedHint: document.getElementById('hint-display').innerText !== '',
+    targetAlbum: targetSong.album
+  });
 
   refreshSideStats();
   saveSession();
