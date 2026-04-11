@@ -196,49 +196,57 @@ function triggerWinEffect() {
 }
 
 function launchConfetti() {
-  const colors = ['#4daa31','#ccab17','#ffffff','#ff6b6b','#6b9fff'];
-  for (let i = 0; i < 120; i++) {
-    const piece = document.createElement('div');
-    piece.style.cssText = `
-      position:fixed;
-      left:${Math.random() * 100}vw;
-      top:-10px;
-      width:${6 + Math.random() * 6}px;
-      height:${6 + Math.random() * 6}px;
-      background:${colors[Math.floor(Math.random() * colors.length)]};
-      border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
-      opacity:1;
-      z-index:99999;
-      pointer-events:none;
-      animation: confettiFall ${1.5 + Math.random() * 2}s ease-in forwards;
-      animation-delay:${Math.random() * 1.2}s;
-    `;
-    document.body.appendChild(piece);
-    setTimeout(() => piece.remove(), 4000);
+  const colors = ['#4daa31','#ccab17','#ffffff','#ff6b6b','#6b9fff','#ff9ff3','#54a0ff'];
+  for (let wave = 0; wave < 3; wave++) {
+    setTimeout(() => {
+      for (let i = 0; i < 200; i++) {
+        const piece = document.createElement('div');
+        piece.style.cssText = `
+          position:fixed;
+          left:${Math.random() * 100}vw;
+          top:-10px;
+          width:${6 + Math.random() * 10}px;
+          height:${6 + Math.random() * 10}px;
+          background:${colors[Math.floor(Math.random() * colors.length)]};
+          border-radius:${Math.random() > 0.5 ? '50%' : '2px'};
+          opacity:1;
+          z-index:99999;
+          pointer-events:none;
+          animation: confettiFall ${1.5 + Math.random() * 2.5}s ease-in forwards;
+          animation-delay:${Math.random() * 1.5}s;
+        `;
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 5000);
+      }
+    }, wave * 800);
   }
 }
 
 function launchGoldShower() {
-  const colors = ['#ccab17','#ffdd44','#ffaa00','#fff0a0'];
-  for (let i = 0; i < 150; i++) {
-    const piece = document.createElement('div');
-    piece.style.cssText = `
-      position:fixed;
-      left:${Math.random() * 100}vw;
-      top:-10px;
-      width:${4 + Math.random() * 8}px;
-      height:${4 + Math.random() * 8}px;
-      background:${colors[Math.floor(Math.random() * colors.length)]};
-      border-radius:50%;
-      opacity:1;
-      z-index:99999;
-      pointer-events:none;
-      box-shadow: 0 0 6px ${colors[0]};
-      animation: confettiFall ${1 + Math.random() * 2}s ease-in forwards;
-      animation-delay:${Math.random() * 0.8}s;
-    `;
-    document.body.appendChild(piece);
-    setTimeout(() => piece.remove(), 4000);
+  const colors = ['#ccab17','#ffdd44','#ffaa00','#fff0a0','#ffd700','#ffec80'];
+  for (let wave = 0; wave < 4; wave++) {
+    setTimeout(() => {
+      for (let i = 0; i < 200; i++) {
+        const piece = document.createElement('div');
+        piece.style.cssText = `
+          position:fixed;
+          left:${Math.random() * 100}vw;
+          top:-10px;
+          width:${5 + Math.random() * 12}px;
+          height:${5 + Math.random() * 12}px;
+          background:${colors[Math.floor(Math.random() * colors.length)]};
+          border-radius:50%;
+          opacity:1;
+          z-index:99999;
+          pointer-events:none;
+          box-shadow: 0 0 8px ${colors[0]}, 0 0 16px ${colors[1]};
+          animation: confettiFall ${1 + Math.random() * 2.5}s ease-in forwards;
+          animation-delay:${Math.random() * 1}s;
+        `;
+        document.body.appendChild(piece);
+        setTimeout(() => piece.remove(), 5000);
+      }
+    }, wave * 600);
   }
 }
 
