@@ -387,8 +387,18 @@ async function fetchDailyStats() {
     { headers: { 'apikey': DB_KEY, 'Authorization': `Bearer ${DB_KEY}`, 'Prefer': 'count=exact' } }
   );
   const rawCount = Number(res.headers.get('content-range')?.split('/')[1] || '0');
+
+  // Determine how far through the day we are (0.0 at midnight → 1.0 at end of day)
+  const now = new Date();
+  const secondsInDay = 24 * 60 * 60;
+  const secondsElapsed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
+  const dayFraction = secondsElapsed / secondsInDay;
+
+  // Seed with todayKey so the target total is consistent, then scale by time of day
   Math.seedrandom(todayKey + 'pad');
-  const pad   = Math.floor(Math.random() * 151) + 150;
+  const targetPad = Math.floor(Math.random() * 151) + 150; // e.g. 150–300, same each day
+  const pad = Math.round(targetPad * dayFraction);
+
   const count = rawCount + pad;
   const rows  = await res.json();
   const nums  = rows.map(r => Number(r.guesses)).filter(n => !isNaN(n) && n > 0);
