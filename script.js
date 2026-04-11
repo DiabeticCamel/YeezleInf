@@ -76,21 +76,37 @@ function awardXP(profile, { won, guessCount, isDaily }) {
 }
 
 /* ── achievement toast ── */
+const _toastQueue = [];
+let _toastRunning = false;
+
 function showAchievementToast(message) {
+  _toastQueue.push(message);
+  if (!_toastRunning) _runToastQueue();
+}
+
+function _runToastQueue() {
+  if (!_toastQueue.length) { _toastRunning = false; return; }
+  _toastRunning = true;
+  const message = _toastQueue.shift();
+
   const toast = document.createElement('div');
   toast.innerText = message;
   toast.style.cssText = `
     position:fixed; bottom:90px; left:50%; transform:translateX(-50%);
     background:#4daa31; color:white; padding:10px 20px; border-radius:8px;
     font-family:SYNE; font-size:14px; z-index:9999; white-space:nowrap;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4); opacity:1;
   `;
   document.body.appendChild(toast);
+
   setTimeout(() => {
     toast.style.transition = 'opacity 0.5s';
     toast.style.opacity = '0';
   }, 2500);
-  setTimeout(() => toast.remove(), 3000);
+  setTimeout(() => {
+    toast.remove();
+    _runToastQueue();
+  }, 3000);
 }
 
 /* ── achievements ── */
@@ -111,6 +127,45 @@ const ACHIEVEMENTS = [
   { id: 'mbdtf_fan',      label: 'MBDTF Fan 🎭',       check: (p, g)  => g.won && g.targetAlbum === 5 },
   { id: 'custom_curator', label: 'Custom Curator 🎨',  check: (p, g)  => g.usedCustomMode },
 ];
+
+function showAchievements() {
+  const profile = loadProfile();
+  const earned = profile.achievements || [];
+
+  document.getElementById('achievements-count-label').innerText =
+    `${earned.length} / ${ACHIEVEMENTS.length} unlocked`;
+
+  const grid = document.getElementById('achievements-grid');
+  grid.innerHTML = '';
+
+  for (const ach of ACHIEVEMENTS) {
+    const unlocked = earned.includes(ach.id);
+    const card = document.createElement('div');
+    card.style.cssText = `
+      background:${unlocked ? 'rgba(77,170,49,0.2)' : 'rgba(255,255,255,0.05)'};
+      border:1px solid ${unlocked ? '#4daa31' : 'rgba(255,255,255,0.1)'};
+      border-radius:8px; padding:12px; display:flex; flex-direction:column;
+      align-items:center; gap:6px; text-align:center;
+      opacity:${unlocked ? '1' : '0.4'};
+      box-shadow:${unlocked ? '0 0 10px rgba(77,170,49,0.3)' : 'none'};
+    `;
+    card.innerHTML = `
+      <div style="font-size:22px;">${unlocked ? ach.label.match(/\S+$/)[0] : '🔒'}</div>
+      <div style="font-family:YZY;font-size:12px;color:white;">${ach.label.replace(/\S+$/, '').trim()}</div>
+      <div style="font-family:SYNE;font-size:10px;color:${unlocked ? '#4daa31' : 'rgba(255,255,255,0.3)'};">
+        ${unlocked ? 'UNLOCKED' : 'LOCKED'}
+      </div>
+    `;
+    grid.appendChild(card);
+  }
+
+  // close on backdrop click
+  document.getElementById('achievements-back').onclick = e => {
+    if (e.target.id === 'achievements-back') e.target.classList.add('hide');
+  };
+
+  document.getElementById('achievements-back').classList.remove('hide');
+}
 
 function checkAchievements(profile, gameContext) {
   for (const ach of ACHIEVEMENTS) {
