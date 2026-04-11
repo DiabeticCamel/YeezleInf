@@ -20,6 +20,16 @@ const POOL_MAP = {
   custom:   JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]')
 };
 
+function buildNumberPool() {
+  const allowed = POOL_MAP[filterMode];
+  const pool = [];
+  allowed.forEach(albumId => {
+    const r = NUM_RANGES[albumId];
+    for (let n = r.lo; n <= r.hi; n++) pool.push(n);
+  });
+  return pool;
+}
+
 const applyBtn = document.getElementById('custom-apply-btn');
 if (applyBtn) applyBtn.style.display = filterMode === 'custom' ? 'block' : 'none';
 
