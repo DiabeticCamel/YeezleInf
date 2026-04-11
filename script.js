@@ -63,7 +63,7 @@ function xpForLevel(level) {
 
 function awardXP(profile, { won, guessCount, isDaily }) {
   let xp = won ? 20 + (9 - guessCount) * 5 : 5;
-  if (isDaily) xp += 10;
+  if (isDaily) xp += 100;
   profile.xp += xp;
   let leveled = false;
   while (profile.xp >= xpForLevel(profile.level)) {
