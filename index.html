@@ -120,6 +120,32 @@
           <img src="" alt="" id="mystery-song-img" />
           <p id="mystery-song-title"></p>
           <p id="mystery-song-feature"></p>
+          <div id="rewards-panel" style="display:none;width:100%;margin-top:16px;margin-bottom:8px;">
+  <div style="height:1px;background:rgba(255,255,255,0.1);margin-bottom:16px;"></div>
+
+  <!-- coins + xp earned this round -->
+  <div style="display:flex;justify-content:center;gap:24px;margin-bottom:14px;">
+    <div style="text-align:center;">
+      <div id="coins-earned-display" style="font-size:22px;color:#ccab17;font-family:YZY;">+0</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.4);font-family:SYNE;text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;">coins</div>
+    </div>
+    <div style="text-align:center;">
+      <div id="xp-earned-display" style="font-size:22px;color:#4daa31;font-family:YZY;">+0</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.4);font-family:SYNE;text-transform:uppercase;letter-spacing:0.05em;margin-top:2px;">xp</div>
+    </div>
+  </div>
+
+  <!-- level + xp bar -->
+  <div style="width:90%;margin:0 auto;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);font-family:SYNE;">LEVEL <span id="level-display">1</span></div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);font-family:SYNE;"><span id="xp-current-display">0</span> / <span id="xp-next-display">100</span> XP</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.1);border-radius:99px;height:8px;overflow:hidden;">
+      <div id="xp-bar" style="height:100%;background:#4daa31;border-radius:99px;width:0%;transition:width 1s ease;"></div>
+    </div>
+  </div>
+</div>
         </div>
 
         <style>
