@@ -329,6 +329,35 @@ body {
   }
 }
 
+#preview-album-grid {
+  display: none;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#preview-album-grid.visible {
+  display: grid;
+}
+
+#preview-album-grid .smallbums {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  max-width: 100%;
+  transition: opacity 90ms ease-in-out, transform 90ms ease-in-out;
+}
+
+@media only screen and (max-width: 600px) {
+  #preview-album-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 header {
   display: flex;
   align-items: center;
