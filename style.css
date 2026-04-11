@@ -310,7 +310,7 @@ body {
 
 #custom-album-grid {
   display: none;
-  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  grid-template-columns: repeat(8, 1fr);
   gap: 6px;
   margin-bottom: 16px;
   width: 100%;
