@@ -112,6 +112,7 @@ body {
 .right-but-cont svg,
 #mode-toggle-btn svg,
 #album-mode-btn svg,
+#achievements-btn svg,
 #shop-btn svg {
   width: 40px;
   height: 40px;
@@ -147,6 +148,7 @@ body {
 
   .right-but-cont svg,
   #mode-toggle-btn svg,
+  #achievements-btn svg,
   #shop-btn svg,
   #album-mode-btn svg {
     width: 40px;
