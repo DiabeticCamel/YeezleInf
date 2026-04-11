@@ -20,6 +20,9 @@ const POOL_MAP = {
   custom:   JSON.parse(localStorage.getItem('customAlbums') || '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]')
 };
 
+const applyBtn = document.getElementById('custom-apply-btn');
+if (applyBtn) applyBtn.style.display = filterMode === 'custom' ? 'block' : 'none';
+
 /* ── supabase config ── */
 const DB_URL  = 'https://ebqqfuiomqyrnvklnrkl.supabase.co';
 const DB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVicXFmdWlvbXF5cm52a2xucmtsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3OTg3OTYsImV4cCI6MjA5MTM3NDc5Nn0.pHAh7y2yk5kd8ytDBQtL6OIuJUhSfNomYYpy9ZsaKJg';
