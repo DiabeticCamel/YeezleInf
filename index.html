@@ -381,7 +381,13 @@
       <button class="shop-tab-btn" onclick="setShopTab('effects')"     data-tab="effects"     style="font-family:SYNE;font-size:12px;padding:6px 14px;">Win Effects</button>
     </div>
 
-    <!-- ===== ACHIEVEMENTS PANEL ===== -->
+    <div id="shop-items-grid"></div>
+
+    <button onclick="document.getElementById('shop-back').classList.add('hide')" style="font-family:YZY;margin-top:16px;background-color:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2);width:100%;">Close</button>
+  </div>
+</div>
+
+  <!-- ===== ACHIEVEMENTS PANEL ===== -->
 <div id="achievements-back" class="hide" style="backdrop-filter:brightness(0.3);-webkit-backdrop-filter:brightness(0.3);background-color:rgba(0,0,0,0.6);position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:flex-start;z-index:200;overflow-y:auto;">
   <div style="background-color:rgb(44,44,44);color:white;width:min(560px,92vw);border-radius:10px;box-shadow:0 0 90px rgb(141,141,141);padding:24px;margin:40px 0;">
     <div style="font-size:28px;font-family:YZY;margin-bottom:6px;">ACHIEVEMENTS</div>
@@ -389,13 +395,6 @@
     <div id="achievements-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;"></div>
     <button onclick="document.getElementById('achievements-back').classList.add('hide')" style="font-family:YZY;margin-top:20px;background-color:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2);width:100%;">Close</button>
   </div>
-</div>
-
-    <div id="shop-items-grid"></div>
-
-    <button onclick="document.getElementById('shop-back').classList.add('hide')" style="font-family:YZY;margin-top:16px;background-color:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2);width:100%;">Close</button>
-  </div>
-</div>
   
   <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
   <script src="script.js"></script>
