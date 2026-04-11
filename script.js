@@ -125,7 +125,6 @@ function updateDailyStreak(profile) {
   }
 }
 
-/* ── on game complete ── */
 function onGameComplete({ won, guessCount, secondsTaken, isDaily, usedHint, targetAlbum }) {
   const profile = loadProfile();
 
@@ -153,9 +152,25 @@ function onGameComplete({ won, guessCount, secondsTaken, isDaily, usedHint, targ
 
   saveProfile(profile);
 
-  if (won) {
-    setTimeout(() => showAchievementToast(`+${coinsEarned} coins 🪙  +${xpEarned} XP ⭐`), 1200);
-  }
+  // update rewards panel
+  setTimeout(() => {
+    const panel = document.getElementById('rewards-panel');
+    if (!panel) return;
+    panel.style.display = 'block';
+
+    document.getElementById('coins-earned-display').innerText = '+' + coinsEarned;
+    document.getElementById('xp-earned-display').innerText    = '+' + xpEarned;
+    document.getElementById('level-display').innerText        = profile.level;
+    document.getElementById('xp-current-display').innerText   = profile.xp;
+    document.getElementById('xp-next-display').innerText      = xpForLevel(profile.level);
+
+    // animate xp bar
+    const pct = Math.min((profile.xp / xpForLevel(profile.level)) * 100, 100);
+    setTimeout(() => {
+      const bar = document.getElementById('xp-bar');
+      if (bar) bar.style.width = pct + '%';
+    }, 200);
+  }, 800);
 }
 
 /* ── album pools ── */
