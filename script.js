@@ -982,6 +982,7 @@ async function renderEndCard(won) {
   }
   winOverlay.querySelector('#mystery-song-img').src = targetSong.cover;
   winOverlay.classList.remove('hide');
+  if (won) triggerWinEffect();
   textInput.classList.add('greyed');
   dismissBtn.focus();
 
