@@ -1094,13 +1094,13 @@ ul { text-align: left; }
   font-size: 11px;
   padding: 7px 10px;
   border-radius: 6px;
-  white-space: nowrap;
   z-index: 10000;
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 4px 16px rgba(0,0,0,0.5);
   transition: opacity 0.15s ease;
   text-align: center;
-  max-width: 180px;
+  width: 160px;
+  max-width: 160px;
   white-space: normal;
   line-height: 1.4;
 }
