@@ -1046,3 +1046,22 @@ ul { text-align: left; }
 #xp-bar {
   will-change: width;
 }
+
+/* ── shop ── */
+.shop-tab-btn {
+  background-color: rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.shop-tab-btn.active-tab {
+  background-color: #4daa31;
+  color: white;
+  border-color: #4daa31;
+}
+
+#shop-back .buttonA {
+  margin-top: 0;
+}
