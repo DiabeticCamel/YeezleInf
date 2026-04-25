@@ -1,5 +1,5 @@
 /* ============================================================
-   InfYeezle — Stylesheet
+   InfYeezle â€” Stylesheet
    Organized sections:
      1.  Fonts
      2.  Reset & Base
@@ -431,7 +431,7 @@ tr {
   padding-inline: 10px;
 }
 
-/* FIX 2: Album cell redesigned — art fills the cell square,
+/* FIX 2: Album cell redesigned â€” art fills the cell square,
    arrow lives in a slim separate column beside it */
 .album-cell {
   opacity: 100;
@@ -1069,10 +1069,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
    ============================================================ */
 @media only screen and (max-width: 600px) {
 
-  /* ──────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      HEADER
      Logo is large, centered, header is compact
-     ────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   /* FIX 6+7: Logo hugs the very top, fills 4/7 width centered */
   #mega-header {
     margin-top: 0;
@@ -1100,10 +1100,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     display: none;
   }
 
-  /* ──────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      BOTTOM NAV BAR
      Fixed frosted bar, icons centered
-     ────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   #rs-cont {
     position: fixed;
     bottom: 0;
@@ -1131,10 +1131,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     height: 36px;
   }
 
-  /* ──────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      MAIN CONTENT
      Pad bottom to avoid nav overlap
-     ────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   .main-container {
     padding-bottom: 90px;
   }
@@ -1158,10 +1158,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     margin-block: 4px;
   }
 
-  /* ──────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      VERSION LABEL
      Sits in bottom nav zone
-     ────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   #version-label {
     position: fixed !important;
     bottom: 6px !important;
@@ -1180,13 +1180,13 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: rgba(255, 255, 255, 0.4) !important;
   }
 
-  /* ──────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      RESULTS TABLE
      FIX 2: Table sits directly under guess button, no gap
      FIX 2: Album art fills its own square cell; arrow is a
              separate slim column right beside it
      FIX 3: Column headers shortened in HTML (#, Length)
-     ────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
   #result-container {
     width: 100%;
@@ -1218,7 +1218,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   #result-table th:nth-child(2),
   #result-table td:nth-child(2) { width: 11%; } /* Album art */
   #result-table th:nth-child(3),
-  #result-table td:nth-child(3) { width: 7%;  } /* Arrow ↑↓  */
+  #result-table td:nth-child(3) { width: 7%;  } /* Arrow â†‘â†“  */
   #result-table th:nth-child(4),
   #result-table td:nth-child(4) { width: 12%; } /* #         */
   #result-table th:nth-child(5),
@@ -1264,7 +1264,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     word-break: break-word;
   }
 
-  /* Fix 1: Album cell — art is a pure filled square, zero padding */
+  /* Fix 1: Album cell â€” art is a pure filled square, zero padding */
   .album-cell {
     padding: 0;
     min-width: 0;
@@ -1322,9 +1322,9 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     line-height: 1.2;
   }
 
-  /* ──────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      END CARD
-     ────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   #end-card-title   { font-size: 36px; }
   #super-div        { width: 90vw; }
   #end-card         { width: 100%; }
@@ -1332,9 +1332,9 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   #mystery-song-img { width: 50vw; }
   #divisions-img    { zoom: 0.6; }
 
-  /* ──────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      INTRO / HELP CARD
-     ────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   #intro-card-back { align-items: flex-start; }
 
   #intro-card {
@@ -1361,9 +1361,9 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     height: auto;
   }
 
-  /* ──────────────────────────────────────────
+  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
      ALBUM MODE CARD GRIDS
-     ────────────────────────────────────────── */
+     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
   #custom-album-grid  { grid-template-columns: repeat(4, 1fr); }
   #preview-album-grid { grid-template-columns: repeat(4, 1fr); }
 
