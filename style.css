@@ -1,5 +1,5 @@
 /* ============================================================
-   InfYeezle â€” Stylesheet
+   InfYeezle — Stylesheet
    Organized sections:
      1.  Fonts
      2.  Reset & Base
@@ -121,10 +121,13 @@ body {
 #mega-header {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  justify-content: center;
+  position: relative;
   margin-top: 0;
+  padding-top: 8px;
+  padding-bottom: 0;
 }
 
 #mega-header svg { width: 60%; }
@@ -140,7 +143,7 @@ header {
   left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
-  height: clamp(150px, 22vw, 300px);
+  height: clamp(100px, 18vw, 220px);
   width: auto;
 }
 
@@ -166,23 +169,18 @@ header {
   width: 30vw;
   max-width: 290px;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   position: relative;
-  top: -20px;
-  margin-top: 1vw;
 }
 
 /* Right side */
 #rs-cont {
   display: flex;
   flex-direction: row;
-  margin-top: 2vw;
   width: 30vw;
   max-width: 290px;
-  position: relative;
-  top: -20px;
   justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
   margin-right: 6px;
 }
 
@@ -302,6 +300,8 @@ header {
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  margin-top: 0;
+  padding-top: 6px;
 }
 
 .outer-container {
@@ -431,7 +431,7 @@ tr {
   padding-inline: 10px;
 }
 
-/* FIX 2: Album cell redesigned â€” art fills the cell square,
+/* FIX 2: Album cell redesigned — art fills the cell square,
    arrow lives in a slim separate column beside it */
 .album-cell {
   opacity: 100;
@@ -1069,30 +1069,30 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
    ============================================================ */
 @media only screen and (max-width: 600px) {
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* ──────────────────────────────────────────
      HEADER
      Logo is large, centered, header is compact
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-  /* FIX 6+7: Logo hugs the very top, fills 4/7 width centered */
+     ────────────────────────────────────────── */
+  /* Logo hugs the very top, header sized to logo height */
   #mega-header {
     margin-top: 0;
-    margin-bottom: 0;
     padding-top: 6px;
-    height: auto;
+    padding-bottom: 0;
+    height: calc(4 / 7 * 100vw * 0.55); /* logo height: width * natural aspect ~0.55 */
     position: relative;
   }
 
   /* Fix 7: Logo = 4/7 (~57%) of screen width, centered */
   #main-logo {
-    position: relative;
-    left: auto;
-    transform: none;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     display: block;
-    margin: 0 auto;
     width: calc(4 / 7 * 100vw);
-    max-width: 340px;
+    max-width: 320px;
     height: auto;
     pointer-events: none;
+    top: 6px;
   }
 
   /* No desktop left-side button on mobile */
@@ -1100,10 +1100,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     display: none;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* ──────────────────────────────────────────
      BOTTOM NAV BAR
      Fixed frosted bar, icons centered
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ────────────────────────────────────────── */
   #rs-cont {
     position: fixed;
     bottom: 0;
@@ -1131,10 +1131,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     height: 36px;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* ──────────────────────────────────────────
      MAIN CONTENT
      Pad bottom to avoid nav overlap
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ────────────────────────────────────────── */
   .main-container {
     padding-bottom: 90px;
   }
@@ -1158,10 +1158,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     margin-block: 4px;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* ──────────────────────────────────────────
      VERSION LABEL
      Sits in bottom nav zone
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ────────────────────────────────────────── */
   #version-label {
     position: fixed !important;
     bottom: 6px !important;
@@ -1180,13 +1180,13 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: rgba(255, 255, 255, 0.4) !important;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* ──────────────────────────────────────────
      RESULTS TABLE
      FIX 2: Table sits directly under guess button, no gap
      FIX 2: Album art fills its own square cell; arrow is a
              separate slim column right beside it
      FIX 3: Column headers shortened in HTML (#, Length)
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ────────────────────────────────────────── */
 
   #result-container {
     width: 100%;
@@ -1210,15 +1210,13 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     word-wrap: break-word;
   }
 
-  /* Fix 3: Column headers now just # and Length in HTML.
-     Fix 2: Album column = art square, Arrow = slim next column.
-     Song column just wide enough for ~14 chars ("To The Jungle"). */
+  /* 6 columns: Song | Album-art | Arrow | # | Length | Features */
   #result-table th:nth-child(1),
-  #result-table td:nth-child(1) { width: 18%; } /* Song     */
+  #result-table td:nth-child(1) { width: 18%; } /* Song      */
   #result-table th:nth-child(2),
   #result-table td:nth-child(2) { width: 11%; } /* Album art */
   #result-table th:nth-child(3),
-  #result-table td:nth-child(3) { width: 7%;  } /* Arrow â†‘â†“  */
+  #result-table td:nth-child(3) { width: 7%;  } /* Arrow ↑↓  */
   #result-table th:nth-child(4),
   #result-table td:nth-child(4) { width: 12%; } /* #         */
   #result-table th:nth-child(5),
@@ -1264,7 +1262,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     word-break: break-word;
   }
 
-  /* Fix 1: Album cell â€” art is a pure filled square, zero padding */
+  /* Fix 1: Album cell — art is a pure filled square, zero padding */
   .album-cell {
     padding: 0;
     min-width: 0;
@@ -1322,9 +1320,9 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     line-height: 1.2;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* ──────────────────────────────────────────
      END CARD
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ────────────────────────────────────────── */
   #end-card-title   { font-size: 36px; }
   #super-div        { width: 90vw; }
   #end-card         { width: 100%; }
@@ -1332,9 +1330,9 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   #mystery-song-img { width: 50vw; }
   #divisions-img    { zoom: 0.6; }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* ──────────────────────────────────────────
      INTRO / HELP CARD
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ────────────────────────────────────────── */
   #intro-card-back { align-items: flex-start; }
 
   #intro-card {
@@ -1361,9 +1359,9 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     height: auto;
   }
 
-  /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  /* ──────────────────────────────────────────
      ALBUM MODE CARD GRIDS
-     â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+     ────────────────────────────────────────── */
   #custom-album-grid  { grid-template-columns: repeat(4, 1fr); }
   #preview-album-grid { grid-template-columns: repeat(4, 1fr); }
 
