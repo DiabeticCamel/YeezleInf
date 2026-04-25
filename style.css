@@ -1140,22 +1140,21 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding-bottom: 90px;
   }
 
-  /* Guess title — vertically centered between logo bottom and bar top */
+  /* Guess title — sits closer to logo, more gap below toward bar */
   #guess-title {
     font-size: 26px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 6px;
+    margin-bottom: 18px;
     padding-bottom: 0;
   }
 
-  /* Guess bar — shorter width, asymmetric margins so text reads as centered
-     More margin on left (optical centering trick): left 8vw, right 14vw */
+  /* Guess bar — more space from LEFT edge of screen than right */
   .autocomplete {
     display: block;
-    width: 78vw !important;
-    max-width: 340px;
-    margin-left: 8vw !important;
-    margin-right: 14vw !important;
+    width: 70vw !important;
+    max-width: 320px;
+    margin-left: 14vw !important;
+    margin-right: 8vw !important;
   }
 
   #search-input {
@@ -1169,6 +1168,14 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     margin-top: 0;
     margin-bottom: 4px;
     display: block;
+  }
+
+  /* Guess button — bigger */
+  #guess-button {
+    padding: 11px 32px;
+    font-size: 18px;
+    margin-top: 6px;
+    margin-bottom: 6px;
   }
 
   /* ──────────────────────────────────────────
@@ -1226,36 +1233,18 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   }
 
   /* ── Column widths (6 physical columns) — total = 100% ──
-     Song 22 | Art 24 | Arrow 3 | # 10 | Length 20 | Features 21
+     Song 22 | Art 25 | Arrow 1 | # 13 | Length 19 | Features 20
      ── */
-  /* Col 1 — Song */
   #result-table th:nth-child(1),
-  #result-table td:nth-child(1) {
-    width: 22%;
-  }
-  /* Col 2 — Album art */
-  #result-table td:nth-child(2) {
-    width: 24%;
-  }
-  /* Col 3 — Album arrow: absolute minimum — one glyph */
-  #result-table td:nth-child(3) {
-    width: 3%;
-  }
-  /* Col 4 — Track # */
+  #result-table td:nth-child(1) { width: 22%; } /* Song     */
+  #result-table td:nth-child(2) { width: 25%; } /* Art      */
+  #result-table td:nth-child(3) { width: 1%;  } /* Arrow    */
   #result-table th:nth-child(3),
-  #result-table td:nth-child(4) {
-    width: 10%;
-  }
-  /* Col 5 — Length */
+  #result-table td:nth-child(4) { width: 13%; } /* #        */
   #result-table th:nth-child(4),
-  #result-table td:nth-child(5) {
-    width: 20%;
-  }
-  /* Col 6 — Features */
+  #result-table td:nth-child(5) { width: 19%; } /* Length   */
   #result-table th:nth-child(5),
-  #result-table td:nth-child(6) {
-    width: 21%;
-  }
+  #result-table td:nth-child(6) { width: 20%; } /* Features */
 
   /* Header row */
   #table-text,
@@ -1324,10 +1313,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding: 0;
   }
 
-  /* ── Album arrow cell — as slim as possible, just the glyph ── */
+  /* ── Album arrow cell — 1% wide, absolute minimum ── */
   .album-arrow-td {
     padding: 0 !important;
-    font-size: 11px;
+    font-size: 9px;
     font-weight: bold;
     color: white;
     text-align: center;
