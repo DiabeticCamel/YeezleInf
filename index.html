@@ -45,8 +45,6 @@
   </noscript>
 
   <!-- ===== TOP NAV ===== -->
-  <!-- NOTE: removed the giant inline <style> that was setting height:400px on mega-header
-       and margin-top:-100px on .main-container — those were fighting the CSS fixes -->
   <header id="mega-header">
     <div id="left-but-cont">
       <div class="circle-button" id="other-button">
@@ -81,7 +79,6 @@
   </header>
 
   <!-- ===== MAIN GAME AREA ===== -->
-  <!-- REMOVED: <br /><br /> that was pushing "Guess the Ye song" far below the logo -->
   <div class="main-container">
     <figcaption id="guess-title">Guess the Ye song</figcaption>
 
@@ -98,14 +95,17 @@
 
     <div id="result-container">
       <table id="result-table">
-        <tr id="result-rows">
-          <th id="table-text">Song</th>
-          <!-- Album header spans art cell + arrow cell so Features stays aligned -->
-          <th id="table-text" colspan="2">Album</th>
-          <th id="table-text">#</th>
-          <th id="table-text">Length</th>
-          <th id="table-text">Features</th>
-        </tr>
+        <thead>
+          <tr id="result-rows">
+            <th id="table-text">Song</th>
+            <!-- colspan=2: spans the art cell AND the arrow cell so all other headers stay aligned -->
+            <th id="table-text" colspan="2">Album</th>
+            <th id="table-text">#</th>
+            <th id="table-text">Length</th>
+            <th id="table-text">Features</th>
+          </tr>
+        </thead>
+        <tbody id="result-body"></tbody>
       </table>
     </div>
   </div>
@@ -124,9 +124,6 @@
           <p id="mystery-song-title"></p>
           <p id="mystery-song-feature"></p>
         </div>
-
-        <!-- NOTE: removed the rogue <style> block that was overriding
-             #mega-header height:400px and .main-container margin-top:-100px -->
 
         <div>
           <button id="share-score-button">Share Score</button>
@@ -258,7 +255,6 @@
         <button class="album-mode-btn" data-mode="custom"   onclick="setAlbumMode('custom')"   style="font-family:YZY;">Custom</button>
       </div>
 
-      <!-- PREVIEW GRID -->
       <div id="preview-album-label" style="display:none;font-family:SYNE;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Albums included in this mode</div>
       <div id="preview-album-grid">
         <img class="preview-album-img smallbums" data-album="1"  src="images/Ye2.jpeg"   title="College Dropout"/>
@@ -279,7 +275,6 @@
         <img class="preview-album-img smallbums" data-album="16" src="images/128_16.jpg" title="Bully"/>
       </div>
 
-      <!-- CUSTOM GRID -->
       <div id="custom-album-label" style="display:none;font-family:SYNE;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Click albums to toggle</div>
       <div id="custom-album-grid">
         <img class="custom-album-img smallbums" data-album="1"  src="images/Ye2.jpeg"   onclick="toggleCustomAlbum(1)"  style="cursor:pointer;" title="College Dropout"/>
@@ -313,7 +308,6 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
   <script src="script.js"></script>
   <script src="autocomplete.js"></script>
-  <!-- 100% privacy-first analytics -->
   <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
 </body>
