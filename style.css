@@ -337,7 +337,6 @@ header {
 /* ============================================================
    9. GUESS TITLE & INPUT
    ============================================================ */
-/* FIX 6: Reduced padding so guess title sits tight under logo */
 #guess-title {
   padding-bottom: 4px;
   padding-top: 4px;
@@ -381,7 +380,6 @@ figcaption     { text-align: center; font-size: 20px; }
   align-items: center;
   justify-content: center;
   overflow-x: auto;
-  /* FIX 2: Reduced gap between guess button and table */
   margin-top: 4px;
 }
 
@@ -389,9 +387,10 @@ figcaption     { text-align: center; font-size: 20px; }
   table-layout: fixed;
   word-wrap: break-word;
   width: fit-content;
-  /* FIX 2: Reduced top margin on table itself */
   margin-top: 4px;
   border-radius: 1px;
+  border-collapse: separate;
+  border-spacing: 2px;
 }
 
 #result-rows { color: var(--seccol); }
@@ -432,50 +431,39 @@ tr {
   padding-inline: 10px;
 }
 
-/* Album cell — single <td> containing art + arrow side by side via flex */
-.album-cell {
+/*
+ * ALBUM COLUMN — split into TWO separate <td> elements (no wrapper div):
+ *
+ * .album-art-cell  — col 2 — square, cropped art fills 100% of cell
+ * .album-arrow-td  — col 3 — slim cell, colored by JS, shows ↑ or ↓
+ *
+ * The <th colspan="2">Album</th> header spans both columns visually.
+ */
+
+/* Art cell: zero padding, overflow hidden so image crops cleanly */
+.album-art-cell {
   padding: 0;
   overflow: hidden;
   vertical-align: middle;
-  /* width controlled by nth-child in mobile / table-layout on desktop */
 }
 
-/* The flex wrapper inside the album td */
-.album-cell-inner {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  justify-content: flex-start;
-  width: 100%;
-  height: 100%;
-}
-
-/* Art: fills ~75% of the cell width, full height, cropped square */
+/* Image fills the entire art cell — cropped square */
 img.album-logo {
-  flex: 0 0 75%;
-  width: 75%;
+  width: 100%;
   height: 100%;
   min-height: 55px;
   object-fit: cover;
   display: block;
 }
 
-/* Arrow box: fills remaining ~25%, same height, colored by JS (green/yellow/grey) */
-.album-arrow-cell {
-  flex: 0 0 25%;
-  width: 25%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
+/* Arrow cell: colored background, centered arrow glyph only */
+.album-arrow-td {
+  text-align: center;
+  vertical-align: middle;
+  font-size: 16px;
   font-weight: bold;
   color: white;
-  /* background-color comes from .green / .yellow class added by JS */
-}
-
-/* Hide any number text — arrow character only */
-.album-arrow-cell .album-num {
-  display: none;
+  padding: 0;
 }
 
 .features-cell {
@@ -509,6 +497,7 @@ td.yellow {
   box-shadow: 0 5px 30px var(--yellow);
 }
 
+/* Arrow suffix classes kept for any legacy use */
 td.down::after { content: " \2193"; width: 40px; }
 td.up::after   { content: " \2191"; width: 40px; }
 
@@ -1079,19 +1068,19 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
 @media only screen and (max-width: 600px) {
 
   /* ──────────────────────────────────────────
-     HEADER
-     Logo is large, centered, header is compact
+     HEADER — logo is 4/7 of screen width,
+     header height matches the logo's natural height
      ────────────────────────────────────────── */
-  /* Logo hugs the very top, header sized to logo height */
   #mega-header {
     margin-top: 0;
     padding-top: 6px;
     padding-bottom: 0;
-    height: calc(4 / 7 * 100vw * 0.55); /* logo height: width * natural aspect ~0.55 */
+    /* height = logo width × aspect ratio (~0.55 for the InfYeezle logo) */
+    height: calc(4 / 7 * 100vw * 0.55);
     position: relative;
   }
 
-  /* Fix 7: Logo = 4/7 (~57%) of screen width, centered */
+  /* Logo = exactly 4/7 of screen width, centered */
   #main-logo {
     position: absolute;
     left: 50%;
@@ -1104,14 +1093,13 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     top: 6px;
   }
 
-  /* No desktop left-side button on mobile */
+  /* Hide desktop left-side button on mobile */
   #left-but-cont {
     display: none;
   }
 
   /* ──────────────────────────────────────────
      BOTTOM NAV BAR
-     Fixed frosted bar, icons centered
      ────────────────────────────────────────── */
   #rs-cont {
     position: fixed;
@@ -1141,14 +1129,13 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   }
 
   /* ──────────────────────────────────────────
-     MAIN CONTENT
-     Pad bottom to avoid nav overlap
+     MAIN CONTENT — pad bottom to clear nav bar
      ────────────────────────────────────────── */
   .main-container {
     padding-bottom: 90px;
   }
 
-  /* FIX 6: Zero gap between logo and "Guess the Ye song" */
+  /* Guess title tight under logo */
   #guess-title {
     font-size: 26px;
     margin-top: 2px;
@@ -1156,7 +1143,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding-bottom: 0;
   }
 
-  /* Fix 5: Input box shorter height */
+  /* Input box shorter */
   #search-input {
     width: 90%;
     max-width: 400px;
@@ -1169,7 +1156,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
 
   /* ──────────────────────────────────────────
      VERSION LABEL
-     Sits in bottom nav zone
      ────────────────────────────────────────── */
   #version-label {
     position: fixed !important;
@@ -1190,11 +1176,16 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   }
 
   /* ──────────────────────────────────────────
-     RESULTS TABLE
-     FIX 2: Table sits directly under guess button, no gap
-     FIX 2: Album art fills its own square cell; arrow is a
-             separate slim column right beside it
-     FIX 3: Column headers shortened in HTML (#, Length)
+     RESULTS TABLE — 6 physical columns
+     ──────────────────────────────────────────
+     Col 1: Song     ~21%
+     Col 2: Art      ~17%   ← .album-art-cell
+     Col 3: Arrow    ~ 6%   ← .album-arrow-td
+     Col 4: #        ~11%
+     Col 5: Length   ~16%
+     Col 6: Features ~29%
+     
+     Header: Song | Album(colspan=2) | # | Length | Features
      ────────────────────────────────────────── */
 
   #result-container {
@@ -1210,29 +1201,46 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   }
 
   #result-table {
-    zoom: 1;
     width: 98vw;
     margin: 0 auto;
     border-collapse: separate;
     border-spacing: 2px;
     table-layout: fixed;
-    word-wrap: break-word;
   }
 
-  /* 5 columns matching reference image proportions:
-     Song ~21% | Album (art+arrow combined) ~20% | # ~10% | Length ~16% | Features ~33% */
+  /* ── Column widths (6 physical columns) ── */
+  /* Col 1 — Song */
   #result-table th:nth-child(1),
-  #result-table td:nth-child(1) { width: 21%; } /* Song     */
-  #result-table th:nth-child(2),
-  #result-table td:nth-child(2) { width: 20%; } /* Album    */
+  #result-table td:nth-child(1) {
+    width: 21%;
+  }
+  /* Col 2 — Album art  (th here is the colspan=2 "Album" header) */
+  /* The header th:nth-child(2) has colspan=2 so it covers cols 2+3 visually.
+     For td, nth-child(2) is the art cell. */
+  #result-table td:nth-child(2) {
+    width: 17%;
+  }
+  /* Col 3 — Album arrow  (no th for this column — covered by colspan above) */
+  #result-table td:nth-child(3) {
+    width: 6%;
+  }
+  /* Col 4 — Track #  (th:nth-child(3) = the "#" header) */
   #result-table th:nth-child(3),
-  #result-table td:nth-child(3) { width: 10%; } /* #        */
+  #result-table td:nth-child(4) {
+    width: 11%;
+  }
+  /* Col 5 — Length  (th:nth-child(4)) */
   #result-table th:nth-child(4),
-  #result-table td:nth-child(4) { width: 16%; } /* Length   */
+  #result-table td:nth-child(5) {
+    width: 16%;
+  }
+  /* Col 6 — Features  (th:nth-child(5)) */
   #result-table th:nth-child(5),
-  #result-table td:nth-child(5) { width: 33%; } /* Features */
+  #result-table td:nth-child(6) {
+    width: 29%;
+  }
 
-  /* Header labels */
+  /* Header row */
   #table-text,
   #result-table th {
     font-size: 13px;
@@ -1240,20 +1248,28 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: var(--seccol);
   }
 
-  /* All data cells */
-  td, th {
-    padding: 3px 2px;
+  /* All data cells: base sizing */
+  td {
+    padding: 2px;
     font-size: 13px;
-    height: 60px;
+    height: 70px;
     vertical-align: middle;
     text-align: center;
     word-break: break-word;
     line-height: 1.2;
   }
 
-  /* Song — wraps to 2 lines */
+  th {
+    padding: 4px 2px;
+    font-size: 13px;
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  /* ── Song cell ── */
   .song-cell {
     font-size: 13px;
     padding: 4px 3px;
@@ -1270,48 +1286,34 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     word-break: break-word;
   }
 
-  /* Album cell — flex row: art takes 75%, arrow takes 25% of cell width */
-  .album-cell {
-    padding: 0;
+  /* ── Album art cell — image fills the ENTIRE cell, cropped ── */
+  .album-art-cell {
+    padding: 0 !important;
     overflow: hidden;
     vertical-align: middle;
-    height: 60px;
-  }
-
-  .album-cell-inner {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    width: 100%;
-    height: 60px;
+    height: 70px;
   }
 
   img.album-logo {
-    flex: 0 0 75% !important;
-    width: 75% !important;
-    height: 60px !important;
+    width: 100% !important;
+    height: 70px !important;
     object-fit: cover !important;
     display: block;
     min-height: 0;
   }
 
-  .album-arrow-cell {
-    flex: 0 0 25% !important;
-    width: 25% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    font-size: 13px;
+  /* ── Album arrow cell — slim, colored, just the arrow glyph ── */
+  .album-arrow-td {
+    padding: 0 !important;
+    font-size: 14px;
     font-weight: bold;
     color: white;
-    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    height: 70px;
   }
 
-  .album-arrow-cell .album-num {
-    display: none;
-  }
-
-  /* Track # */
+  /* ── Track # cell ── */
   .track-cell {
     font-size: 13px;
     white-space: nowrap;
@@ -1319,7 +1321,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     min-width: 0;
   }
 
-  /* Length */
+  /* ── Length cell ── */
   .length-cell {
     font-size: 13px;
     white-space: nowrap;
@@ -1327,7 +1329,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     min-width: 0;
   }
 
-  /* Features */
+  /* ── Features cell ── */
   .features-cell {
     font-size: 13px;
     white-space: normal;
