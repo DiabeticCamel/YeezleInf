@@ -57,9 +57,10 @@ ul   { text-align: left; }
 hr   { width: 100%; margin-block: 5px; }
 p    { font-family: SYNE; }
 
+/* FIX 1: Reduced top margin so logo sits closer to content */
 center {
-  margin-top: 50px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 y { background-color: yellow; }
@@ -118,13 +119,14 @@ body {
 /* ============================================================
    6. HEADER & NAVIGATION
    ============================================================ */
+/* FIX 1: Tightened top margin so logo is closer to top of screen */
 #mega-header {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   width: 100%;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 8px;
 }
 
 #mega-header svg { width: 60%; }
@@ -336,8 +338,9 @@ header {
 /* ============================================================
    9. GUESS TITLE & INPUT
    ============================================================ */
+/* FIX 1: Reduced padding-bottom so guess title sits tight under logo */
 #guess-title {
-  padding-bottom: 15px;
+  padding-bottom: 8px;
   color: var(--seccol);
   font-family: SYNE;
   font-size: 24px;
@@ -378,14 +381,16 @@ figcaption     { text-align: center; font-size: 20px; }
   align-items: center;
   justify-content: center;
   overflow-x: auto;
-  margin-top: 10px;
+  /* FIX 2: Reduced gap between guess button and table */
+  margin-top: 4px;
 }
 
 #result-table {
   table-layout: fixed;
   word-wrap: break-word;
   width: fit-content;
-  margin-top: 10px;
+  /* FIX 2: Reduced top margin on table itself */
+  margin-top: 4px;
   border-radius: 1px;
 }
 
@@ -427,27 +432,42 @@ tr {
   padding-inline: 10px;
 }
 
+/* FIX 2: Album cell redesigned — art fills the cell square,
+   arrow lives in a slim separate column beside it */
 .album-cell {
   opacity: 100;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
-  max-width: 120px;
-}
-
-.album-cell-inner {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 120px;
+  padding: 0;
+  width: 60px;
+  max-width: 60px;
+  overflow: hidden;
 }
 
 img.album-logo {
   width: 60px;
   height: 60px;
-  object-fit: scale-down;
+  object-fit: cover;   /* fill the whole square, no letterboxing */
+  display: block;
+}
+
+/* Slim arrow column that sits right of the album art */
+.album-arrow-cell {
+  width: 22px;
+  max-width: 22px;
+  padding: 2px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 12px;
+  color: var(--seccol);
+}
+
+/* Keep old album-cell-inner for any desktop fallback */
+.album-cell-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 60px;
 }
 
 .features-cell {
@@ -508,8 +528,9 @@ button[disabled] { background-color: #aaa; }
 #guess-button {
   color: var(--maincol);
   background-color: var(--seccol);
-  margin-bottom: 15px;
-  margin-top: 15px;
+  /* FIX 2: Reduced margins so button sits tighter against table */
+  margin-bottom: 6px;
+  margin-top: 8px;
 }
 
 #guess-button[disable] {
@@ -537,7 +558,8 @@ button[disabled] { background-color: #aaa; }
   background-color: rgba(255, 255, 255, 0);
   height: 30px;
   font-size: 20px;
-  margin-bottom: 25px;
+  /* FIX 2: Tighter margins so Show Results sits close to table */
+  margin-bottom: 6px;
   margin-top: 0;
   padding-bottom: 5px;
   color: rgba(255, 255, 255, 0.999);
@@ -1053,9 +1075,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
      HEADER
      Logo is large, centered, header is compact
      ────────────────────────────────────────── */
+  /* FIX 1: Tighten top margin so logo fills top of screen */
   #mega-header {
-    margin-top: 40px;
-    margin-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 4px;
     height: auto;
     position: relative;
   }
@@ -1117,10 +1140,11 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding-bottom: 90px;
   }
 
-  /* "Guess the Ye song" — big and prominent */
+  /* FIX 1: "Guess the Ye song" — tight margin to logo */
   #guess-title {
     font-size: 28px;
-    margin-block: 20px;
+    margin-top: 6px;
+    margin-bottom: 8px;
     padding-bottom: 0;
   }
 
@@ -1132,7 +1156,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     font-size: 18px;
     border-radius: 4px;
     box-sizing: border-box;
-    margin-block: 10px;
+    margin-block: 8px;
   }
 
   /* ──────────────────────────────────────────
@@ -1159,11 +1183,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
 
   /* ──────────────────────────────────────────
      RESULTS TABLE
-     Matches reference image exactly:
-       · Full screen width (98vw)
-       · border-separate + 2px spacing = visible cell gaps
-       · table-layout fixed + nth-child widths = correct proportions
-       · 60px tall rows, 45px album art, text wraps cleanly
+     FIX 2: Table sits directly under guess button, no gap
+     FIX 2: Album art fills its own square cell; arrow is a
+             separate slim column right beside it
+     FIX 3: Column headers shortened in HTML (#, Length)
      ────────────────────────────────────────── */
 
   #result-container {
@@ -1173,32 +1196,35 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     align-items: flex-start;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    margin-top: 20px;
+    /* FIX 2: Was margin-top:20px — pull it up tight */
+    margin-top: 4px;
     padding: 0;
     box-sizing: border-box;
   }
 
   #result-table {
-    zoom: 1;                   /* remove any inherited zoom */
-    width: 98vw;               /* edge-to-edge */
+    zoom: 1;
+    width: 98vw;
     margin: 0 auto;
     border-collapse: separate;
-    border-spacing: 2px;       /* thin gap between cells like reference */
+    border-spacing: 2px;
     table-layout: fixed;
     word-wrap: break-word;
   }
 
-  /* Column widths — tuned to match reference image proportions */
+  /* FIX 3 / FIX 2: Column widths re-tuned for slim album-art + arrow layout */
   #result-table th:nth-child(1),
-  #result-table td:nth-child(1) { width: 22%; } /* Song     */
+  #result-table td:nth-child(1) { width: 22%; } /* Song      */
   #result-table th:nth-child(2),
-  #result-table td:nth-child(2) { width: 18%; } /* Album    */
+  #result-table td:nth-child(2) { width: 12%; } /* Album art */
   #result-table th:nth-child(3),
-  #result-table td:nth-child(3) { width: 12%; } /* Track #  */
+  #result-table td:nth-child(3) { width: 6%;  } /* Arrow     */
   #result-table th:nth-child(4),
-  #result-table td:nth-child(4) { width: 16%; } /* Length   */
+  #result-table td:nth-child(4) { width: 12%; } /* #         */
   #result-table th:nth-child(5),
-  #result-table td:nth-child(5) { width: 32%; } /* Features */
+  #result-table td:nth-child(5) { width: 16%; } /* Length    */
+  #result-table th:nth-child(6),
+  #result-table td:nth-child(6) { width: 32%; } /* Features  */
 
   /* Header labels */
   #table-text,
@@ -1210,7 +1236,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     text-overflow: ellipsis;
   }
 
-  /* All cells: tall rows, readable text, wrapping */
+  /* All cells */
   td, th {
     padding: 4px 2px;
     font-size: 11px;
@@ -1221,7 +1247,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     line-height: 1.2;
   }
 
-  /* Song — wraps to 2 lines e.g. "Blood On / The Leaves" */
+  /* Song */
   .song-cell {
     font-size: 11px;
     padding: 4px 3px;
@@ -1238,34 +1264,32 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     word-break: break-word;
   }
 
-  /* Album — art fills cell, arrow beside it */
+  /* FIX 2: Album cell — art fills the entire square, no padding */
   .album-cell {
-    padding: 2px;
+    padding: 0;
     min-width: 0;
     max-width: none;
     display: table-cell;
+    overflow: hidden;
   }
 
-  .album-cell-inner {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    width: 100%;
-    max-width: none;
-  }
-
-  /* 45px album art — fills most of the 60px row */
   img.album-logo {
-    width: 45px !important;
-    height: 45px !important;
-    object-fit: cover;
+    width: 100% !important;
+    height: 60px !important;
+    object-fit: cover !important;
     display: block;
     flex-shrink: 0;
   }
 
-  /* Arrows smaller next to art */
+  /* FIX 2: Arrow column — slim, centered */
+  .album-arrow-cell {
+    width: 6%;
+    padding: 2px 1px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 10px;
+  }
+
   td.up::after,
   td.down::after {
     font-size: 10px;
@@ -1288,7 +1312,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     min-width: 0;
   }
 
-  /* Features — wraps e.g. "No / features", "Pusha T" */
+  /* Features */
   .features-cell {
     font-size: 11px;
     white-space: normal;
