@@ -524,43 +524,74 @@ function setsAreEqual(a, b) {
 }
 
 function appendRow(song, result) {
-  const row = guessTable.insertRow(-1);
-
+  // Insert into tbody so the header row (in thead) is never shifted
+  const tbody = document.getElementById('result-body');
+  const row = tbody.insertRow(-1);
+ 
+  // ── Col 1: Song ──────────────────────────────────────────
   const tdTitle = document.createElement('td');
   tdTitle.classList.add('song-cell');
-  tdTitle.className += ' ' + result.title;
+  tdTitle.classList.add(result.title);
   const titleText = document.createElement('p');
   titleText.className = 'song-title';
   titleText.innerText = song.title;
   tdTitle.appendChild(titleText);
-
-  const tdAlbum = document.createElement('td');
-  tdAlbum.classList.add('album-cell');
-  tdAlbum.className += ' ' + result.album;
-  const albumWrap = document.createElement('div');
-  albumWrap.className = 'album-cell-inner';
+ 
+  // ── Col 2: Album ART (square, cropped, no padding) ───────
+  const tdAlbumArt = document.createElement('td');
+  tdAlbumArt.classList.add('album-art-cell');
+  // Art cell itself gets the album color result (green/yellow/grey)
+  // but we DON'T put the arrow here — the art fills 100% of this cell
   const albumCover = new Image();
   albumCover.src = 'images/128_' + song.album + '.jpg';
   albumCover.className = 'album-logo';
-  albumWrap.appendChild(albumCover);
-  tdAlbum.appendChild(albumWrap);
-
+  tdAlbumArt.appendChild(albumCover);
+ 
+  // ── Col 3: Album ARROW (slim colored cell) ────────────────
+  const tdAlbumArrow = document.createElement('td');
+  tdAlbumArrow.classList.add('album-arrow-td');
+  // Parse the result: e.g. "yellow up", "grey down", "green"
+  const albumParts = result.album.split(' ');
+  const albumColor = albumParts[0]; // "green", "yellow", "grey"
+  const albumDir   = albumParts[1]; // "up", "down", or undefined
+ 
+  tdAlbumArrow.classList.add(albumColor);
+  if (albumDir === 'up')   tdAlbumArrow.innerText = '↑';
+  if (albumDir === 'down') tdAlbumArrow.innerText = '↓';
+  // green = exact match, no arrow needed (leave empty or add checkmark)
+ 
+  // ── Col 4: Track # ───────────────────────────────────────
   const tdTrack = document.createElement('td');
   tdTrack.classList.add('track-cell');
-  tdTrack.innerText  = song.track;
-  tdTrack.className += ' ' + result.track;
-
+  const trackParts = result.track.split(' ');
+  const trackColor = trackParts[0];
+  const trackDir   = trackParts[1];
+  tdTrack.classList.add(trackColor);
+  let trackText = String(song.track);
+  if (trackDir === 'up')   trackText += ' ↑';
+  if (trackDir === 'down') trackText += ' ↓';
+  tdTrack.innerText = trackText;
+ 
+  // ── Col 5: Length ─────────────────────────────────────────
   const tdLength = document.createElement('td');
   tdLength.classList.add('length-cell');
-  tdLength.innerText  = formatDuration(song.length);
-  tdLength.className += ' ' + result.length;
-
+  const lengthParts = result.length.split(' ');
+  const lengthColor = lengthParts[0];
+  const lengthDir   = lengthParts[1];
+  tdLength.classList.add(lengthColor);
+  let lengthText = formatDuration(song.length);
+  if (lengthDir === 'up')   lengthText += ' ↑';
+  if (lengthDir === 'down') lengthText += ' ↓';
+  tdLength.innerText = lengthText;
+ 
+  // ── Col 6: Features ───────────────────────────────────────
   const tdFeatures = document.createElement('td');
   tdFeatures.classList.add('features-cell');
-  tdFeatures.innerText  = displayFeatures(song);
-  tdFeatures.className += ' ' + result.features;
-
-  [tdTitle, tdAlbum, tdTrack, tdLength, tdFeatures].forEach(td => row.appendChild(td));
+  tdFeatures.classList.add(result.features);
+  tdFeatures.innerText = displayFeatures(song);
+ 
+  // ── Append all 6 cells ────────────────────────────────────
+  [tdTitle, tdAlbumArt, tdAlbumArrow, tdTrack, tdLength, tdFeatures].forEach(td => row.appendChild(td));
 }
 
 function formatDuration(secs) {
