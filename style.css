@@ -24,7 +24,8 @@
     21.  Autocomplete
     22.  Utility Classes
     23.  Misc
-    24.  ── MOBILE (max-width: 600px) ──
+    24.  Desktop intro override (min-width: 700px)
+    25.  MOBILE ONLY (max-width: 600px)
    ============================================================ */
 
 
@@ -51,26 +52,14 @@
   font-family: YZY;
 }
 
-html {
-  min-height: 100%;
-}
-
-ul {
-  text-align: left;
-}
-
-hr {
-  width: 100%;
-  margin-block: 5px;
-}
+html { min-height: 100%; }
+ul   { text-align: left; }
+hr   { width: 100%; margin-block: 5px; }
+p    { font-family: SYNE; }
 
 center {
   margin-top: 50px;
   margin-bottom: 20px;
-}
-
-p {
-  font-family: SYNE;
 }
 
 y { background-color: yellow; }
@@ -138,9 +127,7 @@ body {
   margin-top: 20px;
 }
 
-#mega-header svg {
-  width: 60%;
-}
+#mega-header svg { width: 60%; }
 
 header {
   display: flex;
@@ -173,7 +160,7 @@ header {
   font-size: 48px;
 }
 
-/* ── Left side ── */
+/* Left side */
 #left-but-cont {
   display: flex;
   width: 30vw;
@@ -185,7 +172,7 @@ header {
   margin-top: 1vw;
 }
 
-/* ── Right side ── */
+/* Right side */
 #rs-cont {
   display: flex;
   flex-direction: row;
@@ -197,10 +184,6 @@ header {
   justify-content: flex-end;
   align-items: flex-start;
   margin-right: 6px;
-}
-
-.right-but-cont {
-  /* wrapper for each icon in the right nav */
 }
 
 /* Version label (desktop) */
@@ -263,7 +246,6 @@ header {
 #help-button:hover { cursor: pointer; }
 #dono-button:hover { cursor: pointer; color: red; }
 
-/* Circle icon button */
 .circle-button {
   padding: 15px;
   border-radius: 50%;
@@ -347,16 +329,8 @@ header {
   bottom: 0;
 }
 
-#footing-text {
-  width: 20%;
-  height: 40px;
-}
-
-#but-div {
-  display: flex;
-  width: 100%;
-  height: 50px;
-}
+#footing-text { width: 20%; height: 40px; }
+#but-div      { display: flex; width: 100%; height: 50px; }
 
 
 /* ============================================================
@@ -370,11 +344,7 @@ header {
   font-weight: 500;
 }
 
-figcaption {
-  text-align: center;
-  font-size: 20px;
-}
-
+figcaption     { text-align: center; font-size: 20px; }
 #mystery-figure { height: 220px; }
 #show-sil       { color: var(--seccol); }
 
@@ -412,8 +382,8 @@ figcaption {
 }
 
 #result-table {
-  align-items: center;
-  justify-content: center;
+  table-layout: fixed;
+  word-wrap: break-word;
   width: fit-content;
   margin-top: 10px;
   border-radius: 1px;
@@ -485,9 +455,8 @@ img.album-logo {
   padding-inline: 10px;
 }
 
-/* Jersey SVG */
-svg > text    { text-anchor: middle; }
-svg.jersey    { width: 40px; }
+svg > text { text-anchor: middle; }
+svg.jersey { width: 40px; }
 
 .text-button {
   cursor: pointer;
@@ -499,13 +468,13 @@ svg.jersey    { width: 40px; }
 /* ============================================================
    12. TABLE COLOR STATES
    ============================================================ */
-td.green  {
+td.green {
   background-color: var(--green);
   color: white;
   box-shadow: 0 5px 30px var(--green);
 }
 
-td.grey   { opacity: 1; }
+td.grey { opacity: 1; }
 
 td.yellow {
   background-color: var(--yellow);
@@ -534,9 +503,7 @@ button {
   border-radius: 1px;
 }
 
-button[disabled] {
-  background-color: #aaa;
-}
+button[disabled] { background-color: #aaa; }
 
 #guess-button {
   color: var(--maincol);
@@ -576,7 +543,6 @@ button[disabled] {
   color: rgba(255, 255, 255, 0.999);
 }
 
-/* Link styled as button */
 a.buttonA {
   text-decoration: none;
   margin-top: 20px;
@@ -595,6 +561,7 @@ a.buttonA {
 
 #start-div       { margin-top: 2vw; }
 #new-song-button { white-space: nowrap; margin-right: 20px; }
+
 #newSongButton {
   display: flex;
   justify-content: center;
@@ -608,15 +575,13 @@ a.buttonA {
    14. END-CARD OVERLAY
    ============================================================ */
 #card-background {
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   transition: opacity 0.4s ease-out;
   overflow-y: scroll;
 }
@@ -681,15 +646,12 @@ a.buttonA {
 
 #mystery-song-title   { font-size: min(5vw, 30px); margin-top: 10px; text-align: center; }
 #mystery-song-feature { font-size: min(3vw, 15px); margin-top: 10px; text-align: center; }
-
 #end-card-title,
 #mystery-song-name    { color: white; }
 
-/* End-card action buttons */
 #play-again-button  { opacity: 0; white-space: normal; }
 #share-score-button { opacity: 1; width: 100%; white-space: nowrap; margin-right: 10px; margin-bottom: 30px; }
 
-/* Album cover thumbnails (shared between intro + end card) */
 .smallbums {
   width: 100%;
   height: auto;
@@ -742,7 +704,7 @@ a.buttonA {
 .stat-bubbles.green { background-color: #4daa31; }
 .stat-bubbles.red   { background-color: #a11414; }
 
-.endcardStatistics  { width: auto; height: auto; }
+.endcardStatistics { width: auto; height: auto; }
 
 #vertical-stat {
   display: flex;
@@ -758,9 +720,9 @@ a.buttonA {
   text-align: center;
 }
 
-#data-div          { color: rgb(255, 255, 255); }
-#donate-banner     { text-align: center; color: white; margin-right: 10px; margin-left: 10px; }
-#twelve-marg       { margin: 12px; }
+#data-div      { color: rgb(255, 255, 255); }
+#donate-banner { text-align: center; color: white; margin-right: 10px; margin-left: 10px; }
+#twelve-marg   { margin: 12px; }
 
 
 /* ============================================================
@@ -931,10 +893,8 @@ li {
   aspect-ratio: 1 / 1;
 }
 
-/* Colour highlight spans in intro text */
 #green-fill {
-  padding: 2px;
-  margin: -2px;
+  padding: 2px; margin: -2px;
   border-radius: 2px;
   display: inline-block;
   background-color: var(--green);
@@ -943,36 +903,12 @@ li {
 }
 
 #yellow-fill {
-  padding: 2px;
-  margin: -2px;
+  padding: 2px; margin: -2px;
   border-radius: 2px;
   display: inline-block;
   background-color: var(--yellow);
   color: #fff;
   font-family: SYNE;
-}
-
-/* Desktop intro card overrides */
-@media only screen and (min-width: 700px) {
-  #intro-card {
-    width: clamp(200px, 1000px, 1000px);
-    overflow-y: auto;
-    margin-inline: 20px;
-    max-height: 90%;
-  }
-
-  #albums-included {
-    margin-inline: 5px;
-    width: fit-content;
-    max-height: 60px;
-  }
-
-  #intro-card-inner {
-    background-color: #202020e7;
-    border-radius: 10px;
-    padding-top: 16px;
-    box-shadow: 0 0 8px rgba(109, 109, 109, 0.247);
-  }
 }
 
 
@@ -1070,63 +1006,82 @@ input[type="submit"] { background-color: var(--primary); color: #fff; }
 }
 
 .display-none { display: none; }
+.center       { text-align: center; }
 
-.center { text-align: center; }
-
-footer > center { margin-bottom: 0; }
-
-a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
+footer > center                { margin-bottom: 0; }
+a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
 
 
 /* ============================================================
    23. MISC
    ============================================================ */
-#divisions-img { /* placeholder for any division image styling */ }
+#divisions-img { }
 
 
 /* ============================================================
-   24. ── MOBILE ONLY (max-width: 600px) ──
+   24. DESKTOP INTRO OVERRIDE (min-width: 700px)
+   ============================================================ */
+@media only screen and (min-width: 700px) {
+  #intro-card {
+    width: clamp(200px, 1000px, 1000px);
+    overflow-y: auto;
+    margin-inline: 20px;
+    max-height: 90%;
+  }
+
+  #albums-included {
+    margin-inline: 5px;
+    width: fit-content;
+    max-height: 60px;
+  }
+
+  #intro-card-inner {
+    background-color: #202020e7;
+    border-radius: 10px;
+    padding-top: 16px;
+    box-shadow: 0 0 8px rgba(109, 109, 109, 0.247);
+  }
+}
+
+
+/* ============================================================
+   25. MOBILE ONLY (max-width: 600px)
    ============================================================ */
 @media only screen and (max-width: 600px) {
 
-  /* ────────────────────────────────────────────────────────────
+  /* ──────────────────────────────────────────
      HEADER
-     Goal: compact top area, big centered logo, nav at bottom
-     ──────────────────────────────────────────────────────────── */
+     Logo is large, centered, header is compact
+     ────────────────────────────────────────── */
   #mega-header {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    height: auto;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    /* Shrunk from 400px — just tall enough to hold the logo */
-    height: 140px;
-    margin-top: 0;
-    padding: 8px 0 0 0;
-    overflow: visible;
   }
 
-  /* Bigger logo, tightly positioned at top */
+  /* Large centered logo — fills ~80% of screen width */
   #main-logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    left: auto;
+    transform: none;
+    display: block;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 340px;
+    height: auto;
     pointer-events: none;
-    /* Larger than before (was clamped to 150–300px at 22vw) */
-    height: clamp(110px, 36vw, 160px);
-    width: auto;
-    top: 4px;
   }
 
-  /* Hide desktop left button */
+  /* No desktop left-side button on mobile */
   #left-but-cont {
     display: none;
   }
 
-  /* ────────────────────────────────────────────────────────────
+  /* ──────────────────────────────────────────
      BOTTOM NAV BAR
-     Fixed to bottom, frosted glass effect
-     ──────────────────────────────────────────────────────────── */
+     Fixed frosted bar, icons centered
+     ────────────────────────────────────────── */
   #rs-cont {
     position: fixed;
     bottom: 0;
@@ -1138,65 +1093,58 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 30px;
     margin: 0;
-    padding: 10px 0 30px 0;
-    background-color: rgba(22, 20, 20, 0.75);
+    padding: 15px 0 25px 0;
+    background-color: rgba(20, 20, 20, 0.8);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 100;
   }
 
-  /* Nav icon sizes */
   .right-but-cont svg,
   #mode-toggle-btn svg,
   #album-mode-btn svg {
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
   }
 
-  /* ────────────────────────────────────────────────────────────
-     MAIN CONTAINER
-     Push everything up close under the logo
-     ──────────────────────────────────────────────────────────── */
+  /* ──────────────────────────────────────────
+     MAIN CONTENT
+     Pad bottom to avoid nav overlap
+     ────────────────────────────────────────── */
   .main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* Pulled up tightly under the now-shorter header */
-    margin-top: 0;
     padding-bottom: 90px;
-    gap: 0;
   }
 
-  /* Reduce space under "Guess the Ye song" title */
+  /* "Guess the Ye song" — big and prominent */
   #guess-title {
+    font-size: 28px;
+    margin-block: 20px;
+    padding-bottom: 0;
+  }
+
+  /* Input — wide, tall, matches reference */
+  #search-input {
+    width: 90%;
+    max-width: 400px;
+    height: 50px;
     font-size: 18px;
-    padding-bottom: 6px;
-    padding-top: 4px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-block: 10px;
   }
 
-  /* Shrink input + button gap */
-  #search-input { margin-block: 6px; }
-
-  #guess-button {
-    margin-top: 6px;
-    margin-bottom: 6px;
-  }
-
-  #results-button {
-    margin-bottom: 8px;
-  }
-
-  /* ────────────────────────────────────────────────────────────
+  /* ──────────────────────────────────────────
      VERSION LABEL
-     Sits inside bottom nav bar area
-     ──────────────────────────────────────────────────────────── */
+     Sits in bottom nav zone
+     ────────────────────────────────────────── */
   #version-label {
     position: fixed !important;
     bottom: 6px !important;
     left: 0 !important;
     right: 0 !important;
+    width: 100% !important;
     text-align: center !important;
     background: none !important;
     backdrop-filter: none !important;
@@ -1206,104 +1154,96 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
     font-family: SYNE !important;
     z-index: 102 !important;
     pointer-events: none !important;
-    color: rgba(255, 255, 255, 0.5) !important;
+    color: rgba(255, 255, 255, 0.4) !important;
   }
 
-  /* ────────────────────────────────────────────────────────────
+  /* ──────────────────────────────────────────
      RESULTS TABLE
-     Match the reference image exactly:
-       - Full viewport width, no side padding
-       - Cells smooshed together (border-spacing: 0, no cell gaps)
-       - Song + Features wrap to 2 lines, narrow
-       - Album art is a tight square flush in its cell
-       - Track #, Length are minimal width
-       - Color glows on green/yellow preserved
-     ──────────────────────────────────────────────────────────── */
+     Matches reference image exactly:
+       · Full screen width (98vw)
+       · border-separate + 2px spacing = visible cell gaps
+       · table-layout fixed + nth-child widths = correct proportions
+       · 60px tall rows, 45px album art, text wraps cleanly
+     ────────────────────────────────────────── */
 
-  /* Outer wrapper — fills width, scrolls horizontally if needed */
   #result-container {
     width: 100%;
-    padding: 0;
-    margin-top: 4px;
-    overflow-x: auto;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
+    padding: 0;
     box-sizing: border-box;
   }
 
-  /* Table — border-collapse removes all inter-cell gaps */
   #result-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 98vw;          /* almost full viewport width */
-    table-layout: fixed;  /* enables controlled column widths */
-    font-size: 10px;
+    zoom: 1;                   /* remove any inherited zoom */
+    width: 98vw;               /* edge-to-edge */
     margin: 0 auto;
+    border-collapse: separate;
+    border-spacing: 2px;       /* thin gap between cells like reference */
+    table-layout: fixed;
+    word-wrap: break-word;
   }
 
-  /* Column widths — must add up to roughly 98vw */
-  /* Song       ~25%  */
-  /* Album      ~16%  */
-  /* Track #    ~10%  */
-  /* Length     ~16%  */
-  /* Features   ~33%  */
-  #result-table colgroup,
-  #result-table col { /* fallback if no colgroup in HTML */ }
+  /* Column widths — tuned to match reference image proportions */
+  #result-table th:nth-child(1),
+  #result-table td:nth-child(1) { width: 22%; } /* Song     */
+  #result-table th:nth-child(2),
+  #result-table td:nth-child(2) { width: 18%; } /* Album    */
+  #result-table th:nth-child(3),
+  #result-table td:nth-child(3) { width: 12%; } /* Track #  */
+  #result-table th:nth-child(4),
+  #result-table td:nth-child(4) { width: 16%; } /* Length   */
+  #result-table th:nth-child(5),
+  #result-table td:nth-child(5) { width: 32%; } /* Features */
 
-  /* Header cells */
-  #result-table th,
-  #table-text {
-    font-size: 9px;
-    padding: 4px 2px 4px 2px;
+  /* Header labels */
+  #table-text,
+  #result-table th {
+    font-size: 11px;
+    padding: 4px 2px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-bottom: 1px solid var(--seccol);
-    text-align: center;
   }
 
-  /* Target each column by position since there are no col classes on th */
-  #result-table tr th:nth-child(1) { width: 25%; } /* Song     */
-  #result-table tr th:nth-child(2) { width: 16%; } /* Album    */
-  #result-table tr th:nth-child(3) { width: 10%; } /* #        */
-  #result-table tr th:nth-child(4) { width: 16%; } /* Length   */
-  #result-table tr th:nth-child(5) { width: 33%; } /* Features */
-
-  /* All data cells — zero padding, border-collapse handles spacing */
-  td {
-    padding: 3px 2px;
-    border: 1px solid rgba(254, 250, 239, 0.3);
+  /* All cells: tall rows, readable text, wrapping */
+  td, th {
+    padding: 4px 2px;
+    font-size: 11px;
+    height: 60px;
     vertical-align: middle;
     text-align: center;
-    line-height: 1.15;
-    overflow: hidden;
+    word-break: break-word;
+    line-height: 1.2;
   }
 
-  /* ── Song cell ── */
+  /* Song — wraps to 2 lines e.g. "Blood On / The Leaves" */
   .song-cell {
-    font-size: 10px;
+    font-size: 11px;
+    padding: 4px 3px;
     white-space: normal;
     word-break: break-word;
-    padding: 3px 3px;
     min-width: 0;
   }
 
   .song-cell p,
   .song-cell .song-title {
-    font-size: 10px;
-    line-height: 1.15;
+    font-size: 11px;
+    line-height: 1.2;
     margin: 0;
     word-break: break-word;
   }
 
-  /* ── Album art cell ── */
-  /* In the image, album cell is: art fills almost entire cell, arrow beside it */
+  /* Album — art fills cell, arrow beside it */
   .album-cell {
     padding: 2px;
     min-width: 0;
     max-width: none;
+    display: table-cell;
   }
 
   .album-cell-inner {
@@ -1311,70 +1251,66 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 1px;
-    max-width: none;
+    gap: 2px;
     width: 100%;
+    max-width: none;
   }
 
+  /* 45px album art — fills most of the 60px row */
   img.album-logo {
-    /* Fill almost the full cell height — rows are ~44px naturally */
-    width: 38px;
-    height: 38px;
+    width: 45px !important;
+    height: 45px !important;
     object-fit: cover;
     display: block;
     flex-shrink: 0;
   }
 
-  /* The up/down arrow text that sits next to album art */
+  /* Arrows smaller next to art */
   td.up::after,
   td.down::after {
-    font-size: 9px;
+    font-size: 10px;
     width: auto;
   }
 
-  /* ── Track number cell ── */
+  /* Track # */
   .track-cell {
-    font-size: 10px;
+    font-size: 11px;
     white-space: nowrap;
+    padding: 4px 1px;
     min-width: 0;
-    padding: 3px 1px;
   }
 
-  /* ── Length cell ── */
+  /* Length */
   .length-cell {
-    font-size: 10px;
+    font-size: 11px;
     white-space: nowrap;
+    padding: 4px 2px;
     min-width: 0;
-    padding: 3px 2px;
   }
 
-  /* ── Features cell ── */
+  /* Features — wraps e.g. "No / features", "Pusha T" */
   .features-cell {
-    font-size: 9px;
+    font-size: 11px;
     white-space: normal;
     word-break: break-word;
-    padding: 3px 3px;
+    padding: 4px 3px;
     min-width: 0;
     line-height: 1.2;
   }
 
-  /* ── Glow on colored cells (keep from desktop) ── */
-  td.green  { box-shadow: inset 0 0 8px rgba(77, 170, 49, 0.5); }
-  td.yellow { box-shadow: inset 0 0 8px rgba(204, 171, 23, 0.5); }
-
-  /* ────────────────────────────────────────────────────────────
+  /* ──────────────────────────────────────────
      END CARD
-     ──────────────────────────────────────────────────────────── */
-  #end-card-title   { font-size: 32px; }
-  #super-div        { width: 92vw; }
+     ────────────────────────────────────────── */
+  #end-card-title   { font-size: 36px; }
+  #super-div        { width: 90vw; }
   #end-card         { width: 100%; }
   .stat-container   { width: 100%; }
   #mystery-song-img { width: 50vw; }
   #divisions-img    { zoom: 0.6; }
 
-  /* ────────────────────────────────────────────────────────────
+  /* ──────────────────────────────────────────
      INTRO / HELP CARD
-     ──────────────────────────────────────────────────────────── */
+     ────────────────────────────────────────── */
   #intro-card-back { align-items: flex-start; }
 
   #intro-card {
@@ -1401,11 +1337,11 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
     height: auto;
   }
 
-  /* ────────────────────────────────────────────────────────────
+  /* ──────────────────────────────────────────
      ALBUM MODE CARD GRIDS
-     ──────────────────────────────────────────────────────────── */
+     ────────────────────────────────────────── */
   #custom-album-grid  { grid-template-columns: repeat(4, 1fr); }
   #preview-album-grid { grid-template-columns: repeat(4, 1fr); }
 
 }
-/* ── END MOBILE ── */
+/* END MOBILE */
