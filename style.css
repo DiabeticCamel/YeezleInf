@@ -983,6 +983,7 @@ input {
   padding: 6px 10px;
   font-size: 16px;
   width: 95%;
+  border-radius: 0;
 }
 
 input[type="text"]   { background-color: #f1f1f1; }
@@ -1068,29 +1069,31 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
 @media only screen and (max-width: 600px) {
 
   /* ──────────────────────────────────────────
-     HEADER — logo is 4/7 of screen width,
-     header height matches the logo's natural height
+     HEADER — logo is (4/7 × 1.2) of screen width,
+     header height matches the logo's natural height,
+     with generous top padding
      ────────────────────────────────────────── */
   #mega-header {
     margin-top: 0;
-    padding-top: 6px;
+    /* 10× more top padding: was 6px → 60px */
+    padding-top: 60px;
     padding-bottom: 0;
-    /* height = logo width × aspect ratio (~0.55 for the InfYeezle logo) */
-    height: calc(4 / 7 * 100vw * 0.55);
+    /* height = logo width × aspect ratio (~0.55) + top padding */
+    height: calc(4 / 7 * 1.2 * 100vw * 0.55 + 60px);
     position: relative;
   }
 
-  /* Logo = exactly 4/7 of screen width, centered */
+  /* Logo = 4/7 × 1.2 of screen width, centered, sits below the top padding */
   #main-logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     display: block;
-    width: calc(4 / 7 * 100vw);
-    max-width: 320px;
+    width: calc(4 / 7 * 1.2 * 100vw);
+    max-width: 384px;
     height: auto;
     pointer-events: none;
-    top: 6px;
+    top: 60px;
   }
 
   /* Hide desktop left-side button on mobile */
@@ -1135,23 +1138,32 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding-bottom: 90px;
   }
 
-  /* Guess title tight under logo */
+  /* Guess title — more breathing room below logo */
   #guess-title {
     font-size: 26px;
-    margin-top: 2px;
-    margin-bottom: 4px;
+    margin-top: 14px;
+    margin-bottom: 10px;
     padding-bottom: 0;
   }
 
-  /* Input box shorter */
+  /* Input box — centered, no rounded corners, more space above */
+  .autocomplete {
+    display: flex;
+    justify-content: center;
+    width: 92vw !important;
+    max-width: 420px;
+  }
+
   #search-input {
-    width: 90%;
-    max-width: 400px;
-    height: 36px;
+    width: 100%;
+    max-width: 420px;
+    height: 40px;
     font-size: 16px;
-    border-radius: 4px;
+    border-radius: 0 !important;
     box-sizing: border-box;
-    margin-block: 4px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    display: block;
   }
 
   /* ──────────────────────────────────────────
@@ -1208,36 +1220,36 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     table-layout: fixed;
   }
 
-  /* ── Column widths (6 physical columns) ── */
+  /* ── Column widths (6 physical columns) — total = 100% ──
+     Song 22 | Art 22 | Arrow 4 | # 10 | Length 21 | Features 21
+     ── */
   /* Col 1 — Song */
   #result-table th:nth-child(1),
   #result-table td:nth-child(1) {
-    width: 21%;
+    width: 22%;
   }
-  /* Col 2 — Album art  (th here is the colspan=2 "Album" header) */
-  /* The header th:nth-child(2) has colspan=2 so it covers cols 2+3 visually.
-     For td, nth-child(2) is the art cell. */
+  /* Col 2 — Album art */
   #result-table td:nth-child(2) {
-    width: 17%;
+    width: 22%;
   }
-  /* Col 3 — Album arrow  (no th for this column — covered by colspan above) */
+  /* Col 3 — Album arrow: slim, just enough for one glyph */
   #result-table td:nth-child(3) {
-    width: 6%;
+    width: 4%;
   }
-  /* Col 4 — Track #  (th:nth-child(3) = the "#" header) */
+  /* Col 4 — Track # */
   #result-table th:nth-child(3),
   #result-table td:nth-child(4) {
-    width: 11%;
+    width: 10%;
   }
-  /* Col 5 — Length  (th:nth-child(4)) */
+  /* Col 5 — Length */
   #result-table th:nth-child(4),
   #result-table td:nth-child(5) {
-    width: 16%;
+    width: 21%;
   }
-  /* Col 6 — Features  (th:nth-child(5)) */
+  /* Col 6 — Features */
   #result-table th:nth-child(5),
   #result-table td:nth-child(6) {
-    width: 29%;
+    width: 21%;
   }
 
   /* Header row */
@@ -1302,15 +1314,17 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     min-height: 0;
   }
 
-  /* ── Album arrow cell — slim, colored, just the arrow glyph ── */
+  /* ── Album arrow cell — as slim as possible, just the glyph ── */
   .album-arrow-td {
     padding: 0 !important;
-    font-size: 14px;
+    font-size: 11px;
     font-weight: bold;
     color: white;
     text-align: center;
     vertical-align: middle;
     height: 70px;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   /* ── Track # cell ── */
