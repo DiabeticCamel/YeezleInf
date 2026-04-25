@@ -432,45 +432,50 @@ tr {
   padding-inline: 10px;
 }
 
-/* Album art cell — image fills the entire box, cropped */
+/* Album cell — single <td> containing art + arrow side by side via flex */
 .album-cell {
   padding: 0;
   overflow: hidden;
-  width: 55px;
-  max-width: 55px;
   vertical-align: middle;
+  /* width controlled by nth-child in mobile / table-layout on desktop */
 }
 
+/* The flex wrapper inside the album td */
+.album-cell-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+}
+
+/* Art: fills ~75% of the cell width, full height, cropped square */
 img.album-logo {
-  width: 55px;
-  height: 55px;
+  flex: 0 0 75%;
+  width: 75%;
+  height: 100%;
+  min-height: 55px;
   object-fit: cover;
   display: block;
 }
 
-/* Arrow cell — slim sibling td, colored green/yellow, arrow only (no number) */
+/* Arrow box: fills remaining ~25%, same height, colored by JS (green/yellow/grey) */
 .album-arrow-cell {
-  width: 22px;
-  max-width: 26px;
-  padding: 0;
-  text-align: center;
-  vertical-align: middle;
+  flex: 0 0 25%;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
   font-weight: bold;
   color: white;
-  /* color class (green/yellow) applied by JS same as other cells */
+  /* background-color comes from .green / .yellow class added by JS */
 }
 
-/* Hide the numeric part inside arrow cells — arrow only */
+/* Hide any number text — arrow character only */
 .album-arrow-cell .album-num {
   display: none;
-}
-
-.album-cell-inner {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
 }
 
 .features-cell {
@@ -1214,22 +1219,20 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     word-wrap: break-word;
   }
 
-  /* 6 physical cols: Song | Album-art | Arrow | # | Length | Features
-     Album <th> uses colspan=2 so header aligns over both art+arrow */
+  /* 5 columns matching reference image proportions:
+     Song ~21% | Album (art+arrow combined) ~20% | # ~10% | Length ~16% | Features ~33% */
   #result-table th:nth-child(1),
-  #result-table td:nth-child(1) { width: 18%; } /* Song      */
+  #result-table td:nth-child(1) { width: 21%; } /* Song     */
   #result-table th:nth-child(2),
-  #result-table td:nth-child(2) { width: 12%; } /* Album art */
+  #result-table td:nth-child(2) { width: 20%; } /* Album    */
   #result-table th:nth-child(3),
-  #result-table td:nth-child(3) { width: 6%;  } /* Arrow     */
+  #result-table td:nth-child(3) { width: 10%; } /* #        */
   #result-table th:nth-child(4),
-  #result-table td:nth-child(4) { width: 12%; } /* #         */
+  #result-table td:nth-child(4) { width: 16%; } /* Length   */
   #result-table th:nth-child(5),
-  #result-table td:nth-child(5) { width: 16%; } /* Length    */
-  #result-table th:nth-child(6),
-  #result-table td:nth-child(6) { width: 36%; } /* Features  */
+  #result-table td:nth-child(5) { width: 33%; } /* Features */
 
-  /* Fix 4: Bumped from 11px to 13px so text is readable */
+  /* Header labels */
   #table-text,
   #result-table th {
     font-size: 13px;
@@ -1239,18 +1242,18 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     text-overflow: ellipsis;
   }
 
-  /* Fix 4: All cells at 13px, moderate row height */
+  /* All data cells */
   td, th {
     padding: 3px 2px;
     font-size: 13px;
-    height: 52px;
+    height: 60px;
     vertical-align: middle;
     text-align: center;
     word-break: break-word;
     line-height: 1.2;
   }
 
-  /* Fix 3 (song): narrow column, text wraps cleanly */
+  /* Song — wraps to 2 lines */
   .song-cell {
     font-size: 13px;
     padding: 4px 3px;
@@ -1267,34 +1270,43 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     word-break: break-word;
   }
 
-  /* Album cell — art fills the entire square, cropped */
+  /* Album cell — flex row: art takes 75%, arrow takes 25% of cell width */
   .album-cell {
     padding: 0;
-    min-width: 0;
     overflow: hidden;
     vertical-align: middle;
+    height: 60px;
+  }
+
+  .album-cell-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    width: 100%;
+    height: 60px;
   }
 
   img.album-logo {
-    width: 100% !important;
-    height: 52px !important;
+    flex: 0 0 75% !important;
+    width: 75% !important;
+    height: 60px !important;
     object-fit: cover !important;
     display: block;
+    min-height: 0;
   }
 
-  /* Arrow cell — slim, colored (green/yellow via JS), arrow only */
   .album-arrow-cell {
-    width: 7%;
-    max-width: 22px;
-    padding: 0;
-    text-align: center;
-    vertical-align: middle;
-    font-size: 12px;
+    flex: 0 0 25% !important;
+    width: 25% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 13px;
     font-weight: bold;
     color: white;
+    padding: 0;
   }
 
-  /* Never show the number inside arrow cells */
   .album-arrow-cell .album-num {
     display: none;
   }
