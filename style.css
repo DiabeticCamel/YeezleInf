@@ -1,8 +1,36 @@
 /* ============================================================
    InfYeezle — Stylesheet
+   Organized sections:
+     1.  Fonts
+     2.  Reset & Base
+     3.  Design Tokens (CSS Variables)
+     4.  Scrollbar
+     5.  Body & Background
+     6.  Header & Navigation
+     7.  Nav Icons & Buttons
+     8.  Main Layout
+     9.  Guess Title & Input
+    10.  Results Table
+    11.  Table Cell Types
+    12.  Table Color States
+    13.  Buttons
+    14.  End-Card Overlay
+    15.  Stats Panel
+    16.  Clipboard Toast
+    17.  Mode Card
+    18.  Donate Card
+    19.  Intro / Help Card
+    20.  Album Mode Card
+    21.  Autocomplete
+    22.  Utility Classes
+    23.  Misc
+    24.  ── MOBILE (max-width: 600px) ──
    ============================================================ */
 
-/* ── Fonts ─────────────────────────────────────────────────── */
+
+/* ============================================================
+   1. FONTS
+   ============================================================ */
 @font-face {
   font-family: YZY;
   src: url(/VCR_OSD_MONO_1.001.ttf);
@@ -13,31 +41,83 @@
   src: url(/Syne-VariableFont_wght.ttf);
 }
 
-/* ── Reset ──────────────────────────────────────────────────── */
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
 * {
   margin: 0;
   padding: 0;
   font-family: YZY;
 }
 
-/* ── Scrollbar ──────────────────────────────────────────────── */
+html {
+  min-height: 100%;
+}
+
+ul {
+  text-align: left;
+}
+
+hr {
+  width: 100%;
+  margin-block: 5px;
+}
+
+center {
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+p {
+  font-family: SYNE;
+}
+
+y { background-color: yellow; }
+g { background-color: green; }
+
+
+/* ============================================================
+   3. DESIGN TOKENS (CSS Variables)
+   ============================================================ */
+:root {
+  --yellow:     #ccab17;
+  --green:      #4daa31;
+  --grey:       rgb(165, 165, 165);
+  --primary:    #4daa31;
+  --text-color: black;
+  --maincolS:   rgb(70, 67, 65);
+  --maincol:    rgb(51, 51, 51);
+  --seccol:     rgb(254, 250, 239);
+}
+
+
+/* ============================================================
+   4. SCROLLBAR
+   ============================================================ */
 ::-webkit-scrollbar       { width: 0.5em; }
 ::-webkit-scrollbar-track { background: hsl(40 5% 30% / 1); border-radius: 100vw; }
 ::-webkit-scrollbar-thumb { background: hsl(40 10% 60% / 1); border-radius: 100vw; }
 
-/* ── Design tokens ──────────────────────────────────────────── */
-:root {
-  --yellow:     #ccab17;
-  --green:      #4daa31;
-  --grey:       rgb(165,165,165);
-  --primary:    #4daa31;
-  --text-color: black;
-  --maincolS:   rgb(70,67,65);
-  --maincol:    rgb(51,51,51);
-  --seccol:     rgb(254,250,239);
+
+/* ============================================================
+   5. BODY & BACKGROUND
+   ============================================================ */
+body {
+  color: var(--text-color);
+  min-height: 100%;
+  background-image: radial-gradient(
+    circle,
+    #2a2a2a, #2a292a, #2a292a, #2b2829,
+    #2c2727, #302a2a, #342e2c, #38312f,
+    #423a37, #4c433f, #564c48, #605650
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
 }
 
-/* ── Base ───────────────────────────────────────────────────── */
 #HTMLHead {
   min-height: 100%;
   background-position: center;
@@ -45,29 +125,37 @@
   background-size: contain;
 }
 
-html {
-  min-height: 100%;
-}
 
-body {
-  color: var(--text-color);
-  min-height: 100%;
-  background-image: radial-gradient(circle, #2a2a2a, #2a292a, #2a292a, #2b2829, #2c2727, #302a2a, #342e2c, #38312f, #423a37, #4c433f, #564c48, #605650);
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top center;
-}
-
-/* ── Header ─────────────────────────────────────────────────── */
+/* ============================================================
+   6. HEADER & NAVIGATION
+   ============================================================ */
 #mega-header {
+  display: flex;
+  flex-direction: row;
   align-items: flex-start;
   width: 100%;
   justify-content: center;
-  flex-direction: row;
   margin-top: 20px;
 }
-#mega-header svg { width: 60%; }
+
+#mega-header svg {
+  width: 60%;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#main-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  height: clamp(150px, 22vw, 300px);
+  width: auto;
+}
 
 #INFYEEZLE_Image {
   position: relative;
@@ -85,14 +173,19 @@ body {
   font-size: 48px;
 }
 
-/* ── Mode toggle ────────────────────────────────────────────── */
-#mode-toggle-btn {
+/* ── Left side ── */
+#left-but-cont {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 30vw;
+  max-width: 290px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  position: relative;
+  top: -20px;
+  margin-top: 1vw;
 }
 
-/* ── Right-side nav controls ────────────────────────────────── */
+/* ── Right side ── */
 #rs-cont {
   display: flex;
   flex-direction: row;
@@ -106,113 +199,26 @@ body {
   margin-right: 6px;
 }
 
-.material-icons.md-cus { font-size: 40px; }
-
-/* ── Icon sizing in nav ─────────────────────────────────────── */
-.right-but-cont svg,
-#mode-toggle-btn svg,
-#album-mode-btn svg {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-  display: block;
+.right-but-cont {
+  /* wrapper for each icon in the right nav */
 }
 
-/* ── Mobile — single block for all max-width: 600px rules ───── */
-@media only screen and (max-width: 600px) {
-  #rs-cont {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    top: auto;
-    width: 100%;
-    max-width: 100%;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-    margin: 0;
-    padding: 10px 0 40px 0;
-    background-color: rgba(30, 28, 28, 0.55);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    z-index: 100;
-  }
-
-  #left-but-cont {
-    display: none;
-  }
-
-  .right-but-cont svg,
-  #mode-toggle-btn svg,
-  #album-mode-btn svg {
-    width: 40px;
-    height: 40px;
-  }
-
-  .main-container {
-    padding-bottom: 90px;
-  }
-
-  @media only screen and (max-width: 600px) {
-  #version-label {
-    position: fixed !important;
-    bottom: 6px !important;
-    left: 0 !important;
-    right: 0 !important;
-    text-align: center !important;
-    background: none !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-    padding: 6px 0 0 0 !important;
-    font-size: 10px !important;
-    font-family: SYNE !important;
-    z-index: 102 !important;
-    pointer-events: none !important;
-    color: rgba(255, 255, 255, 0.85) !important;
-  }
+/* Version label (desktop) */
+#version-label {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: SYNE;
+  font-size: 11px;
+  pointer-events: none;
+  z-index: 1;
 }
 
-  #end-card-title   { font-size: 36px; }
-  #super-div        { width: 80vw; }
-  #end-card         { width: 100%; }
-  .stat-container   { width: 100%; }
-  #mystery-song-img { width: 50vw; }
-  #result-table     { zoom: 0.5; }
-  #divisions-img    { zoom: 0.6; }
 
-  li { font-size: 12px; margin-bottom: 3vw; }
-
-  #intro-card-back  { align-items: flex-start; }
-
-  #intro-card {
-    margin-top: 16px;
-    overflow-y: scroll;
-  }
-
-  #intro-card-inner {
-    margin-bottom: 164px;
-    background-color: #202020e7;
-    border-radius: 10px;
-    padding-top: 16px;
-    box-shadow: 0 0 8px rgb(109 109 109 / 25%);
-  }
-}
-
-/* ── Left-side nav ──────────────────────────────────────────── */
-#left-but-cont {
-  display: flex;
-  width: 30vw;
-  justify-content: flex-start;
-  align-items: flex-start;
-  max-width: 290px;
-  position: relative;
-  top: -20px;
-  margin-top: 1vw;
-}
-
-/* ── Material icons base ────────────────────────────────────── */
+/* ============================================================
+   7. NAV ICONS & BUTTONS
+   ============================================================ */
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -232,139 +238,32 @@ body {
   font-feature-settings: 'liga';
 }
 
-.material-icons.md-18 { font-size: 18px; }
-.material-icons.md-24 { font-size: 24px; }
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-18  { font-size: 18px; }
+.material-icons.md-24  { font-size: 24px; }
+.material-icons.md-36  { font-size: 36px; }
+.material-icons.md-48  { font-size: 48px; }
+.material-icons.md-cus { font-size: 40px; }
 
-/* ── Mode card ──────────────────────────────────────────────── */
-#mode-card-back {
-  backdrop-filter: brightness(0.3);
-  -webkit-backdrop-filter: brightness(0.3);
-  background-color: rgba(0,0,0,0.6);
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+/* Icon sizing in nav */
+.right-but-cont svg,
+#mode-toggle-btn svg,
+#album-mode-btn svg {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: block;
+}
+
+#mode-toggle-btn {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.4s ease-out;
 }
 
-#mode-card {
-  background-color: rgb(44,44,44);
-  color: white;
-  width: min(500px, 60vw);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 10px;
-  box-shadow: 0 0 90px rgb(141,141,141);
-  padding: 20px;
-}
-
-#mode-card-title { font-size: 28px; color: white; margin-bottom: 10px; }
-#mode-card-text  { font-weight: 100; font-family: SYNE; font-size: 16px; text-align: center; margin-bottom: 10px; }
-
-/* ── Hover states ───────────────────────────────────────────── */
 #help-button:hover { cursor: pointer; }
 #dono-button:hover { cursor: pointer; color: red; }
 
-/* ── Other button ───────────────────────────────────────────── */
-#other-button {
-  color: var(--seccol);
-  border-width: 1px;
-  border-color: var(--seccol);
-  border-radius: 16px;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-  opacity: 0;
-}
-
-/* ── Main layout ────────────────────────────────────────────── */
-.main-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-}
-
-.smallbums {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  max-width: 100%;
-  box-shadow: 0 0 50px rgba(255,248,220,0.247);
-  transition: opacity 90ms ease-in-out, transform 90ms ease-in-out;
-}
-
-.smallbums:hover {
-  transform: scale(1.15);
-  box-shadow: 3px 2px 50px 9px #161616;
-}
-
-#custom-album-grid {
-  display: none;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 6px;
-  margin-bottom: 16px;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-  justify-content: center;
-}
-
-#custom-album-grid.visible {
-  display: grid;
-}
-
-@media only screen and (max-width: 600px) {
-  #custom-album-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-#preview-album-grid {
-  display: none;
-  grid-template-columns: repeat(8, 1fr);
-  gap: 6px;
-  margin-bottom: 16px;
-  width: 100%;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-#preview-album-grid.visible {
-  display: grid;
-}
-
-#preview-album-grid .smallbums {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
-  object-fit: cover;
-  max-width: 100%;
-  transition: opacity 90ms ease-in-out, transform 90ms ease-in-out;
-}
-
-@media only screen and (max-width: 600px) {
-  #preview-album-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* ── Circle icon button ─────────────────────────────────────── */
+/* Circle icon button */
 .circle-button {
   padding: 15px;
   border-radius: 50%;
@@ -378,6 +277,7 @@ header {
   cursor: pointer;
   border: solid var(--seccol);
 }
+
 .circle-button:hover {
   background: var(--seccol);
   color: black;
@@ -398,9 +298,70 @@ header {
   cursor: pointer;
 }
 
-/* ── Guess title / caption ──────────────────────────────────── */
-#mystery-figure { height: 220px; }
+#other-button {
+  color: var(--seccol);
+  border-width: 1px;
+  border-color: var(--seccol);
+  border-radius: 16px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  opacity: 0;
+}
 
+
+/* ============================================================
+   8. MAIN LAYOUT
+   ============================================================ */
+.main-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+
+.outer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#show-divisions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+#foot-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  position: fixed;
+  padding: 10px 10px 0 10px;
+  bottom: 0;
+}
+
+#footing-text {
+  width: 20%;
+  height: 40px;
+}
+
+#but-div {
+  display: flex;
+  width: 100%;
+  height: 50px;
+}
+
+
+/* ============================================================
+   9. GUESS TITLE & INPUT
+   ============================================================ */
 #guess-title {
   padding-bottom: 15px;
   color: var(--seccol);
@@ -409,18 +370,13 @@ header {
   font-weight: 500;
 }
 
-#show-sil { color: var(--seccol); }
-
 figcaption {
   text-align: center;
   font-size: 20px;
 }
 
-/* ── Results table ──────────────────────────────────────────── */
-th {
-  border-bottom: solid 1px var(--seccol);
-  padding-inline: 10px;
-}
+#mystery-figure { height: 220px; }
+#show-sil       { color: var(--seccol); }
 
 #mystery-img {
   pointer-events: none;
@@ -436,11 +392,23 @@ th {
 
 #search-input { margin-block: 10px; }
 
+#hint-display {
+  color: white;
+  font-family: SYNE;
+  margin-top: 10px;
+}
+
+
+/* ============================================================
+   10. RESULTS TABLE
+   ============================================================ */
 #result-container {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-x: auto;
+  margin-top: 10px;
 }
 
 #result-table {
@@ -451,8 +419,18 @@ th {
   border-radius: 1px;
 }
 
-#result-rows   { color: var(--seccol); }
-#table-text    { color: var(--seccol); font-size: small; padding: 0 25px 5px 25px; }
+#result-rows { color: var(--seccol); }
+
+#table-text {
+  color: var(--seccol);
+  font-size: small;
+  padding: 0 25px 5px 25px;
+}
+
+th {
+  border-bottom: solid 1px var(--seccol);
+  padding-inline: 10px;
+}
 
 td {
   text-align: center;
@@ -466,8 +444,50 @@ td {
 tr {
   opacity: 100;
   overflow: visible;
-  box-shadow: 0 4px 20px -10px rgb(255,255,255);
+  box-shadow: 0 4px 20px -10px rgb(255, 255, 255);
 }
+
+
+/* ============================================================
+   11. TABLE CELL TYPES
+   ============================================================ */
+.song-cell {
+  opacity: 100;
+  min-width: 15vw;
+  padding-inline: 10px;
+}
+
+.album-cell {
+  opacity: 100;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  max-width: 120px;
+}
+
+.album-cell-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 120px;
+}
+
+img.album-logo {
+  width: 60px;
+  height: 60px;
+  object-fit: scale-down;
+}
+
+.features-cell {
+  min-width: 15vw;
+  padding-inline: 10px;
+}
+
+/* Jersey SVG */
+svg > text    { text-anchor: middle; }
+svg.jersey    { width: 40px; }
 
 .text-button {
   cursor: pointer;
@@ -475,11 +495,34 @@ tr {
   color: var(--text-color);
 }
 
-/* ── Buttons ────────────────────────────────────────────────── */
+
+/* ============================================================
+   12. TABLE COLOR STATES
+   ============================================================ */
+td.green  {
+  background-color: var(--green);
+  color: white;
+  box-shadow: 0 5px 30px var(--green);
+}
+
+td.grey   { opacity: 1; }
+
+td.yellow {
+  background-color: var(--yellow);
+  box-shadow: 0 5px 30px var(--yellow);
+}
+
+td.down::after { content: " \2193"; width: 40px; }
+td.up::after   { content: " \2191"; width: 40px; }
+
+
+/* ============================================================
+   13. BUTTONS
+   ============================================================ */
 button {
-  background-color: rgb(255,252,238);
+  background-color: rgb(255, 252, 238);
   border: none;
-  color: rgb(0,0,0);
+  color: rgb(0, 0, 0);
   padding: 10px 20px;
   text-align: center;
   max-width: 90%;
@@ -491,9 +534,9 @@ button {
   border-radius: 1px;
 }
 
-button[disabled] { background-color: #aaa; }
-
-#but-div { display: flex; width: 100%; height: 50px; }
+button[disabled] {
+  background-color: #aaa;
+}
 
 #guess-button {
   color: var(--maincol);
@@ -524,22 +567,23 @@ button[disabled] { background-color: #aaa; }
 }
 
 #results-button {
-  background-color: rgba(255,255,255,0);
+  background-color: rgba(255, 255, 255, 0);
   height: 30px;
   font-size: 20px;
   margin-bottom: 25px;
   margin-top: 0;
   padding-bottom: 5px;
-  color: rgba(255,255,255,0.999);
+  color: rgba(255, 255, 255, 0.999);
 }
 
+/* Link styled as button */
 a.buttonA {
   text-decoration: none;
   margin-top: 20px;
   margin-bottom: 10px;
-  background-color: rgb(255,252,238);
+  background-color: rgb(255, 252, 238);
   border: none;
-  color: rgb(0,0,0);
+  color: rgb(0, 0, 0);
   padding: 10px 20px;
   text-align: center;
   max-width: 90%;
@@ -549,62 +593,30 @@ a.buttonA {
   border-radius: 8px;
 }
 
-/* ── Table cells ────────────────────────────────────────────── */
-.song-cell {
-  opacity: 100;
-  min-width: 15vw;
-  padding-inline: 10px;
-}
-
-.album-cell-inner {
+#start-div       { margin-top: 2vw; }
+#new-song-button { white-space: nowrap; margin-right: 20px; }
+#newSongButton {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  max-width: 120px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
-.album-cell {
-  opacity: 100;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: row;
-  max-width: 120px;
-}
 
-.features-cell {
-  min-width: 15vw;
-  padding-inline: 10px;
-}
-
-img.album-logo {
-  width: 60px;
-  height: 60px;
-  object-fit: scale-down;
-}
-
-/* ── Color states ───────────────────────────────────────────── */
-td.green  { background-color: var(--green);  color: white; box-shadow: 0 5px 30px var(--green); }
-td.grey   { opacity: 1; }
-td.yellow { background-color: var(--yellow); box-shadow: 0 5px 30px var(--yellow); }
-td.down::after { content: " \2193"; width: 40px; }
-td.up::after   { content: " \2191"; width: 40px; }
-
-/* ── Jersey SVG ─────────────────────────────────────────────── */
-svg > text   { text-anchor: middle; }
-svg.jersey   { width: 40px; }
-.number-cell::after { vertical-align: 100%; }
-
-/* ── End-card overlay ───────────────────────────────────────── */
+/* ============================================================
+   14. END-CARD OVERLAY
+   ============================================================ */
 #card-background {
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   position: fixed;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   transition: opacity 0.4s ease-out;
   overflow-y: scroll;
 }
@@ -619,10 +631,8 @@ svg.jersey   { width: 40px; }
   align-items: center;
 }
 
-
-
 #end-card {
-  background-color: rgb(44,44,44);
+  background-color: rgb(44, 44, 44);
   color: white;
   width: min(500px, 90vw);
   display: flex;
@@ -675,33 +685,32 @@ svg.jersey   { width: 40px; }
 #end-card-title,
 #mystery-song-name    { color: white; }
 
-/* ── Clipboard toast ────────────────────────────────────────── */
-#clipboard-popup {
-  position: fixed;
-  background-color: #4daa31;
-  max-width: 400px;
-  width: fit-content;
-  height: fit-content;
-  padding: 10px;
-  border-radius: 4px;
-  top: 45%;
-  margin-top: -25px;
+/* End-card action buttons */
+#play-again-button  { opacity: 0; white-space: normal; }
+#share-score-button { opacity: 1; width: 100%; white-space: nowrap; margin-right: 10px; margin-bottom: 30px; }
+
+/* Album cover thumbnails (shared between intro + end card) */
+.smallbums {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  max-width: 100%;
+  box-shadow: 0 0 50px rgba(255, 248, 220, 0.247);
+  transition: opacity 90ms ease-in-out, transform 90ms ease-in-out;
 }
 
-#clipboard-popup-text {
-  text-align: center;
-  margin: 10px 5px;
-  font-size: min(3vw, 30px);
+.smallbums:hover {
+  transform: scale(1.15);
+  box-shadow: 3px 2px 50px 9px #161616;
 }
 
-/* ── End-card action buttons ────────────────────────────────── */
-#play-again-button   { opacity: 0; white-space: normal; }
-#share-score-button  { opacity: 1; width: 100%; white-space: nowrap; margin-right: 10px; margin-bottom: 30px; }
-#new-song-button     { white-space: nowrap; margin-right: 20px; }
 
-/* ── Stats panel ────────────────────────────────────────────── */
+/* ============================================================
+   15. STATS PANEL
+   ============================================================ */
 .stat-container {
-  background-color: rgb(44,44,44);
+  background-color: rgb(44, 44, 44);
   color: white;
   width: 100%;
   height: fit-content;
@@ -711,7 +720,7 @@ svg.jersey   { width: 40px; }
   justify-content: center;
   border-radius: 10px;
   padding-block: 15px;
-  box-shadow: 0 20px 50px rgba(255,248,220,0.473);
+  box-shadow: 0 20px 50px rgba(255, 248, 220, 0.473);
   margin-top: min(1vh, 10px);
 }
 
@@ -733,7 +742,7 @@ svg.jersey   { width: 40px; }
 .stat-bubbles.green { background-color: #4daa31; }
 .stat-bubbles.red   { background-color: #a11414; }
 
-.endcardStatistics { width: auto; height: auto; }
+.endcardStatistics  { width: auto; height: auto; }
 
 #vertical-stat {
   display: flex;
@@ -749,33 +758,265 @@ svg.jersey   { width: 40px; }
   text-align: center;
 }
 
-#data-div { color: rgb(255,255,255); }
+#data-div          { color: rgb(255, 255, 255); }
+#donate-banner     { text-align: center; color: white; margin-right: 10px; margin-left: 10px; }
+#twelve-marg       { margin: 12px; }
 
-/* ── Utility ────────────────────────────────────────────────── */
-.hide {
-  opacity: 0;
-  pointer-events: none;
+
+/* ============================================================
+   16. CLIPBOARD TOAST
+   ============================================================ */
+#clipboard-popup {
+  position: fixed;
+  background-color: #4daa31;
+  max-width: 400px;
+  width: fit-content;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 4px;
+  top: 45%;
+  margin-top: -25px;
 }
 
-.fade-out { animation: fadeOut ease 2s; }
-
-@keyframes fadeOut {
-  0%   { opacity: 1; }
-  100% { opacity: 0; }
+#clipboard-popup-text {
+  text-align: center;
+  margin: 10px 5px;
+  font-size: min(3vw, 30px);
 }
 
-.display-none { display: none; }
 
-center { margin-top: 50px; margin-bottom: 20px; }
+/* ============================================================
+   17. MODE CARD
+   ============================================================ */
+#mode-card-back {
+  backdrop-filter: brightness(0.3);
+  -webkit-backdrop-filter: brightness(0.3);
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.4s ease-out;
+}
 
-#show-divisions {
+#mode-card {
+  background-color: rgb(44, 44, 44);
+  color: white;
+  width: min(500px, 60vw);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 90px rgb(141, 141, 141);
+  padding: 20px;
 }
 
-/* ── Autocomplete ───────────────────────────────────────────── */
+#mode-card-title { font-size: 28px; color: white; margin-bottom: 10px; }
+#mode-card-text  { font-weight: 100; font-family: SYNE; font-size: 16px; text-align: center; margin-bottom: 10px; }
+
+
+/* ============================================================
+   18. DONATE CARD
+   ============================================================ */
+#donate-card-back {
+  backdrop-filter: brightness(0.3);
+  -webkit-backdrop-filter: brightness(0.3);
+  background-color: rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  transition: opacity 0.4s ease-out;
+}
+
+#donate-container {
+  background-color: rgb(204, 99, 99);
+  color: white;
+  width: min(500px, 60vw);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 0 90px rgb(141, 141, 141);
+  padding: 20px;
+  margin-top: 40px;
+}
+
+#donate-title  { font-size: 28px; color: white; margin-bottom: 10px; }
+#donate-text   { font-weight: 100; font-family: SYNE; font-size: 16px; }
+#donate-button { margin-top: 24px; }
+#donate-img    { width: 100px; margin: -10px; }
+
+#small-donate-text {
+  font-size: 15px;
+  font-family: SYNE;
+  font-style: italic;
+  color: #884242;
+  margin-top: 10px;
+}
+
+#donor-text {
+  font-size: 15px;
+  font-family: SYNE;
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+}
+
+
+/* ============================================================
+   19. INTRO / HELP CARD
+   ============================================================ */
+#intro-card-back {
+  backdrop-filter: brightness(0.5);
+  -webkit-backdrop-filter: brightness(0.5);
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#intro-card {
+  width: fit-content;
+  height: fit-content;
+  max-height: 99%;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0);
+  transition: opacity 0.4s ease-out;
+  color: white;
+  text-align: center;
+}
+
+#intro-card-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#intro-text {
+  max-width: 90%;
+  font-size: min(5vw, 18px);
+}
+
+li {
+  font-size: min(2vw, 18px);
+  margin-bottom: 3vw;
+  font-family: SYNE;
+}
+
+#albums-included {
+  width: fit-content;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+#albums-included .smallbums {
+  width: 5vw;
+  max-width: 60px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+/* Colour highlight spans in intro text */
+#green-fill {
+  padding: 2px;
+  margin: -2px;
+  border-radius: 2px;
+  display: inline-block;
+  background-color: var(--green);
+  color: #fff;
+  font-family: SYNE;
+}
+
+#yellow-fill {
+  padding: 2px;
+  margin: -2px;
+  border-radius: 2px;
+  display: inline-block;
+  background-color: var(--yellow);
+  color: #fff;
+  font-family: SYNE;
+}
+
+/* Desktop intro card overrides */
+@media only screen and (min-width: 700px) {
+  #intro-card {
+    width: clamp(200px, 1000px, 1000px);
+    overflow-y: auto;
+    margin-inline: 20px;
+    max-height: 90%;
+  }
+
+  #albums-included {
+    margin-inline: 5px;
+    width: fit-content;
+    max-height: 60px;
+  }
+
+  #intro-card-inner {
+    background-color: #202020e7;
+    border-radius: 10px;
+    padding-top: 16px;
+    box-shadow: 0 0 8px rgba(109, 109, 109, 0.247);
+  }
+}
+
+
+/* ============================================================
+   20. ALBUM MODE CARD
+   ============================================================ */
+#preview-album-grid {
+  display: none;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#preview-album-grid.visible { display: grid; }
+
+#preview-album-grid .smallbums {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  max-width: 100%;
+  transition: opacity 90ms ease-in-out, transform 90ms ease-in-out;
+}
+
+#custom-album-grid {
+  display: none;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  justify-content: center;
+}
+
+#custom-album-grid.visible { display: grid; }
+
+
+/* ============================================================
+   21. AUTOCOMPLETE
+   ============================================================ */
 .autocomplete {
   position: relative;
   display: inline-block;
@@ -809,232 +1050,192 @@ input[type="submit"] { background-color: var(--primary); color: #fff; }
   border-bottom: 1px solid #d4d4d4;
 }
 
-.autocomplete-items div:hover   { background-color: #e9e9e9; }
-.autocomplete-active            { background-color: var(--primary) !important; color: #fff; }
+.autocomplete-items div:hover { background-color: #e9e9e9; }
+.autocomplete-active           { background-color: var(--primary) !important; color: #fff; }
 
-/* ── Misc text ──────────────────────────────────────────────── */
-a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
+
+/* ============================================================
+   22. UTILITY CLASSES
+   ============================================================ */
+.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fade-out { animation: fadeOut ease 2s; }
+
+@keyframes fadeOut {
+  0%   { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.display-none { display: none; }
+
 .center { text-align: center; }
+
 footer > center { margin-bottom: 0; }
 
-/* ── Donate card ────────────────────────────────────────────── */
-#donate-container {
-  background-color: rgb(204,99,99);
-  color: white;
-  width: min(500px, 60vw);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 10px;
-  box-shadow: 0 0 90px rgb(141,141,141);
-  padding: 20px;
-  margin-top: 40px;
-}
+a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
 
-#donate-card-back {
-  backdrop-filter: brightness(0.3);
-  -webkit-backdrop-filter: brightness(0.3);
-  background-color: rgba(0,0,0,0.1);
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  transition: opacity 0.4s ease-out;
-}
 
-#donate-text   { font-weight: 100; font-family: SYNE; font-size: 16px; }
-#donate-title  { font-size: 28px; color: white; margin-bottom: 10px; }
-#donate-button { margin-top: 24px; }
+/* ============================================================
+   23. MISC
+   ============================================================ */
+#divisions-img { /* placeholder for any division image styling */ }
 
-#small-donate-text {
-  font-size: 15px;
-  font-family: SYNE;
-  font-style: italic;
-  color: #884242;
-  margin-top: 10px;
-}
 
-#donor-text {
-  font-size: 15px;
-  font-family: SYNE;
-  text-align: center;
-  color: white;
-  margin-top: 10px;
-}
+/* ============================================================
+   24. ── MOBILE ONLY (max-width: 600px) ──
+   ============================================================ */
+@media only screen and (max-width: 600px) {
 
-#donate-banner {
-  text-align: center;
-  color: white;
-  margin-right: 10px;
-  margin-left: 10px;
-}
-
-#twelve-marg { margin: 12px; }
-
-/* ── Intro / help card ──────────────────────────────────────── */
-#intro-card-back {
-  backdrop-filter: brightness(0.5);
-  -webkit-backdrop-filter: brightness(0.5);
-  background-color: rgba(0,0,0,0.6);
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#intro-text { max-width: 90%; font-size: min(5vw); }
-
-li {
-  font-size: min(2vw, 18px);
-  margin-bottom: 3vw;
-  font-family: SYNE;
-}
-
-#intro-card {
-  width: fit-content;
-  height: fit-content;
-  max-height: 99%;
-  margin-top: 50px;
-  margin-bottom: 30px;
-  padding: 10px;
-  border-radius: 10px;
-  background-color: rgba(0,0,0,0);
-  transition: opacity 0.4s ease-out;
-  color: white;
-  text-align: center;
-}
-
-#intro-card-inner {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-#albums-included {
-  width: fit-content;
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-#albums-included .smallbums {
-  width: 5vw;
-  max-width: 60px;
-  height: auto;
-  aspect-ratio: 1 / 1;
-}
-
-@media only screen and (min-width: 700px) {
-  #intro-card {
-    width: clamp(200px, 1000px, 1000px);
-    overflow-y: auto;
-    margin-inline: 20px;
-    max-height: 90%;
+  /* ── Header ── */
+  #mega-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    height: 400px;
+    padding: 10px 0;
+    overflow: visible;
   }
 
-  #albums-included {
-    margin-inline: 5px;
-    width: fit-content;
-    max-height: 60px;
+  #main-logo {
+    height: clamp(150px, 22vw, 300px);
+    width: auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+
+  #left-but-cont {
+    display: none;
+  }
+
+  /* ── Bottom nav bar ── */
+  #rs-cont {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    margin: 0;
+    padding: 10px 0 40px 0;
+    background-color: rgba(30, 28, 28, 0.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 100;
+  }
+
+  /* ── Nav icon sizes ── */
+  .right-but-cont svg,
+  #mode-toggle-btn svg,
+  #album-mode-btn svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* ── Main content padding (avoid bottom nav overlap) ── */
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -100px;
+    min-height: 0;
+    padding-bottom: 90px;
+  }
+
+  /* ── Version label ── */
+  #version-label {
+    position: fixed !important;
+    bottom: 6px !important;
+    left: 0 !important;
+    right: 0 !important;
+    text-align: center !important;
+    background: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 6px 0 0 0 !important;
+    font-size: 10px !important;
+    font-family: SYNE !important;
+    z-index: 102 !important;
+    pointer-events: none !important;
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  /* ── Results table — MOBILE FIX ── */
+  /* Remove zoom: 0.5 and make table scrollable + readable */
+  #result-table {
+    zoom: 1;
+    font-size: 11px;
+  }
+
+  #result-container {
+    margin-top: 10px;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+  }
+
+  /* Table column sizing */
+  #table-text       { padding: 0 6px 5px 6px; font-size: 10px; }
+  td                { padding: 2px 4px; }
+  .song-cell        { min-width: 80px; padding-inline: 6px; }
+  .features-cell    { min-width: 70px; padding-inline: 6px; }
+  .album-cell       { max-width: 64px; }
+  img.album-logo    { width: 40px; height: 40px; }
+
+  /* ── End card ── */
+  #end-card-title   { font-size: 36px; }
+  #super-div        { width: 80vw; }
+  #end-card         { width: 100%; }
+  .stat-container   { width: 100%; }
+  #mystery-song-img { width: 50vw; }
+
+  /* ── Division image ── */
+  #divisions-img    { zoom: 0.6; }
+
+  /* ── Intro card ── */
+  #intro-card-back  { align-items: flex-start; }
+
+  #intro-card {
+    margin-top: 16px;
+    overflow-y: scroll;
   }
 
   #intro-card-inner {
+    margin-bottom: 164px;
     background-color: #202020e7;
     border-radius: 10px;
     padding-top: 16px;
-    box-shadow: 0 0 8px rgba(109,109,109,0.247);
+    box-shadow: 0 0 8px rgba(109, 109, 109, 0.25);
   }
-}
 
-@media only screen and (max-width: 600px) {
+  li {
+    font-size: 12px;
+    margin-bottom: 3vw;
+  }
+
   #albums-included .smallbums {
     width: 14vw;
     max-width: 40px;
     height: auto;
   }
+
+  /* ── Album mode card grids ── */
+  #custom-album-grid  { grid-template-columns: repeat(4, 1fr); }
+  #preview-album-grid { grid-template-columns: repeat(4, 1fr); }
+
 }
-
-
-
-
-.
-/* ── Intro buttons ──────────────────────────────────────────── */
-#start-div { margin-top: 2vw; }
-
-/* ── Version label (desktop) ────────────────────────────────── */
-#version-label {
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  color: rgba(255,255,255,0.3);
-  font-family: SYNE;
-  font-size: 11px;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* ── Misc structural ────────────────────────────────────────── */
-hr   { width: 100%; margin-block: 5px; }
-y    { background-color: yellow; }
-g    { background-color: green; }
-p    { font-family: SYNE; }
-
-.outer-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-ul { text-align: left; }
-
-#foot-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-  position: fixed;
-  padding: 10px 10px 0 10px;
-  bottom: 0;
-}
-
-#footing-text { width: 20%; height: 40px; }
-
-/* ── Colour highlight spans ─────────────────────────────────── */
-#green-fill {
-  padding: 2px;
-  margin: -2px;
-  border-radius: 2px;
-  display: inline-block;
-  background-color: var(--green);
-  color: #fff;
-  font-family: SYNE;
-}
-
-#yellow-fill {
-  padding: 2px;
-  margin: -2px;
-  border-radius: 2px;
-  display: inline-block;
-  background-color: var(--yellow);
-  color: #fff;
-  font-family: SYNE;
-}
-
-/* ── Donate img ─────────────────────────────────────────────── */
-#donate-img { width: 100px; margin: -10px; }
-
-#newSongButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 20px;
-  margin-bottom: 20px;
-}
+/* ── END MOBILE ── */
