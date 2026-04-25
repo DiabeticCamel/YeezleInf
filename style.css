@@ -1233,18 +1233,20 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   }
 
   /* ── Column widths (6 physical columns) — total = 100% ──
-     Song 22 | Art 25 | Arrow 1 | # 13 | Length 19 | Features 20
+     Song 22 | Art 26 | Arrow 2 | # 12 | Length 19 | Features 19
+     Arrow col is ~2% ≈ ~18px on a 390px screen — just wide enough
+     to hold one 13px glyph with a sliver of padding each side.
      ── */
   #result-table th:nth-child(1),
   #result-table td:nth-child(1) { width: 22%; } /* Song     */
-  #result-table td:nth-child(2) { width: 25%; } /* Art      */
-  #result-table td:nth-child(3) { width: 1%;  } /* Arrow    */
+  #result-table td:nth-child(2) { width: 26%; } /* Art      */
+  #result-table td:nth-child(3) { width: 2%;  } /* Arrow    */
   #result-table th:nth-child(3),
-  #result-table td:nth-child(4) { width: 13%; } /* #        */
+  #result-table td:nth-child(4) { width: 12%; } /* #        */
   #result-table th:nth-child(4),
   #result-table td:nth-child(5) { width: 19%; } /* Length   */
   #result-table th:nth-child(5),
-  #result-table td:nth-child(6) { width: 20%; } /* Features */
+  #result-table td:nth-child(6) { width: 19%; } /* Features */
 
   /* Header row */
   #table-text,
@@ -1313,10 +1315,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding: 0;
   }
 
-  /* ── Album arrow cell — 1% wide, absolute minimum ── */
+  /* ── Album arrow cell — normal font size, box just barely wider than glyph ── */
   .album-arrow-td {
     padding: 0 !important;
-    font-size: 9px;
+    font-size: 13px;
     font-weight: bold;
     color: white;
     text-align: center;
