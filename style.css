@@ -1089,39 +1089,49 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
    ============================================================ */
 @media only screen and (max-width: 600px) {
 
-  /* ── Header ── */
+  /* ────────────────────────────────────────────────────────────
+     HEADER
+     Goal: compact top area, big centered logo, nav at bottom
+     ──────────────────────────────────────────────────────────── */
   #mega-header {
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
+    justify-content: center;
     width: 100%;
-    height: 400px;
-    padding: 10px 0;
+    /* Shrunk from 400px — just tall enough to hold the logo */
+    height: 140px;
+    margin-top: 0;
+    padding: 8px 0 0 0;
     overflow: visible;
   }
 
+  /* Bigger logo, tightly positioned at top */
   #main-logo {
-    height: clamp(150px, 22vw, 300px);
-    width: auto;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     pointer-events: none;
+    /* Larger than before (was clamped to 150–300px at 22vw) */
+    height: clamp(110px, 36vw, 160px);
+    width: auto;
+    top: 4px;
   }
 
+  /* Hide desktop left button */
   #left-but-cont {
     display: none;
   }
 
-  /* ── Bottom nav bar ── */
+  /* ────────────────────────────────────────────────────────────
+     BOTTOM NAV BAR
+     Fixed to bottom, frosted glass effect
+     ──────────────────────────────────────────────────────────── */
   #rs-cont {
     position: fixed;
     bottom: 0;
-    right: 0;
     left: 0;
+    right: 0;
     top: auto;
     width: 100%;
     max-width: 100%;
@@ -1130,32 +1140,58 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
     align-items: center;
     gap: 24px;
     margin: 0;
-    padding: 10px 0 40px 0;
-    background-color: rgba(30, 28, 28, 0.55);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    padding: 10px 0 30px 0;
+    background-color: rgba(22, 20, 20, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     z-index: 100;
   }
 
-  /* ── Nav icon sizes ── */
+  /* Nav icon sizes */
   .right-but-cont svg,
   #mode-toggle-btn svg,
   #album-mode-btn svg {
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
   }
 
-  /* ── Main content padding (avoid bottom nav overlap) ── */
+  /* ────────────────────────────────────────────────────────────
+     MAIN CONTAINER
+     Push everything up close under the logo
+     ──────────────────────────────────────────────────────────── */
   .main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -100px;
-    min-height: 0;
+    /* Pulled up tightly under the now-shorter header */
+    margin-top: 0;
     padding-bottom: 90px;
+    gap: 0;
   }
 
-  /* ── Version label ── */
+  /* Reduce space under "Guess the Ye song" title */
+  #guess-title {
+    font-size: 18px;
+    padding-bottom: 6px;
+    padding-top: 4px;
+  }
+
+  /* Shrink input + button gap */
+  #search-input { margin-block: 6px; }
+
+  #guess-button {
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  #results-button {
+    margin-bottom: 8px;
+  }
+
+  /* ────────────────────────────────────────────────────────────
+     VERSION LABEL
+     Sits inside bottom nav bar area
+     ──────────────────────────────────────────────────────────── */
   #version-label {
     position: fixed !important;
     bottom: 6px !important;
@@ -1165,114 +1201,181 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
     background: none !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    padding: 6px 0 0 0 !important;
-    font-size: 10px !important;
+    padding: 0 !important;
+    font-size: 9px !important;
     font-family: SYNE !important;
     z-index: 102 !important;
     pointer-events: none !important;
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
   }
 
-  /* ── Results table — MOBILE FIX ── */
+  /* ────────────────────────────────────────────────────────────
+     RESULTS TABLE
+     Match the reference image exactly:
+       - Full viewport width, no side padding
+       - Cells smooshed together (border-spacing: 0, no cell gaps)
+       - Song + Features wrap to 2 lines, narrow
+       - Album art is a tight square flush in its cell
+       - Track #, Length are minimal width
+       - Color glows on green/yellow preserved
+     ──────────────────────────────────────────────────────────── */
 
-  /* Wrapper: centered when empty, scrollable when rows overflow */
+  /* Outer wrapper — fills width, scrolls horizontally if needed */
   #result-container {
-    margin-top: 10px;
+    width: 100%;
+    padding: 0;
+    margin-top: 4px;
     overflow-x: auto;
     overflow-y: visible;
     -webkit-overflow-scrolling: touch;
-    justify-content: center;   /* keeps header row centered before any guesses */
-    width: 100%;
-    padding-inline: 6px;
+    display: flex;
+    justify-content: center;
     box-sizing: border-box;
   }
 
-  /* Table itself — no zoom, compact font */
+  /* Table — border-collapse removes all inter-cell gaps */
   #result-table {
-    zoom: 1;
-    font-size: 11px;
-    width: max-content;        /* lets it grow naturally, scroll kicks in if needed */
-    margin-inline: auto;       /* centers it when narrower than viewport */
-  }
-
-  /* Header row labels */
-  #table-text {
-    padding: 0 5px 4px 5px;
-    font-size: 9px;
-    white-space: nowrap;
-  }
-
-  /* All cells: tight vertical padding so rows feel compact like the screenshot */
-  td {
-    padding: 0px 5px;
-    line-height: 1.1;
-  }
-
-  /* Song name — narrow, allow wrapping to two short lines */
-  .song-cell {
-    min-width: 72px;
-    max-width: 90px;
-    padding-inline: 5px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 98vw;          /* almost full viewport width */
+    table-layout: fixed;  /* enables controlled column widths */
     font-size: 10px;
-    word-break: break-word;
-    white-space: normal;
-    vertical-align: middle;
+    margin: 0 auto;
   }
 
-  /* Song title <p> inside cell */
+  /* Column widths — must add up to roughly 98vw */
+  /* Song       ~25%  */
+  /* Album      ~16%  */
+  /* Track #    ~10%  */
+  /* Length     ~16%  */
+  /* Features   ~33%  */
+  #result-table colgroup,
+  #result-table col { /* fallback if no colgroup in HTML */ }
+
+  /* Header cells */
+  #result-table th,
+  #table-text {
+    font-size: 9px;
+    padding: 4px 2px 4px 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid var(--seccol);
+    text-align: center;
+  }
+
+  /* Target each column by position since there are no col classes on th */
+  #result-table tr th:nth-child(1) { width: 25%; } /* Song     */
+  #result-table tr th:nth-child(2) { width: 16%; } /* Album    */
+  #result-table tr th:nth-child(3) { width: 10%; } /* #        */
+  #result-table tr th:nth-child(4) { width: 16%; } /* Length   */
+  #result-table tr th:nth-child(5) { width: 33%; } /* Features */
+
+  /* All data cells — zero padding, border-collapse handles spacing */
+  td {
+    padding: 3px 2px;
+    border: 1px solid rgba(254, 250, 239, 0.3);
+    vertical-align: middle;
+    text-align: center;
+    line-height: 1.15;
+    overflow: hidden;
+  }
+
+  /* ── Song cell ── */
+  .song-cell {
+    font-size: 10px;
+    white-space: normal;
+    word-break: break-word;
+    padding: 3px 3px;
+    min-width: 0;
+  }
+
+  .song-cell p,
   .song-cell .song-title {
     font-size: 10px;
-    line-height: 1.2;
+    line-height: 1.15;
+    margin: 0;
+    word-break: break-word;
   }
 
-  /* Album cell — square thumbnail, no wasted space */
+  /* ── Album art cell ── */
+  /* In the image, album cell is: art fills almost entire cell, arrow beside it */
   .album-cell {
-    max-width: 52px;
-    min-width: 52px;
     padding: 2px;
+    min-width: 0;
+    max-width: none;
   }
 
   .album-cell-inner {
-    max-width: 48px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    max-width: none;
+    width: 100%;
   }
 
   img.album-logo {
-    width: 36px;
-    height: 36px;
+    /* Fill almost the full cell height — rows are ~44px naturally */
+    width: 38px;
+    height: 38px;
+    object-fit: cover;
+    display: block;
+    flex-shrink: 0;
   }
 
-  /* Track # and length — tight */
-  .track-cell,
-  .length-cell {
-    min-width: 36px;
+  /* The up/down arrow text that sits next to album art */
+  td.up::after,
+  td.down::after {
+    font-size: 9px;
+    width: auto;
+  }
+
+  /* ── Track number cell ── */
+  .track-cell {
     font-size: 10px;
     white-space: nowrap;
-    padding-inline: 4px;
+    min-width: 0;
+    padding: 3px 1px;
   }
 
-  /* Features — allow wrapping, reasonably narrow */
-  .features-cell {
-    min-width: 60px;
-    max-width: 80px;
-    padding-inline: 5px;
+  /* ── Length cell ── */
+  .length-cell {
     font-size: 10px;
-    word-break: break-word;
-    white-space: normal;
-    vertical-align: middle;
+    white-space: nowrap;
+    min-width: 0;
+    padding: 3px 2px;
   }
 
-  /* ── End card ── */
-  #end-card-title   { font-size: 36px; }
-  #super-div        { width: 80vw; }
+  /* ── Features cell ── */
+  .features-cell {
+    font-size: 9px;
+    white-space: normal;
+    word-break: break-word;
+    padding: 3px 3px;
+    min-width: 0;
+    line-height: 1.2;
+  }
+
+  /* ── Glow on colored cells (keep from desktop) ── */
+  td.green  { box-shadow: inset 0 0 8px rgba(77, 170, 49, 0.5); }
+  td.yellow { box-shadow: inset 0 0 8px rgba(204, 171, 23, 0.5); }
+
+  /* ────────────────────────────────────────────────────────────
+     END CARD
+     ──────────────────────────────────────────────────────────── */
+  #end-card-title   { font-size: 32px; }
+  #super-div        { width: 92vw; }
   #end-card         { width: 100%; }
   .stat-container   { width: 100%; }
   #mystery-song-img { width: 50vw; }
-
-  /* ── Division image ── */
   #divisions-img    { zoom: 0.6; }
 
-  /* ── Intro card ── */
-  #intro-card-back  { align-items: flex-start; }
+  /* ────────────────────────────────────────────────────────────
+     INTRO / HELP CARD
+     ──────────────────────────────────────────────────────────── */
+  #intro-card-back { align-items: flex-start; }
 
   #intro-card {
     margin-top: 16px;
@@ -1280,7 +1383,7 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
   }
 
   #intro-card-inner {
-    margin-bottom: 164px;
+    margin-bottom: 100px;
     background-color: #202020e7;
     border-radius: 10px;
     padding-top: 16px;
@@ -1298,7 +1401,9 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
     height: auto;
   }
 
-  /* ── Album mode card grids ── */
+  /* ────────────────────────────────────────────────────────────
+     ALBUM MODE CARD GRIDS
+     ──────────────────────────────────────────────────────────── */
   #custom-album-grid  { grid-template-columns: repeat(4, 1fr); }
   #preview-album-grid { grid-template-columns: repeat(4, 1fr); }
 
