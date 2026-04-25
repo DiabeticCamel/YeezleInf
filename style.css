@@ -1174,27 +1174,92 @@ a.poet, a.poet:visited, small { font-size: 12px; line-height: 14px; }
   }
 
   /* ── Results table — MOBILE FIX ── */
-  /* Remove zoom: 0.5 and make table scrollable + readable */
-  #result-table {
-    zoom: 1;
-    font-size: 11px;
-  }
 
+  /* Wrapper: centered when empty, scrollable when rows overflow */
   #result-container {
     margin-top: 10px;
     overflow-x: auto;
-    overflow-y: auto;
+    overflow-y: visible;
     -webkit-overflow-scrolling: touch;
-    justify-content: flex-start;
+    justify-content: center;   /* keeps header row centered before any guesses */
+    width: 100%;
+    padding-inline: 6px;
+    box-sizing: border-box;
   }
 
-  /* Table column sizing */
-  #table-text       { padding: 0 6px 5px 6px; font-size: 10px; }
-  td                { padding: 2px 4px; }
-  .song-cell        { min-width: 80px; padding-inline: 6px; }
-  .features-cell    { min-width: 70px; padding-inline: 6px; }
-  .album-cell       { max-width: 64px; }
-  img.album-logo    { width: 40px; height: 40px; }
+  /* Table itself — no zoom, compact font */
+  #result-table {
+    zoom: 1;
+    font-size: 11px;
+    width: max-content;        /* lets it grow naturally, scroll kicks in if needed */
+    margin-inline: auto;       /* centers it when narrower than viewport */
+  }
+
+  /* Header row labels */
+  #table-text {
+    padding: 0 5px 4px 5px;
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
+  /* All cells: tight vertical padding so rows feel compact like the screenshot */
+  td {
+    padding: 0px 5px;
+    line-height: 1.1;
+  }
+
+  /* Song name — narrow, allow wrapping to two short lines */
+  .song-cell {
+    min-width: 72px;
+    max-width: 90px;
+    padding-inline: 5px;
+    font-size: 10px;
+    word-break: break-word;
+    white-space: normal;
+    vertical-align: middle;
+  }
+
+  /* Song title <p> inside cell */
+  .song-cell .song-title {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  /* Album cell — square thumbnail, no wasted space */
+  .album-cell {
+    max-width: 52px;
+    min-width: 52px;
+    padding: 2px;
+  }
+
+  .album-cell-inner {
+    max-width: 48px;
+  }
+
+  img.album-logo {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Track # and length — tight */
+  .track-cell,
+  .length-cell {
+    min-width: 36px;
+    font-size: 10px;
+    white-space: nowrap;
+    padding-inline: 4px;
+  }
+
+  /* Features — allow wrapping, reasonably narrow */
+  .features-cell {
+    min-width: 60px;
+    max-width: 80px;
+    padding-inline: 5px;
+    font-size: 10px;
+    word-break: break-word;
+    white-space: normal;
+    vertical-align: middle;
+  }
 
   /* ── End card ── */
   #end-card-title   { font-size: 36px; }
