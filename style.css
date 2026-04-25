@@ -440,20 +440,25 @@ tr {
  * The <th colspan="2">Album</th> header spans both columns visually.
  */
 
-/* Art cell: zero padding, overflow hidden so image crops cleanly */
+/* Art cell: relative container so img can be absolute */
 .album-art-cell {
   padding: 0;
   overflow: hidden;
   vertical-align: middle;
+  position: relative;
 }
 
-/* Image fills the entire art cell — cropped square */
+/* Image fills the entire art cell absolutely — zero grey gaps ever */
 img.album-logo {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  min-height: 55px;
   object-fit: cover;
   display: block;
+  margin: 0;
+  padding: 0;
 }
 
 /* Arrow cell: colored background, centered arrow glyph only */
@@ -1075,15 +1080,12 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
      ────────────────────────────────────────── */
   #mega-header {
     margin-top: 0;
-    /* 10× more top padding: was 6px → 60px */
-    padding-top: 60px;
+    padding-top: 30px;
     padding-bottom: 0;
-    /* height = logo width × aspect ratio (~0.55) + top padding */
-    height: calc(4 / 7 * 1.2 * 100vw * 0.55 + 60px);
+    height: calc(4 / 7 * 1.2 * 100vw * 0.55 + 30px);
     position: relative;
   }
 
-  /* Logo = 4/7 × 1.2 of screen width, centered, sits below the top padding */
   #main-logo {
     position: absolute;
     left: 50%;
@@ -1093,7 +1095,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     max-width: 384px;
     height: auto;
     pointer-events: none;
-    top: 60px;
+    top: 30px;
   }
 
   /* Hide desktop left-side button on mobile */
@@ -1138,30 +1140,33 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding-bottom: 90px;
   }
 
-  /* Guess title — more breathing room below logo */
+  /* Guess title — vertically centered between logo bottom and bar top */
   #guess-title {
     font-size: 26px;
-    margin-top: 14px;
+    margin-top: 10px;
     margin-bottom: 10px;
     padding-bottom: 0;
   }
 
-  /* Input box — centered, no rounded corners, more space above */
+  /* Guess bar — shorter width, asymmetric margins so text reads as centered
+     More margin on left (optical centering trick): left 8vw, right 14vw */
   .autocomplete {
-    display: flex;
-    justify-content: center;
-    width: 92vw !important;
-    max-width: 420px;
+    display: block;
+    width: 78vw !important;
+    max-width: 340px;
+    margin-left: 8vw !important;
+    margin-right: 14vw !important;
   }
 
   #search-input {
-    width: 100%;
-    max-width: 420px;
+    width: 100% !important;
     height: 40px;
     font-size: 16px;
     border-radius: 0 !important;
     box-sizing: border-box;
-    margin-top: 8px;
+    padding-left: 14px;
+    padding-right: 8px;
+    margin-top: 0;
     margin-bottom: 4px;
     display: block;
   }
@@ -1221,7 +1226,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   }
 
   /* ── Column widths (6 physical columns) — total = 100% ──
-     Song 22 | Art 22 | Arrow 4 | # 10 | Length 21 | Features 21
+     Song 22 | Art 24 | Arrow 3 | # 10 | Length 20 | Features 21
      ── */
   /* Col 1 — Song */
   #result-table th:nth-child(1),
@@ -1230,11 +1235,11 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   }
   /* Col 2 — Album art */
   #result-table td:nth-child(2) {
-    width: 22%;
+    width: 24%;
   }
-  /* Col 3 — Album arrow: slim, just enough for one glyph */
+  /* Col 3 — Album arrow: absolute minimum — one glyph */
   #result-table td:nth-child(3) {
-    width: 4%;
+    width: 3%;
   }
   /* Col 4 — Track # */
   #result-table th:nth-child(3),
@@ -1244,7 +1249,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   /* Col 5 — Length */
   #result-table th:nth-child(4),
   #result-table td:nth-child(5) {
-    width: 21%;
+    width: 20%;
   }
   /* Col 6 — Features */
   #result-table th:nth-child(5),
@@ -1298,20 +1303,25 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     word-break: break-word;
   }
 
-  /* ── Album art cell — image fills the ENTIRE cell, cropped ── */
+  /* ── Album art cell — img absolutely fills the cell, zero gap ── */
   .album-art-cell {
     padding: 0 !important;
     overflow: hidden;
     vertical-align: middle;
     height: 70px;
+    position: relative; /* anchor for absolute img */
   }
 
   img.album-logo {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
     width: 100% !important;
-    height: 70px !important;
+    height: 100% !important;
     object-fit: cover !important;
     display: block;
-    min-height: 0;
+    margin: 0;
+    padding: 0;
   }
 
   /* ── Album arrow cell — as slim as possible, just the glyph ── */
