@@ -338,8 +338,7 @@ header {
    9. GUESS TITLE & INPUT
    ============================================================ */
 #guess-title {
-  padding-bottom: 4px;
-  padding-top: 4px;
+  padding-bottom: 15px;
   color: var(--seccol);
   font-family: SYNE;
   font-size: 24px;
@@ -387,7 +386,7 @@ figcaption      { text-align: center; font-size: 20px; }
   table-layout: fixed;
   word-wrap: break-word;
   width: fit-content;
-  margin-top: 4px;
+  margin-top: 10px;
   border-radius: 1px;
   border-collapse: separate;
   border-spacing: 2px;
@@ -438,11 +437,9 @@ tr {
 }
 
 img.album-logo {
-  width: 100%;
-  height: 100%;
-  min-height: 60px;
-  object-fit: cover;
-  display: block;
+  width: 60px;
+  height: 60px;
+  object-fit: scale-down;
 }
 
 .album-arrow-td {
@@ -454,9 +451,9 @@ img.album-logo {
   padding: 0;
 }
 
-/* legacy — no longer used but kept safe */
-.album-cell     { padding: 0; overflow: hidden; vertical-align: middle; }
-.album-art-div  { position: relative; overflow: hidden; }
+/* legacy */
+.album-cell      { padding: 0; overflow: hidden; vertical-align: middle; }
+.album-art-div   { position: relative; overflow: hidden; }
 .album-arrow-div { display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: white; }
 
 .features-cell {
@@ -490,7 +487,6 @@ td.yellow {
   box-shadow: 0 5px 30px var(--yellow);
 }
 
-/* Arrow suffix classes kept for any legacy use */
 td.down::after { content: " \2193"; width: 40px; }
 td.up::after   { content: " \2191"; width: 40px; }
 
@@ -518,9 +514,8 @@ button[disabled] { background-color: #aaa; }
 #guess-button {
   color: var(--maincol);
   background-color: var(--seccol);
-  margin-bottom: 4px;
-  margin-top: 4px;
-  padding: 7px 20px;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 #guess-button[disable] {
@@ -548,7 +543,7 @@ button[disabled] { background-color: #aaa; }
   background-color: rgba(255, 255, 255, 0);
   height: 30px;
   font-size: 20px;
-  margin-bottom: 2px;
+  margin-bottom: 25px;
   margin-top: 0;
   padding-bottom: 5px;
   color: rgba(255, 255, 255, 0.999);
