@@ -1213,7 +1213,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     font-family: SYNE !important;
     z-index: 102 !important;
     pointer-events: none !important;
-    color: rgba(255, 255, 255, 0.4) !important;
+    color: rgba(255, 255, 255, 1) !important;
   }
 
   /* ── RESULT CONTAINER — THE ONLY SCROLLING REGION ─────────
