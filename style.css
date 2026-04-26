@@ -104,6 +104,8 @@ body {
   flex-direction: row;
   margin-top: 20px;
   position: relative;
+  /* tall enough to contain the absolutely-positioned logo */
+  height: clamp(120px, 19vw, 300px);
 }
 
 #mega-header svg { width: 60%; }
@@ -1054,7 +1056,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     height: calc(4 / 7 * 1.2 * 100vw * 0.55 + 30px);
     position: relative;
   }
-
   #main-logo {
     position: absolute;
     left: 50%;
