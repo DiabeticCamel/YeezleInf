@@ -378,12 +378,17 @@ figcaption      { text-align: center; font-size: 20px; }
 #table-text {
   color: var(--seccol);
   font-size: small;
-  padding: 0 40px 5px 40px;
+  padding: 0 30px 5px 30px;
+  white-space: nowrap;
 }
 
 th {
   border-bottom: solid 1px var(--seccol);
+  border-left: none;
+  border-right: none;
+  border-top: none;
   padding-inline: 10px;
+  white-space: nowrap;
 }
 
 td {
@@ -399,6 +404,10 @@ tr {
   opacity: 100;
   overflow: visible;
   box-shadow: 0 4px 20px -10px rgb(255, 255, 255);
+}
+
+thead tr {
+  box-shadow: none;
 }
 
 
