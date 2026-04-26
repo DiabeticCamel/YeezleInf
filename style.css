@@ -1251,12 +1251,39 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     table-layout: fixed;
   }
 
-  /* Sticky header — stays visible while rows scroll beneath */
-  #result-table thead tr th {
+  /* Header row has no gaps between cells — one solid bar */
+  #result-table thead {
     position: sticky;
     top: 0;
     z-index: 2;
+  }
+
+  #result-table thead tr {
+    border-spacing: 0;
+  }
+
+  /* Sticky header — one solid bar, no glow bleed from rows beneath */
+  #result-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+  }
+
+  #result-table thead tr th {
     background-color: #2a2a2a;
+    border-bottom: 1px solid var(--seccol);
+    box-shadow: none;
+    /* Clip any colored-cell glow that tries to creep upward */
+    overflow: hidden;
+  }
+
+  /* Solid backdrop behind the entire header row so nothing bleeds through */
+  #result-table thead::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #2a2a2a;
+    z-index: -1;
   }
 
   /* Header cells */
