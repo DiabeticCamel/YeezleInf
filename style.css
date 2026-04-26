@@ -346,7 +346,7 @@ header {
   font-weight: 500;
 }
 
-figcaption     { text-align: center; font-size: 20px; }
+figcaption      { text-align: center; font-size: 20px; }
 #mystery-figure { height: 220px; }
 #show-sil       { color: var(--seccol); }
 
@@ -431,20 +431,6 @@ tr {
   padding-inline: 10px;
 }
 
-/*
- * ALBUM COLUMN — split into TWO separate <td> elements (no wrapper div):
- *
- * .album-art-cell  — col 2 — square, cropped art fills 100% of cell
- * .album-arrow-td  — col 3 — slim cell, colored by JS, shows ↑ or ↓
- *
- * The <th colspan="2">Album</th> header spans both columns visually.
- */
-
-/*
- * ALBUM COLUMN — two separate <td> elements per row:
- *   td.album-art-cell  — image fills entire cell, cropped
- *   td.album-arrow-td  — slim colored cell with ↑ or ↓
- */
 .album-art-cell {
   padding: 0;
   overflow: hidden;
@@ -469,8 +455,8 @@ img.album-logo {
 }
 
 /* legacy — no longer used but kept safe */
-.album-cell { padding: 0; overflow: hidden; vertical-align: middle; }
-.album-art-div { position: relative; overflow: hidden; }
+.album-cell     { padding: 0; overflow: hidden; vertical-align: middle; }
+.album-art-div  { position: relative; overflow: hidden; }
 .album-arrow-div { display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: white; }
 
 .features-cell {
@@ -1075,87 +1061,191 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
    ============================================================ */
 @media only screen and (max-width: 600px) {
 
- /* ── BODY ── */
-body {
-  display: flex;
-  flex-direction: column;
-  height: 100dvh;
-  overflow: hidden;
-}
-
-/* ── HEADER ── */
-#mega-header {
-  flex-shrink: 0;
-  margin-top: 0;
-  padding-top: 30px;
-  padding-bottom: 0;
-  height: calc(4 / 7 * 1.2 * 100vw * 0.55 + 30px);
-  position: relative;
-}
-
-/* ── MAIN CONTAINER ──
-   Takes all remaining space between header and nav bar.
-   padding-bottom: 76px keeps content above the fixed nav. */
-.main-container {
-  flex: 1 1 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  padding-bottom: 76px;
-}
-
-/* ── STATIONARY ELEMENTS — must not grow/shrink ── */
-#guess-title {
-  flex-shrink: 0;
-  font-size: 26px;
-  margin-top: 6px;
-  margin-bottom: 18px;
-  padding-bottom: 0;
-}
-
-.autocomplete {
-  flex-shrink: 0;
-  display: block;
-  width: 70vw !important;
-  max-width: 320px;
-  margin-left: 14vw !important;
-  margin-right: 8vw !important;
-}
-
-#guess-button {
-  flex-shrink: 0;
-  padding: 11px 32px;
-  font-size: 18px;
-  margin-top: 6px;
-  margin-bottom: 6px;
-}
-
-/* ── RESULT CONTAINER — this is the ONLY thing that scrolls ── */
-#result-container {
-  flex: 1 1 0;
-  min-height: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  margin-top: 2px;
-  padding: 0 28px 8px;
-  box-sizing: border-box;
-}
-
-  /* Small bottom margin on the table so the last row never hides behind anything */
-  #result-table {
-    margin-bottom: 8px;
+  /* ── BODY ──────────────────────────────────────────────────
+     Full-height flex column. The header and inputs sit at the
+     top; .main-container fills whatever is left; the fixed
+     bottom nav sits on top of everything.
+     ────────────────────────────────────────── */
+  body {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    overflow: hidden;
+    padding-top: 0;  /* cancel the desktop 12px top pad */
   }
 
+  /* ── HEADER ────────────────────────────────────────────────
+     Logo is (4/7 × 1.2) of screen width, header height matches
+     the logo's natural height, with generous top padding.
+     flex-shrink:0 keeps it from being squeezed by the table.
+     ────────────────────────────────────────── */
+  #mega-header {
+    flex-shrink: 0;
+    margin-top: 0;
+    padding-top: 30px;
+    padding-bottom: 0;
+    height: calc(4 / 7 * 1.2 * 100vw * 0.55 + 30px);
+    position: relative;
+  }
+
+  #main-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    width: calc(4 / 7 * 1.2 * 100vw);
+    max-width: 384px;
+    height: auto;
+    pointer-events: none;
+    top: 30px;
+  }
+
+  /* Hide desktop left-side button on mobile */
+  #left-but-cont {
+    display: none;
+  }
+
+  /* ── BOTTOM NAV BAR ────────────────────────────────────────
+     Fixed to bottom, full width, frosted glass.
+     Total height: 15px top pad + 36px icons + 25px bottom pad = 76px
+     ────────────────────────────────────────── */
+  #rs-cont {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: auto;
+    width: 100%;
+    max-width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin: 0;
+    padding: 15px 0 25px 0;
+    background-color: rgba(20, 20, 20, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+
+  .right-but-cont svg,
+  #mode-toggle-btn svg,
+  #album-mode-btn svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* ── MAIN CONTENT AREA ─────────────────────────────────────
+     Takes all remaining height between the header and the
+     screen bottom. padding-bottom pushes content above the
+     fixed nav bar (76px tall).
+     ────────────────────────────────────────── */
+  .main-container {
+    flex: 1 1 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 76px;
+  }
+
+  /* ── STATIONARY UI ELEMENTS ────────────────────────────────
+     These must never grow or shrink — they stay pinned above
+     the scrolling table.
+     ────────────────────────────────────────── */
+  #guess-title {
+    flex-shrink: 0;
+    font-size: 26px;
+    margin-top: 6px;
+    margin-bottom: 18px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .autocomplete {
+    flex-shrink: 0;
+    display: block;
+    width: 70vw !important;
+    max-width: 320px;
+    margin-left: 14vw !important;
+    margin-right: 8vw !important;
+  }
+
+  #search-input {
+    width: 100% !important;
+    height: 40px;
+    font-size: 16px;
+    border-radius: 0 !important;
+    box-sizing: border-box;
+    padding-left: 14px;
+    padding-right: 8px;
+    margin-top: 0;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  #guess-button {
+    flex-shrink: 0;
+    padding: 11px 32px;
+    font-size: 18px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  /* ── VERSION LABEL ─────────────────────────────────────────
+     Sits centred inside the bottom nav bar, behind the icons.
+     ────────────────────────────────────────── */
+  #version-label {
+    position: fixed !important;
+    bottom: 6px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+    background: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+    font-size: 9px !important;
+    font-family: SYNE !important;
+    z-index: 102 !important;
+    pointer-events: none !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+  }
+
+  /* ── RESULT CONTAINER — THE ONLY SCROLLING REGION ─────────
+     flex:1 fills all space left after the stationary elements.
+     min-height:0 is required for flex children to scroll
+     correctly. overflow-y:auto enables the scroll.
+     ────────────────────────────────────────── */
+  #result-container {
+    flex: 1 1 0;
+    min-height: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 2px;
+    padding: 0 28px 8px;
+    box-sizing: border-box;
+  }
+
+  /* ── RESULT TABLE ──────────────────────────────────────────
+     6 physical columns. Exact ratios from reference design:
+     Song 23.7% | Art 16.3% | Arrow 5.8% | # 14.5% | Length 18.5% | Features 21.2%
+     Side margins 28px each from #result-container padding.
+     Row height 62px.
+     ────────────────────────────────────────── */
   #result-table {
     width: 100%;
     margin: 0 auto;
+    margin-bottom: 8px;
     border-collapse: separate;
     border-spacing: 2px;
     table-layout: fixed;
@@ -1169,10 +1259,7 @@ body {
     background-color: #2a2a2a;
   }
 
-  /* Column widths are set via <colgroup> in the HTML — colgroup takes
-     authority over table-layout:fixed regardless of colspan on headers. */
-
-  /* Header row */
+  /* Header cells */
   #table-text,
   #result-table th {
     font-size: 13px;
@@ -1183,7 +1270,7 @@ body {
     color: var(--seccol);
   }
 
-  /* All data cells: base sizing — 62px height (77 - 15) */
+  /* All data cells */
   td {
     padding: 2px;
     font-size: 13px;
@@ -1218,7 +1305,7 @@ body {
     word-break: break-word;
   }
 
-  /* ── Album art cell — img fills via normal flow, no absolute ── */
+  /* ── Album art cell ── */
   .album-art-cell {
     padding: 0 !important;
     overflow: hidden;
@@ -1235,7 +1322,7 @@ body {
     padding: 0;
   }
 
-  /* ── Album arrow cell — normal font, box just wider than glyph ── */
+  /* ── Album arrow cell ── */
   .album-arrow-td {
     padding: 0 !important;
     font-size: 13px;
@@ -1274,9 +1361,7 @@ body {
     line-height: 1.2;
   }
 
-  /* ──────────────────────────────────────────
-     END CARD
-     ────────────────────────────────────────── */
+  /* ── END CARD ──────────────────────────────────────────── */
   #end-card-title   { font-size: 36px; }
   #super-div        { width: 90vw; }
   #end-card         { width: 100%; }
@@ -1284,9 +1369,7 @@ body {
   #mystery-song-img { width: 50vw; }
   #divisions-img    { zoom: 0.6; }
 
-  /* ──────────────────────────────────────────
-     INTRO / HELP CARD
-     ────────────────────────────────────────── */
+  /* ── INTRO / HELP CARD ─────────────────────────────────── */
   #intro-card-back { align-items: flex-start; }
 
   #intro-card {
@@ -1313,11 +1396,8 @@ body {
     height: auto;
   }
 
-  /* ──────────────────────────────────────────
-     ALBUM MODE CARD GRIDS
-     ────────────────────────────────────────── */
+  /* ── ALBUM MODE CARD GRIDS ─────────────────────────────── */
   #custom-album-grid  { grid-template-columns: repeat(4, 1fr); }
   #preview-album-grid { grid-template-columns: repeat(4, 1fr); }
 
-}
-/* END MOBILE */
+} /* END MOBILE */
