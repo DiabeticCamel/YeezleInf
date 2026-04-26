@@ -95,6 +95,15 @@
 
     <div id="result-container">
       <table id="result-table">
+        <!-- colgroup enforces widths with table-layout:fixed even when thead uses colspan -->
+        <colgroup>
+          <col style="width:23.7%"> <!-- Song -->
+          <col style="width:16.3%"> <!-- Album art -->
+          <col style="width:5.8%">  <!-- Album arrow -->
+          <col style="width:14.5%"> <!-- # -->
+          <col style="width:18.5%"> <!-- Length -->
+          <col style="width:21.2%"> <!-- Features -->
+        </colgroup>
         <thead>
           <tr id="result-rows">
             <th id="table-text">Song</th>
