@@ -155,7 +155,7 @@ header {
   margin-top: 1vw;
 }
 
-/* Right wing — icons pushed to the right, offset down from corner */
+/* Right wing — icons inset from right edge to match original spacing */
 #rs-cont {
   display: flex;
   flex-direction: row;
@@ -166,7 +166,7 @@ header {
   top: -20px;
   justify-content: flex-end;
   align-items: flex-start;
-  margin-right: 6px;
+  margin-right: 60px;
 }
 
 /* Version label (desktop) */
@@ -350,6 +350,10 @@ figcaption      { text-align: center; font-size: 20px; }
   margin-top: 10px;
 }
 
+
+/* Hide mobile-only table elements on desktop */
+.mobile-header { display: none; }
+.mobile-cols   { display: none; }
 
 /* ============================================================
    10. RESULTS TABLE
