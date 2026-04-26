@@ -1,31 +1,5 @@
 /* ============================================================
    InfYeezle — Stylesheet
-   Organized sections:
-     1.  Fonts
-     2.  Reset & Base
-     3.  Design Tokens (CSS Variables)
-     4.  Scrollbar
-     5.  Body & Background
-     6.  Header & Navigation
-     7.  Nav Icons & Buttons
-     8.  Main Layout
-     9.  Guess Title & Input
-    10.  Results Table
-    11.  Table Cell Types
-    12.  Table Color States
-    13.  Buttons
-    14.  End-Card Overlay
-    15.  Stats Panel
-    16.  Clipboard Toast
-    17.  Mode Card
-    18.  Donate Card
-    19.  Intro / Help Card
-    20.  Album Mode Card
-    21.  Autocomplete
-    22.  Utility Classes
-    23.  Misc
-    24.  Desktop intro override (min-width: 700px)
-    25.  MOBILE ONLY (max-width: 600px)
    ============================================================ */
 
 
@@ -67,7 +41,7 @@ g { background-color: green; }
 
 
 /* ============================================================
-   3. DESIGN TOKENS (CSS Variables)
+   3. DESIGN TOKENS
    ============================================================ */
 :root {
   --yellow:     #ccab17;
@@ -118,11 +92,15 @@ body {
 /* ============================================================
    6. HEADER & NAVIGATION
    ============================================================ */
+
+/* The header uses justify-content: center so the logo (absolute,
+   left:50%) centres itself, while the two wing divs each occupy
+   30 vw and push the icons to the far edges. */
 #mega-header {
   display: flex;
   align-items: flex-start;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: row;
   margin-top: 20px;
   position: relative;
@@ -136,13 +114,14 @@ header {
   justify-content: space-between;
 }
 
-/* Large centered logo — sits between the two nav wings */
+/* Centred logo — absolutely positioned so it doesn't affect
+   the flex layout of the two nav wings */
 #main-logo {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
-  width: clamp(260px, 38vw, 560px);
+  width: clamp(220px, 32vw, 480px);
   height: auto;
   top: 0;
 }
@@ -163,27 +142,30 @@ header {
   font-size: 48px;
 }
 
-/* Left side — spacer to balance the right nav */
+/* Left wing — invisible spacer to balance the right nav */
 #left-but-cont {
   display: flex;
   width: 30vw;
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 290px;
-  padding-top: 16px;
-  padding-left: 16px;
+  position: relative;
+  top: -20px;
+  margin-top: 1vw;
 }
 
-/* Right side nav icons */
+/* Right wing — icon row, offset up slightly to sit near the corner */
 #rs-cont {
   display: flex;
   flex-direction: row;
+  margin-top: 2vw;
   width: 30vw;
   max-width: 290px;
+  position: relative;
+  top: -20px;
   justify-content: flex-end;
   align-items: flex-start;
-  padding-top: 16px;
-  padding-right: 16px;
+  margin-right: 6px;
 }
 
 /* Version label (desktop) */
@@ -227,7 +209,6 @@ header {
 .material-icons.md-48  { font-size: 48px; }
 .material-icons.md-cus { font-size: 40px; }
 
-/* Icon sizing in nav */
 .right-but-cont svg,
 #mode-toggle-btn svg,
 #album-mode-btn svg {
@@ -302,7 +283,6 @@ header {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  margin-top: clamp(180px, 22vw, 320px);
 }
 
 .outer-container {
@@ -447,7 +427,6 @@ img.album-logo {
   padding: 0;
 }
 
-/* legacy */
 .album-cell      { padding: 0; overflow: hidden; vertical-align: middle; }
 .album-art-div   { position: relative; overflow: hidden; }
 .album-arrow-div { display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: white; }
@@ -1059,11 +1038,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
    ============================================================ */
 @media only screen and (max-width: 600px) {
 
-  /* ── BODY ──────────────────────────────────────────────────
-     Full-height flex column. The header and inputs sit at the
-     top; .main-container fills whatever is left; the fixed
-     bottom nav sits on top of everything.
-     ────────────────────────────────────────── */
   body {
     display: flex;
     flex-direction: column;
@@ -1072,11 +1046,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding-top: 0;
   }
 
-  /* ── HEADER ────────────────────────────────────────────────
-     Logo is (4/7 × 1.2) of screen width, header height matches
-     the logo's natural height, with generous top padding.
-     flex-shrink:0 keeps it from being squeezed by the table.
-     ────────────────────────────────────────── */
   #mega-header {
     flex-shrink: 0;
     margin-top: 0;
@@ -1098,15 +1067,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     top: 30px;
   }
 
-  /* Hide desktop left-side button on mobile */
   #left-but-cont {
     display: none;
   }
 
-  /* ── BOTTOM NAV BAR ────────────────────────────────────────
-     Fixed to bottom, full width, frosted glass.
-     Total height: 15px top pad + 36px icons + 25px bottom pad = 76px
-     ────────────────────────────────────────── */
   #rs-cont {
     position: fixed;
     bottom: 0;
@@ -1134,11 +1098,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     height: 36px;
   }
 
-  /* ── MAIN CONTENT AREA ─────────────────────────────────────
-     Takes all remaining height between the header and the
-     screen bottom. padding-bottom pushes content above the
-     fixed nav bar (76px tall).
-     ────────────────────────────────────────── */
   .main-container {
     flex: 1 1 0;
     min-height: 0;
@@ -1151,10 +1110,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     margin-top: 0;
   }
 
-  /* ── STATIONARY UI ELEMENTS ────────────────────────────────
-     These must never grow or shrink — they stay pinned above
-     the scrolling table.
-     ────────────────────────────────────────── */
   #guess-title {
     flex-shrink: 0;
     font-size: 26px;
@@ -1194,9 +1149,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     margin-bottom: 6px;
   }
 
-  /* ── VERSION LABEL ─────────────────────────────────────────
-     Sits centred inside the bottom nav bar, behind the icons.
-     ────────────────────────────────────────── */
   #version-label {
     position: fixed !important;
     bottom: 6px !important;
@@ -1215,11 +1167,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: rgba(255, 255, 255, 1) !important;
   }
 
-  /* ── RESULT CONTAINER — THE ONLY SCROLLING REGION ─────────
-     flex:1 fills all space left after the stationary elements.
-     min-height:0 is required for flex children to scroll
-     correctly. overflow-y:auto enables the scroll.
-     ────────────────────────────────────────── */
   #result-container {
     flex: 1 1 0;
     min-height: 0;
@@ -1235,12 +1182,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     box-sizing: border-box;
   }
 
-  /* ── RESULT TABLE ──────────────────────────────────────────
-     6 physical columns. Exact ratios from reference design:
-     Song 23.7% | Art 16.3% | Arrow 5.8% | # 14.5% | Length 18.5% | Features 21.2%
-     Side margins 28px each from #result-container padding.
-     Row height 62px.
-     ────────────────────────────────────────── */
   #result-table {
     width: 100%;
     margin: 0 auto;
@@ -1250,10 +1191,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     table-layout: fixed;
   }
 
-  /* Sticky header — each th sticks individually.
-     outline: 2px solid fills the border-spacing gaps between cells
-     so the header reads as one solid bar with no visible seams.
-     The td.green/yellow box-shadow can't bleed past the solid bg. */
   #result-table thead tr th {
     position: sticky;
     top: 0;
@@ -1262,7 +1199,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     outline: 2px solid #2a2a2a;
   }
 
-  /* Header cells */
   #table-text,
   #result-table th {
     font-size: 13px;
@@ -1273,7 +1209,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: var(--seccol);
   }
 
-  /* All data cells */
   td {
     padding: 2px;
     font-size: 13px;
@@ -1291,7 +1226,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     text-align: center;
   }
 
-  /* ── Song cell ── */
   .song-cell {
     font-size: 13px;
     padding: 4px 3px;
@@ -1308,7 +1242,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     word-break: break-word;
   }
 
-  /* ── Album art cell ── */
   .album-art-cell {
     padding: 0 !important;
     overflow: hidden;
@@ -1325,7 +1258,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding: 0;
   }
 
-  /* ── Album arrow cell ── */
   .album-arrow-td {
     padding: 0 !important;
     font-size: 13px;
@@ -1338,7 +1270,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     white-space: nowrap;
   }
 
-  /* ── Track # cell ── */
   .track-cell {
     font-size: 13px;
     white-space: nowrap;
@@ -1346,7 +1277,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     min-width: 0;
   }
 
-  /* ── Length cell ── */
   .length-cell {
     font-size: 13px;
     white-space: nowrap;
@@ -1354,7 +1284,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     min-width: 0;
   }
 
-  /* ── Features cell ── */
   .features-cell {
     font-size: 13px;
     white-space: normal;
@@ -1364,7 +1293,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     line-height: 1.2;
   }
 
-  /* ── END CARD ──────────────────────────────────────────── */
   #end-card-title   { font-size: 36px; }
   #super-div        { width: 90vw; }
   #end-card         { width: 100%; }
@@ -1372,7 +1300,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   #mystery-song-img { width: 50vw; }
   #divisions-img    { zoom: 0.6; }
 
-  /* ── INTRO / HELP CARD ─────────────────────────────────── */
   #intro-card-back { align-items: flex-start; }
 
   #intro-card {
@@ -1399,7 +1326,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     height: auto;
   }
 
-  /* ── ALBUM MODE CARD GRIDS ─────────────────────────────── */
   #custom-album-grid  { grid-template-columns: repeat(4, 1fr); }
   #preview-album-grid { grid-template-columns: repeat(4, 1fr); }
 
