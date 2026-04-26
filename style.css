@@ -1136,10 +1136,20 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   }
 
   /* ──────────────────────────────────────────
-     MAIN CONTENT — pad bottom to clear nav bar
+     MAIN CONTENT — fixed viewport height, only table scrolls
      ────────────────────────────────────────── */
+  body {
+    overflow: hidden;
+    height: 100dvh;
+  }
+
   .main-container {
-    padding-bottom: 90px;
+    height: calc(100dvh - 70px); /* 70px = bottom nav bar height */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 0;
   }
 
   /* Guess title — sits closer to logo, more gap below toward bar */
@@ -1211,17 +1221,19 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
 
   #result-container {
     width: 100%;
+    flex: 1 1 0;        /* grows to fill all remaining space in .main-container */
+    min-height: 0;      /* required for flex children to shrink below content size */
     display: flex;
     justify-content: center;
     align-items: flex-start;
     overflow-x: hidden;
-    /* Once rows fill the viewport below the header area, only this scrolls */
-    max-height: calc(100dvh - 260px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     margin-top: 2px;
     padding: 0 28px;
     box-sizing: border-box;
+    /* bottom padding so last row clears the nav bar */
+    padding-bottom: 80px;
   }
 
   #result-table {
