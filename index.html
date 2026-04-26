@@ -96,23 +96,43 @@
     <div id="result-container">
       <table id="result-table">
         <!-- colgroup enforces widths with table-layout:fixed even when thead uses colspan -->
-        <colgroup>
-          <col style="width:23.7%"> <!-- Song -->
-          <col style="width:16.3%"> <!-- Album art -->
-          <col style="width:5.8%">  <!-- Album arrow -->
-          <col style="width:14.5%"> <!-- # -->
-          <col style="width:18.5%"> <!-- Length -->
-          <col style="width:21.2%"> <!-- Features -->
-        </colgroup>
-        <thead>
-          <tr id="result-rows">
-            <th id="table-text">Song</th>
-            <th id="table-text" colspan="2">Album</th>
-            <th id="table-text">#</th>
-            <th id="table-text">Length</th>
-            <th id="table-text">Features</th>
-          </tr>
-        </thead>
+     <!-- Desktop colgroup -->
+<colgroup class="desktop-cols">
+  <col style="width:22%">  <!-- Song -->
+  <col style="width:12%">  <!-- Album art -->
+  <col style="width:6%">   <!-- Album arrow -->
+  <col style="width:18%">  <!-- Track No. -->
+  <col style="width:18%">  <!-- Track Length -->
+  <col style="width:24%">  <!-- Features -->
+</colgroup>
+<!-- Mobile colgroup -->
+<colgroup class="mobile-cols">
+  <col style="width:23.7%">
+  <col style="width:16.3%">
+  <col style="width:5.8%">
+  <col style="width:14.5%">
+  <col style="width:18.5%">
+  <col style="width:21.2%">
+</colgroup>
+
+<thead>
+  <!-- Desktop header -->
+  <tr id="result-rows" class="desktop-header">
+    <th id="table-text">Song</th>
+    <th id="table-text" colspan="2">Album</th>
+    <th id="table-text">Track No.</th>
+    <th id="table-text">Track Length</th>
+    <th id="table-text">Features</th>
+  </tr>
+  <!-- Mobile header -->
+  <tr id="result-rows" class="mobile-header">
+    <th id="table-text">Song</th>
+    <th id="table-text" colspan="2">Album</th>
+    <th id="table-text">#</th>
+    <th id="table-text">Length</th>
+    <th id="table-text">Features</th>
+  </tr>
+</thead>
         <tbody id="result-body"></tbody>
       </table>
     </div>
