@@ -147,12 +147,12 @@ header {
   max-width: 290px;
   justify-content: flex-start;
   align-items: flex-start;
-  position: relative;
-  top: -20px;
-  margin-top: 1vw;
+  margin-top: 4vw;
 }
 
-/* Right wing — icons inset from right edge */
+/* Right wing — icons lower, natural right gap that yields to the viewport wall.
+   No position:relative/top hack — margin-top controls vertical position and
+   padding-right gives breathing room that compresses as the viewport narrows. */
 #rs-cont {
   display: flex;
   flex-direction: row;
@@ -160,10 +160,8 @@ header {
   max-width: 290px;
   justify-content: flex-end;
   align-items: flex-start;
-  position: relative;
-  top: -20px;
-  margin-top: 2vw;
-  margin-right: 60px;
+  margin-top: 4vw;
+  padding-right: 2vw;
 }
 
 /* Version label */
