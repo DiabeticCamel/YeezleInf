@@ -122,9 +122,10 @@ body {
   display: flex;
   align-items: flex-start;
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: row;
   margin-top: 20px;
+  position: relative;
 }
 
 #mega-header svg { width: 60%; }
@@ -135,13 +136,15 @@ header {
   justify-content: space-between;
 }
 
+/* Large centered logo — sits between the two nav wings */
 #main-logo {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   pointer-events: none;
-  height: clamp(100px, 18vw, 220px);
-  width: auto;
+  width: clamp(260px, 38vw, 560px);
+  height: auto;
+  top: 0;
 }
 
 #INFYEEZLE_Image {
@@ -160,7 +163,7 @@ header {
   font-size: 48px;
 }
 
-/* Left side */
+/* Left side — spacer to balance the right nav */
 #left-but-cont {
   display: flex;
   width: 30vw;
@@ -172,7 +175,7 @@ header {
   margin-top: 1vw;
 }
 
-/* Right side */
+/* Right side nav icons */
 #rs-cont {
   display: flex;
   flex-direction: row;
@@ -302,6 +305,7 @@ header {
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  margin-top: 20px;
 }
 
 .outer-container {
@@ -1147,6 +1151,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     overflow: hidden;
     padding-top: 0;
     padding-bottom: 76px;
+    margin-top: 0;
   }
 
   /* ── STATIONARY UI ELEMENTS ────────────────────────────────
