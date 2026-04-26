@@ -414,6 +414,11 @@ tr {
 /* ============================================================
    12. TABLE CELL TYPES (DESKTOP)
    ============================================================ */
+
+/* ── Desktop: album art + arrow share one seamless colored box ──
+   Both cells carry the same color class (set in JS).
+   The shared border between them is removed so they read as one unit.
+   The art image fills the left half; the arrow text sits in the right half. */
 .song-cell {
   opacity: 100;
   min-width: 15vw;
@@ -424,21 +429,24 @@ tr {
   padding: 0;
   overflow: hidden;
   vertical-align: middle;
+  border-right: none !important;  /* removes divider between the two halves */
 }
 
 img.album-logo {
-  width: 60px;
+  width: 100%;        /* fills the full width of the art cell */
   height: 60px;
-  object-fit: scale-down;
+  object-fit: cover;  /* crop-fills rather than letterboxing */
+  display: block;
 }
 
 .album-arrow-td {
   text-align: center;
   vertical-align: middle;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: bold;
   color: white;
   padding: 0;
+  border-left: none !important;   /* removes divider from the arrow side */
 }
 
 .album-cell      { padding: 0; overflow: hidden; vertical-align: middle; }
@@ -1278,6 +1286,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     overflow: hidden;
     vertical-align: middle;
     height: 62px;
+    border-right: solid 1px var(--seccol) !important;
   }
 
   img.album-logo {
@@ -1299,6 +1308,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     height: 62px;
     overflow: hidden;
     white-space: nowrap;
+    border-left: solid 1px var(--seccol) !important;
   }
 
   .track-cell {
