@@ -1214,7 +1214,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    overflow-x: auto;
+    overflow-x: hidden;
+    /* Once rows fill the viewport below the header area, only this scrolls */
+    max-height: calc(100dvh - 260px);
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     margin-top: 2px;
     padding: 0 28px;
@@ -1229,26 +1232,37 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     table-layout: fixed;
   }
 
+  /* Sticky header — stays visible while rows scroll beneath */
+  #result-table thead tr th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: #2a2a2a;
+  }
+
   /* ── Column widths — exact ratios from reference px measurements ──
      107+73+26+65+83+95 = 449px total
-     Song  107/449 = 23.8%
-     Art    73/449 = 16.3%
-     Arrow  26/449 =  5.8%
-     #      65/449 = 14.5%
-     Length 83/449 = 18.5%
-     Feat   95/449 = 21.2%   (rounds to 100.1, trim Song to 23.7)  */
-  #result-table th:nth-child(1),
+     Song  107/449 = 23.8%  → td:nth-child(1)
+     Art    73/449 = 16.3%  → td:nth-child(2)
+     Arrow  26/449 =  5.8%  → td:nth-child(3)
+     #      65/449 = 14.5%  → td:nth-child(4)
+     Length 83/449 = 18.5%  → td:nth-child(5)
+     Feat   95/449 = 21.2%  → td:nth-child(6)
+     
+     Header: colspan=2 on Album means th indices are 1,2,3,4,5
+     td widths alone drive table-layout:fixed from the first body row. */
   #result-table td:nth-child(1) { width: 23.7%; } /* Song     107px */
-  #result-table th:nth-child(2),
   #result-table td:nth-child(2) { width: 16.3%; } /* Art       73px */
-  #result-table th:nth-child(3),
   #result-table td:nth-child(3) { width: 5.8%;  } /* Arrow     26px */
-  #result-table th:nth-child(4),
   #result-table td:nth-child(4) { width: 14.5%; } /* #         65px */
-  #result-table th:nth-child(5),
   #result-table td:nth-child(5) { width: 18.5%; } /* Length    83px */
-  #result-table th:nth-child(6),
   #result-table td:nth-child(6) { width: 21.2%; } /* Features  95px */
+  /* th widths for the 5-cell header row */
+  #result-table th:nth-child(1) { width: 23.7%; }               /* Song */
+  #result-table th:nth-child(2) { width: calc(16.3% + 5.8%); }  /* Album colspan=2 */
+  #result-table th:nth-child(3) { width: 14.5%; }               /* # */
+  #result-table th:nth-child(4) { width: 18.5%; }               /* Length */
+  #result-table th:nth-child(5) { width: 21.2%; }               /* Features */
 
   /* Header row */
   #table-text,
@@ -1261,11 +1275,11 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: var(--seccol);
   }
 
-  /* All data cells: base sizing — 92px height matches reference */
+  /* All data cells: base sizing — 77px height (92 - 15) */
   td {
     padding: 2px;
     font-size: 13px;
-    height: 92px;
+    height: 77px;
     vertical-align: middle;
     text-align: center;
     word-break: break-word;
@@ -1301,12 +1315,12 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding: 0 !important;
     overflow: hidden;
     vertical-align: middle;
-    height: 92px;
+    height: 77px;
   }
 
   img.album-logo {
     width: 100% !important;
-    height: 92px !important;
+    height: 77px !important;
     object-fit: cover !important;
     display: block;
     margin: 0;
@@ -1321,11 +1335,12 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: white;
     text-align: center;
     vertical-align: middle;
-    height: 92px;
+    height: 77px;
     overflow: hidden;
     white-space: nowrap;
-  } */
-  .track-cell {
+  }
+
+  /* ── Track # cell ──
     font-size: 13px;
     white-space: nowrap;
     padding: 4px 1px;
