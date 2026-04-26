@@ -58,8 +58,8 @@ hr   { width: 100%; margin-block: 5px; }
 p    { font-family: SYNE; }
 
 center {
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
 y { background-color: yellow; }
@@ -95,7 +95,6 @@ g { background-color: green; }
 body {
   color: var(--text-color);
   min-height: 100%;
-  padding-top: 12px;
   background-image: radial-gradient(
     circle,
     #2a2a2a, #2a292a, #2a292a, #2b2829,
@@ -121,14 +120,11 @@ body {
    ============================================================ */
 #mega-header {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
   width: 100%;
-  position: relative;
-  margin-top: 0;
-  padding-top: 8px;
-  padding-bottom: 0;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 20px;
 }
 
 #mega-header svg { width: 60%; }
@@ -168,20 +164,25 @@ header {
 #left-but-cont {
   display: flex;
   width: 30vw;
-  max-width: 290px;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+  max-width: 290px;
   position: relative;
+  top: -20px;
+  margin-top: 1vw;
 }
 
 /* Right side */
 #rs-cont {
   display: flex;
   flex-direction: row;
+  margin-top: 2vw;
   width: 30vw;
   max-width: 290px;
+  position: relative;
+  top: -20px;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
   margin-right: 6px;
 }
 
@@ -301,8 +302,6 @@ header {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  margin-top: 0;
-  padding-top: 6px;
 }
 
 .outer-container {
@@ -378,18 +377,14 @@ figcaption      { text-align: center; font-size: 20px; }
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-x: auto;
-  margin-top: 4px;
 }
 
 #result-table {
-  table-layout: fixed;
-  word-wrap: break-word;
+  align-items: center;
+  justify-content: center;
   width: fit-content;
   margin-top: 10px;
   border-radius: 1px;
-  border-collapse: separate;
-  border-spacing: 2px;
 }
 
 #result-rows { color: var(--seccol); }
@@ -455,6 +450,14 @@ img.album-logo {
 .album-cell      { padding: 0; overflow: hidden; vertical-align: middle; }
 .album-art-div   { position: relative; overflow: hidden; }
 .album-arrow-div { display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: white; }
+
+.album-cell-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 120px;
+}
 
 .features-cell {
   min-width: 15vw;
@@ -968,10 +971,9 @@ li {
 input {
   border: 1px solid transparent;
   background-color: #f1f1f1;
-  padding: 6px 10px;
+  padding: 10px;
   font-size: 16px;
   width: 95%;
-  border-radius: 0;
 }
 
 input[type="text"]   { background-color: #f1f1f1; }
@@ -1066,7 +1068,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     flex-direction: column;
     height: 100dvh;
     overflow: hidden;
-    padding-top: 0;  /* cancel the desktop 12px top pad */
+    padding-top: 0;
   }
 
   /* ── HEADER ────────────────────────────────────────────────
