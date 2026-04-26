@@ -1249,19 +1249,21 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     table-layout: fixed;
   }
 
-  /* ── Column widths — 5 physical columns ──
-     Song 22% | Album 26% | # 12% | Length 20% | Features 20%  = 100%
-     Inside the Album td: art div=75%, arrow div=25% via flex  */
+  /* ── Column widths — 6 physical columns, 6 th + 6 td ──
+     Song 20% | Art 26% | Arrow 2% | # 12% | Length 19% | Features 21% = 100%
+     th and td nth-child now match 1:1 — table-layout:fixed honours every width */
   #result-table th:nth-child(1),
-  #result-table td:nth-child(1) { width: 22%; } /* Song     */
+  #result-table td:nth-child(1) { width: 20%; } /* Song     */
   #result-table th:nth-child(2),
-  #result-table td:nth-child(2) { width: 26%; } /* Album    */
+  #result-table td:nth-child(2) { width: 26%; } /* Art      */
   #result-table th:nth-child(3),
-  #result-table td:nth-child(3) { width: 12%; } /* #        */
+  #result-table td:nth-child(3) { width: 2%;  } /* Arrow    */
   #result-table th:nth-child(4),
-  #result-table td:nth-child(4) { width: 20%; } /* Length   */
+  #result-table td:nth-child(4) { width: 12%; } /* #        */
   #result-table th:nth-child(5),
-  #result-table td:nth-child(5) { width: 20%; } /* Features */
+  #result-table td:nth-child(5) { width: 19%; } /* Length   */
+  #result-table th:nth-child(6),
+  #result-table td:nth-child(6) { width: 21%; } /* Features */
 
   /* Header row */
   #table-text,
