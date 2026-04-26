@@ -378,6 +378,9 @@ figcaption      { text-align: center; font-size: 20px; }
   padding: 0 40px 5px 40px;
 }
 
+.mobile-header { display: none; }
+.mobile-cols   { display: none; }
+
 th {
   border-bottom: solid 1px var(--seccol);
   padding-inline: 10px;
@@ -1210,6 +1213,11 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: var(--seccol);
   }
 
+.desktop-header { display: none; }
+.desktop-cols   { display: none; }
+.mobile-header  { display: table-row; }
+.mobile-cols    { display: table-column-group; }
+   
   td {
     padding: 2px;
     font-size: 13px;
