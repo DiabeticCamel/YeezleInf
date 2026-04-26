@@ -170,23 +170,20 @@ header {
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 290px;
-  position: relative;
-  top: -20px;
-  margin-top: 1vw;
+  padding-top: 16px;
+  padding-left: 16px;
 }
 
 /* Right side nav icons */
 #rs-cont {
   display: flex;
   flex-direction: row;
-  margin-top: 2vw;
   width: 30vw;
   max-width: 290px;
-  position: relative;
-  top: -20px;
   justify-content: flex-end;
   align-items: flex-start;
-  margin-right: 6px;
+  padding-top: 16px;
+  padding-right: 16px;
 }
 
 /* Version label (desktop) */
@@ -305,7 +302,7 @@ header {
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  margin-top: 20px;
+  margin-top: clamp(180px, 22vw, 320px);
 }
 
 .outer-container {
