@@ -100,11 +100,10 @@ body {
   display: flex;
   align-items: flex-start;
   width: 100%;
-  justify-content: center;
+  justify-content: space-between;
   flex-direction: row;
   margin-top: 20px;
   position: relative;
-  /* tall enough to contain the absolutely-positioned logo */
   height: clamp(120px, 19vw, 300px);
 }
 
@@ -156,18 +155,18 @@ header {
   margin-top: 1vw;
 }
 
-/* Right wing — icons sit below the logo top edge, away from the right edge */
+/* Right wing — icons pushed to the right, offset down from corner */
 #rs-cont {
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
+  margin-top: 2vw;
   width: 30vw;
   max-width: 290px;
   position: relative;
-  top: 0;
+  top: -20px;
   justify-content: flex-end;
   align-items: flex-start;
-  margin-right: 20px;
+  margin-right: 6px;
 }
 
 /* Version label (desktop) */
@@ -377,9 +376,6 @@ figcaption      { text-align: center; font-size: 20px; }
   font-size: small;
   padding: 0 40px 5px 40px;
 }
-
-.mobile-header { display: none; }
-.mobile-cols   { display: none; }
 
 th {
   border-bottom: solid 1px var(--seccol);
@@ -1213,11 +1209,6 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: var(--seccol);
   }
 
-.desktop-header { display: none; }
-.desktop-cols   { display: none; }
-.mobile-header  { display: table-row; }
-.mobile-cols    { display: table-column-group; }
-   
   td {
     padding: 2px;
     font-size: 13px;
