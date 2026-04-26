@@ -1254,11 +1254,11 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: var(--seccol);
   }
 
-  /* All data cells: base sizing — 77px height (92 - 15) */
+  /* All data cells: base sizing — 62px height (77 - 15) */
   td {
     padding: 2px;
     font-size: 13px;
-    height: 77px;
+    height: 62px;
     vertical-align: middle;
     text-align: center;
     word-break: break-word;
@@ -1294,12 +1294,12 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding: 0 !important;
     overflow: hidden;
     vertical-align: middle;
-    height: 77px;
+    height: 62px;
   }
 
   img.album-logo {
     width: 100% !important;
-    height: 77px !important;
+    height: 62px !important;
     object-fit: cover !important;
     display: block;
     margin: 0;
@@ -1314,12 +1314,13 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: white;
     text-align: center;
     vertical-align: middle;
-    height: 77px;
+    height: 62px;
     overflow: hidden;
     white-space: nowrap;
   }
 
-  /* ── Track # cell ──
+  /* ── Track # cell ── */
+  .track-cell {
     font-size: 13px;
     white-space: nowrap;
     padding: 4px 1px;
