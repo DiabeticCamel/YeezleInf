@@ -90,18 +90,16 @@ body {
 
 
 /* ============================================================
-   6. HEADER & NAVIGATION
+   6. DESKTOP HEADER & NAVIGATION
+   (These rules apply on desktop only — mobile overrides
+    everything it needs inside @media max-width:600px)
    ============================================================ */
-
-/* The header uses justify-content: center so the logo (absolute,
-   left:50%) centres itself, while the two wing divs each occupy
-   30 vw and push the icons to the far edges. */
 #mega-header {
   display: flex;
   align-items: flex-start;
-  width: 100%;
   justify-content: space-between;
   flex-direction: row;
+  width: 100%;
   margin-top: 20px;
   position: relative;
   height: clamp(120px, 19vw, 300px);
@@ -115,16 +113,15 @@ header {
   justify-content: space-between;
 }
 
-/* Centred logo — absolutely positioned so it doesn't affect
-   the flex layout of the two nav wings */
+/* Logo: absolutely centred, doesn't disturb flex wings */
 #main-logo {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  pointer-events: none;
+  top: 0;
   width: clamp(220px, 32vw, 480px);
   height: auto;
-  top: 0;
+  pointer-events: none;
 }
 
 #INFYEEZLE_Image {
@@ -143,33 +140,33 @@ header {
   font-size: 48px;
 }
 
-/* Left wing — invisible spacer to balance the right nav */
+/* Left wing — invisible spacer */
 #left-but-cont {
   display: flex;
   width: 30vw;
+  max-width: 290px;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 290px;
   position: relative;
   top: -20px;
   margin-top: 1vw;
 }
 
-/* Right wing — icons inset from right edge to match original spacing */
+/* Right wing — icons inset from right edge */
 #rs-cont {
   display: flex;
   flex-direction: row;
-  margin-top: 2vw;
   width: 30vw;
   max-width: 290px;
-  position: relative;
-  top: -20px;
   justify-content: flex-end;
   align-items: flex-start;
+  position: relative;
+  top: -20px;
+  margin-top: 2vw;
   margin-right: 60px;
 }
 
-/* Version label (desktop) */
+/* Version label */
 #version-label {
   position: fixed;
   bottom: 10px;
@@ -351,12 +348,15 @@ figcaption      { text-align: center; font-size: 20px; }
 }
 
 
-/* Hide mobile-only table elements on desktop */
+/* ============================================================
+   10. DESKTOP TABLE — show desktop rows, hide mobile rows
+   ============================================================ */
 .mobile-header { display: none; }
 .mobile-cols   { display: none; }
 
+
 /* ============================================================
-   10. RESULTS TABLE
+   11. RESULTS TABLE (DESKTOP)
    ============================================================ */
 #result-container {
   width: 100%;
@@ -391,6 +391,10 @@ th {
   white-space: nowrap;
 }
 
+thead tr {
+  box-shadow: none;
+}
+
 td {
   text-align: center;
   color: var(--seccol);
@@ -406,13 +410,9 @@ tr {
   box-shadow: 0 4px 20px -10px rgb(255, 255, 255);
 }
 
-thead tr {
-  box-shadow: none;
-}
-
 
 /* ============================================================
-   11. TABLE CELL TYPES
+   12. TABLE CELL TYPES (DESKTOP)
    ============================================================ */
 .song-cell {
   opacity: 100;
@@ -469,7 +469,7 @@ svg.jersey { width: 40px; }
 
 
 /* ============================================================
-   12. TABLE COLOR STATES
+   13. TABLE COLOR STATES
    ============================================================ */
 td.green {
   background-color: var(--green);
@@ -489,7 +489,7 @@ td.up::after   { content: " \2191"; width: 40px; }
 
 
 /* ============================================================
-   13. BUTTONS
+   14. BUTTONS
    ============================================================ */
 button {
   background-color: rgb(255, 252, 238);
@@ -575,7 +575,7 @@ a.buttonA {
 
 
 /* ============================================================
-   14. END-CARD OVERLAY
+   15. END-CARD OVERLAY
    ============================================================ */
 #card-background {
   top: 0; left: 0;
@@ -672,7 +672,7 @@ a.buttonA {
 
 
 /* ============================================================
-   15. STATS PANEL
+   16. STATS PANEL
    ============================================================ */
 .stat-container {
   background-color: rgb(44, 44, 44);
@@ -729,7 +729,7 @@ a.buttonA {
 
 
 /* ============================================================
-   16. CLIPBOARD TOAST
+   17. CLIPBOARD TOAST
    ============================================================ */
 #clipboard-popup {
   position: fixed;
@@ -751,7 +751,7 @@ a.buttonA {
 
 
 /* ============================================================
-   17. MODE CARD
+   18. MODE CARD
    ============================================================ */
 #mode-card-back {
   backdrop-filter: brightness(0.3);
@@ -784,7 +784,7 @@ a.buttonA {
 
 
 /* ============================================================
-   18. DONATE CARD
+   19. DONATE CARD
    ============================================================ */
 #donate-card-back {
   backdrop-filter: brightness(0.3);
@@ -836,7 +836,7 @@ a.buttonA {
 
 
 /* ============================================================
-   19. INTRO / HELP CARD
+   20. INTRO / HELP CARD
    ============================================================ */
 #intro-card-back {
   backdrop-filter: brightness(0.5);
@@ -916,7 +916,7 @@ li {
 
 
 /* ============================================================
-   20. ALBUM MODE CARD
+   21. ALBUM MODE CARD
    ============================================================ */
 #preview-album-grid {
   display: none;
@@ -954,7 +954,7 @@ li {
 
 
 /* ============================================================
-   21. AUTOCOMPLETE
+   22. AUTOCOMPLETE
    ============================================================ */
 .autocomplete {
   position: relative;
@@ -994,7 +994,7 @@ input[type="submit"] { background-color: var(--primary); color: #fff; }
 
 
 /* ============================================================
-   22. UTILITY CLASSES
+   23. UTILITY CLASSES
    ============================================================ */
 .hide {
   opacity: 0;
@@ -1013,12 +1013,6 @@ input[type="submit"] { background-color: var(--primary); color: #fff; }
 
 footer > center                { margin-bottom: 0; }
 a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
-
-
-/* ============================================================
-   23. MISC
-   ============================================================ */
-#divisions-img { }
 
 
 /* ============================================================
@@ -1049,9 +1043,12 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
 
 /* ============================================================
    25. MOBILE ONLY (max-width: 600px)
+   Every rule in this block is scoped to mobile.
+   Nothing here leaks to desktop.
    ============================================================ */
 @media only screen and (max-width: 600px) {
 
+  /* --- Body --- */
   body {
     display: flex;
     flex-direction: column;
@@ -1060,6 +1057,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding-top: 0;
   }
 
+  /* --- Header --- */
   #mega-header {
     flex-shrink: 0;
     margin-top: 0;
@@ -1067,7 +1065,9 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding-bottom: 0;
     height: calc(4 / 7 * 1.2 * 100vw * 0.55 + 30px);
     position: relative;
+    justify-content: flex-end; /* puts rs-cont at right edge before it goes fixed */
   }
+
   #main-logo {
     position: absolute;
     left: 50%;
@@ -1084,6 +1084,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     display: none;
   }
 
+  /* --- Nav icons: fixed bottom bar on mobile --- */
   #rs-cont {
     position: fixed;
     bottom: 0;
@@ -1111,6 +1112,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     height: 36px;
   }
 
+  /* --- Main container --- */
   .main-container {
     flex: 1 1 0;
     min-height: 0;
@@ -1123,6 +1125,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     margin-top: 0;
   }
 
+  /* --- Guess title --- */
   #guess-title {
     flex-shrink: 0;
     font-size: 26px;
@@ -1132,6 +1135,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding-bottom: 0;
   }
 
+  /* --- Autocomplete input --- */
   .autocomplete {
     flex-shrink: 0;
     display: block;
@@ -1154,6 +1158,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     display: block;
   }
 
+  /* --- Guess button --- */
   #guess-button {
     flex-shrink: 0;
     padding: 11px 32px;
@@ -1162,6 +1167,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     margin-bottom: 6px;
   }
 
+  /* --- Version label --- */
   #version-label {
     position: fixed !important;
     bottom: 6px !important;
@@ -1180,6 +1186,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: rgba(255, 255, 255, 1) !important;
   }
 
+  /* --- Result container --- */
   #result-container {
     flex: 1 1 0;
     min-height: 0;
@@ -1195,6 +1202,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     box-sizing: border-box;
   }
 
+  /* --- Result table --- */
   #result-table {
     width: 100%;
     margin: 0 auto;
@@ -1204,6 +1212,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     table-layout: fixed;
   }
 
+  /* Sticky header on mobile */
   #result-table thead tr th {
     position: sticky;
     top: 0;
@@ -1212,6 +1221,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     outline: 2px solid #2a2a2a;
   }
 
+  /* --- Mobile table header text --- */
   #table-text,
   #result-table th {
     font-size: 13px;
@@ -1222,6 +1232,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: var(--seccol);
   }
 
+  /* --- Mobile table cells --- */
   td {
     padding: 2px;
     font-size: 13px;
@@ -1239,6 +1250,13 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     text-align: center;
   }
 
+  /* --- Mobile table: show mobile rows, hide desktop rows --- */
+  .desktop-header { display: none; }
+  .desktop-cols   { display: none; }
+  .mobile-header  { display: table-row; }
+  .mobile-cols    { display: table-column-group; }
+
+  /* --- Mobile cell types --- */
   .song-cell {
     font-size: 13px;
     padding: 4px 3px;
@@ -1306,6 +1324,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     line-height: 1.2;
   }
 
+  /* --- Mobile end card --- */
   #end-card-title   { font-size: 36px; }
   #super-div        { width: 90vw; }
   #end-card         { width: 100%; }
@@ -1313,6 +1332,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   #mystery-song-img { width: 50vw; }
   #divisions-img    { zoom: 0.6; }
 
+  /* --- Mobile intro card --- */
   #intro-card-back { align-items: flex-start; }
 
   #intro-card {
