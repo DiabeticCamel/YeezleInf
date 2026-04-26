@@ -592,6 +592,14 @@ function appendRow(song, result) {
  
   // ── Append all 6 cells ────────────────────────────────────
   [tdTitle, tdAlbumArt, tdAlbumArrow, tdTrack, tdLength, tdFeatures].forEach(td => row.appendChild(td));
+
+  // ── Auto-scroll to newest row ─────────────────────────────
+  const container = document.getElementById('result-container');
+  if (container) {
+    requestAnimationFrame(() => {
+      container.scrollTop = container.scrollHeight;
+    });
+  }
 }
 
 function formatDuration(secs) {
