@@ -157,7 +157,7 @@ function saveSession() {
 }
 
 function showModeCard() {
-  document.getElementById('current-mode-label').innerText = activeMode === 'infinite' ? 'Infinite' : 'Daily';
+  document.getElementById('current-mode-label').innerText = activeMode === 'infinite' ? 'Daily' : 'Infinite';
   document.getElementById('mode-card-back').classList.remove('hide');
 }
 
