@@ -156,18 +156,18 @@ header {
   margin-top: 1vw;
 }
 
-/* Right wing — icon row, offset up slightly to sit near the corner */
+/* Right wing — icons sit below the logo top edge, away from the right edge */
 #rs-cont {
   display: flex;
   flex-direction: row;
-  margin-top: 2vw;
+  margin-top: 10px;
   width: 30vw;
   max-width: 290px;
   position: relative;
-  top: -20px;
+  top: 0;
   justify-content: flex-end;
   align-items: flex-start;
-  margin-right: 6px;
+  margin-right: 20px;
 }
 
 /* Version label (desktop) */
@@ -375,7 +375,7 @@ figcaption      { text-align: center; font-size: 20px; }
 #table-text {
   color: var(--seccol);
   font-size: small;
-  padding: 0 25px 5px 25px;
+  padding: 0 40px 5px 40px;
 }
 
 th {
