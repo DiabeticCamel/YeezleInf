@@ -441,52 +441,37 @@ tr {
  */
 
 /*
- * ALBUM COLUMN — single <td class="album-cell"> containing two divs:
- *   .album-art-div   (75%) — cropped image fills completely
- *   .album-arrow-div (25%) — slim colored div with ↑ or ↓
+ * ALBUM COLUMN — two separate <td> elements per row:
+ *   td.album-art-cell  — image fills entire cell, cropped
+ *   td.album-arrow-td  — slim colored cell with ↑ or ↓
  */
-.album-cell {
+.album-art-cell {
   padding: 0;
   overflow: hidden;
   vertical-align: middle;
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-}
-
-.album-art-div {
-  flex: 0 0 75%;
-  width: 75%;
-  position: relative;
-  overflow: hidden;
 }
 
 img.album-logo {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
+  min-height: 60px;
   object-fit: cover;
   display: block;
-  margin: 0;
-  padding: 0;
 }
 
-.album-arrow-div {
-  flex: 0 0 25%;
-  width: 25%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.album-arrow-td {
+  text-align: center;
+  vertical-align: middle;
   font-size: 13px;
   font-weight: bold;
   color: white;
+  padding: 0;
 }
 
-.album-arrow-div.green  { background-color: var(--green); }
-.album-arrow-div.yellow { background-color: var(--yellow); }
-.album-arrow-div.grey   { background-color: transparent; }
+/* legacy — no longer used but kept safe */
+.album-cell { padding: 0; overflow: hidden; vertical-align: middle; }
+.album-art-div { position: relative; overflow: hidden; }
+.album-arrow-div { display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; color: white; }
 
 .features-cell {
   min-width: 15vw;
@@ -1250,14 +1235,13 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   }
 
   /* ── Column widths — 6 physical columns, 6 th + 6 td ──
-     Song 20% | Art 26% | Arrow 2% | # 12% | Length 19% | Features 21% = 100%
-     th and td nth-child now match 1:1 — table-layout:fixed honours every width */
+     Song 20% | Art 24% | Arrow 4% | # 12% | Length 19% | Features 21% = 100% */
   #result-table th:nth-child(1),
   #result-table td:nth-child(1) { width: 20%; } /* Song     */
   #result-table th:nth-child(2),
-  #result-table td:nth-child(2) { width: 26%; } /* Art      */
+  #result-table td:nth-child(2) { width: 24%; } /* Art      */
   #result-table th:nth-child(3),
-  #result-table td:nth-child(3) { width: 2%;  } /* Arrow    */
+  #result-table td:nth-child(3) { width: 4%;  } /* Arrow    */
   #result-table th:nth-child(4),
   #result-table td:nth-child(4) { width: 12%; } /* #        */
   #result-table th:nth-child(5),
@@ -1311,62 +1295,24 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     word-break: break-word;
   }
 
-  /* ── Album cell — single td, flex row: art 75%, arrow 25% ── */
-  .album-cell {
+  /* ── Album art cell — img fills via normal flow, no absolute ── */
+  .album-art-cell {
     padding: 0 !important;
     overflow: hidden;
     vertical-align: middle;
     height: 70px;
   }
 
-  /* Flex container stretches to fill the td */
-  .album-cell {
-    display: flex !important;
-    flex-direction: row;
-    align-items: stretch;
-    height: 70px;
-  }
-
-  /* Art div: 75% of the album td width, image absolutely fills it */
-  .album-art-div {
-    flex: 0 0 75%;
-    width: 75%;
-    height: 70px;
-    position: relative;
-    overflow: hidden;
-  }
-
   img.album-logo {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
     width: 100% !important;
-    height: 100% !important;
+    height: 70px !important;
     object-fit: cover !important;
     display: block;
     margin: 0;
     padding: 0;
   }
 
-  /* Arrow div: 25% of the album td width, colored, centered glyph */
-  .album-arrow-div {
-    flex: 0 0 25%;
-    width: 25%;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    font-weight: bold;
-    color: white;
-    padding: 0;
-  }
-
-  .album-arrow-div.green  { background-color: var(--green); }
-  .album-arrow-div.yellow { background-color: var(--yellow); }
-  .album-arrow-div.grey   { background-color: transparent; }
-
-  /* ── Track # cell ── */
+  /* ── Album arrow cell — normal font, box just wider than glyph ── */ */
   .track-cell {
     font-size: 13px;
     white-space: nowrap;
