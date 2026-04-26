@@ -1203,15 +1203,10 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
 
   /* ──────────────────────────────────────────
      RESULTS TABLE — 6 physical columns
-     ──────────────────────────────────────────
-     Col 1: Song     ~21%
-     Col 2: Art      ~17%   ← .album-art-cell
-     Col 3: Arrow    ~ 6%   ← .album-arrow-td
-     Col 4: #        ~11%
-     Col 5: Length   ~16%
-     Col 6: Features ~29%
-     
-     Header: Song | Album(colspan=2) | # | Length | Features
+     Exact px from reference (scaled to ratios):
+     Song 107 | Art 73 | Arrow 26 | # 65 | Length 83 | Features 95
+     Side margins 28px each = table width calc(100vw - 56px)
+     Row height 92px
      ────────────────────────────────────────── */
 
   #result-container {
@@ -1222,32 +1217,38 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     margin-top: 2px;
-    padding: 0;
+    padding: 0 28px;
     box-sizing: border-box;
   }
 
   #result-table {
-    width: 98vw;
+    width: 100%;
     margin: 0 auto;
     border-collapse: separate;
     border-spacing: 2px;
     table-layout: fixed;
   }
 
-  /* ── Column widths — 6 physical columns, 6 th + 6 td ──
-     Song 20% | Art 24% | Arrow 4% | # 12% | Length 19% | Features 21% = 100% */
+  /* ── Column widths — exact ratios from reference px measurements ──
+     107+73+26+65+83+95 = 449px total
+     Song  107/449 = 23.8%
+     Art    73/449 = 16.3%
+     Arrow  26/449 =  5.8%
+     #      65/449 = 14.5%
+     Length 83/449 = 18.5%
+     Feat   95/449 = 21.2%   (rounds to 100.1, trim Song to 23.7)  */
   #result-table th:nth-child(1),
-  #result-table td:nth-child(1) { width: 20%; } /* Song     */
+  #result-table td:nth-child(1) { width: 23.7%; } /* Song     107px */
   #result-table th:nth-child(2),
-  #result-table td:nth-child(2) { width: 24%; } /* Art      */
+  #result-table td:nth-child(2) { width: 16.3%; } /* Art       73px */
   #result-table th:nth-child(3),
-  #result-table td:nth-child(3) { width: 4%;  } /* Arrow    */
+  #result-table td:nth-child(3) { width: 5.8%;  } /* Arrow     26px */
   #result-table th:nth-child(4),
-  #result-table td:nth-child(4) { width: 12%; } /* #        */
+  #result-table td:nth-child(4) { width: 14.5%; } /* #         65px */
   #result-table th:nth-child(5),
-  #result-table td:nth-child(5) { width: 19%; } /* Length   */
+  #result-table td:nth-child(5) { width: 18.5%; } /* Length    83px */
   #result-table th:nth-child(6),
-  #result-table td:nth-child(6) { width: 21%; } /* Features */
+  #result-table td:nth-child(6) { width: 21.2%; } /* Features  95px */
 
   /* Header row */
   #table-text,
@@ -1260,11 +1261,11 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     color: var(--seccol);
   }
 
-  /* All data cells: base sizing */
+  /* All data cells: base sizing — 92px height matches reference */
   td {
     padding: 2px;
     font-size: 13px;
-    height: 70px;
+    height: 92px;
     vertical-align: middle;
     text-align: center;
     word-break: break-word;
@@ -1300,19 +1301,30 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
     padding: 0 !important;
     overflow: hidden;
     vertical-align: middle;
-    height: 70px;
+    height: 92px;
   }
 
   img.album-logo {
     width: 100% !important;
-    height: 70px !important;
+    height: 92px !important;
     object-fit: cover !important;
     display: block;
     margin: 0;
     padding: 0;
   }
 
-  /* ── Album arrow cell — normal font, box just wider than glyph ── */ */
+  /* ── Album arrow cell — normal font, box just wider than glyph ── */
+  .album-arrow-td {
+    padding: 0 !important;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    height: 92px;
+    overflow: hidden;
+    white-space: nowrap;
+  } */
   .track-cell {
     font-size: 13px;
     white-space: nowrap;
