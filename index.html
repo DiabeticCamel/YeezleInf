@@ -80,7 +80,6 @@
 
   <!-- ===== MAIN GAME AREA ===== -->
   <div class="main-container">
-    <br /><br />
     <figcaption id="guess-title">Guess the Ye song</figcaption>
 
     <form autocomplete="off">
@@ -96,13 +95,47 @@
 
     <div id="result-container">
       <table id="result-table">
-        <tr id="result-rows">
-          <th id="table-text">Song</th>
-          <th id="table-text">Album</th>
-          <th id="table-text">Track No.</th>
-          <th id="table-text">Track Length</th>
-          <th id="table-text">Features</th>
-        </tr>
+
+        <!-- ── DESKTOP colgroup (hidden on mobile via CSS) ── -->
+       <colgroup class="desktop-cols">
+          <col style="width:20%">   <!-- Song -->
+          <col style="width:12.6%"> <!-- Album art -->
+          <col style="width:8.4%">  <!-- Album arrow -->
+          <col style="width:17%">   <!-- Track No. -->
+          <col style="width:17%">   <!-- Track Length -->
+          <col style="width:25%">   <!-- Features -->
+        </colgroup>
+
+        <!-- ── MOBILE colgroup (hidden on desktop via CSS) ── -->
+        <colgroup class="mobile-cols">
+          <col style="width:23.7%">
+          <col style="width:16.3%">
+          <col style="width:5.8%">
+          <col style="width:14.5%">
+          <col style="width:18.5%">
+          <col style="width:21.2%">
+        </colgroup>
+
+        <thead>
+          <!-- Desktop header row -->
+          <tr class="desktop-header">
+            <th id="table-text">Song</th>
+            <th id="table-text" colspan="2">Album</th>
+            <th id="table-text">Track No.</th>
+            <th id="table-text">Track Length</th>
+            <th id="table-text">Features</th>
+          </tr>
+          <!-- Mobile header row -->
+          <tr class="mobile-header">
+            <th id="table-text">Song</th>
+            <th id="table-text" colspan="2">Album</th>
+            <th id="table-text">#</th>
+            <th id="table-text">Length</th>
+            <th id="table-text">Features</th>
+          </tr>
+        </thead>
+
+        <tbody id="result-body"></tbody>
       </table>
     </div>
   </div>
@@ -121,18 +154,6 @@
           <p id="mystery-song-title"></p>
           <p id="mystery-song-feature"></p>
         </div>
-
-        <style>
-          #mega-header { position:relative !important; display:flex !important; align-items:center !important; justify-content:space-between !important; max-width:1200px !important; margin:0 auto !important; width:100% !important; }
-          #rs-cont { display:flex !important; align-items:center !important; gap:8px !important; margin-top:-150px !important; }
-          #left-but-cont { margin-top:-150px !important; }
-          #main-logo { position:absolute !important; left:50% !important; transform:translateX(-50%) !important; }
-          #new-song-button { white-space:nowrap; margin-right:20px; }
-          #mega-header { display:flex; align-items:center; justify-content:space-between; height:400px; padding:10px 0; overflow:visible; }
-          #main-logo { height:clamp(150px,22vw,300px); width:auto; position:absolute; left:50%; transform:translateX(-50%); pointer-events:none; }
-          .main-container { display:flex; flex-direction:column; align-items:center; margin-top:-100px; min-height:0; }
-          #result-container { margin-top:10px; overflow-y:auto; }
-        </style>
 
         <div>
           <button id="share-score-button">Share Score</button>
@@ -172,10 +193,10 @@
       </div>
 
       <!-- SOCIAL PANEL -->
-    <div class="stat-container" id="stat-collumn" style="flex-direction:column;gap:8px;text-align:center;">
-  <div id="donate-banner">Consider following our official X account!❤️</div>
-  <a href="https://x.com/InfiniteYeezle" target="_blank" rel="noopener noreferrer" class="buttonA" id="twelve-marg">Support us!</a>
-</div>
+      <div class="stat-container" id="stat-collumn" style="flex-direction:column;gap:8px;text-align:center;">
+        <div id="donate-banner">Consider following our official X account!❤️</div>
+        <a href="https://x.com/InfiniteYeezle" target="_blank" rel="noopener noreferrer" class="buttonA" id="twelve-marg">Support us!</a>
+      </div>
 
     </div>
   </div>
@@ -185,13 +206,13 @@
     <div id="mode-card" style="background-color:rgb(44,44,44);color:white;width:min(500px,60vw);display:flex;flex-direction:column;justify-content:space-between;align-items:center;border-radius:10px;box-shadow:0 0 90px rgb(141,141,141);padding:20px;">
       <div id="mode-card-title" style="font-size:28px;color:white;margin-bottom:10px;">SWITCH MODE</div>
       <div id="mode-card-text" style="font-family:SYNE;font-size:16px;text-align:center;margin-bottom:10px;">
-        You're currently in <b id="current-mode-label">Infinite</b> mode.<br><br>Would you like to switch?
+        Would you like to switch to <b id="current-mode-label">Daily</b> mode?
       </div>
       <button id="mode-confirm-btn" onclick="toggleGameMode()">Switch</button>
     </div>
   </div>
 
-  <!-- ===== DONATE CARD ===== --> 
+  <!-- ===== DONATE CARD ===== -->
   <div id="donate-card-back" class="hide">
     <div id="donate-container">
       <div id="donate-title">SUPPORT</div>
@@ -250,76 +271,73 @@
     </div>
   </div>
 
-<!-- ===== ALBUM MODE CARD ===== -->
-<div id="album-card-back" class="hide" style="backdrop-filter:brightness(0.3);-webkit-backdrop-filter:brightness(0.3);background-color:rgba(0,0,0,0.6);position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;z-index:200;overflow-y:auto;">
-  <div id="album-card" style="background-color:rgb(44,44,44);color:white;width:min(500px,90vw);display:flex;flex-direction:column;align-items:center;border-radius:10px;box-shadow:0 0 90px rgb(141,141,141);padding:20px;margin:40px 0;">
-    <div style="font-size:28px;color:white;margin-bottom:6px;">ALBUM MODE</div>
-    <div style="font-family:SYNE;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:20px;">Infinite mode only</div>
+  <!-- ===== ALBUM MODE CARD ===== -->
+  <div id="album-card-back" class="hide" style="backdrop-filter:brightness(0.3);-webkit-backdrop-filter:brightness(0.3);background-color:rgba(0,0,0,0.6);position:fixed;top:0;left:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;z-index:200;overflow-y:auto;">
+    <div id="album-card" style="background-color:rgb(44,44,44);color:white;width:min(500px,90vw);display:flex;flex-direction:column;align-items:center;border-radius:10px;box-shadow:0 0 90px rgb(141,141,141);padding:20px;margin:40px 0;">
+      <div style="font-size:28px;color:white;margin-bottom:6px;">ALBUM MODE</div>
+      <div style="font-family:SYNE;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:20px;">Infinite mode only</div>
 
-    <div style="display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:20px;">
-      <button class="album-mode-btn" data-mode="standard" onclick="setAlbumMode('standard')" style="font-family:YZY;">All Albums</button>
-      <button class="album-mode-btn" data-mode="classic"  onclick="setAlbumMode('classic')"  style="font-family:YZY;">Classic</button>
-      <button class="album-mode-btn" data-mode="early"    onclick="setAlbumMode('early')"    style="font-family:YZY;">Early</button>
-      <button class="album-mode-btn" data-mode="recent"   onclick="setAlbumMode('recent')"   style="font-family:YZY;">Recent</button>
-      <button class="album-mode-btn" data-mode="custom"   onclick="setAlbumMode('custom')"   style="font-family:YZY;">Custom</button>
+      <div style="display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:20px;">
+        <button class="album-mode-btn" data-mode="standard" onclick="setAlbumMode('standard')" style="font-family:YZY;">All Albums</button>
+        <button class="album-mode-btn" data-mode="classic"  onclick="setAlbumMode('classic')"  style="font-family:YZY;">Classic</button>
+        <button class="album-mode-btn" data-mode="early"    onclick="setAlbumMode('early')"    style="font-family:YZY;">Early</button>
+        <button class="album-mode-btn" data-mode="recent"   onclick="setAlbumMode('recent')"   style="font-family:YZY;">Recent</button>
+        <button class="album-mode-btn" data-mode="custom"   onclick="setAlbumMode('custom')"   style="font-family:YZY;">Custom</button>
+      </div>
+
+      <div id="preview-album-label" style="display:none;font-family:SYNE;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Albums included in this mode</div>
+      <div id="preview-album-grid">
+        <img class="preview-album-img smallbums" data-album="1"  src="images/Ye2.jpeg"   title="College Dropout"/>
+        <img class="preview-album-img smallbums" data-album="2"  src="images/Ye3.jpeg"   title="Late Registration"/>
+        <img class="preview-album-img smallbums" data-album="3"  src="images/Ye4.jpeg"   title="Graduation"/>
+        <img class="preview-album-img smallbums" data-album="4"  src="images/Ye5.jpeg"   title="808s"/>
+        <img class="preview-album-img smallbums" data-album="5"  src="images/128_5.jpg"  title="MBDTF"/>
+        <img class="preview-album-img smallbums" data-album="6"  src="images/Ye6.jpeg"   title="Watch The Throne"/>
+        <img class="preview-album-img smallbums" data-album="7"  src="images/Ye7.jpeg"   title="Yeezus"/>
+        <img class="preview-album-img smallbums" data-album="8"  src="images/128_8.jpg"  title="TLOP"/>
+        <img class="preview-album-img smallbums" data-album="9"  src="images/128_9.jpg"  title="ye"/>
+        <img class="preview-album-img smallbums" data-album="10" src="images/Ye10.jpeg"  title="Kids See Ghosts"/>
+        <img class="preview-album-img smallbums" data-album="11" src="images/Ye11.jpeg"  title="Jesus Is King"/>
+        <img class="preview-album-img smallbums" data-album="12" src="images/Ye12.jpeg"  title="Donda"/>
+        <img class="preview-album-img smallbums" data-album="13" src="images/128_13.jpg" title="Vultures 1"/>
+        <img class="preview-album-img smallbums" data-album="14" src="images/Ye14.png"   title="Vultures 2"/>
+        <img class="preview-album-img smallbums" data-album="15" src="images/128_15.jpg" title="Donda 2"/>
+        <img class="preview-album-img smallbums" data-album="16" src="images/128_16.jpg" title="Bully"/>
+      </div>
+
+      <div id="custom-album-label" style="display:none;font-family:SYNE;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Click albums to toggle</div>
+      <div id="custom-album-grid">
+        <img class="custom-album-img smallbums" data-album="1"  src="images/Ye2.jpeg"   onclick="toggleCustomAlbum(1)"  style="cursor:pointer;" title="College Dropout"/>
+        <img class="custom-album-img smallbums" data-album="2"  src="images/Ye3.jpeg"   onclick="toggleCustomAlbum(2)"  style="cursor:pointer;" title="Late Registration"/>
+        <img class="custom-album-img smallbums" data-album="3"  src="images/Ye4.jpeg"   onclick="toggleCustomAlbum(3)"  style="cursor:pointer;" title="Graduation"/>
+        <img class="custom-album-img smallbums" data-album="4"  src="images/Ye5.jpeg"   onclick="toggleCustomAlbum(4)"  style="cursor:pointer;" title="808s"/>
+        <img class="custom-album-img smallbums" data-album="5"  src="images/128_5.jpg"  onclick="toggleCustomAlbum(5)"  style="cursor:pointer;" title="MBDTF"/>
+        <img class="custom-album-img smallbums" data-album="6"  src="images/Ye6.jpeg"   onclick="toggleCustomAlbum(6)"  style="cursor:pointer;" title="Watch The Throne"/>
+        <img class="custom-album-img smallbums" data-album="7"  src="images/Ye7.jpeg"   onclick="toggleCustomAlbum(7)"  style="cursor:pointer;" title="Yeezus"/>
+        <img class="custom-album-img smallbums" data-album="8"  src="images/128_8.jpg"  onclick="toggleCustomAlbum(8)"  style="cursor:pointer;" title="TLOP"/>
+        <img class="custom-album-img smallbums" data-album="9"  src="images/128_9.jpg"  onclick="toggleCustomAlbum(9)"  style="cursor:pointer;" title="ye"/>
+        <img class="custom-album-img smallbums" data-album="10" src="images/Ye10.jpeg"  onclick="toggleCustomAlbum(10)" style="cursor:pointer;" title="Kids See Ghosts"/>
+        <img class="custom-album-img smallbums" data-album="11" src="images/Ye11.jpeg"  onclick="toggleCustomAlbum(11)" style="cursor:pointer;" title="Jesus Is King"/>
+        <img class="custom-album-img smallbums" data-album="12" src="images/Ye12.jpeg"  onclick="toggleCustomAlbum(12)" style="cursor:pointer;" title="Donda"/>
+        <img class="custom-album-img smallbums" data-album="13" src="images/128_13.jpg" onclick="toggleCustomAlbum(13)" style="cursor:pointer;" title="Vultures 1"/>
+        <img class="custom-album-img smallbums" data-album="14" src="images/Ye14.png"   onclick="toggleCustomAlbum(14)" style="cursor:pointer;" title="Vultures 2"/>
+        <img class="custom-album-img smallbums" data-album="15" src="images/128_15.jpg" onclick="toggleCustomAlbum(15)" style="cursor:pointer;" title="Donda 2"/>
+        <img class="custom-album-img smallbums" data-album="16" src="images/128_16.jpg" onclick="toggleCustomAlbum(16)" style="cursor:pointer;" title="Bully"/>
+      </div>
+
+      <div id="custom-apply-btn" style="display:none;">
+        <button onclick="applyCustomMode()" style="font-family:YZY;background-color:#4daa31;color:white;margin-top:4px;">Save &amp; Play</button>
+      </div>
+
+      <button onclick="document.getElementById('album-card-back').classList.add('hide')" style="font-family:YZY;margin-top:8px;background-color:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2);">Close</button>
     </div>
-
-    <!-- PREVIEW GRID (read-only: classic / early / recent / standard) -->
-    <div id="preview-album-label" style="display:none;font-family:SYNE;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Albums included in this mode</div>
-    <div id="preview-album-grid">
-      <img class="preview-album-img smallbums" data-album="1"  src="images/Ye2.jpeg"   title="College Dropout"/>
-      <img class="preview-album-img smallbums" data-album="2"  src="images/Ye3.jpeg"   title="Late Registration"/>
-      <img class="preview-album-img smallbums" data-album="3"  src="images/Ye4.jpeg"   title="Graduation"/>
-      <img class="preview-album-img smallbums" data-album="4"  src="images/Ye5.jpeg"   title="808s"/>
-      <img class="preview-album-img smallbums" data-album="5"  src="images/128_5.jpg"  title="MBDTF"/>
-      <img class="preview-album-img smallbums" data-album="6"  src="images/Ye6.jpeg"   title="Watch The Throne"/>
-      <img class="preview-album-img smallbums" data-album="7"  src="images/Ye7.jpeg"   title="Yeezus"/>
-      <img class="preview-album-img smallbums" data-album="8"  src="images/128_8.jpg"  title="TLOP"/>
-      <img class="preview-album-img smallbums" data-album="9"  src="images/128_9.jpg"  title="ye"/>
-      <img class="preview-album-img smallbums" data-album="10" src="images/Ye10.jpeg"  title="Kids See Ghosts"/>
-      <img class="preview-album-img smallbums" data-album="11" src="images/Ye11.jpeg"  title="Jesus Is King"/>
-      <img class="preview-album-img smallbums" data-album="12" src="images/Ye12.jpeg"  title="Donda"/>
-      <img class="preview-album-img smallbums" data-album="13" src="images/128_13.jpg" title="Vultures 1"/>
-      <img class="preview-album-img smallbums" data-album="14" src="images/Ye14.png"   title="Vultures 2"/>
-      <img class="preview-album-img smallbums" data-album="15" src="images/128_15.jpg" title="Donda 2"/>
-      <img class="preview-album-img smallbums" data-album="16" src="images/128_16.jpg" title="Bully"/>
-    </div>
-
-    <!-- CUSTOM GRID (interactive: toggleable) -->
-    <div id="custom-album-label" style="display:none;font-family:SYNE;font-size:14px;color:rgba(255,255,255,0.6);margin-bottom:10px;">Click albums to toggle</div>
-    <div id="custom-album-grid">
-      <img class="custom-album-img smallbums" data-album="1"  src="images/Ye2.jpeg"   onclick="toggleCustomAlbum(1)"  style="cursor:pointer;" title="College Dropout"/>
-      <img class="custom-album-img smallbums" data-album="2"  src="images/Ye3.jpeg"   onclick="toggleCustomAlbum(2)"  style="cursor:pointer;" title="Late Registration"/>
-      <img class="custom-album-img smallbums" data-album="3"  src="images/Ye4.jpeg"   onclick="toggleCustomAlbum(3)"  style="cursor:pointer;" title="Graduation"/>
-      <img class="custom-album-img smallbums" data-album="4"  src="images/Ye5.jpeg"   onclick="toggleCustomAlbum(4)"  style="cursor:pointer;" title="808s"/>
-      <img class="custom-album-img smallbums" data-album="5"  src="images/128_5.jpg"  onclick="toggleCustomAlbum(5)"  style="cursor:pointer;" title="MBDTF"/>
-      <img class="custom-album-img smallbums" data-album="6"  src="images/Ye6.jpeg"   onclick="toggleCustomAlbum(6)"  style="cursor:pointer;" title="Watch The Throne"/>
-      <img class="custom-album-img smallbums" data-album="7"  src="images/Ye7.jpeg"   onclick="toggleCustomAlbum(7)"  style="cursor:pointer;" title="Yeezus"/>
-      <img class="custom-album-img smallbums" data-album="8"  src="images/128_8.jpg"  onclick="toggleCustomAlbum(8)"  style="cursor:pointer;" title="TLOP"/>
-      <img class="custom-album-img smallbums" data-album="9"  src="images/128_9.jpg"  onclick="toggleCustomAlbum(9)"  style="cursor:pointer;" title="ye"/>
-      <img class="custom-album-img smallbums" data-album="10" src="images/Ye10.jpeg"  onclick="toggleCustomAlbum(10)" style="cursor:pointer;" title="Kids See Ghosts"/>
-      <img class="custom-album-img smallbums" data-album="11" src="images/Ye11.jpeg"  onclick="toggleCustomAlbum(11)" style="cursor:pointer;" title="Jesus Is King"/>
-      <img class="custom-album-img smallbums" data-album="12" src="images/Ye12.jpeg"  onclick="toggleCustomAlbum(12)" style="cursor:pointer;" title="Donda"/>
-      <img class="custom-album-img smallbums" data-album="13" src="images/128_13.jpg" onclick="toggleCustomAlbum(13)" style="cursor:pointer;" title="Vultures 1"/>
-      <img class="custom-album-img smallbums" data-album="14" src="images/Ye14.png"   onclick="toggleCustomAlbum(14)" style="cursor:pointer;" title="Vultures 2"/>
-      <img class="custom-album-img smallbums" data-album="15" src="images/128_15.jpg" onclick="toggleCustomAlbum(15)" style="cursor:pointer;" title="Donda 2"/>
-      <img class="custom-album-img smallbums" data-album="16" src="images/128_16.jpg" onclick="toggleCustomAlbum(16)" style="cursor:pointer;" title="Bully"/>
-    </div>
-
-    <div id="custom-apply-btn" style="display:none;">
-      <button onclick="applyCustomMode()" style="font-family:YZY;background-color:#4daa31;color:white;margin-top:4px;">Save & Play</button>
-    </div>
-
-    <button onclick="document.getElementById('album-card-back').classList.add('hide')" style="font-family:YZY;margin-top:8px;background-color:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.2);">Close</button>
   </div>
-</div>
 
-  <div id="version-label">v1.2.3<br>infiniteyeezle.netlify.app</div>
+  <div id="version-label">v1.2.5<br>infiniteyeezle.netlify.app</div>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
   <script src="script.js"></script>
   <script src="autocomplete.js"></script>
-  <!-- 100% privacy-first analytics -->
   <script async src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
 
 </body>
