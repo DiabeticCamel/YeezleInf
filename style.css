@@ -441,10 +441,10 @@ img.album-logo {
   text-align: center;
   vertical-align: middle;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: normal;
   color: white;
   padding: 0;
-  border-left: none !important;   /* removes divider from the arrow side */
+  border-left: none !important;
 }
 
 .album-cell      { padding: 0; overflow: hidden; vertical-align: middle; }
