@@ -157,7 +157,7 @@ function saveSession() {
 }
 
 function showModeCard() {
-  document.getElementById('current-mode-label').innerText = activeMode === 'infinite' ? 'Infinite' : 'Daily';
+  document.getElementById('current-mode-label').innerText = activeMode === 'infinite' ? 'Daily' : 'Infinite';
   document.getElementById('mode-card-back').classList.remove('hide');
 }
 
@@ -387,18 +387,8 @@ async function fetchDailyStats() {
     { headers: { 'apikey': DB_KEY, 'Authorization': `Bearer ${DB_KEY}`, 'Prefer': 'count=exact' } }
   );
   const rawCount = Number(res.headers.get('content-range')?.split('/')[1] || '0');
-
-  // Determine how far through the day we are (0.0 at midnight → 1.0 at end of day)
-  const now = new Date();
-  const secondsInDay = 24 * 60 * 60;
-  const secondsElapsed = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds();
-  const dayFraction = secondsElapsed / secondsInDay;
-
-  // Seed with todayKey so the target total is consistent, then scale by time of day
   Math.seedrandom(todayKey + 'pad');
-  const targetPad = Math.floor(Math.random() * 151) + 150; // e.g. 150–300, same each day
-  const pad = Math.round(targetPad * dayFraction);
-
+  const pad   = Math.floor(Math.random() * 151) + 150;
   const count = rawCount + pad;
   const rows  = await res.json();
   const nums  = rows.map(r => Number(r.guesses)).filter(n => !isNaN(n) && n > 0);
@@ -534,43 +524,79 @@ function setsAreEqual(a, b) {
 }
 
 function appendRow(song, result) {
-  const row = guessTable.insertRow(-1);
+  // Insert into tbody so the header row (in thead) is never shifted
+  const tbody = document.getElementById('result-body');
+  const row = tbody.insertRow(-1);
 
+  // ── Col 1: Song ──────────────────────────────────────────
   const tdTitle = document.createElement('td');
   tdTitle.classList.add('song-cell');
-  tdTitle.className += ' ' + result.title;
+  tdTitle.classList.add(result.title);
   const titleText = document.createElement('p');
   titleText.className = 'song-title';
   titleText.innerText = song.title;
   tdTitle.appendChild(titleText);
 
-  const tdAlbum = document.createElement('td');
-  tdAlbum.classList.add('album-cell');
-  tdAlbum.className += ' ' + result.album;
-  const albumWrap = document.createElement('div');
-  albumWrap.className = 'album-cell-inner';
+  // ── Col 2: Album ART ─────────────────────────────────────
+  const tdAlbumArt = document.createElement('td');
+  tdAlbumArt.classList.add('album-art-cell');
+  // Parse album result so art cell gets the same color as the arrow cell
+  const albumParts = result.album.split(' ');
+  const albumColor = albumParts[0]; // "green", "yellow", or "grey"
+  const albumDir   = albumParts[1]; // "up", "down", or undefined
+  tdAlbumArt.classList.add(albumColor); // ← gives art cell matching background color
   const albumCover = new Image();
   albumCover.src = 'images/128_' + song.album + '.jpg';
   albumCover.className = 'album-logo';
-  albumWrap.appendChild(albumCover);
-  tdAlbum.appendChild(albumWrap);
+  tdAlbumArt.appendChild(albumCover);
 
+  // ── Col 3: Album ARROW ───────────────────────────────────
+  const tdAlbumArrow = document.createElement('td');
+  tdAlbumArrow.classList.add('album-arrow-td');
+  tdAlbumArrow.classList.add(albumColor);
+  if (albumDir === 'up')   tdAlbumArrow.innerText = '↑';
+  if (albumDir === 'down') tdAlbumArrow.innerText = '↓';
+
+  // ── Col 4: Track # ───────────────────────────────────────
   const tdTrack = document.createElement('td');
   tdTrack.classList.add('track-cell');
-  tdTrack.innerText  = song.track;
-  tdTrack.className += ' ' + result.track;
+  const trackParts = result.track.split(' ');
+  const trackColor = trackParts[0];
+  const trackDir   = trackParts[1];
+  tdTrack.classList.add(trackColor);
+  let trackText = String(song.track);
+  if (trackDir === 'up')   trackText += ' ↑';
+  if (trackDir === 'down') trackText += ' ↓';
+  tdTrack.innerText = trackText;
 
+  // ── Col 5: Length ─────────────────────────────────────────
   const tdLength = document.createElement('td');
   tdLength.classList.add('length-cell');
-  tdLength.innerText  = formatDuration(song.length);
-  tdLength.className += ' ' + result.length;
+  const lengthParts = result.length.split(' ');
+  const lengthColor = lengthParts[0];
+  const lengthDir   = lengthParts[1];
+  tdLength.classList.add(lengthColor);
+  let lengthText = formatDuration(song.length);
+  if (lengthDir === 'up')   lengthText += ' ↑';
+  if (lengthDir === 'down') lengthText += ' ↓';
+  tdLength.innerText = lengthText;
 
+  // ── Col 6: Features ───────────────────────────────────────
   const tdFeatures = document.createElement('td');
   tdFeatures.classList.add('features-cell');
-  tdFeatures.innerText  = displayFeatures(song);
-  tdFeatures.className += ' ' + result.features;
+  tdFeatures.classList.add(result.features);
+  tdFeatures.innerText = displayFeatures(song);
 
-  [tdTitle, tdAlbum, tdTrack, tdLength, tdFeatures].forEach(td => row.appendChild(td));
+  // ── Append all 6 cells ────────────────────────────────────
+  [tdTitle, tdAlbumArt, tdAlbumArrow, tdTrack, tdLength, tdFeatures].forEach(td => row.appendChild(td));
+
+  // ── Auto-scroll to newest row ─────────────────────────────
+  const container = document.getElementById('result-container');
+  if (container) {
+    requestAnimationFrame(() => {
+      container.scrollTop = container.scrollHeight;
+    });
+  }
 }
 
 function formatDuration(secs) {
