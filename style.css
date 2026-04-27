@@ -161,7 +161,9 @@ header {
   justify-content: flex-end;
   align-items: flex-start;
   margin-top: 4vw;
-  padding-right: 2vw;
+  padding-right: clamp(8px, 2vw, 36px);
+  position: absolute;
+  right: 0;
 }
 
 /* Version label */
