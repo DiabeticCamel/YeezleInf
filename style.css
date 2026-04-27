@@ -160,7 +160,7 @@ header {
   align-items: flex-start;
   margin-top: 4vw;
   position: absolute;
-  left: min(calc(50% + 200px), calc(100% - 160px));
+  left: min(calc(50% + clamp(110px, 16vw, 240px) + 20px), calc(100% - 160px));
 }
 
 /* Version label */
