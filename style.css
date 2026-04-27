@@ -100,7 +100,7 @@ body {
   justify-content: space-between;
   flex-direction: row;
   width: 100%;
-  margin-top: 20px;
+  margin-top: 62px;
   position: relative;
   height: clamp(120px, 19vw, 300px);
 }
