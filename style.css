@@ -88,6 +88,12 @@ body {
   background-size: contain;
 }
 
+#intro-card-back  { z-index: 10; }
+#mode-card-back   { z-index: 10; }
+#donate-card-back { z-index: 10; }
+#album-card-back  { z-index: 10; }
+#card-background  { z-index: 10; }
+
 
 /* ============================================================
    6. DESKTOP HEADER & NAVIGATION
