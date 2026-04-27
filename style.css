@@ -156,14 +156,11 @@ header {
 #rs-cont {
   display: flex;
   flex-direction: row;
-  width: 30vw;
-  max-width: 290px;
-  justify-content: flex-end;
+  justify-content: flex-start;
   align-items: flex-start;
   margin-top: 4vw;
-  padding-right: clamp(8px, 2vw, 36px);
   position: absolute;
-  right: 0;
+  left: min(calc(50% + 200px), calc(100% - 160px));
 }
 
 /* Version label */
