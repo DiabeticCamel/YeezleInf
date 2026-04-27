@@ -1377,3 +1377,109 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   #preview-album-grid { grid-template-columns: repeat(4, 1fr); }
 
 } /* END MOBILE */
+
+/* ============================================================
+   26. SUGGESTIONS MODAL
+   ============================================================ */
+#suggestions-card {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  width: 300px;
+  background-color: rgb(44, 44, 44);
+  border-radius: 10px;
+  border: 0.5px solid rgba(254, 250, 239, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+#suggestions-title {
+  color: var(--seccol);
+  font-size: 15px;
+  font-family: YZY;
+  margin: 0 0 4px;
+}
+
+#suggestions-subtitle {
+  color: rgba(254, 250, 239, 0.5);
+  font-size: 12px;
+  font-family: SYNE;
+  margin: 0 0 12px;
+}
+
+#suggestions-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#suggestions-input {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.07);
+  border: 0.5px solid rgba(254, 250, 239, 0.2);
+  border-radius: 4px;
+  color: var(--seccol);
+  font-size: 13px;
+  font-family: SYNE;
+  padding: 8px;
+  resize: none;
+  margin-bottom: 8px;
+}
+
+#suggestions-input::placeholder {
+  color: rgba(254, 250, 239, 0.3);
+}
+
+#suggestions-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+#suggestions-actions button {
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 4px;
+  margin: 0;
+}
+
+#suggestions-actions button[type="button"] {
+  background: transparent;
+  border: 0.5px solid rgba(254, 250, 239, 0.2);
+  color: rgba(254, 250, 239, 0.5);
+}
+
+#suggestions-actions button[type="button"]:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--seccol);
+}
+
+#suggestions-submit {
+  background: #4daa31;
+  border: none;
+  color: white;
+}
+
+#suggestions-submit:hover {
+  background: #3d8f28;
+}
+
+#suggestions-success {
+  text-align: center;
+  color: #4daa31;
+  font-family: SYNE;
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+@media only screen and (max-width: 600px) {
+  #suggestions-card {
+    top: auto;
+    bottom: 90px;
+    right: 12px;
+    left: 12px;
+    width: auto;
+  }
+}
