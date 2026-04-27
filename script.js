@@ -733,3 +733,30 @@ function jerseyElement(primary, secondary, number, color) {
 }
 
 function openInNewTab(url) { window.open(url, '_blank').focus(); }
+
+function toggleSuggestionsCard() {
+  const card = document.getElementById('suggestions-card');
+  const form = document.getElementById('suggestions-form');
+  const success = document.getElementById('suggestions-success');
+  card.classList.toggle('hide');
+  form.classList.remove('hide');
+  success.classList.add('hide');
+}
+
+document.getElementById('suggestions-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const data = new FormData(e.target);
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString()
+  })
+    .then(() => {
+      e.target.classList.add('hide');
+      document.getElementById('suggestions-success').classList.remove('hide');
+      document.getElementById('suggestions-input').value = '';
+      setTimeout(() => document.getElementById('suggestions-card').classList.add('hide'), 2500);
+    })
+    .catch(() => alert('Something went wrong. Please try again.'));
+});
