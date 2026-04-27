@@ -1222,7 +1222,7 @@ a.poet, a.poet:visited, small  { font-size: 12px; line-height: 14px; }
   #result-table thead tr th {
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 1;
     background-color: #2a2a2a;
     outline: 2px solid #2a2a2a;
   }
