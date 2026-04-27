@@ -44,49 +44,47 @@
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TKLT8HB" height="0" width="0" style="display:none;visibility:hidden"></iframe>
   </noscript>
 
-  <!-- ===== TOP NAV ===== -->
-  <header id="mega-header">
-    <div id="left-but-cont">
-      <div class="circle-button" id="other-button">
-        <span class="material-symbols-outlined red600">favorite</span>
-      </div>
+ <!-- ===== TOP NAV ===== -->
+<header id="mega-header">
+  <div id="left-but-cont">
+    <div class="circle-button" id="other-button">
+      <span class="material-symbols-outlined red600">favorite</span>
     </div>
-
-    <img src="InfYeezle.png" alt="Infinite Yeezle Logo" id="main-logo" />
-
-<div id="rs-cont">
-  <!-- ADD THIS first: -->
-  <div class="right-but-cont">
-    <span onclick="toggleSuggestionsCard()" style="cursor:pointer;display:flex;align-items:center;">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3" width="40" height="40">
-        <path d="M480-360q17 0 28.5-11.5T520-400q0-17-11.5-28.5T480-440q-17 0-28.5 11.5T440-400q0 17 11.5 28.5T480-360Zm-40-160h80v-240h-80v240ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/>
-      </svg>
-    </span>
   </div>
-    <div id="rs-cont">
-      <div class="right-but-cont">
-        <span class="material-icons md-cus" id="help-button">help_outline</span>
-      </div>
-      <div class="right-but-cont" id="dono-icon">
-        <span class="material-icons md-cus" id="dono-button">favorite_outline</span>
-      </div>
-      <div class="right-but-cont">
-        <span id="mode-toggle-btn" onclick="showModeCard()" style="cursor:pointer;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
-            <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/>
-          </svg>
-        </span>
-      </div>
-      <div class="right-but-cont">
-        <span id="album-mode-btn" onclick="showAlbumCard()" style="cursor:pointer;display:flex;align-items:center;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
-            <path d="M500-360q42 0 71-29t29-71v-220h120v-80H560v220q-13-10-28-15t-32-5q-42 0-71 29t-29 71q0 42 29 71t71 29ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/>
-          </svg>
-        </span>
-      </div>
-    </div>
-  </header>
 
+  <img src="InfYeezle.png" alt="Infinite Yeezle Logo" id="main-logo" />
+
+  <div id="rs-cont">
+    <div class="right-but-cont">
+      <span onclick="toggleSuggestionsCard()" style="cursor:pointer;display:flex;align-items:center;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
+          <path d="M80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/>
+        </svg>
+      </span>
+    </div>
+    <div class="right-but-cont">
+      <span class="material-icons md-cus" id="help-button">help_outline</span>
+    </div>
+    <div class="right-but-cont" id="dono-icon">
+      <span class="material-icons md-cus" id="dono-button">favorite_outline</span>
+    </div>
+    <div class="right-but-cont">
+      <span id="mode-toggle-btn" onclick="showModeCard()" style="cursor:pointer;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
+          <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"/>
+        </svg>
+      </span>
+    </div>
+    <div class="right-but-cont">
+      <span id="album-mode-btn" onclick="showAlbumCard()" style="cursor:pointer;display:flex;align-items:center;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#e3e3e3">
+          <path d="M500-360q42 0 71-29t29-71v-220h120v-80H560v220q-13-10-28-15t-32-5q-42 0-71 29t-29 71q0 42 29 71t71 29ZM320-240q-33 0-56.5-23.5T240-320v-480q0-33 23.5-56.5T320-880h480q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H320Zm0-80h480v-480H320v480ZM160-80q-33 0-56.5-23.5T80-160v-560h80v560h560v80H160Zm160-720v480-480Z"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+</header>
+  
   <!-- ===== MAIN GAME AREA ===== -->
   <div class="main-container">
     <figcaption id="guess-title">Guess the Ye song</figcaption>
